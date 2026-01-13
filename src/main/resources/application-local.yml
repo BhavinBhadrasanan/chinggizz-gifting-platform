@@ -22,9 +22,11 @@ logging:
     org.hibernate.type.descriptor.sql.BasicBinder: TRACE
 
 # Local development defaults (can be overridden by environment variables)
+# These are set here so local development works without setting env vars
+# Production MUST set these via environment variables
 app:
   jwt:
-    secret: chinggizz-local-dev-secret-key-not-for-production
+    secret: ${JWT_SECRET:chinggizz-local-dev-secret-key-not-for-production}
   admin:
-    default-password: admin123
+    default-password: ${ADMIN_PASSWORD:admin123}
 
