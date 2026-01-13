@@ -8,12 +8,12 @@ Remove-Item Env:SPRING_DATASOURCE_DRIVER_CLASS_NAME -ErrorAction SilentlyContinu
 
 # Set Supabase environment variables (using session pooler - IPv4 compatible with SSL)
 $env:SPRING_PROFILES_ACTIVE="supabase"
-$env:SUPABASE_DB_URL="jdbc:postgresql://aws-1-ap-south-1.pooler.supabase.com:5432/postgres?sslmode=require"
+$env:SUPABASE_DB_URL="jdbc:postgresql://aws-1-ap-south-1.pooler.supabase.com:5432/postgres?sslmode=require&connectTimeout=60&socketTimeout=60&loginTimeout=60"
 $env:SUPABASE_DB_USERNAME="postgres.pyzgqowrxbtefhxsaukxc"
 $env:SUPABASE_DB_PASSWORD="Chinggizz098"
 
 # Override Spring datasource directly (highest priority)
-$env:SPRING_DATASOURCE_URL="jdbc:postgresql://aws-1-ap-south-1.pooler.supabase.com:5432/postgres?sslmode=require"
+$env:SPRING_DATASOURCE_URL="jdbc:postgresql://aws-1-ap-south-1.pooler.supabase.com:5432/postgres?sslmode=require&connectTimeout=60&socketTimeout=60&loginTimeout=60"
 $env:SPRING_DATASOURCE_USERNAME="postgres.pyzgqowrxbtefhxsaukxc"
 $env:SPRING_DATASOURCE_PASSWORD="Chinggizz098"
 $env:SPRING_DATASOURCE_DRIVER_CLASS_NAME="org.postgresql.Driver"
