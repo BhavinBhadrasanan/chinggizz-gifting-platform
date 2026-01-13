@@ -9,7 +9,7 @@ Remove-Item Env:SPRING_DATASOURCE_DRIVER_CLASS_NAME -ErrorAction SilentlyContinu
 # Set Spring profile for local development
 $env:SPRING_PROFILES_ACTIVE="local"
 $env:SPRING_DATASOURCE_URL="jdbc:postgresql://aws-1-ap-south-1.pooler.supabase.com:5432/postgres?sslmode=require&connectTimeout=60&socketTimeout=60&loginTimeout=60"
-$env:SPRING_DATASOURCE_USERNAME="postgres.pyzgqowrxbtefhxsaukxc"
+$env:SPRING_DATASOURCE_USERNAME="postgres.pzgnowrxbiefhxsoukxc"
 $env:SPRING_DATASOURCE_PASSWORD="Chinggizz098"
 $env:SPRING_DATASOURCE_DRIVER_CLASS_NAME="org.postgresql.Driver"
 

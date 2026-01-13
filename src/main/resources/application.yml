@@ -7,7 +7,7 @@ spring:
   datasource:
     url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://aws-1-ap-south-1.pooler.supabase.com:5432/postgres?sslmode=require&connectTimeout=60&socketTimeout=60&loginTimeout=60}
     driver-class-name: org.postgresql.Driver
-    username: ${SPRING_DATASOURCE_USERNAME:postgres.pyzgqowrxbtefhxsaukxc}
+    username: ${SPRING_DATASOURCE_USERNAME:postgres.pzgnowrxbiefhxsoukxc}
     password: ${SPRING_DATASOURCE_PASSWORD:Chinggizz098}
     hikari:
       # Increased pool size for high concurrency
