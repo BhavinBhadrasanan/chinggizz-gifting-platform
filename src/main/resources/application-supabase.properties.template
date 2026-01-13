@@ -1,0 +1,82 @@
+# ========================================
+# Supabase PostgreSQL Configuration Template
+# ========================================
+# 
+# INSTRUCTIONS:
+# 1. Copy this file to: application-supabase.properties
+# 2. Fill in your actual Supabase credentials
+# 3. NEVER commit the actual application-supabase.properties file
+#
+# ========================================
+
+# Database Configuration
+spring.datasource.url=jdbc:postgresql://YOUR_SUPABASE_HOST:5432/postgres
+spring.datasource.username=YOUR_SUPABASE_USERNAME
+spring.datasource.password=YOUR_SUPABASE_PASSWORD
+spring.datasource.driver-class-name=org.postgresql.Driver
+
+# Connection Pool Configuration (HikariCP)
+spring.datasource.hikari.pool-name=ChinggizzHikariPool-Supabase
+spring.datasource.hikari.maximum-pool-size=10
+spring.datasource.hikari.minimum-idle=5
+spring.datasource.hikari.connection-timeout=30000
+spring.datasource.hikari.idle-timeout=600000
+spring.datasource.hikari.max-lifetime=1800000
+
+# JPA/Hibernate Configuration
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+spring.jpa.properties.hibernate.format_sql=true
+spring.jpa.properties.hibernate.use_sql_comments=true
+spring.jpa.properties.hibernate.jdbc.batch_size=20
+spring.jpa.properties.hibernate.order_inserts=true
+spring.jpa.properties.hibernate.order_updates=true
+spring.jpa.properties.hibernate.temp.use_jdbc_metadata_defaults=false
+
+# Logging Configuration
+logging.level.org.hibernate.SQL=DEBUG
+logging.level.org.hibernate.type.descriptor.sql.BasicBinder=TRACE
+logging.level.com.chinggizz=DEBUG
+logging.level.org.springframework.web=DEBUG
+logging.level.org.springframework.security=DEBUG
+
+# JWT Configuration
+jwt.secret=YOUR_SUPER_SECRET_JWT_KEY_MINIMUM_256_BITS_LONG_CHANGE_THIS_IN_PRODUCTION
+jwt.expiration=86400000
+
+# File Upload Configuration
+file.upload-dir=./uploads/products
+spring.servlet.multipart.max-file-size=10MB
+spring.servlet.multipart.max-request-size=10MB
+
+# Server Configuration
+server.port=8080
+server.error.include-message=always
+server.error.include-binding-errors=always
+
+# CORS Configuration (handled in WebConfig.java)
+# Add your frontend URLs in WebConfig.java
+
+# ========================================
+# HOW TO GET SUPABASE CREDENTIALS:
+# ========================================
+# 
+# 1. Go to https://supabase.com/dashboard
+# 2. Select your project
+# 3. Go to Settings → Database
+# 4. Find "Connection string" section
+# 5. Copy the connection details:
+#    - Host: db.xxxxxxxxxxxxx.supabase.co
+#    - Database: postgres
+#    - User: postgres
+#    - Password: [your password]
+#    - Port: 5432
+#
+# Example:
+# spring.datasource.url=jdbc:postgresql://db.abcdefghijklmnop.supabase.co:5432/postgres
+# spring.datasource.username=postgres
+# spring.datasource.password=your-actual-password-here
+#
+# ========================================
+

@@ -1,0 +1,60 @@
+# Supabase Profile - PostgreSQL Database (Cloud)
+# Optimized for high concurrency
+spring:
+  datasource:
+    url: ${SUPABASE_DB_URL:jdbc:postgresql://aws-0-ap-southeast-1.pooler.supabase.com:6543/postgres}
+    driver-class-name: org.postgresql.Driver
+    username: ${SUPABASE_DB_USERNAME:postgres}
+    password: ${SUPABASE_DB_PASSWORD:changeme}
+    hikari:
+      maximum-pool-size: 50
+      minimum-idle: 20
+      connection-timeout: 20000
+      idle-timeout: 300000
+      max-lifetime: 1800000
+      connection-test-query: SELECT 1
+      leak-detection-threshold: 60000
+      pool-name: ChinggizzHikariPool-Supabase
+  
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        jdbc:
+          batch_size: 20
+        order_inserts: true
+        order_updates: true
+        # PostgreSQL specific settings
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        temp:
+          use_jdbc_metadata_defaults: false
+
+  # Disable H2 console for Supabase profile
+  h2:
+    console:
+      enabled: false
+
+logging:
+  level:
+    com.chinggizz: DEBUG
+    org.springframework.web: INFO
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+
+# Application specific properties (same as dev)
+app:
+  jwt:
+    secret: ${JWT_SECRET:chinggizz-super-secret-key-change-in-production-2024}
+    expiration: 86400000 # 24 hours in milliseconds
+  whatsapp:
+    business-number: ${WHATSAPP_NUMBER:7012897008}
+  admin:
+    default-username: admin
+    default-password: ${ADMIN_PASSWORD:admin123}
+  upload:
+    dir: ${UPLOAD_DIR:uploads/products}
+
