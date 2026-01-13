@@ -1,0 +1,32 @@
+# Maven
+target/
+!target/chinggizz-app-1.0.0.jar
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# Git
+.git/
+.gitignore
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+
+# Uploads
+uploads/
+
+# Documentation
+*.md
+!README.md
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
