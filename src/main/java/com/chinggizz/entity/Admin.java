@@ -24,8 +24,8 @@ public class Admin extends BaseEntity {
     
     @Column(nullable = false, length = 255)
     private String password; // BCrypt encoded
-    
-    @Column(nullable = false, length = 200)
+
+    @Column(name = "full_name", nullable = false, length = 200)
     private String fullName;
     
     @Column(length = 200)
