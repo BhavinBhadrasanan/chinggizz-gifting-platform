@@ -25,7 +25,15 @@ public class CorsConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOriginPatterns("http://localhost:*", "http://127.0.0.1:*", "http://[::1]:*")
+                .allowedOriginPatterns(
+                    "http://localhost:*",
+                    "http://127.0.0.1:*",
+                    "http://[::1]:*",
+                    "https://*.netlify.app",           // Netlify deployments
+                    "https://*.onrender.com",          // Render deployments
+                    "https://chinggizz.com",           // Custom domain (if any)
+                    "https://*.chinggizz.com"          // Custom subdomains
+                )
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS", "HEAD")
                 .allowedHeaders("*")
                 .exposedHeaders("Authorization", "Content-Type", "X-Requested-With", "Accept", "Origin")
@@ -45,7 +53,11 @@ public class CorsConfig implements WebMvcConfigurer {
         configuration.setAllowedOriginPatterns(Arrays.asList(
             "http://localhost:*",
             "http://127.0.0.1:*",
-            "http://[::1]:*"
+            "http://[::1]:*",
+            "https://*.netlify.app",           // Netlify deployments
+            "https://*.onrender.com",          // Render deployments
+            "https://chinggizz.com",           // Custom domain (if any)
+            "https://*.chinggizz.com"          // Custom subdomains
         ));
 
         // Allow all HTTP methods
