@@ -27,7 +27,6 @@ spring:
   jpa:
     open-in-view: false
     show-sql: true
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: update
     properties:
@@ -38,7 +37,6 @@ spring:
           batch_size: 20
         order_inserts: true
         order_updates: true
-        dialect: org.hibernate.dialect.PostgreSQLDialect
 
   jackson:
     serialization:

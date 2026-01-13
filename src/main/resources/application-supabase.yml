@@ -17,7 +17,6 @@ spring:
       pool-name: ChinggizzHikariPool-Supabase
   
   jpa:
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: update
     show-sql: true
@@ -28,10 +27,6 @@ spring:
           batch_size: 20
         order_inserts: true
         order_updates: true
-        # PostgreSQL specific settings
-        dialect: org.hibernate.dialect.PostgreSQLDialect
-        temp:
-          use_jdbc_metadata_defaults: false
 
   # Disable H2 console for Supabase profile
   h2:
