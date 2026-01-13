@@ -22,7 +22,7 @@ FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app
 
 # Copy the JAR file from build stage
-COPY --from=build /app/target/chinggizz-app-1.0.0.jar app.jar
+COPY --from=build /app/target/chinggizz-app.jar app.jar
 
 # Create uploads directory
 RUN mkdir -p /app/uploads/products
