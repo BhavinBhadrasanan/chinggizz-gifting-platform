@@ -5,10 +5,10 @@ spring:
   # Supabase PostgreSQL Database Configuration (Default)
   # Optimized for high concurrency (1000+ users)
   datasource:
-    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://aws-0-ap-southeast-1.pooler.supabase.com:6543/postgres}
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://aws-1-ap-south-1.pooler.supabase.com:5432/postgres?sslmode=require}
     driver-class-name: org.postgresql.Driver
-    username: ${SPRING_DATASOURCE_USERNAME:postgres}
-    password: ${SPRING_DATASOURCE_PASSWORD:Kunjichini@1827}
+    username: ${SPRING_DATASOURCE_USERNAME:postgres.pyzgqowrxbtefhxsaukxc}
+    password: ${SPRING_DATASOURCE_PASSWORD:Chinggizz098}
     hikari:
       # Increased pool size for high concurrency
       maximum-pool-size: 50
