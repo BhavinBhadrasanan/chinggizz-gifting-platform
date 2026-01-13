@@ -25,15 +25,15 @@ spring:
 
   jpa:
     open-in-view: false
-    show-sql: true
+    show-sql: ${SHOW_SQL:false}
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: update
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
-        format_sql: true
-        use_sql_comments: true
+        format_sql: false
+        use_sql_comments: false
         jdbc:
           batch_size: 20
         order_inserts: true
@@ -55,28 +55,28 @@ spring:
       file-size-threshold: 2KB
 
 server:
-  port: 8080
+  port: ${PORT:8080}
   error:
-    include-message: always
-    include-binding-errors: always
+    include-message: ${INCLUDE_ERROR_MESSAGE:never}
+    include-binding-errors: ${INCLUDE_BINDING_ERRORS:never}
 
 logging:
   level:
-    com.chinggizz: DEBUG
-    org.springframework.web: INFO
-    org.hibernate.SQL: DEBUG
-    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    com.chinggizz: ${LOG_LEVEL:INFO}
+    org.springframework.web: WARN
+    org.hibernate.SQL: ${HIBERNATE_LOG_LEVEL:WARN}
+    org.hibernate.type.descriptor.sql.BasicBinder: WARN
 
 # Application specific properties
 app:
   jwt:
-    secret: ${JWT_SECRET:chinggizz-super-secret-key-change-in-production-2024}
-    expiration: 86400000 # 24 hours in milliseconds
+    secret: ${JWT_SECRET}
+    expiration: ${JWT_EXPIRATION:86400000} # 24 hours in milliseconds
   whatsapp:
     business-number: ${WHATSAPP_NUMBER:7012897008}
   admin:
-    default-username: admin
-    default-password: ${ADMIN_PASSWORD:admin123}
+    default-username: ${ADMIN_USERNAME:admin}
+    default-password: ${ADMIN_PASSWORD}
   upload:
     dir: ${UPLOAD_DIR:uploads/products}
 

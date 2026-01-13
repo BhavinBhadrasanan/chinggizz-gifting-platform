@@ -1,0 +1,30 @@
+# Local Development Configuration
+# This file overrides application.yml when running with -Dspring.profiles.active=local
+
+spring:
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        use_sql_comments: true
+
+server:
+  error:
+    include-message: always
+    include-binding-errors: always
+
+logging:
+  level:
+    com.chinggizz: DEBUG
+    org.springframework.web: INFO
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+
+# Local development defaults (can be overridden by environment variables)
+app:
+  jwt:
+    secret: chinggizz-local-dev-secret-key-not-for-production
+  admin:
+    default-password: admin123
+
