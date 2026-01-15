@@ -1042,6 +1042,8 @@ export default function HamperBuilderPage() {
       return;
     }
     setStep(3);
+    // Scroll to top to show preview
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleCheckout = () => {
@@ -1383,47 +1385,44 @@ export default function HamperBuilderPage() {
 
             {/* Mobile: Reverse order - Items first, then 3D box */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
-              {/* MOBILE: Available Items Section FIRST (shows at top on mobile) */}
+              {/* MOBILE: Available Items Section FIRST (shows at top on mobile) - COMPACT */}
               <div className="lg:hidden">
-                <div className="card p-4">
-                  {/* Mobile Instructions */}
-                  <div className="mb-4 p-3 bg-gradient-to-r from-blue-50 to-indigo-50 border-2 border-blue-300 rounded-xl">
-                    <h4 className="font-bold text-blue-900 mb-2 flex items-center text-sm">
-                      <span className="text-lg mr-2">👇</span>
-                      How to Build Your Hamper
+                <div className="card p-3">
+                  {/* Mobile Instructions - Compact */}
+                  <div className="mb-3 p-2 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-300 rounded-lg">
+                    <h4 className="font-bold text-blue-900 mb-1 flex items-center text-xs">
+                      <span className="text-base mr-1">👇</span>
+                      Quick Guide
                     </h4>
-                    <ol className="text-xs text-blue-800 space-y-1 list-decimal list-inside">
-                      <li><strong>Tap an item below</strong> to select it</li>
-                      <li><strong>Scroll down</strong> to see the 3D box</li>
-                      <li><strong>Tap a green spot</strong> in the box to place item</li>
-                      <li><strong>Use controls</strong> to adjust position</li>
-                    </ol>
+                    <p className="text-[10px] text-blue-800">
+                      <strong>1.</strong> Tap item → <strong>2.</strong> Scroll to 3D box → <strong>3.</strong> Tap green spot
+                    </p>
                   </div>
 
-                  {/* Available Items - Mobile */}
+                  {/* Available Items - Mobile - COMPACT */}
                   <div className="bg-white rounded-lg border-2 border-orange-300 shadow-sm overflow-hidden">
-                    <div className="bg-gradient-to-r from-orange-500 to-amber-500 px-3 py-2 flex items-center justify-between">
-                      <h3 className="text-white font-bold text-sm flex items-center gap-2">
-                        <ShoppingBag className="h-4 w-4" />
-                        Available Items ({availableItems.length})
+                    <div className="bg-gradient-to-r from-orange-500 to-amber-500 px-2 py-1.5 flex items-center justify-between">
+                      <h3 className="text-white font-bold text-xs flex items-center gap-1">
+                        <ShoppingBag className="h-3 w-3" />
+                        Items ({availableItems.length})
                       </h3>
                       <button
                         onClick={() => navigate('/products')}
-                        className="bg-white hover:bg-orange-50 text-orange-700 font-semibold text-xs px-2 py-1 rounded-lg flex items-center gap-1 transition-colors"
+                        className="bg-white hover:bg-orange-50 text-orange-700 font-semibold text-[10px] px-1.5 py-0.5 rounded flex items-center gap-0.5 transition-colors"
                       >
-                        <Plus className="h-3 w-3" />
-                        Add More
+                        <Plus className="h-2.5 w-2.5" />
+                        Add
                       </button>
                     </div>
 
-                    <div className="p-3 space-y-2 max-h-[300px] overflow-y-auto">
+                    <div className="p-2 space-y-1.5 max-h-[200px] overflow-y-auto">
                       {availableItems.length === 0 ? (
-                        <div className="text-center py-6">
-                          <ShoppingBag className="h-12 w-12 text-neutral-300 mx-auto mb-2" />
-                          <p className="text-sm text-neutral-600 mb-3">All items placed!</p>
+                        <div className="text-center py-4">
+                          <ShoppingBag className="h-8 w-8 text-neutral-300 mx-auto mb-1" />
+                          <p className="text-xs text-neutral-600 mb-2">All items placed!</p>
                           <button
                             onClick={() => navigate('/products')}
-                            className="btn-primary text-xs py-2 px-4"
+                            className="btn-primary text-[10px] py-1.5 px-3"
                           >
                             Add More Items
                           </button>
@@ -1437,30 +1436,30 @@ export default function HamperBuilderPage() {
                             onDragEnd={handleDragEnd}
                             onClick={() => {
                               setSelectedItemToPlace(item);
-                              toast.info(`📦 ${item.name} selected! Scroll down and tap a green spot in the box.`);
+                              toast.info(`📦 ${item.name} selected! Scroll down and tap a green spot.`);
                             }}
-                            className={`bg-white border-2 rounded-lg p-2 cursor-pointer transition-all hover:shadow-md active:scale-95 ${
+                            className={`bg-white border-2 rounded-lg p-1.5 cursor-pointer transition-all hover:shadow-md active:scale-95 ${
                               selectedItemToPlace?.id === item.id
                                 ? 'border-green-500 bg-green-50 shadow-lg'
                                 : 'border-neutral-200 hover:border-orange-400'
                             }`}
                           >
-                            <div className="flex items-center gap-2">
-                              <div className="w-12 h-12 bg-neutral-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <div className="flex items-center gap-1.5">
+                              <div className="w-10 h-10 bg-neutral-100 rounded flex items-center justify-center flex-shrink-0">
                                 {item.imageUrl ? (
-                                  <img src={item.imageUrl} alt={item.name} className="w-full h-full object-cover rounded-lg" />
+                                  <img src={item.imageUrl} alt={item.name} className="w-full h-full object-cover rounded" />
                                 ) : (
-                                  <Gift className="h-6 w-6 text-neutral-400" />
+                                  <Gift className="h-5 w-5 text-neutral-400" />
                                 )}
                               </div>
                               <div className="flex-1 min-w-0">
-                                <p className="font-semibold text-xs text-neutral-900 truncate">{item.name}</p>
-                                <p className="text-xs text-neutral-600">₹{item.price}</p>
+                                <p className="font-semibold text-[11px] text-neutral-900 truncate leading-tight">{item.name}</p>
+                                <p className="text-[10px] text-neutral-600">₹{item.price}</p>
                               </div>
                               {selectedItemToPlace?.id === item.id && (
                                 <div className="flex-shrink-0">
-                                  <div className="bg-green-500 text-white rounded-full p-1">
-                                    <Check className="h-3 w-3" />
+                                  <div className="bg-green-500 text-white rounded-full p-0.5">
+                                    <Check className="h-2.5 w-2.5" />
                                   </div>
                                 </div>
                               )}
