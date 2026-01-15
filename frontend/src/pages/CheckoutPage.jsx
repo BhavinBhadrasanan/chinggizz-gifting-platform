@@ -152,21 +152,21 @@ export default function CheckoutPage() {
   }
 
   return (
-    <div className="min-h-screen bg-neutral-50 py-12">
+    <div className="min-h-screen bg-neutral-50 py-6 sm:py-12">
       <div className="container-custom">
-        <h1 className="text-3xl font-bold text-neutral-900 mb-8">Checkout</h1>
+        <h1 className="text-2xl sm:text-3xl font-bold text-neutral-900 mb-6 sm:mb-8 px-2 sm:px-0">Checkout</h1>
 
-        <div className="grid lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
           {/* Checkout Form */}
           <div className="lg:col-span-2">
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Contact Information */}
-              <div className="card p-6">
-                <h2 className="text-xl font-bold text-neutral-900 mb-4 flex items-center">
+              <div className="card p-4 sm:p-6">
+                <h2 className="text-lg sm:text-xl font-bold text-neutral-900 mb-4 flex items-center">
                   <User className="h-5 w-5 mr-2 text-primary-600" />
                   Contact Information
                 </h2>
-                <div className="grid md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-neutral-700 mb-2">
                       Full Name *
@@ -212,12 +212,12 @@ export default function CheckoutPage() {
 
 
               {/* Shipping Address */}
-              <div className="card p-6">
-                <h2 className="text-xl font-bold text-neutral-900 mb-4 flex items-center">
+              <div className="card p-4 sm:p-6">
+                <h2 className="text-lg sm:text-xl font-bold text-neutral-900 mb-4 flex items-center">
                   <MapPin className="h-5 w-5 mr-2 text-primary-600" />
                   Shipping Address
                 </h2>
-                <div className="grid md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="md:col-span-2">
                     <label className="block text-sm font-medium text-neutral-700 mb-2">
                       Address *

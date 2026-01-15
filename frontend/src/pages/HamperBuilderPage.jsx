@@ -1054,23 +1054,23 @@ export default function HamperBuilderPage() {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-neutral-50 via-primary-50/20 to-secondary-50/20 py-12">
+    <div className="min-h-screen bg-gradient-to-br from-neutral-50 via-primary-50/20 to-secondary-50/20 py-6 sm:py-12">
       <div className="container-custom">
         {/* Header */}
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center gap-2 bg-white px-6 py-3 rounded-full shadow-lg mb-4">
-            <Sparkles className="h-6 w-6 text-primary-600" />
-            <h1 className="text-3xl font-bold bg-gradient-to-r from-primary-600 to-secondary-500 bg-clip-text text-transparent">
+        <div className="text-center mb-6 sm:mb-8 px-2">
+          <div className="inline-flex items-center gap-2 bg-white px-4 sm:px-6 py-2 sm:py-3 rounded-full shadow-lg mb-3 sm:mb-4">
+            <Sparkles className="h-5 w-5 sm:h-6 sm:w-6 text-primary-600" />
+            <h1 className="text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-primary-600 to-secondary-500 bg-clip-text text-transparent">
               Custom Hamper Builder
             </h1>
           </div>
-          <p className="text-lg text-neutral-600">
+          <p className="text-sm sm:text-base md:text-lg text-neutral-600">
             Create your perfect gift hamper in 3 simple steps
           </p>
         </div>
 
         {/* Progress Steps */}
-        <div className="max-w-2xl mx-auto mb-12">
+        <div className="max-w-2xl mx-auto mb-8 sm:mb-12 px-2">
           <div className="flex items-center justify-between relative">
             <div className="absolute top-6 left-0 right-0 h-1 bg-neutral-200 -z-10">
               <div

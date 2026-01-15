@@ -22,10 +22,10 @@ export default function Navbar() {
       {/* Top Banner */}
       <div className="bg-gradient-to-r from-primary-600 via-primary-500 to-secondary-500 text-white py-2">
         <div className="container-custom">
-          <div className="flex items-center justify-center space-x-2 text-sm font-medium">
-            <Gift className="h-4 w-4 animate-pulse" />
-            <span>Free Delivery on Orders Above ₹999 | Customization Available</span>
-            <Gift className="h-4 w-4 animate-pulse" />
+          <div className="flex items-center justify-center space-x-2 text-xs sm:text-sm font-medium">
+            <Gift className="h-3 w-3 sm:h-4 sm:w-4 animate-pulse" />
+            <span className="text-center">Free Delivery on Orders Above ₹999 | Customization Available</span>
+            <Gift className="h-3 w-3 sm:h-4 sm:w-4 animate-pulse hidden sm:block" />
           </div>
         </div>
       </div>
@@ -50,8 +50,8 @@ export default function Navbar() {
               </div>
             </Link>
 
-            {/* Desktop Navigation */}
-            <div className="flex items-center space-x-2">
+            {/* Desktop Navigation - Hidden on Mobile */}
+            <div className="hidden lg:flex items-center space-x-2">
               {navLinks.map((link) => {
                 const Icon = link.icon;
                 return (
@@ -73,7 +73,7 @@ export default function Navbar() {
                 );
               })}
 
-              {/* Cart Button */}
+              {/* Cart Button - Desktop */}
               <button
                 onClick={() => setIsCartOpen(true)}
                 className="relative group ml-3 px-5 py-2.5 rounded-xl font-semibold text-white bg-gradient-to-r from-secondary-500 to-secondary-600 hover:from-secondary-600 hover:to-secondary-700 shadow-lg shadow-secondary-500/30 hover:shadow-xl hover:shadow-secondary-500/40 transition-all duration-200 flex items-center space-x-2"
@@ -88,34 +88,34 @@ export default function Navbar() {
               </button>
             </div>
 
-            {/* Mobile Actions */}
-            <div className="hidden flex items-center space-x-2">
-              {/* Cart Button */}
+            {/* Mobile Actions - Visible on Mobile/Tablet */}
+            <div className="flex lg:hidden items-center space-x-2">
+              {/* Cart Button - Mobile */}
               <button
                 onClick={() => setIsCartOpen(true)}
-                className="relative p-3 rounded-xl text-white bg-gradient-to-r from-secondary-500 to-secondary-600 shadow-lg shadow-secondary-500/30"
+                className="relative p-3 rounded-xl text-white bg-gradient-to-r from-secondary-500 to-secondary-600 shadow-lg shadow-secondary-500/30 tap-target"
               >
-                <ShoppingBag className="h-6 w-6" />
+                <ShoppingBag className="h-5 w-5 sm:h-6 sm:w-6" />
                 {getCartCount() > 0 && (
-                  <span className="absolute -top-2 -right-2 bg-accent-500 text-white text-xs font-bold rounded-full h-6 w-6 flex items-center justify-center ring-4 ring-white animate-pulse">
+                  <span className="absolute -top-1 -right-1 bg-accent-500 text-white text-xs font-bold rounded-full h-5 w-5 sm:h-6 sm:w-6 flex items-center justify-center ring-2 sm:ring-4 ring-white animate-pulse">
                     {getCartCount()}
                   </span>
                 )}
               </button>
 
-              {/* Menu Button */}
+              {/* Menu Button - Mobile */}
               <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="p-3 rounded-xl text-neutral-700 bg-neutral-100 hover:bg-neutral-200 transition-colors"
+                className="p-3 rounded-xl text-neutral-700 bg-neutral-100 hover:bg-neutral-200 active:bg-neutral-300 transition-colors tap-target"
               >
-                {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+                {isOpen ? <X className="h-5 w-5 sm:h-6 sm:w-6" /> : <Menu className="h-5 w-5 sm:h-6 sm:w-6" />}
               </button>
             </div>
           </div>
 
-          {/* Mobile Navigation */}
+          {/* Mobile Navigation - Visible on Mobile/Tablet */}
           {isOpen && (
-            <div className="hidden py-4 border-t border-neutral-200 bg-neutral-50 rounded-b-2xl">
+            <div className="lg:hidden py-4 border-t border-neutral-200 bg-neutral-50 rounded-b-2xl animate-fadeIn">
               <div className="flex flex-col space-y-2">
                 {navLinks.map((link) => {
                   const Icon = link.icon;
@@ -124,14 +124,14 @@ export default function Navbar() {
                       key={link.path}
                       to={link.path}
                       onClick={() => setIsOpen(false)}
-                      className={`flex items-center space-x-3 px-4 py-3 rounded-xl font-semibold transition-all ${
+                      className={`flex items-center space-x-3 px-4 py-3.5 rounded-xl font-semibold transition-all tap-target ${
                         isActive(link.path)
                           ? 'bg-gradient-to-r from-primary-600 to-primary-500 text-white shadow-lg'
-                          : 'text-neutral-700 hover:bg-white hover:text-primary-600'
+                          : 'text-neutral-700 hover:bg-white hover:text-primary-600 active:bg-primary-50'
                       }`}
                     >
                       <Icon className="h-5 w-5" />
-                      <span>{link.label}</span>
+                      <span className="text-base">{link.label}</span>
                     </Link>
                   );
                 })}

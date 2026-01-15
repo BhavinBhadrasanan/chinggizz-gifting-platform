@@ -6,8 +6,8 @@ export default function Footer() {
 
   return (
     <footer className="bg-neutral-900 text-neutral-300">
-      <div className="container-custom py-12">
-        <div className="grid md:grid-cols-4 gap-8">
+      <div className="container-custom py-8 sm:py-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
           {/* Brand */}
           <div>
             <div className="flex items-center space-x-2 mb-4">
@@ -91,8 +91,8 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-neutral-800 mt-8 pt-8 text-center">
-          <p className="text-sm text-neutral-400">
+        <div className="border-t border-neutral-800 mt-6 sm:mt-8 pt-6 sm:pt-8 text-center">
+          <p className="text-xs sm:text-sm text-neutral-400 px-4">
             © {currentYear} Chinggizz. All rights reserved. | Made with <span className="text-secondary-500">❤</span> for special moments
           </p>
         </div>

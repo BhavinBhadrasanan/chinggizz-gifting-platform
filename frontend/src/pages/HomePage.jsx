@@ -155,14 +155,14 @@ export default function HomePage() {
             </div>
 
             {/* CTA Buttons */}
-            <div className="flex flex-wrap items-center justify-center gap-4">
-              <button className="group px-8 py-4 bg-white text-primary-600 rounded-xl font-bold text-lg shadow-2xl hover:shadow-white/50 hover:scale-105 transition-all duration-200 flex items-center space-x-2">
-                <ShoppingBag className="h-6 w-6 group-hover:scale-110 transition-transform" />
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full sm:w-auto px-4 sm:px-0">
+              <button className="group w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-white text-primary-600 rounded-xl font-bold text-base sm:text-lg shadow-2xl hover:shadow-white/50 hover:scale-105 active:scale-95 transition-all duration-200 flex items-center justify-center space-x-2 tap-target">
+                <ShoppingBag className="h-5 w-5 sm:h-6 sm:w-6 group-hover:scale-110 transition-transform" />
                 <span>Shop Now</span>
               </button>
-              <Link to="/hamper-builder" className="group px-8 py-4 bg-white/20 backdrop-blur-md text-white border-2 border-white/50 rounded-xl font-bold text-lg hover:bg-white/30 hover:scale-105 transition-all duration-200 flex items-center space-x-2">
-                <Sparkles className="h-6 w-6 group-hover:rotate-12 transition-transform" />
-                <span>Build Custom Hamper</span>
+              <Link to="/hamper-builder" className="group w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-white/20 backdrop-blur-md text-white border-2 border-white/50 rounded-xl font-bold text-base sm:text-lg hover:bg-white/30 hover:scale-105 active:scale-95 transition-all duration-200 flex items-center justify-center space-x-2 tap-target">
+                <Sparkles className="h-5 w-5 sm:h-6 sm:w-6 group-hover:rotate-12 transition-transform" />
+                <span className="whitespace-nowrap">Build Custom Hamper</span>
               </Link>
             </div>
           </div>
@@ -283,16 +283,16 @@ export default function HomePage() {
       <section className="py-12 bg-neutral-50">
         <div className="container-custom">
           {loading ? (
-            <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
               {[...Array(12)].map((_, i) => (
                 <div key={i} className="shimmer h-96 rounded-xl"></div>
               ))}
             </div>
           ) : filteredProducts.length === 0 ? (
-            <div className="text-center py-16">
-              <Package className="h-16 w-16 text-neutral-300 mx-auto mb-4" />
-              <h3 className="text-xl font-semibold text-neutral-900 mb-2">No products found</h3>
-              <p className="text-neutral-600 mb-6">Try adjusting your filters</p>
+            <div className="text-center py-12 sm:py-16 px-4">
+              <Package className="h-12 w-12 sm:h-16 sm:w-16 text-neutral-300 mx-auto mb-4" />
+              <h3 className="text-lg sm:text-xl font-semibold text-neutral-900 mb-2">No products found</h3>
+              <p className="text-sm sm:text-base text-neutral-600 mb-6">Try adjusting your filters</p>
               <button
                 onClick={() => {
                   setSelectedCategory('all');
@@ -304,7 +304,7 @@ export default function HomePage() {
               </button>
             </div>
           ) : (
-            <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
               {filteredProducts.map((product) => (
                 <div key={product.id} className="card card-hover group flex flex-col">
                   {/* Product Image */}
