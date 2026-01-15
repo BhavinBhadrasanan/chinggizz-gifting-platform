@@ -85,6 +85,10 @@ export default function HamperBuilderPage() {
   const { cartItems } = useCart();
   const navigate = useNavigate();
 
+  // Refs for scrolling to sections
+  const hamperViewRef = useRef(null);
+  const previewSectionRef = useRef(null);
+
   // Load saved hamper state from localStorage on mount
   const loadSavedHamperState = () => {
     try {
@@ -1042,8 +1046,10 @@ export default function HamperBuilderPage() {
       return;
     }
     setStep(3);
-    // Scroll to top to show preview
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Scroll to preview section
+    setTimeout(() => {
+      previewSectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
   };
 
   const handleCheckout = () => {
@@ -1093,10 +1099,19 @@ export default function HamperBuilderPage() {
                   // Allow navigation to completed steps or current step
                   if (s.num === 1) {
                     setStep(1);
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
                   } else if (s.num === 2 && selectedBox) {
                     setStep(2);
+                    // Scroll to 3D hamper view
+                    setTimeout(() => {
+                      hamperViewRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }, 100);
                   } else if (s.num === 3 && selectedBox && placedItems.length > 0) {
                     setStep(3);
+                    // Scroll to preview section
+                    setTimeout(() => {
+                      previewSectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }, 100);
                   }
                 }}
               >
@@ -1474,7 +1489,7 @@ export default function HamperBuilderPage() {
               </div>
 
               {/* 3D Box Section */}
-              <div className="lg:col-span-2">
+              <div className="lg:col-span-2" ref={hamperViewRef}>
                 <div className="card p-2 sm:p-6 lg:p-8">
                   {/* MOBILE: Compact header with all info */}
                   <div className="lg:hidden mb-3 pb-2 border-b border-neutral-200">
@@ -2086,7 +2101,7 @@ export default function HamperBuilderPage() {
 
         {/* Step 3: Preview */}
         {step === 3 && selectedBox && (
-          <div className="max-w-7xl mx-auto">
+          <div className="max-w-7xl mx-auto" ref={previewSectionRef}>
             <div className="text-center mb-8">
               <h2 className="text-3xl font-bold text-neutral-900 mb-2">Your Custom Hamper</h2>
               <p className="text-neutral-600">Review your beautiful creation</p>
