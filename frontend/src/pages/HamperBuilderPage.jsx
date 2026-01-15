@@ -1229,7 +1229,7 @@ export default function HamperBuilderPage() {
 
         {/* Step 2: Build Hamper */}
         {step === 2 && selectedBox && (
-          <div className="max-w-7xl mx-auto">
+          <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-0">
             <div className="flex items-center justify-between mb-8">
               <button
                 onClick={() => setShowBoxChangeModal(true)}
@@ -1384,10 +1384,10 @@ export default function HamperBuilderPage() {
             )}
 
             {/* Mobile: Reverse order - Items first, then 3D box */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 sm:gap-6 lg:gap-8">
               {/* MOBILE: Available Items Section FIRST (shows at top on mobile) - COMPACT */}
               <div className="lg:hidden">
-                <div className="card p-3">
+                <div className="card p-2">
                   {/* Mobile Instructions - Compact */}
                   <div className="mb-3 p-2 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-300 rounded-lg">
                     <h4 className="font-bold text-blue-900 mb-1 flex items-center text-xs">
@@ -1474,7 +1474,7 @@ export default function HamperBuilderPage() {
 
               {/* 3D Box Section */}
               <div className="lg:col-span-2">
-                <div className="card p-3 sm:p-6 lg:p-8">
+                <div className="card p-2 sm:p-6 lg:p-8">
                   {/* MOBILE: Compact header with all info */}
                   <div className="lg:hidden mb-3 pb-2 border-b border-neutral-200">
                     <div className="flex items-center justify-between mb-2">
@@ -1783,8 +1783,8 @@ export default function HamperBuilderPage() {
 
 
 
-                  {/* 3. AVAILABLE ITEMS SECTION - Compact */}
-                  <div className="bg-white rounded-lg border-2 border-orange-300 shadow-sm overflow-hidden">
+                  {/* 3. AVAILABLE ITEMS SECTION - Compact (HIDDEN ON MOBILE - shown at top instead) */}
+                  <div className="hidden lg:block bg-white rounded-lg border-2 border-orange-300 shadow-sm overflow-hidden">
                     {/* Header */}
                     <div className="bg-gradient-to-r from-orange-500 to-amber-500 px-3 py-2 flex items-center justify-between">
                       <h3 className="text-white font-bold text-sm flex items-center gap-2">
