@@ -1557,6 +1557,20 @@ export default function HamperBuilderPage() {
                     </div>
                   )}
 
+                  {/* Mobile Instructions - Visible only on Mobile */}
+                  <div className="lg:hidden mb-3 p-3 bg-gradient-to-r from-purple-50 to-pink-50 border-2 border-purple-300 rounded-xl">
+                    <h4 className="font-bold text-purple-900 mb-1.5 flex items-center text-sm">
+                      <span className="text-lg mr-2">💡</span>
+                      Quick Tips
+                    </h4>
+                    <ul className="text-xs text-purple-800 space-y-1">
+                      <li>• <strong>Add Items:</strong> Tap items from list, then tap green spots</li>
+                      <li>• <strong>Adjust Position:</strong> Touch a product in the box to select it</li>
+                      <li>• <strong>Move & Rotate:</strong> Use the control bar at the bottom</li>
+                      <li>• <strong>Rotate View:</strong> Swipe on the 3D box to rotate</li>
+                    </ul>
+                  </div>
+
                   {/* Desktop Instructions - Hidden on Mobile */}
                   <div className="hidden lg:block mb-4 p-4 bg-gradient-to-r from-blue-50 to-indigo-50 border-2 border-blue-200 rounded-xl">
                     <h4 className="font-bold text-blue-900 mb-2 flex items-center">
