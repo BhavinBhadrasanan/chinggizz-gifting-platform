@@ -1692,102 +1692,101 @@ export default function HamperBuilderPage() {
                     />
                   </div>
 
-                  {/* MOBILE: Inline Controls - Embedded in 3D card - CLOSER & PARALLEL */}
+                  {/* MOBILE: Floating Bottom Control Bar - ALWAYS VISIBLE, DOESN'T BLOCK VIEW */}
                   {selectedItemForControls && (
-                    <div className="lg:hidden mt-2 pt-2 border-t border-neutral-200">
-                      {/* Selected Item Header - Compact */}
-                      <div className="flex items-center justify-between mb-2 pb-2 border-b border-neutral-200">
-                        <div className="flex items-center gap-1.5">
-                          <span className="text-base">🎮</span>
-                          <h4 className="font-bold text-xs text-neutral-900 truncate max-w-[150px]">{selectedItemForControls.name}</h4>
+                    <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-t-2 border-primary-300 shadow-2xl pb-safe">
+                      {/* Item Info Bar - Compact */}
+                      <div className="flex items-center justify-between px-3 py-2 bg-gradient-to-r from-primary-50 to-purple-50 border-b border-primary-200">
+                        <div className="flex items-center gap-2">
+                          <span className="text-lg">🎮</span>
+                          <span className="font-bold text-xs text-neutral-900 truncate max-w-[120px]">{selectedItemForControls.name}</span>
                         </div>
                         <button
                           onClick={() => {
                             setSelectedItemForControls(null);
                             setSelectedItemToPlace(null);
                           }}
-                          className="bg-red-100 hover:bg-red-200 text-red-700 font-semibold text-[10px] px-2 py-1 rounded flex items-center gap-1 transition-colors"
+                          className="bg-red-500 hover:bg-red-600 text-white font-bold text-xs px-3 py-1.5 rounded-full flex items-center gap-1 transition-all shadow-md active:scale-95"
                         >
-                          <X className="h-2.5 w-2.5" />
+                          <X className="h-3 w-3" />
                           Close
                         </button>
                       </div>
 
-                      {/* PARALLEL LAYOUT: Movement Controls (Left) + Action Buttons (Right) */}
-                      <div className="flex gap-2">
-                        {/* LEFT: Movement Controls - D-Pad */}
+                      {/* Controls - Horizontal Layout */}
+                      <div className="px-3 py-3 flex items-center justify-between gap-3">
+                        {/* LEFT: D-Pad Movement Controls */}
                         <div className="flex-shrink-0">
-                          <p className="text-[9px] text-neutral-600 font-semibold mb-1 text-center">MOVE</p>
-                          <div className="flex flex-col items-center gap-0.5">
-                            {/* Up */}
+                          <div className="grid grid-cols-3 gap-1">
+                            {/* Row 1: Up */}
+                            <div></div>
                             <button
                               onClick={() => handleControlMove('up')}
                               disabled={!canMoveInDirection('up')}
-                              className={`w-10 h-10 rounded-lg flex items-center justify-center transition-all ${
+                              className={`w-11 h-11 rounded-lg flex items-center justify-center transition-all ${
                                 canMoveInDirection('up')
-                                  ? 'bg-blue-500 hover:bg-blue-600 text-white shadow-sm active:scale-95'
+                                  ? 'bg-blue-500 hover:bg-blue-600 text-white shadow-lg active:scale-95'
                                   : 'bg-neutral-200 text-neutral-400 cursor-not-allowed'
                               }`}
                             >
-                              <ArrowUp className="h-4 w-4" />
+                              <ArrowUp className="h-5 w-5" />
+                            </button>
+                            <div></div>
+
+                            {/* Row 2: Left, Center, Right */}
+                            <button
+                              onClick={() => handleControlMove('left')}
+                              disabled={!canMoveInDirection('left')}
+                              className={`w-11 h-11 rounded-lg flex items-center justify-center transition-all ${
+                                canMoveInDirection('left')
+                                  ? 'bg-blue-500 hover:bg-blue-600 text-white shadow-lg active:scale-95'
+                                  : 'bg-neutral-200 text-neutral-400 cursor-not-allowed'
+                              }`}
+                            >
+                              <ArrowLeft className="h-5 w-5" />
                             </button>
 
-                            {/* Left, Center, Right */}
-                            <div className="flex gap-0.5">
-                              <button
-                                onClick={() => handleControlMove('left')}
-                                disabled={!canMoveInDirection('left')}
-                                className={`w-10 h-10 rounded-lg flex items-center justify-center transition-all ${
-                                  canMoveInDirection('left')
-                                    ? 'bg-blue-500 hover:bg-blue-600 text-white shadow-sm active:scale-95'
-                                    : 'bg-neutral-200 text-neutral-400 cursor-not-allowed'
-                                }`}
-                              >
-                                <ArrowLeft className="h-4 w-4" />
-                              </button>
-
-                              <div className="w-10 h-10 bg-neutral-100 rounded-lg flex items-center justify-center border border-neutral-300">
-                                <span className="text-lg">📦</span>
-                              </div>
-
-                              <button
-                                onClick={() => handleControlMove('right')}
-                                disabled={!canMoveInDirection('right')}
-                                className={`w-10 h-10 rounded-lg flex items-center justify-center transition-all ${
-                                  canMoveInDirection('right')
-                                    ? 'bg-blue-500 hover:bg-blue-600 text-white shadow-sm active:scale-95'
-                                    : 'bg-neutral-200 text-neutral-400 cursor-not-allowed'
-                                }`}
-                              >
-                                <ArrowRight className="h-4 w-4" />
-                              </button>
+                            <div className="w-11 h-11 bg-gradient-to-br from-neutral-100 to-neutral-200 rounded-lg flex items-center justify-center border-2 border-neutral-300 shadow-inner">
+                              <span className="text-xl">📦</span>
                             </div>
 
-                            {/* Down */}
+                            <button
+                              onClick={() => handleControlMove('right')}
+                              disabled={!canMoveInDirection('right')}
+                              className={`w-11 h-11 rounded-lg flex items-center justify-center transition-all ${
+                                canMoveInDirection('right')
+                                  ? 'bg-blue-500 hover:bg-blue-600 text-white shadow-lg active:scale-95'
+                                  : 'bg-neutral-200 text-neutral-400 cursor-not-allowed'
+                              }`}
+                            >
+                              <ArrowRight className="h-5 w-5" />
+                            </button>
+
+                            {/* Row 3: Down */}
+                            <div></div>
                             <button
                               onClick={() => handleControlMove('down')}
                               disabled={!canMoveInDirection('down')}
-                              className={`w-10 h-10 rounded-lg flex items-center justify-center transition-all ${
+                              className={`w-11 h-11 rounded-lg flex items-center justify-center transition-all ${
                                 canMoveInDirection('down')
-                                  ? 'bg-blue-500 hover:bg-blue-600 text-white shadow-sm active:scale-95'
+                                  ? 'bg-blue-500 hover:bg-blue-600 text-white shadow-lg active:scale-95'
                                   : 'bg-neutral-200 text-neutral-400 cursor-not-allowed'
                               }`}
                             >
-                              <ArrowDown className="h-4 w-4" />
+                              <ArrowDown className="h-5 w-5" />
                             </button>
+                            <div></div>
                           </div>
                         </div>
 
-                        {/* RIGHT: Action Buttons - Stacked */}
-                        <div className="flex-1 space-y-1.5">
-                          <p className="text-[9px] text-neutral-600 font-semibold mb-1 text-center">ACTIONS</p>
-
+                        {/* RIGHT: Action Buttons - Vertical Stack */}
+                        <div className="flex-1 flex flex-col gap-2">
                           {/* Rotate Button */}
                           <button
                             onClick={handleControlRotate}
-                            className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-semibold text-[10px] py-2 px-2 rounded-lg transition-all flex items-center justify-center gap-1 shadow-sm active:scale-95"
+                            className="w-full bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 text-white font-bold text-xs py-2.5 px-3 rounded-lg transition-all flex items-center justify-center gap-2 shadow-lg active:scale-95"
                           >
-                            <RotateCw className="h-3 w-3 flex-shrink-0" />
+                            <RotateCw className="h-4 w-4 flex-shrink-0" />
                             <span className="truncate">{selectedItemForControls.rotation?.needsRotation ? 'Stand Up' : 'Lay Down'}</span>
                           </button>
 
@@ -1795,19 +1794,19 @@ export default function HamperBuilderPage() {
                           {selectedItemForControls.rotation?.needsRotation && (
                             <button
                               onClick={handleControlRotateDirection}
-                              className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white font-semibold text-[10px] py-2 px-2 rounded-lg transition-all flex items-center justify-center gap-1 shadow-sm active:scale-95"
+                              className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white font-bold text-xs py-2.5 px-3 rounded-lg transition-all flex items-center justify-center gap-2 shadow-lg active:scale-95"
                             >
-                              <RefreshCw className="h-3 w-3 flex-shrink-0" />
-                              <span className="truncate">Rotate</span>
+                              <RefreshCw className="h-4 w-4 flex-shrink-0" />
+                              <span className="truncate">Rotate Dir</span>
                             </button>
                           )}
 
                           {/* Delete Button */}
                           <button
                             onClick={handleControlDelete}
-                            className="w-full bg-gradient-to-r from-red-500 to-pink-600 hover:from-red-600 hover:to-pink-700 text-white font-semibold text-[10px] py-2 px-2 rounded-lg transition-all flex items-center justify-center gap-1 shadow-sm active:scale-95"
+                            className="w-full bg-gradient-to-r from-red-500 to-rose-600 hover:from-red-600 hover:to-rose-700 text-white font-bold text-xs py-2.5 px-3 rounded-lg transition-all flex items-center justify-center gap-2 shadow-lg active:scale-95"
                           >
-                            <Trash2 className="h-3 w-3 flex-shrink-0" />
+                            <Trash2 className="h-4 w-4 flex-shrink-0" />
                             <span className="truncate">Remove</span>
                           </button>
                         </div>
