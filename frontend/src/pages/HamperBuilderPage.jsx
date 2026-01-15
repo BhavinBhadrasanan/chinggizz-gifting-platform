@@ -1230,7 +1230,8 @@ export default function HamperBuilderPage() {
         {/* Step 2: Build Hamper */}
         {step === 2 && selectedBox && (
           <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-0">
-            <div className="flex items-center justify-between mb-8">
+            {/* Desktop only header */}
+            <div className="hidden lg:flex items-center justify-between mb-8">
               <button
                 onClick={() => setShowBoxChangeModal(true)}
                 className="btn-secondary flex items-center gap-2"
@@ -1485,13 +1486,22 @@ export default function HamperBuilderPage() {
                           <p className="text-[10px] text-neutral-600">{selectedBox.dimensions}</p>
                         </div>
                       </div>
-                      <button
-                        onClick={() => setShowBoxChangeModal(true)}
-                        className="bg-primary-100 hover:bg-primary-200 text-primary-700 font-semibold text-[10px] px-2 py-1 rounded flex items-center gap-1 transition-colors"
-                      >
-                        <Package className="h-2.5 w-2.5" />
-                        Change
-                      </button>
+                      <div className="flex items-center gap-1">
+                        <button
+                          onClick={() => setShowBoxChangeModal(true)}
+                          className="bg-primary-100 hover:bg-primary-200 text-primary-700 font-semibold text-[10px] px-2 py-1 rounded flex items-center gap-1 transition-colors"
+                        >
+                          <Package className="h-2.5 w-2.5" />
+                          Change Box
+                        </button>
+                        <button
+                          onClick={handleReset}
+                          className="bg-red-100 hover:bg-red-200 text-red-700 font-semibold text-[10px] px-2 py-1 rounded flex items-center gap-1 transition-colors"
+                        >
+                          <RotateCcw className="h-2.5 w-2.5" />
+                          Reset
+                        </button>
+                      </div>
                     </div>
 
                     {/* Space Tracker - Mobile */}
