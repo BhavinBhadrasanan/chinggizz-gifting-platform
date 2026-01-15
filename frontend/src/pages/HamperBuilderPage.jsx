@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { useCart } from '../context/CartContext';
 import { useNavigate } from 'react-router-dom';
-import { Sparkles, Package, ShoppingBag, ArrowRight, ArrowLeft, Box, RotateCcw, Eye, Move, Plus, Trash2, AlertCircle } from 'lucide-react';
+import { Sparkles, Package, ShoppingBag, ArrowRight, ArrowLeft, Box, RotateCcw, Eye, Move, Plus, Trash2, AlertCircle, Check, Gift } from 'lucide-react';
 import toast from 'react-hot-toast';
 import HamperScene3D from '../components/HamperScene3D';
 import HamperPreview3D from '../components/HamperPreview3D';
@@ -1381,24 +1381,129 @@ export default function HamperBuilderPage() {
               </div>
             )}
 
-            <div className="grid lg:grid-cols-3 gap-8">
-              <div className="lg:col-span-2">
-                <div className="card p-8">
-                  <div className="flex items-center justify-between mb-6 pb-4 border-b border-neutral-200">
-                    <div>
-                      <h3 className="font-bold text-xl text-neutral-900">{selectedBox.name}</h3>
-                      <p className="text-sm text-neutral-600">{selectedBox.dimensions}</p>
+            {/* Mobile: Reverse order - Items first, then 3D box */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+              {/* MOBILE: Available Items Section FIRST (shows at top on mobile) */}
+              <div className="lg:hidden">
+                <div className="card p-4">
+                  {/* Mobile Instructions */}
+                  <div className="mb-4 p-3 bg-gradient-to-r from-blue-50 to-indigo-50 border-2 border-blue-300 rounded-xl">
+                    <h4 className="font-bold text-blue-900 mb-2 flex items-center text-sm">
+                      <span className="text-lg mr-2">👇</span>
+                      How to Build Your Hamper
+                    </h4>
+                    <ol className="text-xs text-blue-800 space-y-1 list-decimal list-inside">
+                      <li><strong>Tap an item below</strong> to select it</li>
+                      <li><strong>Scroll down</strong> to see the 3D box</li>
+                      <li><strong>Tap a green spot</strong> in the box to place item</li>
+                      <li><strong>Use controls</strong> to adjust position</li>
+                    </ol>
+                  </div>
+
+                  {/* Available Items - Mobile */}
+                  <div className="bg-white rounded-lg border-2 border-orange-300 shadow-sm overflow-hidden">
+                    <div className="bg-gradient-to-r from-orange-500 to-amber-500 px-3 py-2 flex items-center justify-between">
+                      <h3 className="text-white font-bold text-sm flex items-center gap-2">
+                        <ShoppingBag className="h-4 w-4" />
+                        Available Items ({availableItems.length})
+                      </h3>
+                      <button
+                        onClick={() => navigate('/products')}
+                        className="bg-white hover:bg-orange-50 text-orange-700 font-semibold text-xs px-2 py-1 rounded-lg flex items-center gap-1 transition-colors"
+                      >
+                        <Plus className="h-3 w-3" />
+                        Add More
+                      </button>
                     </div>
-                    <div className="text-right">
-                      <div className="text-sm text-neutral-600">Items Placed</div>
-                      <div className="text-2xl font-bold text-primary-600">
+
+                    <div className="p-3 space-y-2 max-h-[300px] overflow-y-auto">
+                      {availableItems.length === 0 ? (
+                        <div className="text-center py-6">
+                          <ShoppingBag className="h-12 w-12 text-neutral-300 mx-auto mb-2" />
+                          <p className="text-sm text-neutral-600 mb-3">All items placed!</p>
+                          <button
+                            onClick={() => navigate('/products')}
+                            className="btn-primary text-xs py-2 px-4"
+                          >
+                            Add More Items
+                          </button>
+                        </div>
+                      ) : (
+                        availableItems.map((item) => (
+                          <div
+                            key={item.id}
+                            draggable
+                            onDragStart={(e) => handleDragStart(e, item)}
+                            onDragEnd={handleDragEnd}
+                            onClick={() => {
+                              setSelectedItemToPlace(item);
+                              toast.info(`📦 ${item.name} selected! Scroll down and tap a green spot in the box.`);
+                            }}
+                            className={`bg-white border-2 rounded-lg p-2 cursor-pointer transition-all hover:shadow-md active:scale-95 ${
+                              selectedItemToPlace?.id === item.id
+                                ? 'border-green-500 bg-green-50 shadow-lg'
+                                : 'border-neutral-200 hover:border-orange-400'
+                            }`}
+                          >
+                            <div className="flex items-center gap-2">
+                              <div className="w-12 h-12 bg-neutral-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                {item.imageUrl ? (
+                                  <img src={item.imageUrl} alt={item.name} className="w-full h-full object-cover rounded-lg" />
+                                ) : (
+                                  <Gift className="h-6 w-6 text-neutral-400" />
+                                )}
+                              </div>
+                              <div className="flex-1 min-w-0">
+                                <p className="font-semibold text-xs text-neutral-900 truncate">{item.name}</p>
+                                <p className="text-xs text-neutral-600">₹{item.price}</p>
+                              </div>
+                              {selectedItemToPlace?.id === item.id && (
+                                <div className="flex-shrink-0">
+                                  <div className="bg-green-500 text-white rounded-full p-1">
+                                    <Check className="h-3 w-3" />
+                                  </div>
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                        ))
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* 3D Box Section */}
+              <div className="lg:col-span-2">
+                <div className="card p-4 sm:p-6 lg:p-8">
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 sm:mb-6 pb-3 sm:pb-4 border-b border-neutral-200 gap-2">
+                    <div>
+                      <h3 className="font-bold text-lg sm:text-xl text-neutral-900">{selectedBox.name}</h3>
+                      <p className="text-xs sm:text-sm text-neutral-600">{selectedBox.dimensions}</p>
+                    </div>
+                    <div className="text-left sm:text-right">
+                      <div className="text-xs sm:text-sm text-neutral-600">Items Placed</div>
+                      <div className="text-xl sm:text-2xl font-bold text-primary-600">
                         {placedItems.length} / {selectedBox.capacity}
                       </div>
                     </div>
                   </div>
 
-                  {/* Interactive Instructions */}
-                  <div className="mb-4 p-4 bg-gradient-to-r from-blue-50 to-indigo-50 border-2 border-blue-200 rounded-xl">
+                  {/* Mobile: Selected Item Indicator */}
+                  {selectedItemToPlace && (
+                    <div className="lg:hidden mb-3 p-3 bg-gradient-to-r from-green-50 to-emerald-50 border-2 border-green-400 rounded-xl">
+                      <h4 className="font-bold text-green-900 mb-1 flex items-center text-sm">
+                        <span className="text-lg mr-2">✅</span>
+                        Selected: {selectedItemToPlace.name}
+                      </h4>
+                      <p className="text-xs text-green-700">
+                        Tap a <strong>green spot</strong> below to place this item!
+                      </p>
+                    </div>
+                  )}
+
+                  {/* Desktop Instructions - Hidden on Mobile */}
+                  <div className="hidden lg:block mb-4 p-4 bg-gradient-to-r from-blue-50 to-indigo-50 border-2 border-blue-200 rounded-xl">
                     <h4 className="font-bold text-blue-900 mb-2 flex items-center">
                       <span className="text-xl mr-2">💡</span>
                       Quick Tips
@@ -1424,7 +1529,8 @@ export default function HamperBuilderPage() {
                     </div>
                   )}
 
-                  <div className="w-full h-[600px] relative">
+                  {/* 3D Box Container - Responsive Height */}
+                  <div className="w-full h-[400px] sm:h-[500px] lg:h-[600px] relative">
                     {/* Drop Zone Overlay - Captures HTML5 drag events with Grid */}
                     {isDragging && draggedItem && (
                       <div
