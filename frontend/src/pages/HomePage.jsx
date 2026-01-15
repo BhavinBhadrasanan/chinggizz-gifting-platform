@@ -251,7 +251,7 @@ export default function HomePage() {
               {/* Right CTA */}
               <div className="flex flex-col items-center space-y-3">
                 <a
-                  href="https://wa.me/919876543210?text=Hi%20Chinggis!%20I'm%20interested%20in%20creating%20a%20custom%20hamper."
+                  href="https://wa.me/917012897008?text=Hi%20Chinggizz!%20I'm%20interested%20in%20creating%20a%20custom%20hamper."
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group bg-white text-green-600 px-8 py-4 rounded-xl font-bold text-lg shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-200 flex items-center space-x-3"
@@ -260,9 +260,9 @@ export default function HomePage() {
                   <span>Chat on WhatsApp</span>
                 </a>
                 <div className="flex items-center space-x-4 text-sm">
-                  <a href="tel:+919876543210" className="flex items-center space-x-2 hover:text-yellow-300 transition-colors">
+                  <a href="tel:+917012897008" className="flex items-center space-x-2 hover:text-yellow-300 transition-colors">
                     <Phone className="h-4 w-4" />
-                    <span>+91 98765 43210</span>
+                    <span>+91 70128 97008</span>
                   </a>
                   <span className="text-white/50">|</span>
                   <a href="mailto:hello@chinggis.com" className="flex items-center space-x-2 hover:text-yellow-300 transition-colors">
