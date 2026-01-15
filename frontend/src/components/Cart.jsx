@@ -1,11 +1,13 @@
-import { X, Plus, Minus, ShoppingBag, Trash2 } from 'lucide-react';
+import { X, Plus, Minus, ShoppingBag, Trash2, Sparkles } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import PurchaseFlowModal from './PurchaseFlowModal';
 
 export default function Cart() {
   const { cartItems, removeFromCart, updateQuantity, getCartTotal, getCartCount, isCartOpen, setIsCartOpen } = useCart();
   const [showFlowModal, setShowFlowModal] = useState(false);
+  const navigate = useNavigate();
 
   if (!isCartOpen) return null;
 
@@ -148,13 +150,27 @@ export default function Cart() {
 
         {/* Footer */}
         {cartItems.length > 0 && (
-          <div className="border-t border-neutral-200 p-6 bg-neutral-50">
+          <div className="border-t border-neutral-200 p-6 bg-neutral-50 space-y-3">
             <div className="flex items-center justify-between mb-4">
               <span className="text-lg font-semibold text-neutral-900">Total:</span>
               <span className="text-2xl font-bold text-primary-600">
                 ₹{getCartTotal().toFixed(2)}
               </span>
             </div>
+
+            {/* Build Your Own Hamper Button */}
+            <button
+              onClick={() => {
+                navigate('/hamper-builder');
+                setIsCartOpen(false);
+              }}
+              className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-bold py-3 px-4 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 shadow-md hover:shadow-lg"
+            >
+              <Sparkles className="h-5 w-5" />
+              Build Your Own Hamper
+            </button>
+
+            {/* Proceed to Checkout Button */}
             <button
               onClick={() => {
                 setShowFlowModal(true);
