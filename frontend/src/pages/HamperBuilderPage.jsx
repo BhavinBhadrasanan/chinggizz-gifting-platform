@@ -1474,8 +1474,54 @@ export default function HamperBuilderPage() {
 
               {/* 3D Box Section */}
               <div className="lg:col-span-2">
-                <div className="card p-4 sm:p-6 lg:p-8">
-                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 sm:mb-6 pb-3 sm:pb-4 border-b border-neutral-200 gap-2">
+                <div className="card p-3 sm:p-6 lg:p-8">
+                  {/* MOBILE: Compact header with all info */}
+                  <div className="lg:hidden mb-3 pb-2 border-b border-neutral-200">
+                    <div className="flex items-center justify-between mb-2">
+                      <div className="flex items-center gap-2">
+                        <Box className="h-4 w-4 text-primary-600" />
+                        <div>
+                          <h3 className="font-bold text-sm text-neutral-900">{selectedBox.name}</h3>
+                          <p className="text-[10px] text-neutral-600">{selectedBox.dimensions}</p>
+                        </div>
+                      </div>
+                      <button
+                        onClick={() => setShowBoxChangeModal(true)}
+                        className="bg-primary-100 hover:bg-primary-200 text-primary-700 font-semibold text-[10px] px-2 py-1 rounded flex items-center gap-1 transition-colors"
+                      >
+                        <Package className="h-2.5 w-2.5" />
+                        Change
+                      </button>
+                    </div>
+
+                    {/* Space Tracker - Mobile */}
+                    <div className="flex items-center gap-2">
+                      <div className="flex-1">
+                        <div className="flex items-center justify-between mb-1">
+                          <span className="text-[10px] text-neutral-600">Items: {placedItems.length}/{selectedBox.capacity}</span>
+                          <span className="text-[10px] font-bold" style={{
+                            color: getBoxFillPercentage() > 85 ? '#dc2626' :
+                                   getBoxFillPercentage() > 70 ? '#f59e0b' : '#10b981'
+                          }}>
+                            {getBoxFillPercentage().toFixed(0)}% filled
+                          </span>
+                        </div>
+                        <div className="w-full bg-neutral-200 rounded-full h-2 overflow-hidden">
+                          <div
+                            className="h-2 rounded-full transition-all duration-500"
+                            style={{
+                              width: `${Math.min(getBoxFillPercentage(), 100)}%`,
+                              backgroundColor: getBoxFillPercentage() > 85 ? '#dc2626' :
+                                             getBoxFillPercentage() > 70 ? '#f59e0b' : '#10b981'
+                            }}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* DESKTOP: Original header */}
+                  <div className="hidden lg:flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 sm:mb-6 pb-3 sm:pb-4 border-b border-neutral-200 gap-2">
                     <div>
                       <h3 className="font-bold text-lg sm:text-xl text-neutral-900">{selectedBox.name}</h3>
                       <p className="text-xs sm:text-sm text-neutral-600">{selectedBox.dimensions}</p>
@@ -1639,8 +1685,8 @@ export default function HamperBuilderPage() {
               <div className="lg:col-span-1">
                 <div className="card p-3 sticky top-6 space-y-3 max-h-screen overflow-y-auto">
 
-                  {/* 1. SELECTED BOX - Compact */}
-                  <div className="bg-white rounded-lg border-2 border-blue-300 shadow-sm overflow-hidden">
+                  {/* 1. SELECTED BOX - Compact (HIDDEN ON MOBILE - info moved to 3D box header) */}
+                  <div className="hidden lg:block bg-white rounded-lg border-2 border-blue-300 shadow-sm overflow-hidden">
                     {/* Header */}
                     <div className="bg-gradient-to-r from-blue-500 to-purple-500 px-3 py-2">
                       <h3 className="text-white font-bold text-sm flex items-center gap-2">
@@ -1675,8 +1721,8 @@ export default function HamperBuilderPage() {
                     </div>
                   </div>
 
-                  {/* 2. SPACE TRACKER - Compact */}
-                  <div className="bg-white rounded-lg border-2 border-green-300 shadow-sm overflow-hidden">
+                  {/* 2. SPACE TRACKER - Compact (HIDDEN ON MOBILE - info moved to 3D box header) */}
+                  <div className="hidden lg:block bg-white rounded-lg border-2 border-green-300 shadow-sm overflow-hidden">
                     {/* Header */}
                     <div className="bg-gradient-to-r from-green-500 to-emerald-500 px-3 py-2">
                       <h3 className="text-white font-bold text-sm flex items-center gap-2">
