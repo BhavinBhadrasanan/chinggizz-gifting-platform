@@ -150,10 +150,10 @@ export default function Cart() {
 
         {/* Footer */}
         {cartItems.length > 0 && (
-          <div className="border-t border-neutral-200 p-6 bg-neutral-50 space-y-3">
-            <div className="flex items-center justify-between mb-4">
-              <span className="text-lg font-semibold text-neutral-900">Total:</span>
-              <span className="text-2xl font-bold text-primary-600">
+          <div className="border-t border-neutral-200 p-4 sm:p-6 bg-neutral-50 space-y-2 sm:space-y-3">
+            <div className="flex items-center justify-between mb-3 sm:mb-4">
+              <span className="text-base sm:text-lg font-semibold text-neutral-900">Total:</span>
+              <span className="text-xl sm:text-2xl font-bold text-primary-600">
                 ₹{getCartTotal().toFixed(2)}
               </span>
             </div>
@@ -164,10 +164,10 @@ export default function Cart() {
                 navigate('/hamper-builder');
                 setIsCartOpen(false);
               }}
-              className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-bold py-3 px-4 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 shadow-md hover:shadow-lg"
+              className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-bold text-sm sm:text-base py-2.5 sm:py-3 px-3 sm:px-4 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 shadow-md hover:shadow-lg"
             >
-              <Sparkles className="h-5 w-5" />
-              Build Your Own Hamper
+              <Sparkles className="h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" />
+              <span className="truncate">Build Your Own Hamper</span>
             </button>
 
             {/* Proceed to Checkout Button */}
@@ -176,9 +176,10 @@ export default function Cart() {
                 setShowFlowModal(true);
                 setIsCartOpen(false);
               }}
-              className="btn-primary w-full text-center block"
+              className="w-full bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white font-bold text-sm sm:text-base py-2.5 sm:py-3 px-3 sm:px-4 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg flex items-center justify-center gap-2"
             >
-              Proceed to Checkout
+              <ShoppingBag className="h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" />
+              <span className="truncate">Proceed to Checkout</span>
             </button>
           </div>
         )}
