@@ -1529,8 +1529,8 @@ export default function HamperBuilderPage() {
                     </div>
                   )}
 
-                  {/* 3D Box Container - Responsive Height */}
-                  <div className="w-full h-[400px] sm:h-[500px] lg:h-[600px] relative">
+                  {/* 3D Box Container - Responsive Height (Reduced for mobile) */}
+                  <div className="w-full h-[350px] sm:h-[450px] lg:h-[600px] relative mb-20 lg:mb-0">
                     {/* Drop Zone Overlay - Captures HTML5 drag events with Grid */}
                     {isDragging && draggedItem && (
                       <div
@@ -1886,6 +1886,19 @@ export default function HamperBuilderPage() {
                   </button>
                 </div>
               </div>
+            </div>
+
+            {/* MOBILE ONLY: Sticky Floating Preview Button - Always visible at bottom */}
+            <div className="lg:hidden fixed bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-white via-white to-transparent z-50 pointer-events-none">
+              <button
+                onClick={handleFinalize}
+                disabled={placedItems.length === 0}
+                className="w-full pointer-events-auto bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 disabled:from-gray-400 disabled:to-gray-500 text-white font-bold text-base py-4 px-6 rounded-xl transition-all duration-300 flex items-center justify-center gap-3 shadow-2xl hover:shadow-3xl disabled:opacity-50 disabled:cursor-not-allowed active:scale-95"
+              >
+                <Eye className="h-5 w-5" />
+                <span>{placedItems.length === 0 ? 'Add Items First' : `Preview Hamper (${placedItems.length} items)`}</span>
+                <ArrowRight className="h-5 w-5" />
+              </button>
             </div>
           </div>
         )}
