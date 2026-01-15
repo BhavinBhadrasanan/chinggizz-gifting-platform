@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { useCart } from '../context/CartContext';
 import { useNavigate } from 'react-router-dom';
-import { Sparkles, Package, ShoppingBag, ArrowRight, ArrowLeft, Box, RotateCcw, Eye, Move, Plus, Trash2, AlertCircle, Check, Gift } from 'lucide-react';
+import { Sparkles, Package, ShoppingBag, ArrowRight, ArrowLeft, Box, RotateCcw, Eye, Move, Plus, Trash2, AlertCircle, Check, Gift, X, ArrowUp, ArrowDown, RotateCw, RefreshCw } from 'lucide-react';
 import toast from 'react-hot-toast';
 import HamperScene3D from '../components/HamperScene3D';
 import HamperPreview3D from '../components/HamperPreview3D';
@@ -1672,23 +1672,148 @@ export default function HamperBuilderPage() {
                     />
                   </div>
 
-                  {/* Game-like Control Panel */}
-                  <ProductControlPanel
-                    selectedItem={selectedItemForControls}
-                    onMove={handleControlMove}
-                    onRotate={handleControlRotate}
-                    onRotateDirection={handleControlRotateDirection}
-                    onDelete={handleControlDelete}
-                    onClose={() => {
-                      setSelectedItemForControls(null);
-                      setSelectedItemToPlace(null);
-                    }}
-                    canMoveUp={canMoveInDirection('up')}
-                    canMoveDown={canMoveInDirection('down')}
-                    canMoveLeft={canMoveInDirection('left')}
-                    canMoveRight={canMoveInDirection('right')}
-                    canRotate={true}
-                  />
+                  {/* Desktop: Game-like Control Panel (Popup) */}
+                  <div className="hidden lg:block">
+                    <ProductControlPanel
+                      selectedItem={selectedItemForControls}
+                      onMove={handleControlMove}
+                      onRotate={handleControlRotate}
+                      onRotateDirection={handleControlRotateDirection}
+                      onDelete={handleControlDelete}
+                      onClose={() => {
+                        setSelectedItemForControls(null);
+                        setSelectedItemToPlace(null);
+                      }}
+                      canMoveUp={canMoveInDirection('up')}
+                      canMoveDown={canMoveInDirection('down')}
+                      canMoveLeft={canMoveInDirection('left')}
+                      canMoveRight={canMoveInDirection('right')}
+                      canRotate={true}
+                    />
+                  </div>
+
+                  {/* MOBILE: Inline Controls - Embedded in 3D card */}
+                  {selectedItemForControls && (
+                    <div className="lg:hidden mt-4 pt-3 border-t border-neutral-200">
+                      {/* Selected Item Header */}
+                      <div className="flex items-center justify-between mb-3 pb-2 border-b border-neutral-200">
+                        <div className="flex items-center gap-2">
+                          <span className="text-xl">🎮</span>
+                          <div>
+                            <h4 className="font-bold text-sm text-neutral-900">{selectedItemForControls.name}</h4>
+                            <p className="text-[10px] text-neutral-600">Use controls to adjust</p>
+                          </div>
+                        </div>
+                        <button
+                          onClick={() => {
+                            setSelectedItemForControls(null);
+                            setSelectedItemToPlace(null);
+                          }}
+                          className="bg-red-100 hover:bg-red-200 text-red-700 font-semibold text-[10px] px-2 py-1 rounded flex items-center gap-1 transition-colors"
+                        >
+                          <X className="h-3 w-3" />
+                          Close
+                        </button>
+                      </div>
+
+                      {/* Movement Controls */}
+                      <div className="mb-3">
+                        <p className="text-[10px] text-neutral-600 font-semibold mb-2 text-center">MOVE ITEM</p>
+                        <div className="flex flex-col items-center gap-1">
+                          {/* Up */}
+                          <button
+                            onClick={() => handleControlMove('up')}
+                            disabled={!canMoveInDirection('up')}
+                            className={`w-12 h-12 rounded-lg flex items-center justify-center transition-all ${
+                              canMoveInDirection('up')
+                                ? 'bg-blue-500 hover:bg-blue-600 text-white shadow-md active:scale-95'
+                                : 'bg-neutral-200 text-neutral-400 cursor-not-allowed'
+                            }`}
+                          >
+                            <ArrowUp className="h-5 w-5" />
+                          </button>
+
+                          {/* Left, Center, Right */}
+                          <div className="flex gap-1">
+                            <button
+                              onClick={() => handleControlMove('left')}
+                              disabled={!canMoveInDirection('left')}
+                              className={`w-12 h-12 rounded-lg flex items-center justify-center transition-all ${
+                                canMoveInDirection('left')
+                                  ? 'bg-blue-500 hover:bg-blue-600 text-white shadow-md active:scale-95'
+                                  : 'bg-neutral-200 text-neutral-400 cursor-not-allowed'
+                              }`}
+                            >
+                              <ArrowLeft className="h-5 w-5" />
+                            </button>
+
+                            <div className="w-12 h-12 bg-neutral-100 rounded-lg flex items-center justify-center border-2 border-neutral-300">
+                              <span className="text-2xl">📦</span>
+                            </div>
+
+                            <button
+                              onClick={() => handleControlMove('right')}
+                              disabled={!canMoveInDirection('right')}
+                              className={`w-12 h-12 rounded-lg flex items-center justify-center transition-all ${
+                                canMoveInDirection('right')
+                                  ? 'bg-blue-500 hover:bg-blue-600 text-white shadow-md active:scale-95'
+                                  : 'bg-neutral-200 text-neutral-400 cursor-not-allowed'
+                              }`}
+                            >
+                              <ArrowRight className="h-5 w-5" />
+                            </button>
+                          </div>
+
+                          {/* Down */}
+                          <button
+                            onClick={() => handleControlMove('down')}
+                            disabled={!canMoveInDirection('down')}
+                            className={`w-12 h-12 rounded-lg flex items-center justify-center transition-all ${
+                              canMoveInDirection('down')
+                                ? 'bg-blue-500 hover:bg-blue-600 text-white shadow-md active:scale-95'
+                                : 'bg-neutral-200 text-neutral-400 cursor-not-allowed'
+                            }`}
+                          >
+                            <ArrowDown className="h-5 w-5" />
+                          </button>
+                        </div>
+                      </div>
+
+                      {/* Action Buttons */}
+                      <div className="space-y-2">
+                        <p className="text-[10px] text-neutral-600 font-semibold mb-2 text-center">ACTIONS</p>
+
+                        {/* Rotate Button */}
+                        <button
+                          onClick={handleControlRotate}
+                          className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-semibold text-xs py-2.5 px-4 rounded-lg transition-all flex items-center justify-center gap-2 shadow-md active:scale-95"
+                        >
+                          <RotateCw className="h-4 w-4" />
+                          {selectedItemForControls.rotation?.needsRotation ? 'Stand Up' : 'Lay Down'}
+                        </button>
+
+                        {/* Rotate Direction - Only when laid down */}
+                        {selectedItemForControls.rotation?.needsRotation && (
+                          <button
+                            onClick={handleControlRotateDirection}
+                            className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white font-semibold text-xs py-2.5 px-4 rounded-lg transition-all flex items-center justify-center gap-2 shadow-md active:scale-95"
+                          >
+                            <RefreshCw className="h-4 w-4" />
+                            Rotate Direction
+                          </button>
+                        )}
+
+                        {/* Delete Button */}
+                        <button
+                          onClick={handleControlDelete}
+                          className="w-full bg-gradient-to-r from-red-500 to-pink-600 hover:from-red-600 hover:to-pink-700 text-white font-semibold text-xs py-2.5 px-4 rounded-lg transition-all flex items-center justify-center gap-2 shadow-md active:scale-95"
+                        >
+                          <Trash2 className="h-4 w-4" />
+                          Remove Item
+                        </button>
+                      </div>
+                    </div>
+                  )}
 
                   {/* MOBILE: Preview Button at bottom of 3D card */}
                   <div className="lg:hidden mt-4 pt-3 border-t border-neutral-200">
