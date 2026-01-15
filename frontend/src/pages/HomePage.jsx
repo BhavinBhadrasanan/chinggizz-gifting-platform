@@ -176,46 +176,43 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Filters Section */}
-      <section className="py-6 bg-white border-b border-neutral-200 sticky top-[88px] z-30 shadow-sm">
+      {/* Filters Section - Compact Mobile Design */}
+      <section className="py-2 sm:py-3 md:py-4 bg-white/95 backdrop-blur-sm border-b border-neutral-200 lg:sticky lg:top-[88px] z-30 shadow-sm">
         <div className="container-custom">
-          <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
-            <div className="flex items-center space-x-2">
-              <Filter className="h-5 w-5 text-neutral-600" />
-              <span className="font-semibold text-neutral-900">Filter Products:</span>
-            </div>
+          {/* Mobile: Single Row Horizontal Layout */}
+          <div className="flex items-center gap-2 overflow-x-auto scrollbar-hide">
+            <Filter className="h-4 w-4 text-neutral-600 flex-shrink-0 hidden sm:block" />
 
-            <div className="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
-              {/* Category Filter */}
-              <select
-                value={selectedCategory}
-                onChange={(e) => setSelectedCategory(e.target.value)}
-                className="input-modern"
-              >
-                <option value="all">All Categories</option>
-                {categories.map((cat) => (
-                  <option key={cat.id} value={cat.id}>
-                    {cat.name}
-                  </option>
-                ))}
-              </select>
+            {/* Category Filter - Compact */}
+            <select
+              value={selectedCategory}
+              onChange={(e) => setSelectedCategory(e.target.value)}
+              className="input-modern text-xs sm:text-sm py-1.5 sm:py-2 px-2 sm:px-3 min-w-[110px] sm:min-w-[140px] flex-shrink-0 border-neutral-300"
+            >
+              <option value="all">All Categories</option>
+              {categories.map((cat) => (
+                <option key={cat.id} value={cat.id}>
+                  {cat.name}
+                </option>
+              ))}
+            </select>
 
-              {/* Type Filter */}
-              <select
-                value={selectedType}
-                onChange={(e) => setSelectedType(e.target.value)}
-                className="input-modern"
-              >
-                {productTypes.map((type) => (
-                  <option key={type.value} value={type.value}>
-                    {type.label}
-                  </option>
-                ))}
-              </select>
-            </div>
+            {/* Type Filter - Compact */}
+            <select
+              value={selectedType}
+              onChange={(e) => setSelectedType(e.target.value)}
+              className="input-modern text-xs sm:text-sm py-1.5 sm:py-2 px-2 sm:px-3 min-w-[100px] sm:min-w-[120px] flex-shrink-0 border-neutral-300"
+            >
+              {productTypes.map((type) => (
+                <option key={type.value} value={type.value}>
+                  {type.label}
+                </option>
+              ))}
+            </select>
 
-            <div className="text-sm text-neutral-600">
-              Showing <span className="font-semibold text-neutral-900">{filteredProducts.length}</span> products
+            {/* Product Count - Compact */}
+            <div className="text-xs sm:text-sm text-neutral-600 whitespace-nowrap ml-auto flex-shrink-0 px-2">
+              <span className="font-semibold text-neutral-900">{filteredProducts.length}</span> <span className="hidden sm:inline">items</span>
             </div>
           </div>
         </div>
