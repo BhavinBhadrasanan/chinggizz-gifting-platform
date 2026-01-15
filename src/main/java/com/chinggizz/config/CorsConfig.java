@@ -31,6 +31,7 @@ public class CorsConfig implements WebMvcConfigurer {
                     "http://[::1]:*",
                     "https://*.netlify.app",           // Netlify deployments
                     "https://*.onrender.com",          // Render deployments
+                    "https://*.workers.dev",           // Cloudflare Workers
                     "https://chinggizz.com",           // Custom domain (if any)
                     "https://*.chinggizz.com"          // Custom subdomains
                 )
@@ -56,6 +57,7 @@ public class CorsConfig implements WebMvcConfigurer {
             "http://[::1]:*",
             "https://*.netlify.app",           // Netlify deployments
             "https://*.onrender.com",          // Render deployments
+            "https://*.workers.dev",           // Cloudflare Workers
             "https://chinggizz.com",           // Custom domain (if any)
             "https://*.chinggizz.com"          // Custom subdomains
         ));
