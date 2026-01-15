@@ -311,8 +311,8 @@ export default function HamperPreview3D({ selectedBox, placedItems, hamperName }
               <div className="text-purple-600 font-bold">Loading 3D Preview...</div>
             </Html>
           }>
-            {/* Camera - Optimal angle for viewing the hamper */}
-            <PerspectiveCamera makeDefault position={[3, 2.5, 3]} fov={50} />
+            {/* Camera - Zoomed out for better mobile view */}
+            <PerspectiveCamera makeDefault position={[4.5, 3.5, 4.5]} fov={55} />
 
             {/* Lighting - No shadows, no flickering */}
             <ambientLight intensity={1.0} />
@@ -410,8 +410,8 @@ export default function HamperPreview3D({ selectedBox, placedItems, hamperName }
               enablePan={false}
               enableZoom={true}
               enableRotate={true}
-              minDistance={2.5}
-              maxDistance={8}
+              minDistance={4}
+              maxDistance={12}
               minPolarAngle={Math.PI / 8}
               maxPolarAngle={Math.PI / 2.2}
               target={[0, 0.5, 0]}

@@ -58,8 +58,8 @@ export default function HamperScene3D({
         style={{ background: 'transparent', touchAction: 'none' }}
       >
         <Suspense fallback={<Loader />}>
-          {/* Camera - Zoomed in closer for better view */}
-          <PerspectiveCamera makeDefault position={[3, 2.5, 3]} fov={50} />
+          {/* Camera - Zoomed out for better mobile view */}
+          <PerspectiveCamera makeDefault position={[4.5, 3.5, 4.5]} fov={55} />
 
           {/* Lighting */}
           <ambientLight intensity={0.5} />
@@ -131,8 +131,8 @@ export default function HamperScene3D({
             enableRotate={true}
             enableDamping={true}
             dampingFactor={0.05}
-            minDistance={3}
-            maxDistance={12}
+            minDistance={4}
+            maxDistance={15}
             minPolarAngle={Math.PI / 6}
             maxPolarAngle={Math.PI / 2}
             zoomSpeed={0.8}
