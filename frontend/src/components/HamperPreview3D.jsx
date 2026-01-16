@@ -368,6 +368,7 @@ export default function HamperPreview3D({ selectedBox, placedItems, hamperName }
                   placedItems={placedItems}
                   isPreview={true}
                   hideLid={showLidAnimation && !lidAnimationComplete}
+                  isMobile={isMobile}
                 />
 
                 {/* Animated Lid - Drops, flips, and lands */}

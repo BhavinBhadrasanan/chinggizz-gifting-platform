@@ -7,10 +7,14 @@ import { DragControls } from 'three-stdlib';
 /**
  * Create a realistic cup/mug shape using LatheGeometry
  * This creates a smooth, rounded cup body like a real ceramic tumbler
+ * @param {number} radius - Radius of the mug
+ * @param {number} height - Height of the mug
+ * @param {boolean} isMobile - Whether to use simplified geometry for mobile
  */
-function createMugGeometry(radius, height) {
+function createMugGeometry(radius, height, isMobile = false) {
   const points = [];
-  const segments = 40;
+  // Use fewer segments on mobile for better performance
+  const segments = isMobile ? 16 : 40;
   const wallThickness = radius * 0.1;
 
   // Create the outer profile curve (bottom to top)
@@ -70,13 +74,15 @@ function createMugGeometry(radius, height) {
   points.push(new THREE.Vector2(0, -height / 2));
 
   // Create the lathe geometry by rotating around Y-axis
-  return new THREE.LatheGeometry(points, 48);
+  // Use fewer radial segments on mobile for better performance
+  const radialSegments = isMobile ? 16 : 48;
+  return new THREE.LatheGeometry(points, radialSegments);
 }
 
 /**
  * Individual 3D Product Component with Drag Support
  */
-function Product3DModel({ item, position, onClick, isSelected, onDragStart, onDragEnd, isDraggable = false, onToggleRotation = null }) {
+function Product3DModel({ item, position, onClick, isSelected, onDragStart, onDragEnd, isDraggable = false, onToggleRotation = null, isMobile = false }) {
   const meshRef = useRef();
   const [hovered, setHovered] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
@@ -140,11 +146,13 @@ function Product3DModel({ item, position, onClick, isSelected, onDragStart, onDr
     if (name.includes('candle')) {
       // Scented candle - cylindrical with glass jar appearance
       const radius = Math.min(width, depth) / 2;
-      return <cylinderGeometry args={[radius, radius, height, 32]} />;
+      // Use fewer segments on mobile
+      const segments = isMobile ? 16 : 32;
+      return <cylinderGeometry args={[radius, radius, height, segments]} />;
     } else if (name.includes('mug') || name.includes('cup')) {
       // Realistic mug shape using custom lathe geometry
       const radius = Math.min(width, depth) / 2;
-      const mugGeometry = useMemo(() => createMugGeometry(radius, height), [radius, height]);
+      const mugGeometry = useMemo(() => createMugGeometry(radius, height, isMobile), [radius, height, isMobile]);
       return <primitive object={mugGeometry} />;
     } else if (name.includes('jar')) {
       // Cylindrical products - use width as radius, height as height
@@ -557,7 +565,8 @@ function HamperBoxMesh({
   onDropOnSpot = null,
   draggedItem = null,
   hoveredSpotIndex = null,
-  onToggleRotation = null
+  onToggleRotation = null,
+  isMobile = false
 }) {
   const boxRef = useRef();
   const [internalDraggedItem, setInternalDraggedItem] = useState(null);
@@ -943,6 +952,7 @@ function HamperBoxMesh({
             isDraggable={false}
             isSelected={selectedItemToPlace && selectedItemToPlace.id === item.id && selectedItemToPlace.position === item.position}
             onToggleRotation={onToggleRotation}
+            isMobile={isMobile}
           />
         );
       })}

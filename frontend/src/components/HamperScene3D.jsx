@@ -291,6 +291,7 @@ export default function HamperScene3D({
             onToggleRotation={onToggleRotation}
             draggedItem={draggedItem}
             hoveredSpotIndex={hoveredSpotIndex}
+            isMobile={isMobile}
           />
 
           {/* Ground Shadows - Simplified for mobile */}
