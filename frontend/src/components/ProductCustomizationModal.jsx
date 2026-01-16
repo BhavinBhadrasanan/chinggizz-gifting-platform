@@ -185,7 +185,7 @@ export default function ProductCustomizationModal({ product, isOpen, onClose }) 
 
       {/* Modal - Mobile Optimized Bottom Sheet */}
       <div className="flex min-h-full items-end sm:items-center justify-center p-0 sm:p-4">
-        <div className="relative bg-white rounded-t-3xl sm:rounded-2xl shadow-2xl max-w-4xl w-full max-h-[85vh] overflow-hidden animate-slideUp sm:animate-fade-in flex flex-col">
+        <div className="relative bg-white rounded-t-3xl sm:rounded-2xl shadow-2xl max-w-4xl w-full h-[85vh] sm:max-h-[85vh] overflow-hidden animate-slideUp sm:animate-fade-in flex flex-col">
           {/* Header - Compact Mobile */}
           <div className="flex-shrink-0 bg-gradient-to-r from-primary-500 to-secondary-500 text-white p-2 sm:p-3 flex items-center justify-between z-10 shadow-lg">
             <div className="flex items-center space-x-1.5 flex-1 min-w-0">
@@ -201,7 +201,7 @@ export default function ProductCustomizationModal({ product, isOpen, onClose }) 
           </div>
 
           {/* Content - Scrollable Area */}
-          <div className="flex-1 overflow-y-auto overscroll-contain scrollbar-hide min-h-0" style={{maxHeight: 'calc(85vh - 100px)'}}>
+          <div className="flex-1 overflow-y-auto overscroll-contain scrollbar-hide min-h-0">
             {/* Product Info Card - Clean & Compact */}
             <div className="bg-white border-b-2 border-gray-200 p-3 sm:p-4">
               <div className="flex items-center gap-3">
@@ -441,21 +441,21 @@ export default function ProductCustomizationModal({ product, isOpen, onClose }) 
                 </div>
               </div>
             </div>
-            </div>
-          </div>
+            </div> {/* End scrollable options area */}
+          </div> {/* End scrollable content */}
 
-          {/* Footer - ALWAYS VISIBLE - Sticky Bottom */}
-          <div className="flex-shrink-0 sticky bottom-0 bg-white border-t-4 border-primary-500 p-3 sm:p-4 shadow-2xl z-50">
-            <div className="flex items-center justify-between gap-2 sm:gap-3">
+          {/* Footer - ALWAYS VISIBLE */}
+          <div className="flex-shrink-0 bg-gradient-to-r from-primary-600 to-primary-700 p-3 sm:p-4 shadow-2xl z-50 safe-area-bottom">
+            <div className="flex items-center justify-between gap-3">
               <div className="flex flex-col">
-                <p className="text-xs text-gray-600 font-semibold">Total Price</p>
-                <p className="text-2xl sm:text-3xl font-bold text-primary-600">₹{totalPrice.toFixed(2)}</p>
+                <p className="text-xs text-white/80 font-medium">Total</p>
+                <p className="text-xl sm:text-2xl font-bold text-white">₹{totalPrice.toFixed(2)}</p>
               </div>
               <button
                 onClick={handleAddToCart}
-                className="bg-gradient-to-r from-primary-600 to-primary-700 text-white hover:from-primary-700 hover:to-primary-800 active:scale-95 flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-bold rounded-xl tap-target shadow-xl transition-all"
+                className="bg-white text-primary-600 hover:bg-gray-50 active:bg-gray-100 flex items-center justify-center gap-2 px-5 sm:px-7 py-3 sm:py-3.5 text-sm sm:text-base font-bold rounded-xl tap-target shadow-lg transition-all"
               >
-                <ShoppingCart className="h-5 w-5 sm:h-6 sm:w-6 flex-shrink-0" />
+                <ShoppingCart className="h-5 w-5 flex-shrink-0" />
                 <span>Add to Cart</span>
               </button>
             </div>
