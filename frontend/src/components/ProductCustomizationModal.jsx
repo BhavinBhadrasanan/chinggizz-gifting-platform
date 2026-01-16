@@ -201,101 +201,124 @@ export default function ProductCustomizationModal({ product, isOpen, onClose }) 
           </div>
 
           {/* Content - Mobile Optimized Scrolling */}
-          <div className="p-4 sm:p-6 overflow-y-auto overscroll-contain" style={{ maxHeight: 'calc(92vh - 140px)' }}>
-            {/* Product Info - Compact Mobile Layout */}
-            <div className="flex flex-col sm:flex-row items-start space-y-3 sm:space-y-0 sm:space-x-6 mb-6 sm:mb-8 pb-4 sm:pb-6 border-b">
-              <div className="w-20 h-20 sm:w-32 sm:h-32 rounded-xl overflow-hidden bg-gray-100 flex-shrink-0">
-                {product.imageUrl ? (
-                  <img src={product.imageUrl} alt={product.name} className="w-full h-full object-cover" />
-                ) : (
-                  <div className="w-full h-full flex items-center justify-center">
-                    <Package className="h-8 w-8 sm:h-12 sm:w-12 text-gray-400" />
-                  </div>
-                )}
-              </div>
-              <div className="flex-1 min-w-0">
-                <h3 className="text-lg sm:text-2xl font-bold text-gray-900 mb-1 sm:mb-2 leading-tight">{product.name}</h3>
-                <p className="text-xs sm:text-base text-gray-600 mb-2 sm:mb-3 line-clamp-2">{product.description}</p>
-                <div className="flex flex-wrap items-center gap-2 sm:gap-4">
-                  <span className="text-xl sm:text-3xl font-bold text-primary-600">₹{product.price}</span>
-                  {product.isCustomizable && product.customizationCharge > 0 && (
-                    <span className="text-xs sm:text-sm text-gray-500 bg-gray-100 px-2 py-1 rounded">
-                      +₹{product.customizationCharge} customization
-                    </span>
+          <div className="overflow-y-auto overscroll-contain scrollbar-hide" style={{ maxHeight: 'calc(92vh - 200px)' }}>
+            {/* Product Info Card - Mobile First Design */}
+            <div className="bg-gradient-to-br from-primary-50 to-secondary-50 p-4 sm:p-6 mb-4">
+              <div className="flex items-start gap-3 sm:gap-4">
+                {/* Product Image - Always Visible */}
+                <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl overflow-hidden bg-white shadow-md flex-shrink-0 border-2 border-white">
+                  {product.imageUrl ? (
+                    <img src={product.imageUrl} alt={product.name} className="w-full h-full object-cover" />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center bg-gray-100">
+                      <Package className="h-10 w-10 sm:h-12 sm:w-12 text-gray-400" />
+                    </div>
                   )}
+                </div>
+
+                {/* Product Details */}
+                <div className="flex-1 min-w-0">
+                  <h3 className="text-base sm:text-xl font-bold text-gray-900 mb-1 leading-tight">{product.name}</h3>
+                  <p className="text-xs sm:text-sm text-gray-600 mb-2 line-clamp-2 leading-relaxed">{product.description}</p>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="text-2xl sm:text-3xl font-bold text-primary-600">₹{product.price}</span>
+                    {product.isCustomizable && product.customizationCharge > 0 && (
+                      <span className="text-xs sm:text-sm text-primary-700 bg-primary-100 px-2 py-1 rounded-full font-medium">
+                        +₹{product.customizationCharge} custom
+                      </span>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
 
-            {/* Customization Options - Mobile Optimized */}
+            {/* Scrollable Options Area */}
+            <div className="px-4 sm:px-6 pb-4">
+
+            {/* Customization Options - Card-Based Mobile Design */}
             {optionsArray.length > 0 && (
-              <div className="space-y-4 sm:space-y-6 mb-6 sm:mb-8">
+              <div className="space-y-3 sm:space-y-4 mb-4 sm:mb-6">
                 {optionsArray.map((optionGroup, index) => (
-                  <div key={index} className="bg-gray-50 rounded-xl p-4 sm:p-6">
-                    <h4 className="text-base sm:text-lg font-bold text-gray-900 mb-3 sm:mb-4 flex items-center">
-                      <span className="bg-primary-500 text-white w-6 h-6 sm:w-8 sm:h-8 rounded-full flex items-center justify-center text-xs sm:text-sm mr-2 sm:mr-3 flex-shrink-0">
+                  <div key={index} className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
+                    {/* Option Header */}
+                    <div className="bg-gradient-to-r from-primary-500 to-primary-600 px-4 py-3 flex items-center gap-2">
+                      <span className="bg-white text-primary-600 w-6 h-6 sm:w-7 sm:h-7 rounded-full flex items-center justify-center text-xs sm:text-sm font-bold flex-shrink-0">
                         {index + 1}
                       </span>
-                      <span className="text-sm sm:text-lg">Select {optionGroup.category}</span>
-                    </h4>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
+                      <span className="text-sm sm:text-base font-bold text-white">Select {optionGroup.category}</span>
+                    </div>
+
+                    {/* Options Grid */}
+                    <div className="p-3 sm:p-4">
+                    <div className="grid grid-cols-1 gap-2">
                       {optionGroup.choices.map((choice, choiceIndex) => {
                         const isSelected = selectedOptions[optionGroup.category] === choice.name;
                         return (
                           <button
                             key={choiceIndex}
                             onClick={() => handleOptionSelect(optionGroup.category, choice.name)}
-                            className={`p-3 sm:p-4 rounded-lg border-2 text-left transition-all tap-target ${
+                            className={`p-3 sm:p-4 rounded-xl border-2 text-left transition-all tap-target relative ${
                               isSelected
-                                ? 'border-primary-500 bg-primary-50 shadow-md'
-                                : 'border-gray-200 hover:border-primary-300 bg-white'
+                                ? 'border-primary-500 bg-primary-50 shadow-lg ring-2 ring-primary-200'
+                                : 'border-gray-200 active:border-primary-300 sm:hover:border-primary-300 bg-white'
                             }`}
                           >
-                            <div className="flex items-start justify-between gap-2">
-                              <div className="flex-1 min-w-0">
-                                <div className="font-semibold text-sm sm:text-base text-gray-900 mb-0.5 sm:mb-1">{choice.name}</div>
-                                {choice.description && (
-                                  <div className="text-xs sm:text-sm text-gray-600 mb-1 sm:mb-2 line-clamp-2">{choice.description}</div>
-                                )}
-                                {choice.maxItems && (
-                                  <div className="text-xs text-gray-500">Max {choice.maxItems} items</div>
-                                )}
-                                {(choice.width || choice.height) && (
-                                  <div className="text-xs text-gray-500">
-                                    {choice.width}×{choice.height}{choice.depth ? `×${choice.depth}` : ''} cm
-                                  </div>
-                                )}
+                            {/* Selection Indicator */}
+                            {isSelected && (
+                              <div className="absolute top-2 right-2 bg-primary-500 text-white rounded-full w-6 h-6 flex items-center justify-center">
+                                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                                </svg>
                               </div>
-                              <div className="ml-2 flex-shrink-0">
-                                {choice.price > 0 ? (
-                                  <span className="text-green-600 font-semibold text-sm sm:text-base">+₹{choice.price}</span>
-                                ) : choice.price < 0 ? (
-                                  <span className="text-red-600 font-semibold text-sm sm:text-base">₹{choice.price}</span>
-                                ) : (
-                                  <span className="text-gray-500 text-xs sm:text-sm">Free</span>
+                            )}
+                            <div className="flex items-start gap-3 pr-8">
+                              <div className="flex-1 min-w-0">
+                                <div className="font-bold text-sm sm:text-base text-gray-900 mb-1">{choice.name}</div>
+                                {choice.description && (
+                                  <div className="text-xs sm:text-sm text-gray-600 mb-1.5 line-clamp-1">{choice.description}</div>
                                 )}
+                                <div className="flex flex-wrap items-center gap-2">
+                                  {choice.maxItems && (
+                                    <span className="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full">Max {choice.maxItems} items</span>
+                                  )}
+                                  {(choice.width || choice.height) && (
+                                    <span className="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full">
+                                      {choice.width}×{choice.height}{choice.depth ? `×${choice.depth}` : ''} cm
+                                    </span>
+                                  )}
+                                  {/* Price Badge */}
+                                  {choice.price > 0 ? (
+                                    <span className="text-xs sm:text-sm bg-green-100 text-green-700 font-bold px-2 py-1 rounded-full">+₹{choice.price}</span>
+                                  ) : choice.price < 0 ? (
+                                    <span className="text-xs sm:text-sm bg-red-100 text-red-700 font-bold px-2 py-1 rounded-full">₹{choice.price}</span>
+                                  ) : (
+                                    <span className="text-xs sm:text-sm bg-primary-100 text-primary-700 font-bold px-2 py-1 rounded-full">Free</span>
+                                  )}
+                                </div>
                               </div>
                             </div>
                           </button>
                         );
                       })}
                     </div>
+                    </div>
                   </div>
                 ))}
               </div>
             )}
 
-            {/* Photo Upload Section */}
+            {/* Photo Upload Section - Card Design */}
             {hasPhotoUpload && (
-              <div className="bg-gradient-to-br from-primary-50 to-secondary-50 rounded-xl p-4 sm:p-6 mb-6 sm:mb-8">
-                <h4 className="text-base sm:text-lg font-bold text-gray-900 mb-1 sm:mb-2 flex items-center">
-                  <ImageIcon className="h-4 w-4 sm:h-5 sm:w-5 mr-2 text-primary-600 flex-shrink-0" />
-                  <span className="text-sm sm:text-lg">Upload {requiredPhotos === 2 ? 'Photos' : 'Photo'}</span>
-                  <span className="text-xs sm:text-sm font-normal text-gray-500 ml-2">(Optional)</span>
-                </h4>
+              <div className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden mb-4 sm:mb-6">
+                <div className="bg-gradient-to-r from-secondary-500 to-secondary-600 px-4 py-3 flex items-center gap-2">
+                  <ImageIcon className="h-5 w-5 text-white flex-shrink-0" />
+                  <span className="text-sm sm:text-base font-bold text-white">Upload {requiredPhotos === 2 ? 'Photos' : 'Photo'}</span>
+                  <span className="text-xs text-white/80 ml-auto">(Optional)</span>
+                </div>
+                <div className="p-3 sm:p-4">
                 {requiredPhotos === 2 ? (
-                  <p className="text-xs sm:text-sm text-gray-600 mb-3 sm:mb-4">
-                    Upload 2 clear photos - one for each person (can be added later)
+                  <p className="text-xs sm:text-sm text-gray-600 mb-3">
+                    Upload 2 clear photos - one for each person
                   </p>
                 ) : (
                   <p className="text-xs sm:text-sm text-gray-600 mb-3 sm:mb-4">
@@ -393,28 +416,35 @@ export default function ProductCustomizationModal({ product, isOpen, onClose }) 
                     </div>
                   )}
                 </div>
+                </div>
               </div>
             )}
 
-            {/* Quantity Selector */}
-            {/* Quantity Selector - Mobile Optimized */}
-            <div className="bg-gray-50 rounded-xl p-4 sm:p-6 mb-4 sm:mb-6">
-              <h4 className="text-base sm:text-lg font-bold text-gray-900 mb-3 sm:mb-4">Quantity</h4>
-              <div className="flex items-center space-x-3 sm:space-x-4">
-                <button
-                  onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                  className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white border-2 border-gray-300 active:border-primary-500 sm:hover:border-primary-500 font-bold text-gray-700 tap-target flex items-center justify-center text-lg sm:text-xl"
-                >
-                  -
-                </button>
-                <span className="text-xl sm:text-2xl font-bold text-gray-900 w-12 sm:w-16 text-center">{quantity}</span>
-                <button
-                  onClick={() => setQuantity(quantity + 1)}
-                  className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white border-2 border-gray-300 active:border-primary-500 sm:hover:border-primary-500 font-bold text-gray-700 tap-target flex items-center justify-center text-lg sm:text-xl"
-                >
-                  +
-                </button>
+            {/* Quantity Selector - Card Design */}
+            <div className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
+              <div className="bg-gradient-to-r from-accent-500 to-accent-600 px-4 py-3">
+                <span className="text-sm sm:text-base font-bold text-white">Select Quantity</span>
               </div>
+              <div className="p-4 sm:p-5">
+                <div className="flex items-center justify-center gap-4 sm:gap-6">
+                  <button
+                    onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                    className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-br from-gray-100 to-gray-200 border-2 border-gray-300 active:scale-95 sm:hover:scale-105 active:border-primary-500 sm:hover:border-primary-500 font-bold text-gray-700 tap-target flex items-center justify-center text-xl sm:text-2xl shadow-md transition-all"
+                  >
+                    −
+                  </button>
+                  <div className="bg-primary-50 px-6 py-3 rounded-2xl border-2 border-primary-200">
+                    <span className="text-2xl sm:text-3xl font-bold text-primary-600">{quantity}</span>
+                  </div>
+                  <button
+                    onClick={() => setQuantity(quantity + 1)}
+                    className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-br from-primary-500 to-primary-600 border-2 border-primary-600 active:scale-95 sm:hover:scale-105 font-bold text-white tap-target flex items-center justify-center text-xl sm:text-2xl shadow-md transition-all"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+            </div>
             </div>
           </div>
 
