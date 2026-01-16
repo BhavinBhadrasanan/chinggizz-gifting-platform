@@ -13,7 +13,27 @@ export default function Navbar() {
   // Close mobile menu when route changes
   useEffect(() => {
     setIsOpen(false);
+    // Ensure body scroll is unlocked when route changes
+    document.body.style.overflow = 'unset';
   }, [location.pathname]);
+
+  // Lock/unlock body scroll when mobile menu opens/closes
+  useEffect(() => {
+    if (isOpen) {
+      // Lock scroll when menu is open (mobile only)
+      if (window.innerWidth < 1024) {
+        document.body.style.overflow = 'hidden';
+      }
+    } else {
+      // Unlock scroll when menu is closed
+      document.body.style.overflow = 'unset';
+    }
+
+    // Cleanup on unmount
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen]);
 
   const navLinks = [
     { path: '/', label: 'Home', icon: Home },
@@ -36,9 +56,9 @@ export default function Navbar() {
       </div>
 
       {/* Main Navbar */}
-      <nav className="bg-white shadow-md sticky top-0 z-50 border-b border-neutral-200">
+      <nav className="bg-white shadow-md sticky top-0 z-40 border-b border-neutral-200">
         <div className="container-custom">
-          <div className="flex items-center justify-between h-20">
+          <div className="flex items-center justify-between h-16 sm:h-20">
             {/* Logo */}
             <Link to="/" className="flex items-center space-x-3 group">
               <div className="relative">
@@ -120,32 +140,45 @@ export default function Navbar() {
 
           {/* Mobile Navigation - Visible on Mobile/Tablet */}
           {isOpen && (
-            <div className="lg:hidden py-4 border-t border-neutral-200 bg-neutral-50 rounded-b-2xl animate-fadeIn">
-              <div className="flex flex-col space-y-2">
-                {navLinks.map((link) => {
-                  const Icon = link.icon;
-                  return (
-                    <Link
-                      key={link.path}
-                      to={link.path}
-                      onClick={() => {
-                        setIsOpen(false);
-                        // Scroll to top when navigating
-                        window.scrollTo({ top: 0, behavior: 'smooth' });
-                      }}
-                      className={`flex items-center space-x-3 px-4 py-3.5 rounded-xl font-semibold transition-all tap-target ${
-                        isActive(link.path)
-                          ? 'bg-gradient-to-r from-primary-600 to-primary-500 text-white shadow-lg'
-                          : 'text-neutral-700 hover:bg-white hover:text-primary-600 active:bg-primary-50'
-                      }`}
-                    >
-                      <Icon className="h-5 w-5" />
-                      <span className="text-base">{link.label}</span>
-                    </Link>
-                  );
-                })}
+            <>
+              {/* Backdrop overlay */}
+              <div
+                className="lg:hidden fixed inset-0 bg-black/20 backdrop-blur-sm z-30"
+                onClick={() => setIsOpen(false)}
+              />
+
+              {/* Mobile menu */}
+              <div className="lg:hidden absolute left-0 right-0 top-full py-4 border-t border-neutral-200 bg-white shadow-xl z-40 animate-fadeIn">
+                <div className="container-custom">
+                  <div className="flex flex-col space-y-2">
+                    {navLinks.map((link) => {
+                      const Icon = link.icon;
+                      return (
+                        <Link
+                          key={link.path}
+                          to={link.path}
+                          onClick={() => {
+                            setIsOpen(false);
+                            // Small delay to ensure menu closes before navigation
+                            setTimeout(() => {
+                              window.scrollTo({ top: 0, behavior: 'smooth' });
+                            }, 100);
+                          }}
+                          className={`flex items-center space-x-3 px-4 py-3.5 rounded-xl font-semibold transition-all tap-target ${
+                            isActive(link.path)
+                              ? 'bg-gradient-to-r from-primary-600 to-primary-500 text-white shadow-lg'
+                              : 'text-neutral-700 hover:bg-neutral-50 hover:text-primary-600 active:bg-primary-50'
+                          }`}
+                        >
+                          <Icon className="h-5 w-5" />
+                          <span className="text-base">{link.label}</span>
+                        </Link>
+                      );
+                    })}
+                  </div>
+                </div>
               </div>
-            </div>
+            </>
           )}
         </div>
       </nav>

@@ -85,6 +85,13 @@ export default function HamperBuilderPage() {
   const { cartItems } = useCart();
   const navigate = useNavigate();
 
+  // Debug: Log when component mounts
+  useEffect(() => {
+    console.log('🎁 HamperBuilderPage mounted successfully!');
+    console.log('📱 Screen width:', window.innerWidth);
+    console.log('📦 Cart items:', cartItems.length);
+  }, []);
+
   // Refs for scrolling to sections
   const hamperViewRef = useRef(null);
   const previewSectionRef = useRef(null);
@@ -1062,17 +1069,17 @@ export default function HamperBuilderPage() {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-neutral-50 via-primary-50/20 to-secondary-50/20 py-6 sm:py-12">
+    <div className="min-h-screen bg-gradient-to-br from-neutral-50 via-primary-50/20 to-secondary-50/20 py-4 sm:py-6 md:py-12">
       <div className="container-custom">
         {/* Header */}
-        <div className="text-center mb-6 sm:mb-8 px-2">
-          <div className="inline-flex items-center gap-2 bg-white px-4 sm:px-6 py-2 sm:py-3 rounded-full shadow-lg mb-3 sm:mb-4">
+        <div className="text-center mb-4 sm:mb-6 md:mb-8 px-2">
+          <div className="inline-flex items-center gap-2 bg-white px-4 sm:px-6 py-2 sm:py-3 rounded-full shadow-lg mb-2 sm:mb-3 md:mb-4">
             <Sparkles className="h-5 w-5 sm:h-6 sm:w-6 text-primary-600" />
-            <h1 className="text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-primary-600 to-secondary-500 bg-clip-text text-transparent">
+            <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-primary-600 to-secondary-500 bg-clip-text text-transparent">
               Custom Hamper Builder
             </h1>
           </div>
-          <p className="text-sm sm:text-base md:text-lg text-neutral-600">
+          <p className="text-xs sm:text-sm md:text-base lg:text-lg text-neutral-600">
             Create your perfect gift hamper in 3 simple steps
           </p>
         </div>
