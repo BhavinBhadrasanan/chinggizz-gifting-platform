@@ -312,17 +312,31 @@ export default function HamperPreview3D({ selectedBox, placedItems, hamperName }
       <div className="w-full h-full rounded-xl overflow-hidden shadow-2xl bg-gradient-to-br from-amber-50 via-yellow-50 to-orange-50">
         <Canvas
           shadows={!isMobile}
-          dpr={isMobile ? [0.5, 1] : [1, 2]}
+          dpr={isMobile ? [0.5, 0.75] : [1, 2]}
           gl={{
             antialias: !isMobile,
             alpha: true,
             preserveDrawingBuffer: true,
             powerPreference: isMobile ? "low-power" : "high-performance",
-            failIfMajorPerformanceCaveat: false
+            failIfMajorPerformanceCaveat: false,
+            precision: isMobile ? "lowp" : "highp",
+            ...(isMobile && {
+              stencil: false,
+              depth: true,
+              logarithmicDepthBuffer: false,
+            })
           }}
-          performance={{ min: 0.3 }}
+          performance={{
+            min: 0.1,
+            max: 1,
+            debounce: 200
+          }}
+          frameloop="demand"
           onCreated={({ gl }) => {
             console.log('✅ Preview Canvas created successfully');
+            if (isMobile) {
+              gl.setPixelRatio(Math.min(window.devicePixelRatio, 1));
+            }
           }}
         >
           <Suspense fallback={

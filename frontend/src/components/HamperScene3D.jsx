@@ -1,18 +1,44 @@
 import React, { Suspense, useState, useEffect } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, PerspectiveCamera, Environment, ContactShadows, Html, Sky } from '@react-three/drei';
+import * as THREE from 'three';
 import HamperBoxMesh from './HamperBox3D';
 
 /**
- * Loading fallback component
+ * Loading fallback component - Enhanced for mobile
  */
 function Loader() {
+  const [loadingTime, setLoadingTime] = React.useState(0);
+
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      setLoadingTime(prev => prev + 1);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <Html center>
-      <div className="flex flex-col items-center gap-3">
+      <div className="flex flex-col items-center gap-3 p-4">
         <div className="w-16 h-16 border-4 border-primary-500 border-t-transparent rounded-full animate-spin"></div>
-        <p className="text-primary-600 font-semibold">Loading 3D Scene...</p>
-        <p className="text-xs text-gray-500 mt-2">This may take a moment on mobile devices</p>
+        <p className="text-primary-600 font-semibold text-center">Loading 3D Scene...</p>
+        <p className="text-xs text-gray-500 mt-2 text-center max-w-xs">
+          {loadingTime < 5 ? (
+            "Preparing your hamper box..."
+          ) : loadingTime < 10 ? (
+            "Loading 3D models... Please wait"
+          ) : loadingTime < 20 ? (
+            "Almost there! Building the scene..."
+          ) : (
+            "Still loading... Your device is working hard!"
+          )}
+        </p>
+        {loadingTime > 15 && (
+          <p className="text-xs text-blue-600 mt-1 text-center max-w-xs">
+            💡 Tip: The 3D view is loading. This is normal on mobile devices.
+          </p>
+        )}
       </div>
     </Html>
   );
@@ -74,7 +100,8 @@ export default function HamperScene3D({
 }) {
   const [webGLError, setWebGLError] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const [loadingTimeout, setLoadingTimeout] = useState(false);
+  const [sceneLoaded, setSceneLoaded] = useState(false);
+  const [canvasError, setCanvasError] = useState(false);
 
   // Detect mobile device
   useEffect(() => {
@@ -98,6 +125,12 @@ export default function HamperScene3D({
         setWebGLError(true);
       } else {
         console.log('✅ WebGL supported');
+        // Check WebGL capabilities
+        const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
+        if (debugInfo) {
+          const renderer = gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL);
+          console.log('🎨 GPU Renderer:', renderer);
+        }
       }
     } catch (e) {
       console.error('❌ WebGL error:', e);
@@ -105,25 +138,10 @@ export default function HamperScene3D({
     }
   }, []);
 
-  // Timeout for loading - if 3D takes too long, show fallback
-  useEffect(() => {
-    let timeout;
-    if (!loadingTimeout) {
-      timeout = setTimeout(() => {
-        console.warn('⚠️ 3D loading timeout - showing fallback UI');
-        setLoadingTimeout(true);
-      }, isMobile ? 10000 : 15000); // 10s for mobile, 15s for desktop
-    }
-
-    return () => {
-      if (timeout) clearTimeout(timeout);
-    };
-  }, [isMobile, loadingTimeout]);
-
   // Callback when 3D scene is ready
   const handleSceneReady = React.useCallback(() => {
     console.log('✅ 3D Scene fully loaded and ready');
-    setLoadingTimeout(false); // Clear timeout flag if it was set
+    setSceneLoaded(true);
   }, []);
 
   if (!selectedBox) {
@@ -136,19 +154,21 @@ export default function HamperScene3D({
     );
   }
 
-  // Mobile-optimized 3D settings
+  // Mobile-optimized 3D settings - AGGRESSIVE optimization for mobile
   const mobileSettings = {
-    dpr: [0.5, 1], // Lower pixel ratio for mobile
+    dpr: [0.5, 0.75], // Very low pixel ratio for mobile - prioritize performance
     shadows: false, // Disable shadows on mobile
     antialias: false, // Disable antialiasing on mobile
-    powerPreference: "low-power" // Use low power mode
+    powerPreference: "low-power", // Use low power mode
+    precision: "lowp" // Low precision for mobile
   };
 
   const desktopSettings = {
     dpr: [1, 1.5],
     shadows: true,
     antialias: true,
-    powerPreference: "high-performance"
+    powerPreference: "high-performance",
+    precision: "highp"
   };
 
   const settings = isMobile ? mobileSettings : desktopSettings;
@@ -200,8 +220,9 @@ export default function HamperScene3D({
     </div>
   );
 
-  // Show fallback UI if WebGL is not supported OR loading timeout
-  if (webGLError || loadingTimeout) {
+  // Show fallback UI ONLY if WebGL is not supported OR Canvas has critical error
+  // DO NOT show fallback just because loading is slow - let it load!
+  if (webGLError || canvasError) {
     return <FallbackUI />;
   }
 
@@ -215,17 +236,41 @@ export default function HamperScene3D({
             antialias: settings.antialias,
             alpha: true,
             powerPreference: settings.powerPreference,
-            failIfMajorPerformanceCaveat: false // Don't fail on slow devices
+            failIfMajorPerformanceCaveat: false, // Don't fail on slow devices - CRITICAL for mobile
+            precision: settings.precision,
+            // Mobile-specific optimizations
+            ...(isMobile && {
+              stencil: false, // Disable stencil buffer on mobile
+              depth: true, // Keep depth buffer for proper rendering
+              logarithmicDepthBuffer: false, // Disable for better mobile performance
+            })
           }}
-          performance={{ min: 0.3 }}
+          performance={{
+            min: 0.1, // Allow very low performance - don't give up!
+            max: 1,
+            debounce: 200
+          }}
+          frameloop="demand" // Only render when needed - saves battery on mobile
           style={{ background: 'transparent', touchAction: 'none' }}
-          onCreated={({ gl }) => {
+          onCreated={({ gl, scene, camera }) => {
             console.log('✅ 3D Canvas created successfully');
             gl.setClearColor(0x000000, 0);
+
+            // Mobile-specific optimizations
+            if (isMobile) {
+              console.log('📱 Applying mobile-specific optimizations');
+              gl.setPixelRatio(Math.min(window.devicePixelRatio, 1)); // Cap pixel ratio
+              scene.matrixAutoUpdate = true; // Ensure proper updates
+            }
+
+            // Mark scene as ready after a short delay to ensure everything is loaded
+            setTimeout(() => {
+              handleSceneReady();
+            }, 100);
           }}
           onError={(error) => {
             console.error('❌ Canvas error:', error);
-            setWebGLError(true);
+            setCanvasError(true);
           }}
         >
         <Suspense fallback={<Loader />}>
@@ -305,30 +350,35 @@ export default function HamperScene3D({
             />
           )}
 
-          {/* Grid Helper (optional) */}
-          <gridHelper args={[20, 20, '#cccccc', '#eeeeee']} position={[0, -0.05, 0]} />
+          {/* Grid Helper - Simplified for mobile */}
+          {!isMobile && <gridHelper args={[20, 20, '#cccccc', '#eeeeee']} position={[0, -0.05, 0]} />}
+          {isMobile && <gridHelper args={[20, 10, '#cccccc', '#eeeeee']} position={[0, -0.05, 0]} />}
 
-          {/* Controls - Optimized for better user experience */}
+          {/* Controls - Optimized for mobile and desktop */}
           <OrbitControls
             makeDefault
             autoRotate={autoRotate}
             autoRotateSpeed={2}
-            enablePan={true}
+            enablePan={!isMobile} // Disable pan on mobile to avoid conflicts with touch gestures
             enableZoom={true}
             enableRotate={true}
-            enableDamping={true}
-            dampingFactor={0.05}
+            enableDamping={!isMobile} // Disable damping on mobile for better performance
+            dampingFactor={isMobile ? 0 : 0.05}
             minDistance={3}
             maxDistance={12}
             minPolarAngle={Math.PI / 6}
             maxPolarAngle={Math.PI / 2.2}
-            zoomSpeed={1}
+            zoomSpeed={isMobile ? 0.5 : 1} // Slower zoom on mobile
             panSpeed={0.5}
-            rotateSpeed={1}
+            rotateSpeed={isMobile ? 0.8 : 1} // Slightly slower rotation on mobile
+            touches={{
+              ONE: THREE.TOUCH.ROTATE, // One finger to rotate
+              TWO: THREE.TOUCH.DOLLY_PAN // Two fingers to zoom
+            }}
             mouseButtons={{
-              LEFT: 0,   // Rotate
-              MIDDLE: 1, // Zoom
-              RIGHT: 2   // Pan
+              LEFT: THREE.MOUSE.ROTATE,   // Rotate
+              MIDDLE: THREE.MOUSE.DOLLY, // Zoom
+              RIGHT: THREE.MOUSE.PAN   // Pan
             }}
           />
 
