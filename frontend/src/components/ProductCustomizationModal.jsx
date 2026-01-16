@@ -442,14 +442,30 @@ export default function ProductCustomizationModal({ product, isOpen, onClose }) 
               </div>
             </div>
 
-            {/* ADD TO CART BUTTON - BRIGHT RED FOR TESTING */}
-            <div className="bg-red-600 p-4 mb-4">
-              <button
-                onClick={handleAddToCart}
-                className="w-full bg-yellow-400 text-black py-4 text-xl font-bold rounded-lg"
-              >
-                🛒 ADD TO CART - TOTAL: ₹{totalPrice.toFixed(2)}
-              </button>
+            {/* ADD TO CART - PROFESSIONAL STICKY FOOTER */}
+            <div className="sticky bottom-0 left-0 right-0 bg-white border-t-2 border-gray-200 shadow-2xl -mx-2 sm:-mx-3 -mb-2 sm:-mb-3 mt-4">
+              <div className="p-3 sm:p-4">
+                {/* Total Price Display */}
+                <div className="flex items-center justify-between mb-3">
+                  <div>
+                    <p className="text-xs text-gray-600 font-medium mb-0.5">Total Price</p>
+                    <p className="text-2xl sm:text-3xl font-bold text-primary-600">₹{totalPrice.toFixed(2)}</p>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-xs text-gray-600 font-medium mb-0.5">Quantity</p>
+                    <p className="text-xl sm:text-2xl font-bold text-gray-900">{quantity}</p>
+                  </div>
+                </div>
+
+                {/* Add to Cart Button */}
+                <button
+                  onClick={handleAddToCart}
+                  className="w-full bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white py-4 px-6 rounded-xl font-bold text-base sm:text-lg shadow-xl hover:shadow-2xl active:scale-98 transition-all duration-200 flex items-center justify-center gap-2"
+                >
+                  <ShoppingCart className="h-5 w-5 sm:h-6 sm:w-6" />
+                  <span>Add to Cart</span>
+                </button>
+              </div>
             </div>
 
             </div> {/* End scrollable options area */}
