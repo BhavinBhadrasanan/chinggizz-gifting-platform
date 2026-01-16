@@ -185,7 +185,7 @@ export default function ProductCustomizationModal({ product, isOpen, onClose }) 
 
       {/* Modal - Mobile Optimized Bottom Sheet */}
       <div className="flex min-h-full items-end sm:items-center justify-center p-0 sm:p-4">
-        <div className="relative bg-white rounded-t-3xl sm:rounded-2xl shadow-2xl max-w-4xl w-full max-h-[95vh] sm:max-h-[90vh] overflow-hidden animate-slideUp sm:animate-fade-in flex flex-col">
+        <div className="relative bg-white rounded-t-3xl sm:rounded-2xl shadow-2xl max-w-4xl w-full max-h-[92vh] sm:max-h-[90vh] overflow-hidden animate-slideUp sm:animate-fade-in flex flex-col">
           {/* Header - Compact Mobile */}
           <div className="flex-shrink-0 bg-gradient-to-r from-primary-500 to-secondary-500 text-white p-3 sm:p-4 flex items-center justify-between z-10 shadow-lg">
             <div className="flex items-center space-x-2 flex-1 min-w-0">
@@ -200,11 +200,11 @@ export default function ProductCustomizationModal({ product, isOpen, onClose }) 
             </button>
           </div>
 
-          {/* Content - Scrollable with Fixed Height */}
-          <div className="flex-1 overflow-y-auto overscroll-contain scrollbar-hide" style={{ maxHeight: 'calc(95vh - 160px)' }}>
+          {/* Content - Scrollable Area */}
+          <div className="flex-1 overflow-y-auto overscroll-contain scrollbar-hide">
             {/* Product Info Card - Compact */}
-            <div className="bg-gradient-to-br from-primary-50 to-secondary-50 p-3 sm:p-4 mb-3">
-              <div className="flex items-start gap-2.5 sm:gap-3">
+            <div className="bg-gradient-to-br from-primary-50 to-secondary-50 p-2.5 sm:p-3 mb-2">
+              <div className="flex items-start gap-2 sm:gap-2.5">
                 {/* Product Image - Compact */}
                 <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl overflow-hidden bg-white shadow-md flex-shrink-0 border-2 border-white">
                   {product.imageUrl ? (
@@ -233,7 +233,7 @@ export default function ProductCustomizationModal({ product, isOpen, onClose }) 
             </div>
 
             {/* Scrollable Options Area - Compact */}
-            <div className="px-3 sm:px-4 pb-3">
+            <div className="px-2.5 sm:px-3 pb-2">
 
             {/* Customization Options - Compact Cards */}
             {optionsArray.length > 0 && (
@@ -445,19 +445,19 @@ export default function ProductCustomizationModal({ product, isOpen, onClose }) 
             </div>
           </div>
 
-          {/* Footer - Compact Always Visible */}
-          <div className="flex-shrink-0 bg-white border-t-2 border-gray-200 p-2.5 sm:p-4 shadow-lg safe-area-bottom">
-            <div className="flex items-center justify-between gap-2 sm:gap-3">
+          {/* Footer - Always Visible with Strong Background */}
+          <div className="flex-shrink-0 bg-gradient-to-r from-gray-50 to-gray-100 border-t-2 border-gray-300 p-3 sm:p-4 shadow-2xl safe-area-bottom z-20">
+            <div className="flex items-center justify-between gap-3">
               <div className="flex flex-col">
-                <p className="text-xs text-gray-600">Total</p>
-                <p className="text-xl sm:text-2xl font-bold text-primary-600">₹{totalPrice.toFixed(2)}</p>
+                <p className="text-xs text-gray-600 font-medium">Total Price</p>
+                <p className="text-2xl sm:text-3xl font-bold text-primary-600">₹{totalPrice.toFixed(2)}</p>
               </div>
               <button
                 onClick={handleAddToCart}
-                className="btn-primary flex items-center justify-center space-x-1.5 sm:space-x-2 px-5 sm:px-6 py-2.5 sm:py-3 text-sm sm:text-base tap-target flex-1 max-w-[200px] sm:max-w-none"
+                className="btn-primary flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg tap-target shadow-xl"
               >
-                <ShoppingCart className="h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" />
-                <span>Add to Cart</span>
+                <ShoppingCart className="h-5 w-5 flex-shrink-0" />
+                <span className="font-bold">Add to Cart</span>
               </button>
             </div>
           </div>
