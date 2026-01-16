@@ -185,9 +185,9 @@ export default function ProductCustomizationModal({ product, isOpen, onClose }) 
 
       {/* Modal - Mobile Optimized Bottom Sheet */}
       <div className="flex min-h-full items-end sm:items-center justify-center p-0 sm:p-4">
-        <div className="relative bg-white rounded-t-3xl sm:rounded-2xl shadow-2xl max-w-4xl w-full h-[85vh] sm:max-h-[85vh] overflow-hidden animate-slideUp sm:animate-fade-in flex flex-col">
+        <div className="relative bg-white rounded-t-3xl sm:rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] animate-slideUp sm:animate-fade-in flex flex-col">
           {/* Header - Compact Mobile */}
-          <div className="flex-shrink-0 bg-gradient-to-r from-primary-500 to-secondary-500 text-white p-2 sm:p-3 flex items-center justify-between z-10 shadow-lg">
+          <div className="flex-shrink-0 bg-gradient-to-r from-primary-500 to-secondary-500 text-white p-2 sm:p-3 flex items-center justify-between z-10 shadow-lg rounded-t-3xl sm:rounded-t-2xl">
             <div className="flex items-center space-x-1.5 flex-1 min-w-0">
               <Sparkles className="h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" />
               <h2 className="text-sm sm:text-lg font-bold truncate">Customize</h2>
@@ -201,12 +201,12 @@ export default function ProductCustomizationModal({ product, isOpen, onClose }) 
           </div>
 
           {/* Content - Scrollable Area */}
-          <div className="flex-1 overflow-y-auto overscroll-contain scrollbar-hide min-h-0">
+          <div className="flex-1 overflow-y-auto overflow-x-hidden overscroll-contain scrollbar-hide min-h-0">
             {/* Product Info Card - Clean & Compact */}
-            <div className="bg-white border-b-2 border-gray-200 p-3 sm:p-4">
-              <div className="flex items-center gap-3">
+            <div className="bg-white border-b border-gray-200 p-2 sm:p-3">
+              <div className="flex items-center gap-2">
                 {/* Product Image - Visible */}
-                <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl overflow-hidden bg-white shadow-lg flex-shrink-0 border-2 border-primary-200">
+                <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-lg overflow-hidden bg-white shadow-md flex-shrink-0 border border-primary-200">
                   {product.imageUrl ? (
                     <img src={product.imageUrl} alt={product.name} className="w-full h-full object-cover" />
                   ) : (
@@ -218,11 +218,11 @@ export default function ProductCustomizationModal({ product, isOpen, onClose }) 
 
                 {/* Product Details - Clear */}
                 <div className="flex-1 min-w-0">
-                  <h3 className="text-sm sm:text-base font-bold text-gray-900 mb-1 leading-tight line-clamp-1">{product.name}</h3>
-                  <div className="flex items-center gap-2">
-                    <span className="text-lg sm:text-xl font-bold text-primary-600">₹{product.price}</span>
+                  <h3 className="text-xs sm:text-sm font-bold text-gray-900 mb-0.5 leading-tight line-clamp-1">{product.name}</h3>
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-base sm:text-lg font-bold text-primary-600">₹{product.price}</span>
                     {product.isCustomizable && product.customizationCharge > 0 && (
-                      <span className="text-xs text-white bg-primary-600 px-2 py-1 rounded-full font-bold">
+                      <span className="text-xs text-white bg-primary-600 px-1.5 py-0.5 rounded-full font-bold">
                         +₹{product.customizationCharge}
                       </span>
                     )}
@@ -232,11 +232,11 @@ export default function ProductCustomizationModal({ product, isOpen, onClose }) 
             </div>
 
             {/* Scrollable Options Area - Clean Layout */}
-            <div className="px-3 sm:px-4 py-3 sm:py-4">
+            <div className="px-2 sm:px-3 py-2 sm:py-3">
 
             {/* Customization Options - Clean Cards */}
             {optionsArray.length > 0 && (
-              <div className="space-y-3 sm:space-y-4 mb-3 sm:mb-4">
+              <div className="space-y-2 sm:space-y-3 mb-2 sm:mb-3">
                 {optionsArray.map((optionGroup, index) => (
                   <div key={index} className="bg-gray-50 rounded-xl shadow-sm border-2 border-gray-200 overflow-hidden">
                     {/* Option Header - Clear */}
@@ -416,25 +416,25 @@ export default function ProductCustomizationModal({ product, isOpen, onClose }) 
               </div>
             )}
 
-            {/* Quantity Selector - Clean */}
-            <div className="bg-gray-50 rounded-xl shadow-sm border-2 border-gray-200 overflow-hidden mb-4">
-              <div className="bg-gradient-to-r from-accent-500 to-accent-600 px-3 py-2">
-                <span className="text-sm sm:text-base font-bold text-white">Select Quantity</span>
+            {/* Quantity Selector - Compact */}
+            <div className="bg-gray-50 rounded-lg shadow-sm border border-gray-200 overflow-hidden mb-2">
+              <div className="bg-gradient-to-r from-accent-500 to-accent-600 px-2 py-1.5">
+                <span className="text-xs sm:text-sm font-bold text-white">Select Quantity</span>
               </div>
-              <div className="p-4 sm:p-5">
-                <div className="flex items-center justify-center gap-4 sm:gap-6">
+              <div className="p-2.5 sm:p-3">
+                <div className="flex items-center justify-center gap-3 sm:gap-4">
                   <button
                     onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                    className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-white border-2 border-gray-300 active:scale-95 sm:hover:scale-105 active:border-primary-500 sm:hover:border-primary-500 font-bold text-gray-700 tap-target flex items-center justify-center text-xl sm:text-2xl shadow-md transition-all"
+                    className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white border-2 border-gray-300 active:scale-95 sm:hover:scale-105 active:border-primary-500 sm:hover:border-primary-500 font-bold text-gray-700 tap-target flex items-center justify-center text-lg sm:text-xl shadow-md transition-all"
                   >
                     −
                   </button>
-                  <div className="bg-primary-50 px-6 py-3 rounded-xl border-2 border-primary-300 min-w-[70px] text-center">
-                    <span className="text-2xl sm:text-3xl font-bold text-primary-600">{quantity}</span>
+                  <div className="bg-primary-50 px-4 py-2 rounded-lg border-2 border-primary-300 min-w-[60px] text-center">
+                    <span className="text-xl sm:text-2xl font-bold text-primary-600">{quantity}</span>
                   </div>
                   <button
                     onClick={() => setQuantity(quantity + 1)}
-                    className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-br from-primary-500 to-primary-600 border-2 border-primary-600 active:scale-95 sm:hover:scale-105 font-bold text-white tap-target flex items-center justify-center text-xl sm:text-2xl shadow-md transition-all"
+                    className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-primary-500 to-primary-600 border-2 border-primary-600 active:scale-95 sm:hover:scale-105 font-bold text-white tap-target flex items-center justify-center text-lg sm:text-xl shadow-md transition-all"
                   >
                     +
                   </button>
@@ -445,17 +445,17 @@ export default function ProductCustomizationModal({ product, isOpen, onClose }) 
           </div> {/* End scrollable content */}
 
           {/* Footer - ALWAYS VISIBLE */}
-          <div className="flex-shrink-0 bg-gradient-to-r from-primary-600 to-primary-700 p-3 sm:p-4 shadow-2xl z-50 safe-area-bottom">
-            <div className="flex items-center justify-between gap-3">
-              <div className="flex flex-col">
+          <div className="flex-shrink-0 bg-gradient-to-r from-primary-600 to-primary-700 p-2.5 sm:p-3 shadow-2xl z-50 border-t-2 border-primary-800">
+            <div className="flex items-center justify-between gap-2">
+              <div className="flex flex-col min-w-0">
                 <p className="text-xs text-white/80 font-medium">Total</p>
-                <p className="text-xl sm:text-2xl font-bold text-white">₹{totalPrice.toFixed(2)}</p>
+                <p className="text-lg sm:text-xl font-bold text-white">₹{totalPrice.toFixed(2)}</p>
               </div>
               <button
                 onClick={handleAddToCart}
-                className="bg-white text-primary-600 hover:bg-gray-50 active:bg-gray-100 flex items-center justify-center gap-2 px-5 sm:px-7 py-3 sm:py-3.5 text-sm sm:text-base font-bold rounded-xl tap-target shadow-lg transition-all"
+                className="bg-white text-primary-600 hover:bg-gray-50 active:bg-gray-100 flex items-center justify-center gap-1.5 px-4 sm:px-6 py-2.5 sm:py-3 text-sm sm:text-base font-bold rounded-lg tap-target shadow-lg transition-all flex-shrink-0"
               >
-                <ShoppingCart className="h-5 w-5 flex-shrink-0" />
+                <ShoppingCart className="h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" />
                 <span>Add to Cart</span>
               </button>
             </div>
