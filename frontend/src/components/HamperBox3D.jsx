@@ -1,8 +1,11 @@
-import React, { useRef, useMemo, useState } from 'react';
+import React, { useRef, useMemo, useState, lazy, Suspense } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { OrbitControls, PerspectiveCamera, Environment, ContactShadows, Text } from '@react-three/drei';
+import { OrbitControls, PerspectiveCamera, Environment, ContactShadows } from '@react-three/drei';
 import * as THREE from 'three';
 import { DragControls } from 'three-stdlib';
+
+// Lazy load Text component - VERY heavy, only load when needed
+const Text = lazy(() => import('@react-three/drei').then(module => ({ default: module.Text })));
 
 /**
  * Create a realistic cup/mug shape using LatheGeometry
@@ -13,8 +16,8 @@ import { DragControls } from 'three-stdlib';
  */
 function createMugGeometry(radius, height, isMobile = false) {
   const points = [];
-  // Use fewer segments on mobile for better performance
-  const segments = isMobile ? 16 : 40;
+  // AGGRESSIVE reduction for mobile - 8 segments instead of 16
+  const segments = isMobile ? 8 : 40;
   const wallThickness = radius * 0.1;
 
   // Create the outer profile curve (bottom to top)
@@ -74,8 +77,8 @@ function createMugGeometry(radius, height, isMobile = false) {
   points.push(new THREE.Vector2(0, -height / 2));
 
   // Create the lathe geometry by rotating around Y-axis
-  // Use fewer radial segments on mobile for better performance
-  const radialSegments = isMobile ? 16 : 48;
+  // AGGRESSIVE reduction for mobile - 8 radial segments instead of 16
+  const radialSegments = isMobile ? 8 : 48;
   return new THREE.LatheGeometry(points, radialSegments);
 }
 
@@ -146,8 +149,8 @@ function Product3DModel({ item, position, onClick, isSelected, onDragStart, onDr
     if (name.includes('candle')) {
       // Scented candle - cylindrical with glass jar appearance
       const radius = Math.min(width, depth) / 2;
-      // Use fewer segments on mobile
-      const segments = isMobile ? 16 : 32;
+      // AGGRESSIVE reduction for mobile - 8 segments instead of 16
+      const segments = isMobile ? 8 : 32;
       return <cylinderGeometry args={[radius, radius, height, segments]} />;
     } else if (name.includes('mug') || name.includes('cup')) {
       // Realistic mug shape using custom lathe geometry
@@ -646,29 +649,33 @@ function HamperBoxMesh({
         />
       </mesh>
 
-      {/* Box Dimension Labels */}
-      <Text
-        position={[0, -0.2, width / 2 + 0.3]}
-        fontSize={0.16}
-        color="#374151"
-        anchorX="center"
-        anchorY="middle"
-        outlineWidth={0.03}
-        outlineColor="#FFFFFF"
-      >
-        {box.dimensionsCm}
-      </Text>
-      <Text
-        position={[0, -0.4, width / 2 + 0.3]}
-        fontSize={0.13}
-        color="#6366F1"
-        anchorX="center"
-        anchorY="middle"
-        outlineWidth={0.02}
-        outlineColor="#FFFFFF"
-      >
-        {`Capacity: ${box.capacity} items`}
-      </Text>
+      {/* Box Dimension Labels - SKIP on mobile for MASSIVE performance gain */}
+      {!isMobile && (
+        <Suspense fallback={null}>
+          <Text
+            position={[0, -0.2, width / 2 + 0.3]}
+            fontSize={0.16}
+            color="#374151"
+            anchorX="center"
+            anchorY="middle"
+            outlineWidth={0.03}
+            outlineColor="#FFFFFF"
+          >
+            {box.dimensionsCm}
+          </Text>
+          <Text
+            position={[0, -0.4, width / 2 + 0.3]}
+            fontSize={0.13}
+            color="#6366F1"
+            anchorX="center"
+            anchorY="middle"
+            outlineWidth={0.02}
+            outlineColor="#FFFFFF"
+          >
+            {`Capacity: ${box.capacity} items`}
+          </Text>
+        </Suspense>
+      )}
 
       {/* Box Walls - Transparent glass-like in preview mode */}
       {/* Back Wall */}

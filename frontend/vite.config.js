@@ -18,9 +18,42 @@ export default defineConfig({
     outDir: 'dist',
     sourcemap: false,
     minify: 'esbuild',
-    chunkSizeWarningLimit: 1000
+    chunkSizeWarningLimit: 1000,
+
+    // Aggressive code splitting for faster mobile loading
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          // Separate Three.js and React Three Fiber into their own chunks
+          'three-core': ['three'],
+          'three-fiber': ['@react-three/fiber'],
+          'three-drei': ['@react-three/drei'],
+
+          // Separate React and React Router
+          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
+
+          // Separate UI libraries
+          'ui-vendor': ['lucide-react', 'react-hot-toast', 'framer-motion']
+        }
+      }
+    },
+
+    // Target modern browsers for smaller bundle size
+    target: 'es2015',
+
+    // Enable CSS code splitting
+    cssCodeSplit: true,
+
+    // Optimize chunk size
+    assetsInlineLimit: 4096 // Inline assets smaller than 4kb
   },
 
-  publicDir: 'public'
+  publicDir: 'public',
+
+  // Optimize dependencies
+  optimizeDeps: {
+    include: ['react', 'react-dom', 'react-router-dom'],
+    exclude: ['@react-three/drei'] // Lazy load drei components
+  }
 })
 

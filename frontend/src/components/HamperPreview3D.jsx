@@ -1,8 +1,15 @@
-import React, { Suspense, useRef, useState, useEffect } from 'react';
+import React, { Suspense, useRef, useState, useEffect, lazy } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { OrbitControls, PerspectiveCamera, Environment, ContactShadows, Html, Text, Sparkles, Float } from '@react-three/drei';
+import { OrbitControls, PerspectiveCamera, Html } from '@react-three/drei';
 import HamperBoxMesh from './HamperBox3D';
 import { Eye, Download, Share2, RotateCcw, Package } from 'lucide-react';
+
+// Lazy load heavy components - ONLY load on desktop
+const Environment = lazy(() => import('@react-three/drei').then(module => ({ default: module.Environment })));
+const ContactShadows = lazy(() => import('@react-three/drei').then(module => ({ default: module.ContactShadows })));
+const Text = lazy(() => import('@react-three/drei').then(module => ({ default: module.Text })));
+const Sparkles = lazy(() => import('@react-three/drei').then(module => ({ default: module.Sparkles })));
+const Float = lazy(() => import('@react-three/drei').then(module => ({ default: module.Float })));
 
 /**
  * Animated Lid Component - Drops from top, flips, and lands on box
@@ -361,12 +368,16 @@ export default function HamperPreview3D({ selectedBox, placedItems, hamperName }
               <directionalLight position={[10, 15, 8]} intensity={1.8} />
             )}
 
-            {/* Environment - Only on desktop */}
-            {!isMobile && <Environment preset="sunset" />}
+            {/* Environment - Only on desktop, lazy loaded */}
+            {!isMobile && (
+              <Suspense fallback={null}>
+                <Environment preset="sunset" />
+              </Suspense>
+            )}
 
-            {/* Elegant Pedestal/Platform */}
+            {/* Elegant Pedestal/Platform - Simplified on mobile */}
             <mesh position={[0, -0.15, 0]} receiveShadow>
-              <cylinderGeometry args={[4, 4.5, 0.2, 32]} />
+              <cylinderGeometry args={[4, 4.5, 0.2, isMobile ? 16 : 32]} />
               <meshStandardMaterial
                 color="#F5F5DC"
                 roughness={0.7}
