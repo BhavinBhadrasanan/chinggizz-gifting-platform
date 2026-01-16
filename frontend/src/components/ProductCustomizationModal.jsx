@@ -200,26 +200,26 @@ export default function ProductCustomizationModal({ product, isOpen, onClose }) 
             </button>
           </div>
 
-          {/* Content */}
-          <div className="p-6 overflow-y-auto max-h-[calc(90vh-200px)]">
-            {/* Product Info */}
-            <div className="flex items-start space-x-6 mb-8 pb-6 border-b">
-              <div className="w-32 h-32 rounded-xl overflow-hidden bg-gray-100 flex-shrink-0">
+          {/* Content - Mobile Optimized Scrolling */}
+          <div className="p-4 sm:p-6 overflow-y-auto overscroll-contain" style={{ maxHeight: 'calc(92vh - 140px)' }}>
+            {/* Product Info - Compact Mobile Layout */}
+            <div className="flex flex-col sm:flex-row items-start space-y-3 sm:space-y-0 sm:space-x-6 mb-6 sm:mb-8 pb-4 sm:pb-6 border-b">
+              <div className="w-20 h-20 sm:w-32 sm:h-32 rounded-xl overflow-hidden bg-gray-100 flex-shrink-0">
                 {product.imageUrl ? (
                   <img src={product.imageUrl} alt={product.name} className="w-full h-full object-cover" />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center">
-                    <Package className="h-12 w-12 text-gray-400" />
+                    <Package className="h-8 w-8 sm:h-12 sm:w-12 text-gray-400" />
                   </div>
                 )}
               </div>
-              <div className="flex-1">
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">{product.name}</h3>
-                <p className="text-gray-600 mb-3">{product.description}</p>
-                <div className="flex items-center space-x-4">
-                  <span className="text-3xl font-bold text-primary-600">₹{product.price}</span>
+              <div className="flex-1 min-w-0">
+                <h3 className="text-lg sm:text-2xl font-bold text-gray-900 mb-1 sm:mb-2 leading-tight">{product.name}</h3>
+                <p className="text-xs sm:text-base text-gray-600 mb-2 sm:mb-3 line-clamp-2">{product.description}</p>
+                <div className="flex flex-wrap items-center gap-2 sm:gap-4">
+                  <span className="text-xl sm:text-3xl font-bold text-primary-600">₹{product.price}</span>
                   {product.isCustomizable && product.customizationCharge > 0 && (
-                    <span className="text-sm text-gray-500">
+                    <span className="text-xs sm:text-sm text-gray-500 bg-gray-100 px-2 py-1 rounded">
                       +₹{product.customizationCharge} customization
                     </span>
                   )}
@@ -227,52 +227,52 @@ export default function ProductCustomizationModal({ product, isOpen, onClose }) 
               </div>
             </div>
 
-            {/* Customization Options */}
+            {/* Customization Options - Mobile Optimized */}
             {optionsArray.length > 0 && (
-              <div className="space-y-6 mb-8">
+              <div className="space-y-4 sm:space-y-6 mb-6 sm:mb-8">
                 {optionsArray.map((optionGroup, index) => (
-                  <div key={index} className="bg-gray-50 rounded-xl p-6">
-                    <h4 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
-                      <span className="bg-primary-500 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm mr-3">
+                  <div key={index} className="bg-gray-50 rounded-xl p-4 sm:p-6">
+                    <h4 className="text-base sm:text-lg font-bold text-gray-900 mb-3 sm:mb-4 flex items-center">
+                      <span className="bg-primary-500 text-white w-6 h-6 sm:w-8 sm:h-8 rounded-full flex items-center justify-center text-xs sm:text-sm mr-2 sm:mr-3 flex-shrink-0">
                         {index + 1}
                       </span>
-                      Select {optionGroup.category}
+                      <span className="text-sm sm:text-lg">Select {optionGroup.category}</span>
                     </h4>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
                       {optionGroup.choices.map((choice, choiceIndex) => {
                         const isSelected = selectedOptions[optionGroup.category] === choice.name;
                         return (
                           <button
                             key={choiceIndex}
                             onClick={() => handleOptionSelect(optionGroup.category, choice.name)}
-                            className={`p-4 rounded-lg border-2 text-left transition-all ${
+                            className={`p-3 sm:p-4 rounded-lg border-2 text-left transition-all tap-target ${
                               isSelected
                                 ? 'border-primary-500 bg-primary-50 shadow-md'
                                 : 'border-gray-200 hover:border-primary-300 bg-white'
                             }`}
                           >
-                            <div className="flex items-start justify-between">
-                              <div className="flex-1">
-                                <div className="font-semibold text-gray-900 mb-1">{choice.name}</div>
+                            <div className="flex items-start justify-between gap-2">
+                              <div className="flex-1 min-w-0">
+                                <div className="font-semibold text-sm sm:text-base text-gray-900 mb-0.5 sm:mb-1">{choice.name}</div>
                                 {choice.description && (
-                                  <div className="text-sm text-gray-600 mb-2">{choice.description}</div>
+                                  <div className="text-xs sm:text-sm text-gray-600 mb-1 sm:mb-2 line-clamp-2">{choice.description}</div>
                                 )}
                                 {choice.maxItems && (
                                   <div className="text-xs text-gray-500">Max {choice.maxItems} items</div>
                                 )}
                                 {(choice.width || choice.height) && (
                                   <div className="text-xs text-gray-500">
-                                    Size: {choice.width}×{choice.height}{choice.depth ? `×${choice.depth}` : ''} cm
+                                    {choice.width}×{choice.height}{choice.depth ? `×${choice.depth}` : ''} cm
                                   </div>
                                 )}
                               </div>
-                              <div className="ml-3">
+                              <div className="ml-2 flex-shrink-0">
                                 {choice.price > 0 ? (
-                                  <span className="text-green-600 font-semibold">+₹{choice.price}</span>
+                                  <span className="text-green-600 font-semibold text-sm sm:text-base">+₹{choice.price}</span>
                                 ) : choice.price < 0 ? (
-                                  <span className="text-red-600 font-semibold">₹{choice.price}</span>
+                                  <span className="text-red-600 font-semibold text-sm sm:text-base">₹{choice.price}</span>
                                 ) : (
-                                  <span className="text-gray-500 text-sm">Included</span>
+                                  <span className="text-gray-500 text-xs sm:text-sm">Free</span>
                                 )}
                               </div>
                             </div>
@@ -287,33 +287,34 @@ export default function ProductCustomizationModal({ product, isOpen, onClose }) 
 
             {/* Photo Upload Section */}
             {hasPhotoUpload && (
-              <div className="bg-gradient-to-br from-primary-50 to-secondary-50 rounded-xl p-6 mb-8">
-                <h4 className="text-lg font-bold text-gray-900 mb-2 flex items-center">
-                  <ImageIcon className="h-5 w-5 mr-2 text-primary-600" />
-                  Upload {requiredPhotos === 2 ? 'Photos' : 'Your Photo'} <span className="text-sm font-normal text-gray-500 ml-2">(Optional)</span>
+              <div className="bg-gradient-to-br from-primary-50 to-secondary-50 rounded-xl p-4 sm:p-6 mb-6 sm:mb-8">
+                <h4 className="text-base sm:text-lg font-bold text-gray-900 mb-1 sm:mb-2 flex items-center">
+                  <ImageIcon className="h-4 w-4 sm:h-5 sm:w-5 mr-2 text-primary-600 flex-shrink-0" />
+                  <span className="text-sm sm:text-lg">Upload {requiredPhotos === 2 ? 'Photos' : 'Photo'}</span>
+                  <span className="text-xs sm:text-sm font-normal text-gray-500 ml-2">(Optional)</span>
                 </h4>
                 {requiredPhotos === 2 ? (
-                  <p className="text-sm text-gray-600 mb-4">
-                    Upload 2 clear photos - one for each person (optional, can be added later)
+                  <p className="text-xs sm:text-sm text-gray-600 mb-3 sm:mb-4">
+                    Upload 2 clear photos - one for each person (can be added later)
                   </p>
                 ) : (
-                  <p className="text-sm text-gray-600 mb-4">
-                    Upload your photo for customization (optional, can be added later)
+                  <p className="text-xs sm:text-sm text-gray-600 mb-3 sm:mb-4">
+                    Upload your photo for customization (can be added later)
                   </p>
                 )}
-                <div className="space-y-4">
-                  {/* First Photo Upload */}
+                <div className="space-y-3 sm:space-y-4">
+                  {/* First Photo Upload - Mobile Optimized */}
                   <div>
                     {requiredPhotos === 2 && (
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-2">
                         Person 1 Photo
                       </label>
                     )}
                     <label className="block">
-                      <div className="border-2 border-dashed border-primary-300 rounded-lg p-8 text-center cursor-pointer hover:border-primary-500 transition-colors bg-white">
-                        <Upload className="h-12 w-12 text-primary-500 mx-auto mb-3" />
-                        <p className="text-gray-700 font-medium mb-1">Click to upload {requiredPhotos === 2 ? 'first' : ''} image</p>
-                        <p className="text-sm text-gray-500">PNG, JPG up to 5MB - Clear face photo required</p>
+                      <div className="border-2 border-dashed border-primary-300 rounded-lg p-4 sm:p-8 text-center cursor-pointer active:border-primary-500 sm:hover:border-primary-500 transition-colors bg-white tap-target">
+                        <Upload className="h-8 w-8 sm:h-12 sm:w-12 text-primary-500 mx-auto mb-2 sm:mb-3" />
+                        <p className="text-sm sm:text-base text-gray-700 font-medium mb-1">Click to upload {requiredPhotos === 2 ? 'first' : ''} image</p>
+                        <p className="text-xs sm:text-sm text-gray-500">PNG, JPG up to 5MB</p>
                         <input
                           type="file"
                           accept="image/*"
@@ -396,19 +397,20 @@ export default function ProductCustomizationModal({ product, isOpen, onClose }) 
             )}
 
             {/* Quantity Selector */}
-            <div className="bg-gray-50 rounded-xl p-6 mb-6">
-              <h4 className="text-lg font-bold text-gray-900 mb-4">Quantity</h4>
-              <div className="flex items-center space-x-4">
+            {/* Quantity Selector - Mobile Optimized */}
+            <div className="bg-gray-50 rounded-xl p-4 sm:p-6 mb-4 sm:mb-6">
+              <h4 className="text-base sm:text-lg font-bold text-gray-900 mb-3 sm:mb-4">Quantity</h4>
+              <div className="flex items-center space-x-3 sm:space-x-4">
                 <button
                   onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                  className="w-10 h-10 rounded-full bg-white border-2 border-gray-300 hover:border-primary-500 font-bold text-gray-700"
+                  className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white border-2 border-gray-300 active:border-primary-500 sm:hover:border-primary-500 font-bold text-gray-700 tap-target flex items-center justify-center text-lg sm:text-xl"
                 >
                   -
                 </button>
-                <span className="text-2xl font-bold text-gray-900 w-12 text-center">{quantity}</span>
+                <span className="text-xl sm:text-2xl font-bold text-gray-900 w-12 sm:w-16 text-center">{quantity}</span>
                 <button
                   onClick={() => setQuantity(quantity + 1)}
-                  className="w-10 h-10 rounded-full bg-white border-2 border-gray-300 hover:border-primary-500 font-bold text-gray-700"
+                  className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white border-2 border-gray-300 active:border-primary-500 sm:hover:border-primary-500 font-bold text-gray-700 tap-target flex items-center justify-center text-lg sm:text-xl"
                 >
                   +
                 </button>
@@ -416,18 +418,18 @@ export default function ProductCustomizationModal({ product, isOpen, onClose }) 
             </div>
           </div>
 
-          {/* Footer */}
-          <div className="sticky bottom-0 bg-white border-t border-gray-200 p-6">
-            <div className="flex items-center justify-between mb-4">
-              <div>
-                <p className="text-sm text-gray-600 mb-1">Total Price</p>
-                <p className="text-3xl font-bold text-primary-600">₹{totalPrice.toFixed(2)}</p>
+          {/* Footer - Mobile Optimized Sticky */}
+          <div className="sticky bottom-0 bg-white border-t border-gray-200 p-3 sm:p-6 shadow-lg safe-area-bottom">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 sm:gap-4">
+              <div className="flex items-center justify-between sm:block">
+                <p className="text-xs sm:text-sm text-gray-600 mb-0 sm:mb-1">Total Price</p>
+                <p className="text-2xl sm:text-3xl font-bold text-primary-600">₹{totalPrice.toFixed(2)}</p>
               </div>
               <button
                 onClick={handleAddToCart}
-                className="btn-primary flex items-center space-x-2 px-8 py-4 text-lg"
+                className="btn-primary flex items-center justify-center space-x-2 px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg tap-target w-full sm:w-auto"
               >
-                <ShoppingCart className="h-5 w-5" />
+                <ShoppingCart className="h-5 w-5 flex-shrink-0" />
                 <span>Add to Cart</span>
               </button>
             </div>
