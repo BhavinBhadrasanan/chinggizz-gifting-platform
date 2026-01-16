@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Gift, Menu, X, ShoppingBag, Home, Package, ShieldCheck, Sparkles } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 
@@ -9,6 +9,11 @@ export default function Navbar() {
   const { getCartCount, setIsCartOpen } = useCart();
 
   const isActive = (path) => location.pathname === path;
+
+  // Close mobile menu when route changes
+  useEffect(() => {
+    setIsOpen(false);
+  }, [location.pathname]);
 
   const navLinks = [
     { path: '/', label: 'Home', icon: Home },
@@ -123,7 +128,11 @@ export default function Navbar() {
                     <Link
                       key={link.path}
                       to={link.path}
-                      onClick={() => setIsOpen(false)}
+                      onClick={() => {
+                        setIsOpen(false);
+                        // Scroll to top when navigating
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                      }}
                       className={`flex items-center space-x-3 px-4 py-3.5 rounded-xl font-semibold transition-all tap-target ${
                         isActive(link.path)
                           ? 'bg-gradient-to-r from-primary-600 to-primary-500 text-white shadow-lg'
