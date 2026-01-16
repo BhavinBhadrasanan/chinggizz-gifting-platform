@@ -443,8 +443,8 @@ export default function ProductCustomizationModal({ product, isOpen, onClose }) 
             </div>
 
             {/* ADD TO CART - PROFESSIONAL STICKY FOOTER */}
-            <div className="sticky bottom-0 left-0 right-0 bg-white border-t-2 border-gray-200 shadow-2xl -mx-2 sm:-mx-3 -mb-2 sm:-mb-3 mt-4">
-              <div className="p-3 sm:p-4">
+            <div className="sticky bottom-0 left-0 right-0 bg-white border-t-2 border-gray-200 shadow-2xl -mx-2 sm:-mx-3 mt-4 z-40">
+              <div className="p-3 sm:p-4 pb-20 sm:pb-4">
                 {/* Total Price Display */}
                 <div className="flex items-center justify-between mb-3">
                   <div>
