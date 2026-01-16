@@ -294,16 +294,35 @@ export default function HamperPreview3D({ selectedBox, placedItems, hamperName }
     setLidAnimationComplete(true);
   };
 
+  // Detect mobile
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const checkMobile = () => {
+      const mobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
+      setIsMobile(mobile);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   return (
     <div className="relative w-full h-full">
       {/* 3D Canvas */}
       <div className="w-full h-full rounded-xl overflow-hidden shadow-2xl bg-gradient-to-br from-amber-50 via-yellow-50 to-orange-50">
         <Canvas
-          shadows
-          dpr={[1, 2]}
-          gl={{ antialias: true, alpha: true, preserveDrawingBuffer: true }}
+          shadows={!isMobile}
+          dpr={isMobile ? [0.5, 1] : [1, 2]}
+          gl={{
+            antialias: !isMobile,
+            alpha: true,
+            preserveDrawingBuffer: true,
+            powerPreference: isMobile ? "low-power" : "high-performance",
+            failIfMajorPerformanceCaveat: false
+          }}
+          performance={{ min: 0.3 }}
           onCreated={({ gl }) => {
-            console.log('Canvas created successfully');
+            console.log('✅ Preview Canvas created successfully');
           }}
         >
           <Suspense fallback={
@@ -314,18 +333,22 @@ export default function HamperPreview3D({ selectedBox, placedItems, hamperName }
             {/* Camera - Zoomed out for better mobile view */}
             <PerspectiveCamera makeDefault position={[4.5, 3.5, 4.5]} fov={55} />
 
-            {/* Lighting - No shadows, no flickering */}
-            <ambientLight intensity={1.0} />
-            <directionalLight
-              position={[10, 15, 8]}
-              intensity={1.5}
-            />
-            <pointLight position={[-8, 10, -8]} intensity={0.5} color="#FFFFFF" />
-            <pointLight position={[8, 10, 8]} intensity={0.5} color="#FFFFFF" />
-            <pointLight position={[0, 10, 0]} intensity={0.3} color="#FFFFFF" />
+            {/* Lighting - Simplified for mobile */}
+            <ambientLight intensity={isMobile ? 1.2 : 1.0} />
+            {!isMobile && (
+              <>
+                <directionalLight position={[10, 15, 8]} intensity={1.5} />
+                <pointLight position={[-8, 10, -8]} intensity={0.5} color="#FFFFFF" />
+                <pointLight position={[8, 10, 8]} intensity={0.5} color="#FFFFFF" />
+                <pointLight position={[0, 10, 0]} intensity={0.3} color="#FFFFFF" />
+              </>
+            )}
+            {isMobile && (
+              <directionalLight position={[10, 15, 8]} intensity={1.8} />
+            )}
 
-            {/* Environment */}
-            <Environment preset="sunset" />
+            {/* Environment - Only on desktop */}
+            {!isMobile && <Environment preset="sunset" />}
 
             {/* Elegant Pedestal/Platform */}
             <mesh position={[0, -0.15, 0]} receiveShadow>
