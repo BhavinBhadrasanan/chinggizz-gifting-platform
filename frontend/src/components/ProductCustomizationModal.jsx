@@ -442,21 +442,14 @@ export default function ProductCustomizationModal({ product, isOpen, onClose }) 
               </div>
             </div>
 
-            {/* ADD TO CART BUTTON - INSIDE SCROLLABLE AREA */}
-            <div className="sticky bottom-0 bg-gradient-to-r from-primary-600 to-primary-700 p-3 shadow-2xl z-50 border-t-2 border-primary-800 -mx-2 sm:-mx-3 -mb-2 sm:-mb-3">
-              <div className="flex items-center justify-between gap-2">
-                <div className="flex flex-col min-w-0">
-                  <p className="text-xs text-white/80 font-medium">Total Price</p>
-                  <p className="text-xl sm:text-2xl font-bold text-white">₹{totalPrice.toFixed(2)}</p>
-                </div>
-                <button
-                  onClick={handleAddToCart}
-                  className="bg-white text-primary-600 hover:bg-gray-50 active:bg-gray-100 flex items-center justify-center gap-2 px-5 sm:px-7 py-3 sm:py-4 text-sm sm:text-base font-bold rounded-xl tap-target shadow-xl transition-all flex-shrink-0"
-                >
-                  <ShoppingCart className="h-5 w-5 flex-shrink-0" />
-                  <span className="font-bold">Add to Cart</span>
-                </button>
-              </div>
+            {/* ADD TO CART BUTTON - BRIGHT RED FOR TESTING */}
+            <div className="bg-red-600 p-4 mb-4">
+              <button
+                onClick={handleAddToCart}
+                className="w-full bg-yellow-400 text-black py-4 text-xl font-bold rounded-lg"
+              >
+                🛒 ADD TO CART - TOTAL: ₹{totalPrice.toFixed(2)}
+              </button>
             </div>
 
             </div> {/* End scrollable options area */}
