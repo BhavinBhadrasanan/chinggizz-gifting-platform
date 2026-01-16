@@ -417,7 +417,7 @@ export default function ProductCustomizationModal({ product, isOpen, onClose }) 
             )}
 
             {/* Quantity Selector - Compact */}
-            <div className="bg-gray-50 rounded-lg shadow-sm border border-gray-200 overflow-hidden mb-2">
+            <div className="bg-gray-50 rounded-lg shadow-sm border border-gray-200 overflow-hidden mb-3">
               <div className="bg-gradient-to-r from-accent-500 to-accent-600 px-2 py-1.5">
                 <span className="text-xs sm:text-sm font-bold text-white">Select Quantity</span>
               </div>
@@ -441,25 +441,26 @@ export default function ProductCustomizationModal({ product, isOpen, onClose }) 
                 </div>
               </div>
             </div>
+
+            {/* ADD TO CART BUTTON - INSIDE SCROLLABLE AREA */}
+            <div className="sticky bottom-0 bg-gradient-to-r from-primary-600 to-primary-700 p-3 shadow-2xl z-50 border-t-2 border-primary-800 -mx-2 sm:-mx-3 -mb-2 sm:-mb-3">
+              <div className="flex items-center justify-between gap-2">
+                <div className="flex flex-col min-w-0">
+                  <p className="text-xs text-white/80 font-medium">Total Price</p>
+                  <p className="text-xl sm:text-2xl font-bold text-white">₹{totalPrice.toFixed(2)}</p>
+                </div>
+                <button
+                  onClick={handleAddToCart}
+                  className="bg-white text-primary-600 hover:bg-gray-50 active:bg-gray-100 flex items-center justify-center gap-2 px-5 sm:px-7 py-3 sm:py-4 text-sm sm:text-base font-bold rounded-xl tap-target shadow-xl transition-all flex-shrink-0"
+                >
+                  <ShoppingCart className="h-5 w-5 flex-shrink-0" />
+                  <span className="font-bold">Add to Cart</span>
+                </button>
+              </div>
+            </div>
+
             </div> {/* End scrollable options area */}
           </div> {/* End scrollable content */}
-
-          {/* Footer - ALWAYS VISIBLE */}
-          <div className="flex-shrink-0 bg-gradient-to-r from-primary-600 to-primary-700 p-2.5 sm:p-3 shadow-2xl z-50 border-t-2 border-primary-800">
-            <div className="flex items-center justify-between gap-2">
-              <div className="flex flex-col min-w-0">
-                <p className="text-xs text-white/80 font-medium">Total</p>
-                <p className="text-lg sm:text-xl font-bold text-white">₹{totalPrice.toFixed(2)}</p>
-              </div>
-              <button
-                onClick={handleAddToCart}
-                className="bg-white text-primary-600 hover:bg-gray-50 active:bg-gray-100 flex items-center justify-center gap-1.5 px-4 sm:px-6 py-2.5 sm:py-3 text-sm sm:text-base font-bold rounded-lg tap-target shadow-lg transition-all flex-shrink-0"
-              >
-                <ShoppingCart className="h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" />
-                <span>Add to Cart</span>
-              </button>
-            </div>
-          </div>
         </div>
       </div>
     </div>
