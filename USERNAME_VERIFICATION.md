@@ -3,7 +3,7 @@
 ## 🎯 **YES, THE USERNAME IS CORRECT!**
 
 ```
-SPRING_DATASOURCE_USERNAME=postgres.pyzgqowrxbtefhxsaukxc
+SPRING_DATASOURCE_USERNAME=postgres.pzgnowrxbiefhxsoukxc
 ```
 
 This is the **correct format** for Supabase Session Pooler.
@@ -30,7 +30,7 @@ Username: postgres.pyzgqowrxbtefhxsaukxc
 ```
 Host: aws-1-ap-south-1.pooler.supabase.com
 Port: 5432
-Username: postgres.pyzgqowrxbtefhxsaukxc
+Username: postgres.pzgnowrxbiefhxsoukxc
 ```
 - Used for: Long-lived connections
 - Mode: Session pooling
@@ -50,7 +50,7 @@ You'll see:
 Host: aws-1-ap-south-1.pooler.supabase.com
 Database: postgres
 Port: 5432
-User: postgres.pyzgqowrxbtefhxsaukxc  ✅ This is what we use
+User: postgres.pzgnowrxbiefhxsoukxc  ✅ This is what we use
 Password: [your-password]
 ```
 
@@ -89,7 +89,7 @@ jdbc:postgresql://aws-1-ap-south-1.pooler.supabase.com:5432/postgres?sslmode=req
 | **Socket Timeout** | `socketTimeout=60` | 60 seconds for socket operations |
 | **Login Timeout** | `loginTimeout=60` | 60 seconds for authentication |
 
-**Username:** `postgres.pyzgqowrxbtefhxsaukxc`
+**Username:** `postgres.pzgnowrxbiefhxsoukxc`
 **Password:** `Chinggizz098`
 
 ---
@@ -107,10 +107,10 @@ Username: postgres
 ```
 Host: aws-1-ap-south-1.pooler.supabase.com
 Port: 5432
-Username: postgres.pyzgqowrxbtefhxsaukxc
+Username: postgres.pzgnowrxbiefhxsoukxc
 ```
 
-**Note:** The username includes the project reference (`pyzgqowrxbtefhxsaukxc`) when using the pooler!
+**Note:** The username includes the project reference (`pzgnowrxbiefhxsoukxc`) when using the pooler!
 
 ---
 
@@ -121,7 +121,7 @@ Username: postgres.pyzgqowrxbtefhxsaukxc
 ```
 SPRING_DATASOURCE_URL=jdbc:postgresql://aws-1-ap-south-1.pooler.supabase.com:5432/postgres?sslmode=require&connectTimeout=60&socketTimeout=60&loginTimeout=60
 
-SPRING_DATASOURCE_USERNAME=postgres.pyzgqowrxbtefhxsaukxc
+SPRING_DATASOURCE_USERNAME=postgres.pzgnowrxbiefhxsoukxc
 
 SPRING_DATASOURCE_PASSWORD=Chinggizz098
 ```
@@ -140,5 +140,5 @@ SPRING_DATASOURCE_PASSWORD=Chinggizz098
 
 ---
 
-**Conclusion:** The username `postgres.pyzgqowrxbtefhxsaukxc` is the correct format for Supabase Session Pooler and is already working successfully!
+**Conclusion:** The username `postgres.pzgnowrxbiefhxsoukxc` is the correct format for Supabase Session Pooler and is already working successfully!
 

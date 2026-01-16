@@ -162,6 +162,36 @@ chinggizz/
 
 ---
 
+## 🌐 Deployment
+
+### Backend Deployment (Render)
+See `DEPLOYMENT_GUIDE.md` for complete backend deployment instructions.
+
+### Frontend Deployment (Cloudflare Pages)
+
+**Quick Deploy:**
+1. Push code to GitHub
+2. Connect repository to Cloudflare Pages
+3. Configure build settings:
+   - Framework: Vite
+   - Build command: `npm run build`
+   - Output directory: `dist`
+   - Root directory: `frontend`
+4. Add environment variable: `VITE_API_BASE_URL`
+5. Deploy!
+
+**Complete Guide:** See `CLOUDFLARE_DEPLOYMENT_GUIDE.md`
+**Quick Start:** See `CLOUDFLARE_QUICK_START.md`
+
+**Benefits of Cloudflare Pages:**
+- ✅ Unlimited bandwidth (FREE)
+- ✅ Global CDN (275+ locations)
+- ✅ Automatic deployments
+- ✅ Free SSL & DDoS protection
+- ✅ Preview deployments for PRs
+
+---
+
 ## 📝 License
 
 This project is proprietary software. All rights reserved.

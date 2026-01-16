@@ -6,7 +6,7 @@
 ```
 SPRING_DATASOURCE_URL=jdbc:postgresql://aws-1-ap-south-1.pooler.supabase.com:5432/postgres?sslmode=require&connectTimeout=60&socketTimeout=60&loginTimeout=60
 
-SPRING_DATASOURCE_USERNAME=postgres.pyzgqowrxbtefhxsaukxc
+SPRING_DATASOURCE_USERNAME=postgres.pzgnowrxbiefhxsoukxc
 
 SPRING_DATASOURCE_PASSWORD=Chinggizz098
 ```
@@ -71,7 +71,7 @@ PORT=8080
 | Variable Name | Value | Required |
 |--------------|-------|----------|
 | `SPRING_DATASOURCE_URL` | `jdbc:postgresql://aws-1-ap-south-1.pooler.supabase.com:5432/postgres?sslmode=require&connectTimeout=60&socketTimeout=60&loginTimeout=60` | ✅ YES |
-| `SPRING_DATASOURCE_USERNAME` | `postgres.pyzgqowrxbtefhxsaukxc` | ✅ YES |
+| `SPRING_DATASOURCE_USERNAME` | `postgres.pzgnowrxbiefhxsoukxc` | ✅ YES |
 | `SPRING_DATASOURCE_PASSWORD` | `Chinggizz098` | ✅ YES |
 | `JWT_SECRET` | `<YOUR_STRONG_SECRET>` | ✅ YES |
 | `ADMIN_PASSWORD` | `<YOUR_STRONG_PASSWORD>` | ✅ YES |

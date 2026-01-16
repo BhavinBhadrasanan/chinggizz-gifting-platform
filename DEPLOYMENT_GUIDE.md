@@ -18,7 +18,7 @@ The application is now **running successfully locally** with Supabase connection
 ```yaml
 datasource:
   url: jdbc:postgresql://aws-1-ap-south-1.pooler.supabase.com:5432/postgres?sslmode=require&connectTimeout=60&socketTimeout=60&loginTimeout=60
-  username: postgres.pyzgqowrxbtefhxsaukxc
+  username: postgres.pzgnowrxbiefhxsoukxc
   password: Chinggizz098
   hikari:
     maximum-pool-size: 10
@@ -62,7 +62,7 @@ Go to your Render dashboard → Your service → Environment
 **Update these variables:**
 ```
 SPRING_DATASOURCE_URL=jdbc:postgresql://aws-1-ap-south-1.pooler.supabase.com:5432/postgres?sslmode=require&connectTimeout=60&socketTimeout=60&loginTimeout=60
-SPRING_DATASOURCE_USERNAME=postgres.pyzgqowrxbtefhxsaukxc
+SPRING_DATASOURCE_USERNAME=postgres.pzgnowrxbiefhxsoukxc
 SPRING_DATASOURCE_PASSWORD=Chinggizz098
 ```
 

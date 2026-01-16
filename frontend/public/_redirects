@@ -1,0 +1,21 @@
+# ========================================
+# Cloudflare Pages Redirects Configuration
+# ========================================
+# This file handles routing for the Single Page Application (SPA)
+# and ensures React Router works correctly
+
+# SPA Fallback - CRITICAL for React Router
+# All routes should serve index.html with 200 status
+/*    /index.html   200
+
+# Force HTTPS (optional, Cloudflare handles this by default)
+# Uncomment if you want explicit HTTPS redirect
+# http://*  https://:splat  301
+
+# API Proxy (if needed - uncomment and configure)
+# Proxy API calls to your backend
+# /api/*  https://your-backend-api.onrender.com/api/:splat  200
+
+# Legacy URL redirects (add your own as needed)
+# /old-url  /new-url  301
+

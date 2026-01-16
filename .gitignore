@@ -215,3 +215,18 @@ $RECYCLE.BIN/
 # *.pdf
 # *.docx
 
+# ========================================
+# Cloudflare Pages
+# ========================================
+
+# Wrangler local state
+.wrangler/
+wrangler.toml.local
+
+# Functions build output
+functions/
+
+# Keep configuration files (safe to commit)
+!wrangler.toml
+!frontend/public/_redirects
+!frontend/public/_headers
