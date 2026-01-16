@@ -1,11 +1,8 @@
-import React, { useRef, useMemo, useState, lazy, Suspense } from 'react';
+import React, { useRef, useMemo, useState, Suspense } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { OrbitControls, PerspectiveCamera, Environment, ContactShadows } from '@react-three/drei';
+import { OrbitControls, PerspectiveCamera, Environment, ContactShadows, Text } from '@react-three/drei';
 import * as THREE from 'three';
 import { DragControls } from 'three-stdlib';
-
-// Lazy load Text component - VERY heavy, only load when needed
-const Text = lazy(() => import('@react-three/drei').then(module => ({ default: module.Text })));
 
 /**
  * Create a realistic cup/mug shape using LatheGeometry
@@ -651,7 +648,7 @@ function HamperBoxMesh({
 
       {/* Box Dimension Labels - SKIP on mobile for MASSIVE performance gain */}
       {!isMobile && (
-        <Suspense fallback={null}>
+        <>
           <Text
             position={[0, -0.2, width / 2 + 0.3]}
             fontSize={0.16}
@@ -674,7 +671,7 @@ function HamperBoxMesh({
           >
             {`Capacity: ${box.capacity} items`}
           </Text>
-        </Suspense>
+        </>
       )}
 
       {/* Box Walls - Transparent glass-like in preview mode */}

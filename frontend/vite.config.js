@@ -50,10 +50,13 @@ export default defineConfig({
 
   publicDir: 'public',
 
-  // Optimize dependencies
+  // Optimize dependencies - FIX source map warnings
   optimizeDeps: {
-    include: ['react', 'react-dom', 'react-router-dom'],
-    exclude: ['@react-three/drei'] // Lazy load drei components
+    include: ['react', 'react-dom', 'react-router-dom', 'three', '@react-three/fiber', '@react-three/drei'],
+    esbuildOptions: {
+      // Disable source maps in dependencies to avoid warnings
+      sourcemap: false
+    }
   }
 })
 

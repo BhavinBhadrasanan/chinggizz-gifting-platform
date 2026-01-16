@@ -1,13 +1,8 @@
-import React, { Suspense, useState, useEffect, lazy } from 'react';
+import React, { Suspense, useState, useEffect } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls, PerspectiveCamera, Html } from '@react-three/drei';
+import { OrbitControls, PerspectiveCamera, Html, Environment, ContactShadows, Sky } from '@react-three/drei';
 import * as THREE from 'three';
 import HamperBoxMesh from './HamperBox3D';
-
-// Lazy load heavy components - ONLY load on desktop
-const Environment = lazy(() => import('@react-three/drei').then(module => ({ default: module.Environment })));
-const ContactShadows = lazy(() => import('@react-three/drei').then(module => ({ default: module.ContactShadows })));
-const Sky = lazy(() => import('@react-three/drei').then(module => ({ default: module.Sky })));
 
 /**
  * Loading fallback component - Enhanced for mobile
@@ -316,24 +311,18 @@ export default function HamperScene3D({
             </>
           )}
 
-          {/* Sky Background - Only on desktop, lazy loaded */}
+          {/* Sky Background - Only on desktop */}
           {!isMobile && (
-            <Suspense fallback={null}>
-              <Sky
-                distance={450000}
-                sunPosition={[5, 1, 8]}
-                inclination={0.6}
-                azimuth={0.25}
-              />
-            </Suspense>
+            <Sky
+              distance={450000}
+              sunPosition={[5, 1, 8]}
+              inclination={0.6}
+              azimuth={0.25}
+            />
           )}
 
-          {/* Environment for reflections - Only on desktop, lazy loaded */}
-          {!isMobile && (
-            <Suspense fallback={null}>
-              <Environment preset="sunset" />
-            </Suspense>
-          )}
+          {/* Environment for reflections - Only on desktop */}
+          {!isMobile && <Environment preset="sunset" />}
 
           {/* Hamper Box */}
           <HamperBoxMesh
@@ -350,17 +339,15 @@ export default function HamperScene3D({
             isMobile={isMobile}
           />
 
-          {/* Ground Shadows - Only on desktop, lazy loaded */}
+          {/* Ground Shadows - Only on desktop */}
           {!isMobile && (
-            <Suspense fallback={null}>
-              <ContactShadows
-                position={[0, -0.05, 0]}
-                opacity={0.4}
-                scale={20}
-                blur={2}
-                far={4}
-              />
-            </Suspense>
+            <ContactShadows
+              position={[0, -0.05, 0]}
+              opacity={0.4}
+              scale={20}
+              blur={2}
+              far={4}
+            />
           )}
 
           {/* Grid Helper - Simplified for mobile */}

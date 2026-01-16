@@ -1,15 +1,8 @@
-import React, { Suspense, useRef, useState, useEffect, lazy } from 'react';
+import React, { Suspense, useRef, useState, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { OrbitControls, PerspectiveCamera, Html } from '@react-three/drei';
+import { OrbitControls, PerspectiveCamera, Html, Environment, ContactShadows, Text, Sparkles, Float } from '@react-three/drei';
 import HamperBoxMesh from './HamperBox3D';
 import { Eye, Download, Share2, RotateCcw, Package } from 'lucide-react';
-
-// Lazy load heavy components - ONLY load on desktop
-const Environment = lazy(() => import('@react-three/drei').then(module => ({ default: module.Environment })));
-const ContactShadows = lazy(() => import('@react-three/drei').then(module => ({ default: module.ContactShadows })));
-const Text = lazy(() => import('@react-three/drei').then(module => ({ default: module.Text })));
-const Sparkles = lazy(() => import('@react-three/drei').then(module => ({ default: module.Sparkles })));
-const Float = lazy(() => import('@react-three/drei').then(module => ({ default: module.Float })));
 
 /**
  * Animated Lid Component - Drops from top, flips, and lands on box
@@ -368,12 +361,8 @@ export default function HamperPreview3D({ selectedBox, placedItems, hamperName }
               <directionalLight position={[10, 15, 8]} intensity={1.8} />
             )}
 
-            {/* Environment - Only on desktop, lazy loaded */}
-            {!isMobile && (
-              <Suspense fallback={null}>
-                <Environment preset="sunset" />
-              </Suspense>
-            )}
+            {/* Environment - Only on desktop */}
+            {!isMobile && <Environment preset="sunset" />}
 
             {/* Elegant Pedestal/Platform - Simplified on mobile */}
             <mesh position={[0, -0.15, 0]} receiveShadow>
