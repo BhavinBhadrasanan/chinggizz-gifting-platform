@@ -15,39 +15,47 @@ export default function Cart() {
     <>
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-black/50 z-40 transition-opacity"
+        className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 transition-opacity animate-fadeIn"
         onClick={() => setIsCartOpen(false)}
       ></div>
 
-      {/* Cart Sidebar */}
-      <div className="fixed right-0 top-0 h-full w-full max-w-md bg-white shadow-2xl z-50 flex flex-col">
-        {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b border-neutral-200">
+      {/* Cart Sidebar - Mobile Optimized */}
+      <div className="fixed right-0 top-0 h-full w-full sm:max-w-md bg-white shadow-2xl z-50 flex flex-col animate-slideInRight">
+        {/* Header - Mobile Friendly */}
+        <div className="flex items-center justify-between p-4 sm:p-6 border-b border-neutral-200 bg-gradient-to-r from-primary-50 to-secondary-50">
           <div className="flex items-center space-x-2">
-            <ShoppingBag className="h-6 w-6 text-primary-600" />
-            <h2 className="text-xl font-bold text-neutral-900">
-              Shopping Cart ({getCartCount()})
-            </h2>
+            <div className="bg-primary-600 p-2 rounded-lg">
+              <ShoppingBag className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
+            </div>
+            <div>
+              <h2 className="text-lg sm:text-xl font-bold text-neutral-900">
+                My Cart
+              </h2>
+              <p className="text-xs text-neutral-600">{getCartCount()} {getCartCount() === 1 ? 'item' : 'items'}</p>
+            </div>
           </div>
           <button
             onClick={() => setIsCartOpen(false)}
-            className="p-2 hover:bg-neutral-100 rounded-lg transition-colors"
+            className="p-2 hover:bg-white/50 active:bg-white rounded-lg transition-colors tap-target"
           >
             <X className="h-6 w-6 text-neutral-600" />
           </button>
         </div>
 
-        {/* Cart Items */}
-        <div className="flex-1 overflow-y-auto p-6">
+        {/* Cart Items - Mobile Optimized */}
+        <div className="flex-1 overflow-y-auto p-4 sm:p-6 overscroll-contain">
           {cartItems.length === 0 ? (
-            <div className="text-center py-12">
-              <ShoppingBag className="h-16 w-16 text-neutral-300 mx-auto mb-4" />
-              <p className="text-neutral-600 mb-4">Your cart is empty</p>
+            <div className="text-center py-12 sm:py-16">
+              <div className="bg-neutral-100 w-24 h-24 sm:w-32 sm:h-32 rounded-full flex items-center justify-center mx-auto mb-4">
+                <ShoppingBag className="h-12 w-12 sm:h-16 sm:w-16 text-neutral-300" />
+              </div>
+              <h3 className="text-lg sm:text-xl font-bold text-neutral-900 mb-2">Your cart is empty</h3>
+              <p className="text-sm sm:text-base text-neutral-600 mb-6">Add some amazing products to get started!</p>
               <button
                 onClick={() => setIsCartOpen(false)}
-                className="btn-primary"
+                className="btn-primary tap-target"
               >
-                Continue Shopping
+                Start Shopping
               </button>
             </div>
           ) : (

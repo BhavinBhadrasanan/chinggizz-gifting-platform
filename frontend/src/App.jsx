@@ -1,9 +1,10 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Toaster } from 'react-hot-toast';
 import { CartProvider } from './context/CartContext';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Cart from './components/Cart';
+import MobileBottomNav from './components/MobileBottomNav';
+import MobileToast from './components/MobileToast';
 import HomePage from './pages/HomePage';
 import ProductsPage from './pages/ProductsPage';
 import HamperBuilderPage from './pages/HamperBuilderPage';
@@ -17,7 +18,7 @@ function App() {
   return (
     <Router>
       <CartProvider>
-        <div className="min-h-screen flex flex-col">
+        <div className="min-h-screen flex flex-col pb-16 lg:pb-0">
           <Navbar />
           <Cart />
           <main className="flex-grow">
@@ -33,29 +34,8 @@ function App() {
             </Routes>
           </main>
           <Footer />
-          <Toaster
-          position="top-right"
-          toastOptions={{
-            duration: 3000,
-            style: {
-              background: '#fff',
-              color: '#333',
-              boxShadow: '0 10px 25px rgba(0,0,0,0.1)',
-            },
-            success: {
-              iconTheme: {
-                primary: '#10b981',
-                secondary: '#fff',
-              },
-            },
-            error: {
-              iconTheme: {
-                primary: '#ef4444',
-                secondary: '#fff',
-              },
-            },
-          }}
-        />
+          <MobileBottomNav />
+          <MobileToast />
         </div>
       </CartProvider>
     </Router>

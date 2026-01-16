@@ -178,25 +178,25 @@ export default function ProductCustomizationModal({ product, isOpen, onClose }) 
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto">
       {/* Backdrop */}
-      <div 
-        className="fixed inset-0 bg-black bg-opacity-50 transition-opacity"
+      <div
+        className="fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity"
         onClick={onClose}
       />
 
-      {/* Modal */}
-      <div className="flex min-h-full items-center justify-center p-4">
-        <div className="relative bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden">
-          {/* Header */}
-          <div className="sticky top-0 bg-gradient-to-r from-primary-500 to-secondary-500 text-white p-6 flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <Sparkles className="h-6 w-6" />
-              <h2 className="text-2xl font-bold">Customize Your Product</h2>
+      {/* Modal - Mobile Optimized Bottom Sheet */}
+      <div className="flex min-h-full items-end sm:items-center justify-center p-0 sm:p-4">
+        <div className="relative bg-white rounded-t-3xl sm:rounded-2xl shadow-2xl max-w-4xl w-full max-h-[92vh] sm:max-h-[90vh] overflow-hidden animate-slideUp sm:animate-fade-in">
+          {/* Header - Mobile Optimized */}
+          <div className="sticky top-0 bg-gradient-to-r from-primary-500 to-secondary-500 text-white p-4 sm:p-6 flex items-center justify-between z-10 shadow-lg">
+            <div className="flex items-center space-x-2 sm:space-x-3 flex-1 min-w-0">
+              <Sparkles className="h-5 w-5 sm:h-6 sm:w-6 flex-shrink-0" />
+              <h2 className="text-lg sm:text-2xl font-bold truncate">Customize Your Product</h2>
             </div>
             <button
               onClick={onClose}
-              className="p-2 hover:bg-white/20 rounded-full transition-colors"
+              className="p-2 hover:bg-white/20 active:bg-white/30 rounded-full transition-colors tap-target flex-shrink-0"
             >
-              <X className="h-6 w-6" />
+              <X className="h-5 w-5 sm:h-6 sm:w-6" />
             </button>
           </div>
 

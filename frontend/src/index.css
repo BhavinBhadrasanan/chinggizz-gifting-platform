@@ -28,6 +28,38 @@
   animation: fadeIn 0.2s ease-out;
 }
 
+/* Slide In Right Animation for Cart */
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-slideInRight {
+  animation: slideInRight 0.3s ease-out;
+}
+
+/* Slide Up Animation for Modals */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slideUp {
+  animation: slideUp 0.3s ease-out;
+}
+
 /* Game-like Control Panel Styles */
 @layer components {
   /* Glassmorphism Button Base */
@@ -974,5 +1006,75 @@ button:disabled {
 /* Dark mode support (if needed in future) */
 @media (prefers-color-scheme: dark) {
   /* Add dark mode styles here if needed */
+}
+
+/* ========================================
+   MOBILE-FIRST OPTIMIZATIONS
+   ======================================== */
+
+/* Tap target size for mobile (minimum 44x44px) */
+.tap-target {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* Safe area for notched devices */
+.safe-area-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.safe-area-top {
+  padding-top: env(safe-area-inset-top);
+}
+
+/* Hide scrollbar but keep functionality */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Prevent overscroll bounce on mobile */
+.overscroll-contain {
+  overscroll-behavior: contain;
+}
+
+/* Touch-friendly spacing */
+@media (max-width: 768px) {
+  .mobile-spacing {
+    padding: 1rem;
+  }
+
+  .mobile-gap {
+    gap: 0.75rem;
+  }
+}
+
+/* Smooth scroll for mobile */
+@media (max-width: 1024px) {
+  html {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Prevent text selection on buttons (mobile) */
+button, .btn-primary, .btn-secondary {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Better touch feedback */
+@media (hover: none) and (pointer: coarse) {
+  button:active,
+  .btn-primary:active,
+  .btn-secondary:active {
+    transform: scale(0.97);
+  }
 }
 

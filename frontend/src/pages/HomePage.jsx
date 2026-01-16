@@ -154,14 +154,17 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full sm:w-auto px-4 sm:px-0">
-              <button className="group w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-white text-primary-600 rounded-xl font-bold text-base sm:text-lg shadow-2xl hover:shadow-white/50 hover:scale-105 active:scale-95 transition-all duration-200 flex items-center justify-center space-x-2 tap-target">
-                <ShoppingBag className="h-5 w-5 sm:h-6 sm:w-6 group-hover:scale-110 transition-transform" />
+            {/* CTA Buttons - Mobile Optimized */}
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4 w-full sm:w-auto px-4 sm:px-0 max-w-md sm:max-w-none mx-auto">
+              <button
+                onClick={() => window.scrollTo({ top: document.getElementById('products-section')?.offsetTop - 100, behavior: 'smooth' })}
+                className="group w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 bg-white text-primary-600 rounded-xl font-bold text-base sm:text-lg shadow-2xl hover:shadow-white/50 active:scale-95 sm:hover:scale-105 transition-all duration-200 flex items-center justify-center space-x-2 tap-target"
+              >
+                <ShoppingBag className="h-5 w-5 sm:h-6 sm:w-6 group-active:scale-110 sm:group-hover:scale-110 transition-transform flex-shrink-0" />
                 <span>Shop Now</span>
               </button>
-              <Link to="/hamper-builder" className="group w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-white/20 backdrop-blur-md text-white border-2 border-white/50 rounded-xl font-bold text-base sm:text-lg hover:bg-white/30 hover:scale-105 active:scale-95 transition-all duration-200 flex items-center justify-center space-x-2 tap-target">
-                <Sparkles className="h-5 w-5 sm:h-6 sm:w-6 group-hover:rotate-12 transition-transform" />
+              <Link to="/hamper-builder" className="group w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 bg-white/20 backdrop-blur-md text-white border-2 border-white/50 rounded-xl font-bold text-base sm:text-lg hover:bg-white/30 active:scale-95 sm:hover:scale-105 transition-all duration-200 flex items-center justify-center space-x-2 tap-target">
+                <Sparkles className="h-5 w-5 sm:h-6 sm:w-6 group-active:rotate-12 sm:group-hover:rotate-12 transition-transform flex-shrink-0" />
                 <span className="whitespace-nowrap">Build Custom Hamper</span>
               </Link>
             </div>
@@ -218,55 +221,59 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* WhatsApp Contact Card - For Custom Orders */}
-      <section className="py-8 bg-gradient-to-br from-green-50 to-emerald-50">
+      {/* WhatsApp Contact Card - Mobile Optimized */}
+      <section className="py-6 sm:py-8 bg-gradient-to-br from-green-50 to-emerald-50">
         <div className="container-custom">
-          <div className="card bg-gradient-to-r from-green-500 to-emerald-600 text-white p-8 shadow-2xl border-2 border-green-400">
-            <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-              {/* Left Content */}
+          <div className="card bg-gradient-to-r from-green-500 to-emerald-600 text-white p-5 sm:p-8 shadow-2xl border-2 border-green-400 overflow-hidden relative">
+            {/* Decorative Elements */}
+            <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-3xl"></div>
+            <div className="absolute bottom-0 left-0 w-24 h-24 bg-yellow-300/10 rounded-full blur-2xl"></div>
+
+            <div className="flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6 relative z-10">
+              {/* Left Content - Mobile Optimized */}
               <div className="flex-1 text-center md:text-left">
-                <div className="flex items-center justify-center md:justify-start space-x-3 mb-4">
-                  <MessageCircle className="h-8 w-8 text-yellow-300 animate-pulse" />
-                  <h3 className="text-2xl md:text-3xl font-bold">Can't Find What You're Looking For?</h3>
+                <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start space-y-2 sm:space-y-0 sm:space-x-3 mb-3 sm:mb-4">
+                  <MessageCircle className="h-7 w-7 sm:h-8 sm:w-8 text-yellow-300 animate-pulse" />
+                  <h3 className="text-xl sm:text-2xl md:text-3xl font-bold leading-tight">Can't Find What You Need?</h3>
                 </div>
-                <p className="text-lg text-white/90 mb-4">
-                  Chat with <span className="font-bold text-yellow-300">Chinggis</span> directly on WhatsApp to discuss your custom hamper ideas, special requests, or bulk orders!
+                <p className="text-sm sm:text-base md:text-lg text-white/90 mb-3 sm:mb-4 leading-relaxed">
+                  Chat with <span className="font-bold text-yellow-300">Chinggis</span> on WhatsApp for custom hampers, bulk orders & special requests!
                 </p>
-                <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 text-sm">
-                  <div className="flex items-center space-x-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-lg">
-                    <CheckCircle className="h-4 w-4 text-yellow-300" />
+                <div className="flex flex-wrap items-center justify-center md:justify-start gap-2 sm:gap-4 text-xs sm:text-sm">
+                  <div className="flex items-center space-x-1.5 sm:space-x-2 bg-white/20 backdrop-blur-sm px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg">
+                    <CheckCircle className="h-3 w-3 sm:h-4 sm:w-4 text-yellow-300 flex-shrink-0" />
                     <span>Custom Designs</span>
                   </div>
-                  <div className="flex items-center space-x-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-lg">
-                    <CheckCircle className="h-4 w-4 text-yellow-300" />
+                  <div className="flex items-center space-x-1.5 sm:space-x-2 bg-white/20 backdrop-blur-sm px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg">
+                    <CheckCircle className="h-3 w-3 sm:h-4 sm:w-4 text-yellow-300 flex-shrink-0" />
                     <span>Bulk Orders</span>
                   </div>
-                  <div className="flex items-center space-x-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-lg">
-                    <CheckCircle className="h-4 w-4 text-yellow-300" />
+                  <div className="flex items-center space-x-1.5 sm:space-x-2 bg-white/20 backdrop-blur-sm px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg">
+                    <CheckCircle className="h-3 w-3 sm:h-4 sm:w-4 text-yellow-300 flex-shrink-0" />
                     <span>Special Requests</span>
                   </div>
                 </div>
               </div>
 
-              {/* Right CTA */}
-              <div className="flex flex-col items-center space-y-3">
+              {/* Right CTA - Mobile Optimized */}
+              <div className="flex flex-col items-center space-y-2 sm:space-y-3 w-full md:w-auto">
                 <a
                   href="https://wa.me/917012897008?text=Hi%20Chinggizz!%20I'm%20interested%20in%20creating%20a%20custom%20hamper."
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group bg-white text-green-600 px-8 py-4 rounded-xl font-bold text-lg shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-200 flex items-center space-x-3"
+                  className="group bg-white text-green-600 px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-bold text-base sm:text-lg shadow-xl hover:shadow-2xl active:scale-95 sm:hover:scale-105 transition-all duration-200 flex items-center space-x-2 sm:space-x-3 w-full sm:w-auto justify-center tap-target"
                 >
-                  <MessageCircle className="h-6 w-6 group-hover:scale-110 transition-transform" />
+                  <MessageCircle className="h-5 w-5 sm:h-6 sm:w-6 group-hover:scale-110 transition-transform flex-shrink-0" />
                   <span>Chat on WhatsApp</span>
                 </a>
-                <div className="flex items-center space-x-4 text-sm">
-                  <a href="tel:+917012897008" className="flex items-center space-x-2 hover:text-yellow-300 transition-colors">
-                    <Phone className="h-4 w-4" />
-                    <span>+91 70128 97008</span>
+                <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 text-xs sm:text-sm">
+                  <a href="tel:+917012897008" className="flex items-center space-x-1.5 sm:space-x-2 hover:text-yellow-300 active:text-yellow-200 transition-colors tap-target">
+                    <Phone className="h-3.5 w-3.5 sm:h-4 sm:w-4 flex-shrink-0" />
+                    <span className="whitespace-nowrap">+91 70128 97008</span>
                   </a>
-                  <span className="text-white/50">|</span>
-                  <a href="mailto:hello@chinggis.com" className="flex items-center space-x-2 hover:text-yellow-300 transition-colors">
-                    <Mail className="h-4 w-4" />
+                  <span className="text-white/50 hidden sm:inline">|</span>
+                  <a href="mailto:hello@chinggis.com" className="flex items-center space-x-1.5 sm:space-x-2 hover:text-yellow-300 active:text-yellow-200 transition-colors tap-target">
+                    <Mail className="h-3.5 w-3.5 sm:h-4 sm:w-4 flex-shrink-0" />
                     <span>Email Us</span>
                   </a>
                 </div>
@@ -277,7 +284,7 @@ export default function HomePage() {
       </section>
 
       {/* All Products Section */}
-      <section className="py-12 bg-neutral-50">
+      <section id="products-section" className="py-8 sm:py-12 bg-neutral-50 scroll-mt-20">
         <div className="container-custom">
           {loading ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
