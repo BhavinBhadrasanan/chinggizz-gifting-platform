@@ -12,9 +12,21 @@ function Loader() {
       <div className="flex flex-col items-center gap-3">
         <div className="w-16 h-16 border-4 border-primary-500 border-t-transparent rounded-full animate-spin"></div>
         <p className="text-primary-600 font-semibold">Loading 3D Scene...</p>
+        <p className="text-xs text-gray-500 mt-2">This may take a moment on mobile devices</p>
       </div>
     </Html>
   );
+}
+
+/**
+ * Component to signal when 3D scene is ready
+ */
+function SceneReady({ onReady }) {
+  React.useEffect(() => {
+    console.log('✅ 3D Scene components loaded');
+    onReady && onReady();
+  }, [onReady]);
+  return null;
 }
 
 /**
@@ -62,6 +74,7 @@ export default function HamperScene3D({
 }) {
   const [webGLError, setWebGLError] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [loadingTimeout, setLoadingTimeout] = useState(false);
 
   // Detect mobile device
   useEffect(() => {
@@ -90,6 +103,27 @@ export default function HamperScene3D({
       console.error('❌ WebGL error:', e);
       setWebGLError(true);
     }
+  }, []);
+
+  // Timeout for loading - if 3D takes too long, show fallback
+  useEffect(() => {
+    let timeout;
+    if (!loadingTimeout) {
+      timeout = setTimeout(() => {
+        console.warn('⚠️ 3D loading timeout - showing fallback UI');
+        setLoadingTimeout(true);
+      }, isMobile ? 10000 : 15000); // 10s for mobile, 15s for desktop
+    }
+
+    return () => {
+      if (timeout) clearTimeout(timeout);
+    };
+  }, [isMobile, loadingTimeout]);
+
+  // Callback when 3D scene is ready
+  const handleSceneReady = React.useCallback(() => {
+    console.log('✅ 3D Scene fully loaded and ready');
+    setLoadingTimeout(false); // Clear timeout flag if it was set
   }, []);
 
   if (!selectedBox) {
@@ -166,7 +200,8 @@ export default function HamperScene3D({
     </div>
   );
 
-  if (webGLError) {
+  // Show fallback UI if WebGL is not supported OR loading timeout
+  if (webGLError || loadingTimeout) {
     return <FallbackUI />;
   }
 
@@ -295,6 +330,9 @@ export default function HamperScene3D({
               RIGHT: 2   // Pan
             }}
           />
+
+          {/* Signal when scene is ready */}
+          <SceneReady onReady={handleSceneReady} />
         </Suspense>
       </Canvas>
 
