@@ -2282,60 +2282,42 @@ export default function HamperBuilderPage() {
                 />
               </div>
 
-              {/* MOBILE: Combined Price Summary - Clear and Simple */}
+              {/* MOBILE: Complete Price Summary with Product Names */}
               <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-4 lg:p-6 rounded-xl border-2 border-blue-200 mb-3 lg:mb-6">
                 <h4 className="font-bold text-base lg:text-lg text-blue-900 mb-3 lg:mb-4 flex items-center gap-2">
                   <span>💰</span>
                   <span>Price Summary</span>
                 </h4>
-                <div className="space-y-2 lg:space-y-3 text-sm lg:text-base">
+                <div className="space-y-2 text-sm lg:text-base">
                   {/* Box Info */}
                   <div className="flex justify-between items-center pb-2 border-b border-blue-200">
-                    <div>
+                    <div className="flex-1">
                       <span className="text-neutral-700 font-medium">Box:</span>
                       <span className="text-neutral-600 text-xs lg:text-sm ml-2">{selectedBox.name} ({selectedBox.dimensions})</span>
                     </div>
                     <span className="font-semibold text-neutral-900">₹{selectedBox.price}</span>
                   </div>
 
-                  {/* Items Info */}
-                  <div className="flex justify-between items-center pb-2 border-b border-blue-200">
-                    <div>
-                      <span className="text-neutral-700 font-medium">Products:</span>
-                      <span className="text-neutral-600 text-xs lg:text-sm ml-2">({placedItems.length} items)</span>
+                  {/* Individual Products with Names */}
+                  {placedItems.map((item, index) => (
+                    <div key={index} className="flex justify-between items-center pb-2 border-b border-blue-200">
+                      <div className="flex items-center gap-2 flex-1 min-w-0">
+                        {item.imageUrl && (
+                          <div className="w-8 h-8 lg:w-10 lg:h-10 bg-neutral-100 rounded-lg flex-shrink-0 overflow-hidden">
+                            <img src={item.imageUrl} alt={item.name} className="w-full h-full object-cover" />
+                          </div>
+                        )}
+                        <span className="text-neutral-700 font-medium truncate">{item.name}</span>
+                      </div>
+                      <span className="font-semibold text-neutral-900 ml-2">₹{item.price}</span>
                     </div>
-                    <span className="font-semibold text-neutral-900">
-                      ₹{placedItems.reduce((sum, item) => sum + parseFloat(item.price), 0)}
-                    </span>
-                  </div>
+                  ))}
 
                   {/* Grand Total */}
                   <div className="flex justify-between items-center pt-2 bg-white/60 rounded-lg px-3 py-2 lg:py-3">
                     <span className="text-neutral-900 font-bold text-base lg:text-lg">Grand Total:</span>
                     <span className="font-bold text-primary-600 text-xl lg:text-2xl">₹{getTotalPrice()}</span>
                   </div>
-                </div>
-              </div>
-
-              {/* MOBILE: Compact Items List - Collapsible */}
-              <div className="bg-blue-50 border-2 border-blue-200 rounded-lg lg:rounded-xl p-3 lg:p-6 mb-3 lg:mb-6">
-                <h4 className="font-bold text-sm lg:text-base text-blue-900 mb-2 lg:mb-3">📦 Items ({placedItems.length})</h4>
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 lg:gap-3 max-h-[200px] lg:max-h-none overflow-y-auto">
-                  {placedItems.map((item, index) => (
-                    <div key={index} className="flex items-center gap-2 lg:gap-3 bg-white p-2 lg:p-3 rounded-lg">
-                      <div className="w-10 h-10 lg:w-12 lg:h-12 bg-neutral-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                        {item.imageUrl ? (
-                          <img src={item.imageUrl} alt={item.name} className="w-full h-full object-cover rounded-lg" />
-                        ) : (
-                          <Package className="h-5 w-5 lg:h-6 lg:w-6 text-neutral-400" />
-                        )}
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <h5 className="font-semibold text-xs lg:text-sm text-neutral-900 truncate">{item.name}</h5>
-                        <p className="text-xs text-neutral-600">₹{item.price}</p>
-                      </div>
-                    </div>
-                  ))}
                 </div>
               </div>
 
