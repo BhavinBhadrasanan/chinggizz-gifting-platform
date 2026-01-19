@@ -101,110 +101,133 @@ export default function AdminOrdersPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <div className="bg-white shadow-md">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 pb-20 lg:pb-8">
+      {/* Mobile-First Header */}
+      <div className="bg-gradient-to-r from-pink-500 to-purple-600 shadow-lg sticky top-0 z-30">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-3 sm:py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
+            <div className="flex items-center space-x-2 sm:space-x-3">
               <button
                 onClick={() => navigate('/admin/dashboard')}
-                className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                className="p-2 hover:bg-white/20 rounded-lg transition-colors tap-target"
               >
-                <ArrowLeft className="h-6 w-6" />
+                <ArrowLeft className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
               </button>
-              <Package className="h-8 w-8 text-pink-500" />
-              <h1 className="text-2xl font-bold">Order Management</h1>
+              <Package className="h-6 w-6 sm:h-8 sm:w-8 text-white" />
+              <h1 className="text-lg sm:text-2xl font-bold text-white">Orders</h1>
             </div>
-            <div className="text-sm text-gray-600">
-              Total Orders: <span className="font-bold text-gray-900">{orders.length}</span>
+            <div className="bg-white/20 backdrop-blur-sm px-3 py-1.5 rounded-full">
+              <span className="text-xs sm:text-sm text-white font-bold">{orders.length} Orders</span>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Orders List */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      {/* Orders List - Mobile Optimized */}
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-8">
         {orders.length === 0 ? (
-          <div className="bg-white rounded-xl shadow-md p-12 text-center">
-            <Package className="h-16 w-16 text-gray-300 mx-auto mb-4" />
-            <h3 className="text-xl font-semibold text-gray-900 mb-2">No Orders Yet</h3>
-            <p className="text-gray-600">Orders will appear here once customers start placing them.</p>
+          <div className="bg-white rounded-2xl shadow-lg p-8 sm:p-12 text-center">
+            <div className="bg-gray-100 w-20 h-20 sm:w-24 sm:h-24 rounded-full flex items-center justify-center mx-auto mb-4">
+              <Package className="h-10 w-10 sm:h-16 sm:w-16 text-gray-300" />
+            </div>
+            <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2">No Orders Yet</h3>
+            <p className="text-sm sm:text-base text-gray-600">Orders will appear here once customers start placing them.</p>
           </div>
         ) : (
-          <div className="space-y-4">
+          <div className="space-y-3 sm:space-y-4">
             {orders.map((order) => (
-              <div key={order.id} className="bg-white rounded-xl shadow-md overflow-hidden">
-                {/* Order Header */}
-                <div className="p-6 border-b border-gray-200">
-                  <div className="flex items-center justify-between mb-4">
+              <div key={order.id} className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-200 hover:shadow-xl transition-shadow">
+                {/* Mobile-First Order Header */}
+                <div className="p-4 sm:p-6 border-b border-gray-200 bg-gradient-to-r from-gray-50 to-white">
+                  {/* Order Number & Status - Mobile Stack */}
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-3 sm:mb-4 gap-2">
                     <div>
-                      <h3 className="text-lg font-bold text-gray-900">
-                        Order #{order.orderNumber}
+                      <h3 className="text-base sm:text-lg font-bold text-gray-900 flex items-center gap-2">
+                        <span className="bg-primary-100 text-primary-700 px-2 py-1 rounded-lg text-sm">
+                          #{order.orderNumber}
+                        </span>
                       </h3>
-                      <p className="text-sm text-gray-600 mt-1">
-                        {new Date(order.createdAt).toLocaleString()}
+                      <p className="text-xs sm:text-sm text-gray-600 mt-1">
+                        {new Date(order.createdAt).toLocaleString('en-IN', {
+                          dateStyle: 'medium',
+                          timeStyle: 'short'
+                        })}
                       </p>
                     </div>
-                    <div className="flex items-center space-x-3">
+                    <div className="flex items-center gap-2 flex-wrap">
                       {getOrderTypeBadge(order.orderType)}
                       {getStatusBadge(order.status)}
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-                    {/* Customer Info */}
-                    <div className="flex items-start space-x-3">
-                      <User className="h-5 w-5 text-gray-400 mt-0.5" />
-                      <div>
-                        <p className="text-sm font-medium text-gray-900">{order.customerName}</p>
-                        <p className="text-sm text-gray-600 flex items-center mt-1">
-                          <Phone className="h-3 w-3 mr-1" />
-                          {order.customerPhone}
-                        </p>
-                        {order.customerEmail && (
-                          <p className="text-sm text-gray-600 flex items-center mt-1">
-                            <Mail className="h-3 w-3 mr-1" />
-                            {order.customerEmail}
-                          </p>
-                        )}
+                  {/* Mobile-Optimized Info Cards */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-4">
+                    {/* Customer Info Card */}
+                    <div className="bg-blue-50 rounded-xl p-3 border border-blue-200">
+                      <div className="flex items-start space-x-2">
+                        <div className="bg-blue-500 p-2 rounded-lg">
+                          <User className="h-4 w-4 text-white" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-xs text-blue-600 font-medium mb-1">Customer</p>
+                          <p className="text-sm font-bold text-gray-900 truncate">{order.customerName}</p>
+                          <a href={`tel:${order.customerPhone}`} className="text-xs text-gray-600 flex items-center mt-1 hover:text-blue-600">
+                            <Phone className="h-3 w-3 mr-1" />
+                            {order.customerPhone}
+                          </a>
+                          {order.customerEmail && (
+                            <a href={`mailto:${order.customerEmail}`} className="text-xs text-gray-600 flex items-center mt-1 hover:text-blue-600 truncate">
+                              <Mail className="h-3 w-3 mr-1" />
+                              <span className="truncate">{order.customerEmail}</span>
+                            </a>
+                          )}
+                        </div>
                       </div>
                     </div>
 
-                    {/* Delivery Info */}
-                    <div className="flex items-start space-x-3">
-                      <Truck className="h-5 w-5 text-gray-400 mt-0.5" />
-                      <div>
-                        <p className="text-sm font-medium text-gray-900">
-                          {getDeliveryMethodBadge(order.deliveryMethod)}
-                        </p>
-                        <p className="text-sm text-gray-600 mt-1">{order.deliveryAddress}</p>
-                        {order.city && (
-                          <p className="text-sm text-gray-600">
-                            {order.city}, {order.state} - {order.pincode}
+                    {/* Delivery Info Card */}
+                    <div className="bg-green-50 rounded-xl p-3 border border-green-200">
+                      <div className="flex items-start space-x-2">
+                        <div className="bg-green-500 p-2 rounded-lg">
+                          <Truck className="h-4 w-4 text-white" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-xs text-green-600 font-medium mb-1">Delivery</p>
+                          <p className="text-sm font-bold text-gray-900">
+                            {getDeliveryMethodBadge(order.deliveryMethod)}
                           </p>
-                        )}
+                          <p className="text-xs text-gray-600 mt-1 line-clamp-2">{order.deliveryAddress}</p>
+                          {order.city && (
+                            <p className="text-xs text-gray-600 mt-1">
+                              {order.city}, {order.state} - {order.pincode}
+                            </p>
+                          )}
+                        </div>
                       </div>
                     </div>
 
-                    {/* Order Total */}
-                    <div className="flex items-start space-x-3">
-                      <DollarSign className="h-5 w-5 text-gray-400 mt-0.5" />
-                      <div>
-                        <p className="text-sm text-gray-600">Total Amount</p>
-                        <p className="text-2xl font-bold text-primary-600">₹{order.totalAmount}</p>
+                    {/* Order Total Card */}
+                    <div className="bg-purple-50 rounded-xl p-3 border border-purple-200 sm:col-span-2 lg:col-span-1">
+                      <div className="flex items-start space-x-2">
+                        <div className="bg-purple-500 p-2 rounded-lg">
+                          <DollarSign className="h-4 w-4 text-white" />
+                        </div>
+                        <div className="flex-1">
+                          <p className="text-xs text-purple-600 font-medium mb-1">Total Amount</p>
+                          <p className="text-2xl sm:text-3xl font-bold text-purple-600">₹{order.totalAmount}</p>
+                        </div>
                       </div>
                     </div>
                   </div>
 
-                  {/* Action Buttons */}
-                  <div className="flex items-center justify-between">
+                  {/* Mobile-Friendly Action Buttons */}
+                  <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
                     <button
                       onClick={() => toggleOrderDetails(order.id)}
-                      className="flex items-center space-x-2 text-primary-600 hover:text-primary-700 font-medium"
+                      className="flex items-center justify-center space-x-2 bg-primary-500 hover:bg-primary-600 text-white px-4 py-3 rounded-xl font-medium transition-colors tap-target shadow-md"
                     >
                       <Eye className="h-4 w-4" />
-                      <span>{expandedOrder === order.id ? 'Hide Details' : 'View Details'}</span>
+                      <span className="text-sm">{expandedOrder === order.id ? 'Hide Details' : 'View Full Details'}</span>
                       {expandedOrder === order.id ? (
                         <ChevronUp className="h-4 w-4" />
                       ) : (
@@ -212,65 +235,77 @@ export default function AdminOrdersPage() {
                       )}
                     </button>
 
-                    {/* Status Update Dropdown */}
-                    <div className="flex items-center space-x-2">
-                      <label className="text-sm text-gray-600">Update Status:</label>
+                    {/* Status Update Dropdown - Mobile Optimized */}
+                    <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
+                      <label className="text-xs sm:text-sm text-gray-600 font-medium">Update Status:</label>
                       <select
                         value={order.status}
                         onChange={(e) => updateOrderStatus(order.id, e.target.value)}
                         disabled={updatingStatus === order.id}
-                        className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                        className="px-4 py-3 border-2 border-gray-300 rounded-xl text-sm font-medium focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-white tap-target"
                       >
-                        <option value="NEW">New</option>
-                        <option value="CONFIRMED">Confirmed</option>
-                        <option value="IN_PROGRESS">In Progress</option>
-                        <option value="DELIVERED">Delivered</option>
-                        <option value="CANCELLED">Cancelled</option>
+                        <option value="NEW">🆕 New</option>
+                        <option value="CONFIRMED">✅ Confirmed</option>
+                        <option value="IN_PROGRESS">🔄 In Progress</option>
+                        <option value="DELIVERED">📦 Delivered</option>
+                        <option value="CANCELLED">❌ Cancelled</option>
                       </select>
                     </div>
                   </div>
                 </div>
 
 
-                {/* Expanded Order Details */}
+                {/* Expanded Order Details - Mobile Optimized */}
                 {expandedOrder === order.id && (
-                  <div className="p-6 bg-gray-50">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                      {/* Order Items */}
+                  <div className="p-4 sm:p-6 bg-gradient-to-br from-gray-50 to-gray-100">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
+                      {/* Order Items - Mobile Friendly */}
                       {order.orderItems && order.orderItems.length > 0 && (
-                        <div className="bg-white rounded-lg p-4">
-                          <h4 className="font-semibold text-gray-900 mb-3 flex items-center">
-                            <Package className="h-5 w-5 mr-2 text-primary-600" />
+                        <div className="bg-white rounded-2xl p-4 shadow-md border border-gray-200">
+                          <h4 className="font-bold text-gray-900 mb-3 flex items-center text-sm sm:text-base">
+                            <div className="bg-primary-100 p-2 rounded-lg mr-2">
+                              <Package className="h-4 w-4 sm:h-5 sm:w-5 text-primary-600" />
+                            </div>
                             Order Items ({order.orderItems.length})
                           </h4>
                           <div className="space-y-3">
                             {order.orderItems.map((item, index) => (
-                              <div key={index} className="flex justify-between items-start border-b border-gray-200 pb-3 last:border-0">
-                                <div className="flex-1">
-                                  <p className="font-medium text-gray-900">{item.productName}</p>
-                                  <p className="text-sm text-gray-600">Quantity: {item.quantity}</p>
-                                  <p className="text-sm text-gray-600">Unit Price: ₹{item.unitPrice}</p>
-                                  {item.customizationCharge > 0 && (
-                                    <p className="text-sm text-accent-600">
-                                      Customization: +₹{item.customizationCharge}
-                                    </p>
-                                  )}
+                              <div key={index} className="flex justify-between items-start bg-gray-50 rounded-xl p-3 border border-gray-200">
+                                <div className="flex-1 min-w-0">
+                                  <p className="font-bold text-gray-900 text-sm sm:text-base mb-1">{item.productName}</p>
+                                  <div className="flex flex-wrap gap-2 text-xs sm:text-sm">
+                                    <span className="bg-blue-100 text-blue-700 px-2 py-1 rounded-full font-medium">
+                                      Qty: {item.quantity}
+                                    </span>
+                                    <span className="bg-green-100 text-green-700 px-2 py-1 rounded-full font-medium">
+                                      ₹{item.unitPrice} each
+                                    </span>
+                                    {item.customizationCharge > 0 && (
+                                      <span className="bg-purple-100 text-purple-700 px-2 py-1 rounded-full font-medium">
+                                        +₹{item.customizationCharge} custom
+                                      </span>
+                                    )}
+                                  </div>
                                 </div>
-                                <p className="font-bold text-primary-600">₹{item.totalPrice}</p>
+                                <p className="font-bold text-primary-600 text-base sm:text-lg ml-2">₹{item.totalPrice}</p>
                               </div>
                             ))}
                           </div>
                         </div>
                       )}
 
-                      {/* Hamper Items - Enhanced with Screenshot and Item Details */}
+                      {/* Hamper Items - ENHANCED Mobile-First with Prominent Screenshot */}
                       {order.orderHampers && order.orderHampers.length > 0 && (
-                        <div className="bg-white rounded-lg p-4 lg:col-span-2">
-                          <h4 className="font-semibold text-gray-900 mb-4 flex items-center">
-                            <Package className="h-5 w-5 mr-2 text-accent-600" />
-                            Custom Hampers ({order.orderHampers.length})
-                          </h4>
-                          <div className="space-y-6">
+                        <div className="bg-gradient-to-br from-purple-100 to-pink-100 rounded-2xl p-4 sm:p-6 lg:col-span-2 border-2 border-purple-300 shadow-xl">
+                          <div className="flex items-center justify-between mb-4">
+                            <h4 className="font-bold text-gray-900 flex items-center text-base sm:text-lg">
+                              <div className="bg-purple-500 p-2 rounded-lg mr-2">
+                                <Package className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
+                              </div>
+                              🎁 Custom Hampers ({order.orderHampers.length})
+                            </h4>
+                          </div>
+                          <div className="space-y-4 sm:space-y-6">
                             {order.orderHampers.map((hamper, index) => {
                               let hamperDetails = null;
                               try {
@@ -280,111 +315,145 @@ export default function AdminOrdersPage() {
                               }
 
                               return (
-                                <div key={index} className="border border-gray-200 rounded-lg p-4 bg-gradient-to-br from-purple-50 to-pink-50">
-                                  {/* Hamper Header */}
-                                  <div className="flex items-center justify-between mb-4">
+                                <div key={index} className="bg-white rounded-2xl p-4 sm:p-6 shadow-lg border-2 border-purple-200">
+                                  {/* Hamper Header - Mobile Optimized */}
+                                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 gap-2">
                                     <div>
-                                      <h5 className="font-bold text-lg text-gray-900">
+                                      <h5 className="font-bold text-lg sm:text-xl text-gray-900 flex items-center gap-2">
+                                        <span className="text-2xl">🎁</span>
                                         {hamper.hamperName || `Hamper #${index + 1}`}
                                       </h5>
-                                      <p className="text-sm text-gray-600">{hamper.hamperBoxName}</p>
+                                      <p className="text-sm text-gray-600 mt-1 flex items-center gap-1">
+                                        <span className="text-base">📦</span>
+                                        {hamper.hamperBoxName}
+                                      </p>
                                     </div>
-                                    <div className="text-right">
-                                      <p className="text-2xl font-bold text-primary-600">₹{hamper.totalPrice}</p>
+                                    <div className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-2 rounded-xl">
+                                      <p className="text-xs font-medium">Total Price</p>
+                                      <p className="text-2xl sm:text-3xl font-bold">₹{hamper.totalPrice}</p>
                                     </div>
                                   </div>
 
-                                  <div className="grid md:grid-cols-2 gap-4">
-                                    {/* Screenshot */}
-                                    {hamper.screenshot && (
-                                      <div className="bg-white rounded-lg p-3 border-2 border-accent-200">
-                                        <h6 className="font-semibold text-sm text-gray-700 mb-2">📸 Customer Arrangement</h6>
+                                  {/* PROMINENT Screenshot Display - Mobile First */}
+                                  {hamper.screenshot && (
+                                    <div className="mb-4 bg-gradient-to-br from-yellow-50 to-orange-50 rounded-2xl p-4 border-2 border-yellow-400 shadow-lg">
+                                      <div className="flex items-center justify-between mb-3">
+                                        <h6 className="font-bold text-base sm:text-lg text-gray-900 flex items-center gap-2">
+                                          <span className="text-2xl">📸</span>
+                                          Customer's Arrangement
+                                        </h6>
+                                        <span className="bg-yellow-400 text-yellow-900 px-3 py-1 rounded-full text-xs font-bold">
+                                          IMPORTANT
+                                        </span>
+                                      </div>
+                                      <div className="bg-white rounded-xl p-2 shadow-md">
                                         <img
                                           src={hamper.screenshot}
                                           alt={`${hamper.hamperName} arrangement`}
-                                          className="w-full h-auto rounded-lg shadow-md"
+                                          className="w-full h-auto rounded-lg shadow-lg border-2 border-gray-200"
                                         />
-                                        <p className="text-xs text-gray-500 mt-2 text-center italic">
-                                          Arrange items exactly as shown in the image
+                                      </div>
+                                      <div className="mt-3 bg-yellow-100 border-2 border-yellow-400 rounded-xl p-3">
+                                        <p className="text-sm font-bold text-yellow-900 text-center flex items-center justify-center gap-2">
+                                          <span className="text-xl">⚠️</span>
+                                          Arrange items EXACTLY as shown in the image above
+                                          <span className="text-xl">⚠️</span>
                                         </p>
+                                      </div>
+                                    </div>
+                                  )}
+
+                                  <div className="grid md:grid-cols-2 gap-4">
+
+                                    {/* Box Details - Mobile Friendly */}
+                                    <div className="bg-blue-50 rounded-xl p-4 border-2 border-blue-200 shadow-md">
+                                      <h6 className="font-bold text-sm sm:text-base text-gray-900 mb-3 flex items-center gap-2">
+                                        <span className="text-xl">📦</span>
+                                        Box Details
+                                      </h6>
+                                      <div className="space-y-2 text-sm">
+                                        <div className="flex justify-between items-center bg-white rounded-lg p-2">
+                                          <span className="text-gray-600 font-medium">Box Type:</span>
+                                          <span className="font-bold text-gray-900">{hamper.hamperBoxName}</span>
+                                        </div>
+                                        {hamperDetails?.boxDetails?.dimensions && (
+                                          <div className="flex justify-between items-center bg-white rounded-lg p-2">
+                                            <span className="text-gray-600 font-medium">Dimensions:</span>
+                                            <span className="font-bold text-gray-900">{hamperDetails.boxDetails.dimensions}</span>
+                                          </div>
+                                        )}
+                                        <div className="flex justify-between items-center bg-white rounded-lg p-2">
+                                          <span className="text-gray-600 font-medium">Box Price:</span>
+                                          <span className="font-bold text-green-600">₹{hamper.hamperBoxPrice}</span>
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                    {/* Items List - Enhanced Mobile View */}
+                                    {hamperDetails?.items && hamperDetails.items.length > 0 && (
+                                      <div className="bg-green-50 rounded-xl p-4 border-2 border-green-200 shadow-md">
+                                        <h6 className="font-bold text-sm sm:text-base text-gray-900 mb-3 flex items-center gap-2">
+                                          <span className="text-xl">🎁</span>
+                                          Items in Hamper ({hamperDetails.items.length})
+                                        </h6>
+                                        <div className="space-y-2 max-h-80 overflow-y-auto pr-2">
+                                          {hamperDetails.items.map((item, itemIndex) => (
+                                            <div key={itemIndex} className="bg-white rounded-xl p-3 shadow-sm border border-green-200">
+                                              <div className="flex justify-between items-start gap-2">
+                                                <div className="flex-1 min-w-0">
+                                                  <p className="font-bold text-gray-900 text-sm mb-1">{item.productName}</p>
+                                                  <div className="flex flex-wrap gap-1.5">
+                                                    {item.position !== undefined && (
+                                                      <span className="bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full text-xs font-bold">
+                                                        📍 Spot {item.position + 1}
+                                                      </span>
+                                                    )}
+                                                    {item.rotation?.needsRotation && (
+                                                      <span className="bg-orange-100 text-orange-700 px-2 py-0.5 rounded-full text-xs font-bold">
+                                                        🔄 Laid on side
+                                                      </span>
+                                                    )}
+                                                    {item.quantity > 1 && (
+                                                      <span className="bg-purple-100 text-purple-700 px-2 py-0.5 rounded-full text-xs font-bold">
+                                                        ×{item.quantity}
+                                                      </span>
+                                                    )}
+                                                  </div>
+                                                </div>
+                                                <div className="text-right">
+                                                  <p className="font-bold text-green-600 text-base">₹{item.price}</p>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          ))}
+                                        </div>
                                       </div>
                                     )}
 
-                                    {/* Hamper Details */}
-                                    <div className="space-y-3">
-                                      {/* Box Details */}
-                                      <div className="bg-white rounded-lg p-3 border border-gray-200">
-                                        <h6 className="font-semibold text-sm text-gray-700 mb-2">📦 Box Details</h6>
-                                        <div className="space-y-1 text-sm">
-                                          <div className="flex justify-between">
-                                            <span className="text-gray-600">Box Type:</span>
-                                            <span className="font-medium">{hamper.hamperBoxName}</span>
-                                          </div>
-                                          {hamperDetails?.boxDetails?.dimensions && (
-                                            <div className="flex justify-between">
-                                              <span className="text-gray-600">Dimensions:</span>
-                                              <span className="font-medium">{hamperDetails.boxDetails.dimensions}</span>
-                                            </div>
-                                          )}
-                                          <div className="flex justify-between">
-                                            <span className="text-gray-600">Box Price:</span>
-                                            <span className="font-medium">₹{hamper.hamperBoxPrice}</span>
-                                          </div>
+                                    {/* Price Breakdown - Enhanced */}
+                                    <div className="bg-purple-50 rounded-xl p-4 border-2 border-purple-200 shadow-md">
+                                      <h6 className="font-bold text-sm sm:text-base text-gray-900 mb-3 flex items-center gap-2">
+                                        <span className="text-xl">💰</span>
+                                        Price Breakdown
+                                      </h6>
+                                      <div className="space-y-2 text-sm">
+                                        <div className="flex justify-between items-center bg-white rounded-lg p-2">
+                                          <span className="text-gray-600 font-medium">Items Total:</span>
+                                          <span className="font-bold text-gray-900">₹{hamper.itemsTotal}</span>
                                         </div>
-                                      </div>
-
-                                      {/* Items List */}
-                                      {hamperDetails?.items && hamperDetails.items.length > 0 && (
-                                        <div className="bg-white rounded-lg p-3 border border-gray-200">
-                                          <h6 className="font-semibold text-sm text-gray-700 mb-2">
-                                            🎁 Items ({hamperDetails.items.length})
-                                          </h6>
-                                          <div className="space-y-2 max-h-60 overflow-y-auto">
-                                            {hamperDetails.items.map((item, itemIndex) => (
-                                              <div key={itemIndex} className="flex justify-between items-start text-sm border-b border-gray-100 pb-2 last:border-0">
-                                                <div className="flex-1">
-                                                  <p className="font-medium text-gray-900">{item.productName}</p>
-                                                  {item.position !== undefined && (
-                                                    <p className="text-xs text-gray-500">Position: Spot {item.position + 1}</p>
-                                                  )}
-                                                  {item.rotation?.needsRotation && (
-                                                    <p className="text-xs text-accent-600">⚠️ Laid on side to fit</p>
-                                                  )}
-                                                </div>
-                                                <div className="text-right ml-2">
-                                                  <p className="font-semibold text-gray-900">₹{item.price}</p>
-                                                  {item.quantity > 1 && (
-                                                    <p className="text-xs text-gray-500">Qty: {item.quantity}</p>
-                                                  )}
-                                                </div>
-                                              </div>
-                                            ))}
-                                          </div>
+                                        <div className="flex justify-between items-center bg-white rounded-lg p-2">
+                                          <span className="text-gray-600 font-medium">Box Price:</span>
+                                          <span className="font-bold text-gray-900">₹{hamper.hamperBoxPrice}</span>
                                         </div>
-                                      )}
-
-                                      {/* Price Breakdown */}
-                                      <div className="bg-white rounded-lg p-3 border border-gray-200">
-                                        <h6 className="font-semibold text-sm text-gray-700 mb-2">💰 Price Breakdown</h6>
-                                        <div className="space-y-1 text-sm">
-                                          <div className="flex justify-between">
-                                            <span className="text-gray-600">Items Total:</span>
-                                            <span className="font-medium">₹{hamper.itemsTotal}</span>
+                                        {hamper.withArrangement && hamper.arrangementCharge > 0 && (
+                                          <div className="flex justify-between items-center bg-orange-100 rounded-lg p-2">
+                                            <span className="text-orange-700 font-medium">Arrangement Charge:</span>
+                                            <span className="font-bold text-orange-700">+₹{hamper.arrangementCharge}</span>
                                           </div>
-                                          <div className="flex justify-between">
-                                            <span className="text-gray-600">Box Price:</span>
-                                            <span className="font-medium">₹{hamper.hamperBoxPrice}</span>
-                                          </div>
-                                          {hamper.withArrangement && hamper.arrangementCharge > 0 && (
-                                            <div className="flex justify-between text-accent-600">
-                                              <span>Arrangement Charge:</span>
-                                              <span className="font-medium">+₹{hamper.arrangementCharge}</span>
-                                            </div>
-                                          )}
-                                          <div className="flex justify-between pt-2 border-t border-gray-200 font-bold text-primary-600">
-                                            <span>Total:</span>
-                                            <span>₹{hamper.totalPrice}</span>
-                                          </div>
+                                        )}
+                                        <div className="flex justify-between items-center bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg p-3 mt-3">
+                                          <span className="font-bold text-base">Grand Total:</span>
+                                          <span className="font-bold text-xl">₹{hamper.totalPrice}</span>
                                         </div>
                                       </div>
                                     </div>
