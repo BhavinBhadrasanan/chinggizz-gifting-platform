@@ -2245,48 +2245,52 @@ export default function HamperBuilderPage() {
           </div>
         )}
 
-        {/* Step 3: Preview - MOBILE OPTIMIZED */}
+        {/* Step 3: Preview - COMPACT MOBILE VERSION */}
         {step === 3 && selectedBox && (
-          <div className="max-w-7xl mx-auto" ref={previewSectionRef}>
-            <div className="text-center mb-4 md:mb-8">
-              <h2 className="text-2xl md:text-3xl font-bold text-neutral-900 mb-2">Your Custom Hamper</h2>
-              <p className="text-sm md:text-base text-neutral-600">Review your beautiful creation</p>
+          <div className="max-w-7xl mx-auto pb-4" ref={previewSectionRef}>
+            {/* MOBILE: Compact Header */}
+            <div className="text-center mb-3 lg:mb-8 px-3">
+              <h2 className="text-xl lg:text-3xl font-bold text-neutral-900 mb-1">Your Custom Hamper</h2>
+              <p className="text-xs lg:text-base text-neutral-600">Review your creation</p>
             </div>
 
-            <div className="card p-4 md:p-8 mb-6">
-              <h3 className="text-xl md:text-2xl font-bold text-neutral-900 mb-4 md:mb-6 text-center">🎁 Final Preview</h3>
-              {/* MOBILE: Smaller height for faster loading */}
-              <div className="w-full h-[400px] md:h-[600px] mb-4 md:mb-6" ref={hamperPreviewCanvasRef}>
+            {/* MOBILE: Compact 3D Preview */}
+            <div className="card p-3 lg:p-8 mb-3 lg:mb-6">
+              <h3 className="text-base lg:text-2xl font-bold text-neutral-900 mb-2 lg:mb-6 text-center">🎁 Final Preview</h3>
+              <div className="w-full h-[300px] lg:h-[600px] mb-2 lg:mb-6" ref={hamperPreviewCanvasRef}>
                 <HamperPreview3D
                   selectedBox={selectedBox}
                   placedItems={placedItems}
                   hamperName={hamperName}
                 />
               </div>
-              {/* Mobile loading tip */}
-              <p className="text-xs text-center text-gray-500 md:hidden mb-2">
+              <p className="text-xs text-center text-gray-500 lg:hidden">
                 💡 Swipe to rotate • Pinch to zoom
               </p>
             </div>
 
-            <div className="card p-8 mb-6">
-              <div className="mb-6">
-                <label className="block text-sm font-semibold text-neutral-700 mb-2">
+            {/* MOBILE: Ultra Compact Details Card */}
+            <div className="card p-3 lg:p-8 mb-3 lg:mb-6">
+              {/* Hamper Name - Compact */}
+              <div className="mb-3 lg:mb-6">
+                <label className="block text-xs lg:text-sm font-semibold text-neutral-700 mb-1 lg:mb-2">
                   Hamper Name (Optional)
                 </label>
                 <input
                   type="text"
                   value={hamperName}
                   onChange={(e) => setHamperName(e.target.value)}
-                  placeholder="e.g., Diwali Special, Birthday Gift"
-                  className="w-full px-4 py-3 border-2 border-neutral-200 rounded-xl focus:border-primary-500 focus:outline-none transition-colors"
+                  placeholder="e.g., Diwali Special"
+                  className="w-full px-3 py-2 lg:px-4 lg:py-3 text-sm border-2 border-neutral-200 rounded-lg lg:rounded-xl focus:border-primary-500 focus:outline-none transition-colors"
                 />
               </div>
 
-              <div className="grid md:grid-cols-2 gap-6 mb-6">
-                <div className="bg-neutral-50 p-6 rounded-xl">
-                  <h4 className="font-bold text-neutral-900 mb-4">Box Details</h4>
-                  <div className="space-y-2 text-sm">
+              {/* MOBILE: Single Column Compact Layout */}
+              <div className="space-y-3 lg:grid lg:grid-cols-2 lg:gap-6 lg:space-y-0 mb-3 lg:mb-6">
+                {/* Box Details - Compact */}
+                <div className="bg-neutral-50 p-3 lg:p-6 rounded-lg lg:rounded-xl">
+                  <h4 className="font-bold text-sm lg:text-base text-neutral-900 mb-2 lg:mb-4">Box Details</h4>
+                  <div className="space-y-1 lg:space-y-2 text-xs lg:text-sm">
                     <div className="flex justify-between">
                       <span className="text-neutral-600">Box Type:</span>
                       <span className="font-semibold text-neutral-900">{selectedBox.name}</span>
@@ -2302,9 +2306,10 @@ export default function HamperBuilderPage() {
                   </div>
                 </div>
 
-                <div className="bg-neutral-50 p-6 rounded-xl">
-                  <h4 className="font-bold text-neutral-900 mb-4">Items Summary</h4>
-                  <div className="space-y-2 text-sm">
+                {/* Items Summary - Compact */}
+                <div className="bg-neutral-50 p-3 lg:p-6 rounded-lg lg:rounded-xl">
+                  <h4 className="font-bold text-sm lg:text-base text-neutral-900 mb-2 lg:mb-4">Items Summary</h4>
+                  <div className="space-y-1 lg:space-y-2 text-xs lg:text-sm">
                     <div className="flex justify-between">
                       <span className="text-neutral-600">Total Items:</span>
                       <span className="font-semibold text-neutral-900">{placedItems.length}</span>
@@ -2315,28 +2320,29 @@ export default function HamperBuilderPage() {
                         ₹{placedItems.reduce((sum, item) => sum + parseFloat(item.price), 0)}
                       </span>
                     </div>
-                    <div className="flex justify-between pt-2 border-t border-neutral-200">
+                    <div className="flex justify-between pt-1 lg:pt-2 border-t border-neutral-200">
                       <span className="text-neutral-900 font-bold">Grand Total:</span>
-                      <span className="font-bold text-primary-600 text-lg">₹{getTotalPrice()}</span>
+                      <span className="font-bold text-primary-600 text-base lg:text-lg">₹{getTotalPrice()}</span>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div className="bg-blue-50 border-2 border-blue-200 rounded-xl p-6 mb-6">
-                <h4 className="font-bold text-blue-900 mb-3">📦 Items in Your Hamper</h4>
-                <div className="grid md:grid-cols-2 gap-3">
+              {/* MOBILE: Compact Items List - Collapsible */}
+              <div className="bg-blue-50 border-2 border-blue-200 rounded-lg lg:rounded-xl p-3 lg:p-6 mb-3 lg:mb-6">
+                <h4 className="font-bold text-sm lg:text-base text-blue-900 mb-2 lg:mb-3">📦 Items ({placedItems.length})</h4>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 lg:gap-3 max-h-[200px] lg:max-h-none overflow-y-auto">
                   {placedItems.map((item, index) => (
-                    <div key={index} className="flex items-center gap-3 bg-white p-3 rounded-lg">
-                      <div className="w-12 h-12 bg-neutral-100 rounded-lg flex items-center justify-center">
+                    <div key={index} className="flex items-center gap-2 lg:gap-3 bg-white p-2 lg:p-3 rounded-lg">
+                      <div className="w-10 h-10 lg:w-12 lg:h-12 bg-neutral-100 rounded-lg flex items-center justify-center flex-shrink-0">
                         {item.imageUrl ? (
                           <img src={item.imageUrl} alt={item.name} className="w-full h-full object-cover rounded-lg" />
                         ) : (
-                          <Package className="h-6 w-6 text-neutral-400" />
+                          <Package className="h-5 w-5 lg:h-6 lg:w-6 text-neutral-400" />
                         )}
                       </div>
-                      <div className="flex-1">
-                        <h5 className="font-semibold text-sm text-neutral-900">{item.name}</h5>
+                      <div className="flex-1 min-w-0">
+                        <h5 className="font-semibold text-xs lg:text-sm text-neutral-900 truncate">{item.name}</h5>
                         <p className="text-xs text-neutral-600">₹{item.price}</p>
                       </div>
                     </div>
@@ -2344,14 +2350,15 @@ export default function HamperBuilderPage() {
                 </div>
               </div>
 
-              <div className="flex gap-4">
-                <button onClick={() => setStep(2)} className="btn-secondary flex-1">
-                  <ArrowLeft className="h-5 w-5 mr-2" />
-                  Edit Hamper
+              {/* MOBILE: Compact Action Buttons */}
+              <div className="flex gap-2 lg:gap-4">
+                <button onClick={() => setStep(2)} className="btn-secondary flex-1 text-sm lg:text-base py-2 lg:py-3">
+                  <ArrowLeft className="h-4 w-4 lg:h-5 lg:w-5 mr-1 lg:mr-2" />
+                  Edit
                 </button>
-                <button onClick={handleCheckout} className="btn-primary flex-1">
-                  Proceed to Checkout
-                  <ArrowRight className="h-5 w-5 ml-2" />
+                <button onClick={handleCheckout} className="btn-primary flex-1 text-sm lg:text-base py-2 lg:py-3">
+                  Checkout
+                  <ArrowRight className="h-4 w-4 lg:h-5 lg:w-5 ml-1 lg:ml-2" />
                 </button>
               </div>
             </div>
