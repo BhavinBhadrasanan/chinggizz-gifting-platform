@@ -11,12 +11,19 @@ export default function Footer() {
           {/* Brand - BEAUTIFUL ROUND LOGO */}
           <div>
             <div className="flex items-center space-x-3 mb-4">
-              {/* Round Logo */}
-              <img
-                src="/chinggizz-logo-round.png"
-                alt="Chinggizz Logo"
-                className="h-14 w-14 sm:h-16 sm:w-16 rounded-full object-cover shadow-xl ring-2 ring-white/20 hover:ring-primary-400/50 transition-all duration-300"
-              />
+              {/* Round Logo with Fallback */}
+              <div className="h-14 w-14 sm:h-16 sm:w-16 rounded-full shadow-xl ring-2 ring-white/20 hover:ring-orange-400/50 transition-all duration-300 overflow-hidden bg-white">
+                <img
+                  src="/chinggizz-logo.png"
+                  alt="Chinggizz Logo"
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    // Fallback: Show beautiful gradient with Gift icon if image not found
+                    e.target.style.display = 'none';
+                    e.target.parentElement.innerHTML = '<div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-orange-400 via-orange-500 to-teal-500"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-7 h-7 sm:w-8 sm:h-8"><polyline points="20 12 20 22 4 22 4 12"></polyline><rect x="2" y="7" width="20" height="5"></rect><line x1="12" y1="22" x2="12" y2="7"></line><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path></svg></div>';
+                  }}
+                />
+              </div>
               <span className="text-xl font-bold text-white">Chinggizz</span>
             </div>
             <p className="text-sm text-neutral-400 mb-4">

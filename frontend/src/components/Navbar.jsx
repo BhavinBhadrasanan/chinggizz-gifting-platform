@@ -66,20 +66,27 @@ export default function Navbar() {
                 {/* Glow effect on hover */}
                 <div className="absolute inset-0 bg-gradient-to-br from-orange-400 to-teal-500 rounded-full blur-md opacity-0 group-hover:opacity-60 transition-opacity duration-300"></div>
 
-                {/* Logo Image - Round */}
-                <img
-                  src="/chinggizz-logo-round.png"
-                  alt="Chinggizz Logo"
-                  className="relative h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16 rounded-full object-cover shadow-lg group-hover:scale-105 transition-transform duration-300 ring-2 ring-white/50"
-                />
+                {/* Logo Image - Round with Fallback */}
+                <div className="relative h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16 rounded-full shadow-lg group-hover:scale-105 transition-transform duration-300 ring-2 ring-orange-400/50 overflow-hidden bg-white">
+                  <img
+                    src="/chinggizz-logo.png"
+                    alt="Chinggizz Logo"
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      // Fallback: Show beautiful gradient with Gift icon if image not found
+                      e.target.style.display = 'none';
+                      e.target.parentElement.innerHTML = '<div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-orange-400 via-orange-500 to-teal-500"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8"><polyline points="20 12 20 22 4 22 4 12"></polyline><rect x="2" y="7" width="20" height="5"></rect><line x1="12" y1="22" x2="12" y2="7"></line><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path></svg></div>';
+                    }}
+                  />
+                </div>
               </div>
 
-              {/* Text - Hidden on very small mobile, visible on larger screens */}
-              <div className="hidden xs:flex flex-col">
-                <span className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-primary-600 to-secondary-500 bg-clip-text text-transparent">
+              {/* Text - Always visible on mobile and up */}
+              <div className="flex flex-col">
+                <span className="text-lg sm:text-xl md:text-2xl font-bold bg-gradient-to-r from-primary-600 to-secondary-500 bg-clip-text text-transparent">
                   Chinggizz
                 </span>
-                <span className="text-[10px] sm:text-xs text-neutral-500 font-medium -mt-1">Customised Gifts</span>
+                <span className="text-[9px] sm:text-[10px] md:text-xs text-neutral-500 font-medium -mt-1">Customised Gifts</span>
               </div>
             </Link>
 
