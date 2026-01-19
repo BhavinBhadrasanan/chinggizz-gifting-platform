@@ -156,9 +156,9 @@ export default function Cart() {
           )}
         </div>
 
-        {/* Footer */}
+        {/* Footer - Mobile Safe Area for Bottom Nav */}
         {cartItems.length > 0 && (
-          <div className="border-t border-neutral-200 p-4 sm:p-6 bg-neutral-50 space-y-2 sm:space-y-3">
+          <div className="border-t border-neutral-200 p-4 sm:p-6 pb-20 lg:pb-4 bg-neutral-50 space-y-2 sm:space-y-3">
             <div className="flex items-center justify-between mb-3 sm:mb-4">
               <span className="text-base sm:text-lg font-semibold text-neutral-900">Total:</span>
               <span className="text-xl sm:text-2xl font-bold text-primary-600">
