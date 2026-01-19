@@ -253,14 +253,13 @@ export default function HamperScene3D({
 
   return (
     <Canvas3DErrorBoundary fallback={<FallbackUI />}>
-      {/* GLASSY CONTAINER - Mobile Optimized */}
+      {/* CLEAN CONTAINER - No blur for better visibility */}
       <div className="w-full h-full rounded-xl md:rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 relative">
-        {/* Glassy overlay effect - subtle on mobile */}
-        <div className="absolute inset-0 bg-white/20 backdrop-blur-[2px] pointer-events-none z-10"></div>
+        {/* Removed glassy overlay - was making hamper hard to see */}
 
-        {/* Animated background orbs - lightweight */}
-        <div className="absolute top-0 left-0 w-32 h-32 bg-gradient-to-br from-blue-300/20 to-purple-300/20 rounded-full blur-2xl animate-pulse pointer-events-none"></div>
-        <div className="absolute bottom-0 right-0 w-40 h-40 bg-gradient-to-br from-pink-300/20 to-purple-300/20 rounded-full blur-2xl animate-pulse delay-1000 pointer-events-none"></div>
+        {/* Subtle background orbs - very light */}
+        <div className="absolute top-0 left-0 w-32 h-32 bg-gradient-to-br from-blue-200/10 to-purple-200/10 rounded-full blur-3xl animate-pulse pointer-events-none"></div>
+        <div className="absolute bottom-0 right-0 w-40 h-40 bg-gradient-to-br from-pink-200/10 to-purple-200/10 rounded-full blur-3xl animate-pulse delay-1000 pointer-events-none"></div>
 
         {/* 3D Canvas */}
         <Canvas

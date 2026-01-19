@@ -153,12 +153,12 @@ export default function HamperBuilderPage() {
     localStorage.setItem('hamperBuilderState', JSON.stringify(stateToSave));
   }, [step, selectedBox, placedItems, hamperName]);
 
-  // Show welcome back message if returning with saved items
+  // Show welcome back message if returning with saved items - COMPACT
   useEffect(() => {
     if (savedState.placedItems.length > 0) {
       toast.success(
-        `Welcome back! Your hamper with ${savedState.placedItems.length} item${savedState.placedItems.length !== 1 ? 's' : ''} has been restored.`,
-        { duration: 4000, icon: '🎉' }
+        `Hamper restored (${savedState.placedItems.length} item${savedState.placedItems.length !== 1 ? 's' : ''})`,
+        { duration: 2500, icon: '🎉' }
       );
     }
   }, []); // Only run once on mount
@@ -1479,9 +1479,9 @@ export default function HamperBuilderPage() {
                             onDragEnd={handleDragEnd}
                             onClick={() => {
                               setSelectedItemToPlace(item);
-                              toast.info(`📦 ${item.name} selected! Scroll down and tap a green spot.`, {
-                                duration: 3000,
-                                icon: '👆',
+                              toast.info(`${item.name} - Tap green spot below`, {
+                                duration: 2000,
+                                icon: '👇',
                               });
                             }}
                             className={`bg-white border-2 rounded-xl p-2 cursor-pointer transition-all duration-300 tap-target relative overflow-hidden ${

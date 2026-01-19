@@ -5,17 +5,18 @@ export default function MobileToast() {
     <Toaster
       position="top-center"
       toastOptions={{
-        // Default options
-        duration: 3000,
+        // Default options - COMPACT for mobile
+        duration: 2000, // Shorter duration
         style: {
           background: '#fff',
           color: '#333',
-          padding: '12px 16px',
-          borderRadius: '12px',
-          boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
-          fontSize: '14px',
+          padding: '8px 12px', // Reduced padding
+          borderRadius: '10px',
+          boxShadow: '0 2px 8px rgba(0,0,0,0.12)',
+          fontSize: '12px', // Smaller font
           fontWeight: '500',
-          maxWidth: '90vw',
+          maxWidth: '85vw', // Slightly narrower
+          minHeight: 'auto', // Allow compact height
         },
         
         // Success
@@ -60,11 +61,12 @@ export default function MobileToast() {
         },
       }}
       containerStyle={{
-        top: 80, // Below navbar
-        left: 16,
-        right: 16,
+        top: 70, // Closer to navbar
+        left: 12,
+        right: 12,
       }}
       containerClassName="mobile-toast-container"
+      gutter={6} // Reduced gap between toasts
     />
   );
 }
