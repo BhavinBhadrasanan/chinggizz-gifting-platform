@@ -1989,24 +1989,15 @@ export default function HamperBuilderPage() {
                     </div>
                   )}
 
-                  {/* MOBILE: Preview Button at bottom of 3D card - Scrolls to 3D View */}
+                  {/* MOBILE: Preview Button at bottom of 3D card - Navigate to Final Preview */}
                   <div className="lg:hidden mt-4 pt-3 border-t border-neutral-200">
                     <button
-                      onClick={() => {
-                        if (placedItems.length === 0) {
-                          toast.error('Please add items to your hamper');
-                          return;
-                        }
-                        // Scroll to 3D hamper view
-                        setTimeout(() => {
-                          hamperViewRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                        }, 100);
-                      }}
+                      onClick={handleFinalize}
                       disabled={placedItems.length === 0}
                       className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 disabled:from-gray-400 disabled:to-gray-500 text-white font-bold text-sm py-3 px-4 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed active:scale-95"
                     >
                       <Eye className="h-4 w-4" />
-                      <span>{placedItems.length === 0 ? 'Add Items First' : `View 3D Hamper (${placedItems.length})`}</span>
+                      <span>{placedItems.length === 0 ? 'Add Items First' : `Preview Final Hamper (${placedItems.length})`}</span>
                       <ArrowRight className="h-4 w-4" />
                     </button>
                   </div>
