@@ -157,15 +157,8 @@ export default function HamperBuilderPage() {
     localStorage.setItem('hamperBuilderState', JSON.stringify(stateToSave));
   }, [step, selectedBox, placedItems, hamperName]);
 
-  // Show welcome back message if returning with saved items - COMPACT
-  useEffect(() => {
-    if (savedState.placedItems.length > 0) {
-      toast.success(
-        `Hamper restored (${savedState.placedItems.length} item${savedState.placedItems.length !== 1 ? 's' : ''})`,
-        { duration: 2500, icon: '🎉' }
-      );
-    }
-  }, []); // Only run once on mount
+  // Note: Removed "Hamper restored" toast notification as it's redundant
+  // The green "Hamper Saved Automatically" banner already shows this info
 
   // Keyboard controls for selected item
   useEffect(() => {
