@@ -405,16 +405,26 @@ export default function CheckoutPage() {
               </div>
 
               {/* Special Instructions */}
-              <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg border border-neutral-200/50 p-4 sm:p-7 hover:shadow-xl transition-shadow">
-                <h2 className="text-lg sm:text-2xl font-bold text-neutral-900 mb-3 sm:mb-4">
-                  Special Instructions <span className="text-xs sm:text-sm font-normal text-neutral-500">(Optional)</span>
-                </h2>
+              <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg border-2 border-neutral-200/50 p-4 sm:p-7 hover:shadow-xl transition-shadow">
+                <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-5">
+                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-gradient-to-br from-orange-500 to-amber-600 flex items-center justify-center flex-shrink-0">
+                    <svg className="h-4 w-4 sm:h-5 sm:w-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h2 className="text-lg sm:text-2xl font-bold text-neutral-900">
+                      Special Instructions
+                    </h2>
+                    <p className="text-xs sm:text-sm text-neutral-500">(Optional)</p>
+                  </div>
+                </div>
                 <textarea
                   name="specialInstructions"
                   value={formData.specialInstructions}
                   onChange={handleInputChange}
                   rows="4"
-                  className="input-field focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                  className="w-full px-4 py-3 border-2 border-neutral-200 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all resize-none text-sm sm:text-base"
                   placeholder="Any special requests or delivery instructions... (e.g., 'Please deliver after 6 PM')"
                 ></textarea>
               </div>
