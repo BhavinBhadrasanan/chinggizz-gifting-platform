@@ -1759,7 +1759,7 @@ export default function HamperBuilderPage() {
 
                   {/* MOBILE: Floating Bottom Control Bar - ALWAYS VISIBLE, DOESN'T BLOCK VIEW */}
                   {selectedItemForControls && (
-                    <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-t-2 border-primary-300 shadow-2xl pb-safe">
+                    <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-t-2 border-primary-300 shadow-2xl pb-20">
                       {/* Item Info Bar - Compact */}
                       <div className="flex items-center justify-between px-3 py-2 bg-gradient-to-r from-primary-50 to-purple-50 border-b border-primary-200">
                         <div className="flex items-center gap-2">

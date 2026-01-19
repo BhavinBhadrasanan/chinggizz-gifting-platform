@@ -326,7 +326,7 @@ export default function ProductCustomizationModalMobile({ product, isOpen, onClo
           </div>
 
           {/* Footer - Add to Cart */}
-          <div className="flex-shrink-0 bg-white border-t-2 border-gray-200 shadow-lg p-3 mb-20">
+          <div className="flex-shrink-0 bg-white border-t-2 border-gray-200 shadow-lg p-3 pb-24">
             <div className="flex items-center justify-between mb-3">
               <div>
                 <p className="text-xs text-gray-600 font-medium mb-0.5">Total Price</p>
