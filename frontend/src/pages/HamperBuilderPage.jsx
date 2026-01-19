@@ -8,6 +8,7 @@ import HamperPreview3D from '../components/HamperPreview3D';
 import ConfirmationModal from '../components/ConfirmationModal';
 import ErrorNotificationModal from '../components/ErrorNotificationModal';
 import ProductControlPanel from '../components/ProductControlPanel';
+import { captureHamperScreenshot, prepareHamperData } from '../utils/hamperScreenshot';
 
 // Hamper Boxes Configuration
 const HAMPER_BOXES = [
@@ -82,7 +83,7 @@ const HAMPER_BOXES = [
 ];
 
 export default function HamperBuilderPage() {
-  const { cartItems } = useCart();
+  const { cartItems, addHamperToCart } = useCart();
   const navigate = useNavigate();
 
   // Debug: Log when component mounts and scroll to top
@@ -95,11 +96,12 @@ export default function HamperBuilderPage() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
 
-  // Refs for scrolling to sections
+  // Refs for scrolling to sections and screenshot capture
   const hamperViewRef = useRef(null);
   const previewSectionRef = useRef(null);
   const availableItemsRef = useRef(null);
   const boxSelectionRef = useRef(null);
+  const hamperPreviewCanvasRef = useRef(null);
 
   // Load saved hamper state from localStorage on mount
   const loadSavedHamperState = () => {
@@ -1110,11 +1112,37 @@ export default function HamperBuilderPage() {
     }, 100);
   };
 
-  const handleCheckout = () => {
-    toast.success('Proceeding to checkout...');
-    // Scroll to top before navigation
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    setTimeout(() => navigate('/checkout'), 1000);
+  const handleCheckout = async () => {
+    try {
+      toast.loading('Preparing your hamper...', { id: 'hamper-checkout' });
+
+      // Capture screenshot of the 3D hamper
+      const canvasElement = hamperPreviewCanvasRef.current;
+      const screenshot = await captureHamperScreenshot(canvasElement);
+
+      if (!screenshot) {
+        toast.error('Failed to capture hamper image. Please try again.', { id: 'hamper-checkout' });
+        return;
+      }
+
+      // Prepare hamper data
+      const hamperData = prepareHamperData(selectedBox, placedItems, hamperName, screenshot);
+
+      // Add hamper to cart
+      addHamperToCart(hamperData);
+
+      // Clear hamper builder state
+      localStorage.removeItem('hamperBuilderState');
+
+      toast.success('✓ Hamper added to cart!', { id: 'hamper-checkout' });
+
+      // Scroll to top before navigation
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      setTimeout(() => navigate('/checkout'), 1000);
+    } catch (error) {
+      console.error('Error during checkout:', error);
+      toast.error('Failed to prepare hamper. Please try again.', { id: 'hamper-checkout' });
+    }
   };
 
   const availableItems = cartItems.filter(
@@ -2228,7 +2256,7 @@ export default function HamperBuilderPage() {
             <div className="card p-4 md:p-8 mb-6">
               <h3 className="text-xl md:text-2xl font-bold text-neutral-900 mb-4 md:mb-6 text-center">🎁 Final Preview</h3>
               {/* MOBILE: Smaller height for faster loading */}
-              <div className="w-full h-[400px] md:h-[600px] mb-4 md:mb-6">
+              <div className="w-full h-[400px] md:h-[600px] mb-4 md:mb-6" ref={hamperPreviewCanvasRef}>
                 <HamperPreview3D
                   selectedBox={selectedBox}
                   placedItems={placedItems}

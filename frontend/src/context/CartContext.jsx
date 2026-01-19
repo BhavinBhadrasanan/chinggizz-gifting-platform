@@ -13,16 +13,25 @@ export const useCart = () => {
 
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
+  const [hampers, setHampers] = useState([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
 
   // Load cart from localStorage on mount
   useEffect(() => {
     const savedCart = localStorage.getItem('chinggizz_cart');
+    const savedHampers = localStorage.getItem('chinggizz_hampers');
     if (savedCart) {
       try {
         setCartItems(JSON.parse(savedCart));
       } catch (error) {
         console.error('Failed to load cart:', error);
+      }
+    }
+    if (savedHampers) {
+      try {
+        setHampers(JSON.parse(savedHampers));
+      } catch (error) {
+        console.error('Failed to load hampers:', error);
       }
     }
   }, []);
@@ -31,6 +40,11 @@ export const CartProvider = ({ children }) => {
   useEffect(() => {
     localStorage.setItem('chinggizz_cart', JSON.stringify(cartItems));
   }, [cartItems]);
+
+  // Save hampers to localStorage whenever they change
+  useEffect(() => {
+    localStorage.setItem('chinggizz_hampers', JSON.stringify(hampers));
+  }, [hampers]);
 
   const addToCart = (product, quantity = 1, customization = null) => {
     setCartItems((prevItems) => {
@@ -99,12 +113,33 @@ export const CartProvider = ({ children }) => {
 
   const clearCart = () => {
     setCartItems([]);
+    setHampers([]);
     // Mobile-friendly: Short and clear notification
     toast.success('✓ Cart cleared', { duration: 2000, icon: '🛒' });
   };
 
+  const addHamperToCart = (hamperData) => {
+    setHampers((prevHampers) => {
+      const newHamper = {
+        id: Date.now(), // Unique ID for the hamper
+        ...hamperData,
+        addedAt: new Date().toISOString()
+      };
+      toast.success(`✓ ${hamperData.hamperName} added to cart!`, { duration: 2000, icon: '🎁' });
+      return [...prevHampers, newHamper];
+    });
+  };
+
+  const removeHamperFromCart = (hamperId) => {
+    setHampers((prevHampers) => {
+      const filtered = prevHampers.filter(hamper => hamper.id !== hamperId);
+      toast.success('✓ Hamper removed', { duration: 1500, icon: '🗑️' });
+      return filtered;
+    });
+  };
+
   const getCartTotal = () => {
-    return cartItems.reduce((total, item) => {
+    const itemsTotal = cartItems.reduce((total, item) => {
       // If customization data has totalPrice, use it (already includes base + options + customization charge)
       if (item.customization && typeof item.customization === 'object' && item.customization.totalPrice) {
         return total + parseFloat(item.customization.totalPrice) * item.quantity;
@@ -115,6 +150,12 @@ export const CartProvider = ({ children }) => {
       const customizationCharge = item.customization ? parseFloat(item.customizationCharge || 0) : 0;
       return total + (itemPrice + customizationCharge) * item.quantity;
     }, 0);
+
+    const hampersTotal = hampers.reduce((total, hamper) => {
+      return total + parseFloat(hamper.grandTotal || 0);
+    }, 0);
+
+    return itemsTotal + hampersTotal;
   };
 
   const getCartCount = () => {
@@ -123,10 +164,13 @@ export const CartProvider = ({ children }) => {
 
   const value = {
     cartItems,
+    hampers,
     addToCart,
     removeFromCart,
     updateQuantity,
     clearCart,
+    addHamperToCart,
+    removeHamperFromCart,
     getCartTotal,
     getCartCount,
     isCartOpen,

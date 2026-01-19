@@ -6,7 +6,7 @@ import toast from 'react-hot-toast';
 import api from '../config/api';
 
 export default function CheckoutPage() {
-  const { cartItems, getCartTotal, clearCart } = useCart();
+  const { cartItems, hampers, getCartTotal, clearCart } = useCart();
   const navigate = useNavigate();
   const [orderPlaced, setOrderPlaced] = useState(false);
   const [orderNumber, setOrderNumber] = useState('');
@@ -55,6 +55,10 @@ export default function CheckoutPage() {
     setIsSubmitting(true);
 
     try {
+      // Determine order type based on cart contents
+      const hasHampers = hampers && hampers.length > 0;
+      const orderType = hasHampers ? 'HAMPER_ARRANGEMENT' : 'DIRECT_PURCHASE';
+
       // Prepare order data
       const orderData = {
         customerName: formData.fullName,
@@ -65,7 +69,7 @@ export default function CheckoutPage() {
         state: formData.state,
         pincode: formData.pincode,
         deliveryMethod: formData.deliveryMethod,
-        orderType: 'DIRECT_PURCHASE',
+        orderType: orderType,
         specialInstructions: formData.specialInstructions || null,
         orderItems: cartItems.map(item => ({
           productId: item.id,
@@ -74,7 +78,21 @@ export default function CheckoutPage() {
           customizationCharge: item.customizationCharge || 0,
           customizationData: item.customization ? JSON.stringify(item.customization) : null
         })),
-        orderHampers: []
+        orderHampers: hampers.map(hamper => ({
+          hamperBoxId: hamper.hamperBoxId,
+          withArrangement: true,
+          hamperData: JSON.stringify({
+            hamperName: hamper.hamperName,
+            items: hamper.items,
+            boxDetails: hamper.boxDetails,
+            totalItems: hamper.totalItems,
+            itemsTotal: hamper.itemsTotal,
+            boxPrice: hamper.boxPrice,
+            grandTotal: hamper.grandTotal
+          }),
+          hamperName: hamper.hamperName,
+          screenshot: hamper.screenshot
+        }))
       };
 
       // Submit order to backend

@@ -162,6 +162,8 @@ public class OrderService {
                         .withArrangement(hamperRequest.getWithArrangement())
                         .arrangementCharge(arrangementCharge)
                         .hamperData(hamperRequest.getHamperData())
+                        .hamperName(hamperRequest.getHamperName())
+                        .screenshot(hamperRequest.getScreenshot())
                         .build();
 
                 order.getOrderHampers().add(orderHamper);
@@ -345,6 +347,8 @@ public class OrderService {
                 .withArrangement(orderHamper.getWithArrangement())
                 .arrangementCharge(orderHamper.getArrangementCharge())
                 .hamperData(orderHamper.getHamperData())
+                .hamperName(orderHamper.getHamperName())
+                .screenshot(orderHamper.getScreenshot())
                 .build();
     }
 }

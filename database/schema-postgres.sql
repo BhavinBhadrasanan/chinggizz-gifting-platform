@@ -123,6 +123,8 @@ CREATE TABLE IF NOT EXISTS order_hampers (
     with_arrangement BOOLEAN NOT NULL DEFAULT FALSE,
     arrangement_charge DECIMAL(10, 2) DEFAULT 0.00,
     hamper_data TEXT NOT NULL,
+    hamper_name VARCHAR(200),
+    screenshot TEXT,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT fk_order_hampers_order FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE,

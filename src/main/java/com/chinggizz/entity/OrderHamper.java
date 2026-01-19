@@ -47,5 +47,13 @@ public class OrderHamper extends BaseEntity {
     // JSON field for hamper items and arrangement layout
     @Column(name = "hamper_data", columnDefinition = "TEXT", nullable = false)
     private String hamperData;
+
+    // Custom name for the hamper
+    @Column(name = "hamper_name", length = 200)
+    private String hamperName;
+
+    // Base64 encoded screenshot of the 3D hamper arrangement
+    @Column(name = "screenshot", columnDefinition = "TEXT")
+    private String screenshot;
 }
 

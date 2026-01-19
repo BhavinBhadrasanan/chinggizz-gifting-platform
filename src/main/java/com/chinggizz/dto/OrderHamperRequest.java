@@ -21,8 +21,14 @@ public class OrderHamperRequest {
     
     @NotNull(message = "With arrangement flag is required")
     private Boolean withArrangement;
-    
+
     @NotBlank(message = "Hamper data is required")
     private String hamperData;
+
+    // Custom name for the hamper
+    private String hamperName;
+
+    // Base64 encoded screenshot of the 3D hamper arrangement
+    private String screenshot;
 }
 

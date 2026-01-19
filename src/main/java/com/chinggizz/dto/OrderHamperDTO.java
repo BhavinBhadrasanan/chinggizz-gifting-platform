@@ -24,5 +24,7 @@ public class OrderHamperDTO {
     private Boolean withArrangement;
     private BigDecimal arrangementCharge;
     private String hamperData;
+    private String hamperName;
+    private String screenshot;
 }
 

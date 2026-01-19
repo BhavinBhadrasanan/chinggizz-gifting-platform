@@ -263,27 +263,135 @@ export default function AdminOrdersPage() {
                         </div>
                       )}
 
-                      {/* Hamper Items */}
+                      {/* Hamper Items - Enhanced with Screenshot and Item Details */}
                       {order.orderHampers && order.orderHampers.length > 0 && (
-                        <div className="bg-white rounded-lg p-4">
-                          <h4 className="font-semibold text-gray-900 mb-3 flex items-center">
+                        <div className="bg-white rounded-lg p-4 lg:col-span-2">
+                          <h4 className="font-semibold text-gray-900 mb-4 flex items-center">
                             <Package className="h-5 w-5 mr-2 text-accent-600" />
                             Custom Hampers ({order.orderHampers.length})
                           </h4>
-                          <div className="space-y-3">
-                            {order.orderHampers.map((hamper, index) => (
-                              <div key={index} className="border-b border-gray-200 pb-3 last:border-0">
-                                <p className="font-medium text-gray-900">{hamper.hamperBoxName}</p>
-                                <p className="text-sm text-gray-600">Box Price: ₹{hamper.hamperBoxPrice}</p>
-                                <p className="text-sm text-gray-600">Items Total: ₹{hamper.itemsTotal}</p>
-                                {hamper.withArrangement && (
-                                  <p className="text-sm text-accent-600">
-                                    Arrangement Charge: +₹{hamper.arrangementCharge}
-                                  </p>
-                                )}
-                                <p className="font-bold text-primary-600 mt-2">Total: ₹{hamper.totalPrice}</p>
-                              </div>
-                            ))}
+                          <div className="space-y-6">
+                            {order.orderHampers.map((hamper, index) => {
+                              let hamperDetails = null;
+                              try {
+                                hamperDetails = hamper.hamperData ? JSON.parse(hamper.hamperData) : null;
+                              } catch (e) {
+                                console.error('Failed to parse hamper data:', e);
+                              }
+
+                              return (
+                                <div key={index} className="border border-gray-200 rounded-lg p-4 bg-gradient-to-br from-purple-50 to-pink-50">
+                                  {/* Hamper Header */}
+                                  <div className="flex items-center justify-between mb-4">
+                                    <div>
+                                      <h5 className="font-bold text-lg text-gray-900">
+                                        {hamper.hamperName || `Hamper #${index + 1}`}
+                                      </h5>
+                                      <p className="text-sm text-gray-600">{hamper.hamperBoxName}</p>
+                                    </div>
+                                    <div className="text-right">
+                                      <p className="text-2xl font-bold text-primary-600">₹{hamper.totalPrice}</p>
+                                    </div>
+                                  </div>
+
+                                  <div className="grid md:grid-cols-2 gap-4">
+                                    {/* Screenshot */}
+                                    {hamper.screenshot && (
+                                      <div className="bg-white rounded-lg p-3 border-2 border-accent-200">
+                                        <h6 className="font-semibold text-sm text-gray-700 mb-2">📸 Customer Arrangement</h6>
+                                        <img
+                                          src={hamper.screenshot}
+                                          alt={`${hamper.hamperName} arrangement`}
+                                          className="w-full h-auto rounded-lg shadow-md"
+                                        />
+                                        <p className="text-xs text-gray-500 mt-2 text-center italic">
+                                          Arrange items exactly as shown in the image
+                                        </p>
+                                      </div>
+                                    )}
+
+                                    {/* Hamper Details */}
+                                    <div className="space-y-3">
+                                      {/* Box Details */}
+                                      <div className="bg-white rounded-lg p-3 border border-gray-200">
+                                        <h6 className="font-semibold text-sm text-gray-700 mb-2">📦 Box Details</h6>
+                                        <div className="space-y-1 text-sm">
+                                          <div className="flex justify-between">
+                                            <span className="text-gray-600">Box Type:</span>
+                                            <span className="font-medium">{hamper.hamperBoxName}</span>
+                                          </div>
+                                          {hamperDetails?.boxDetails?.dimensions && (
+                                            <div className="flex justify-between">
+                                              <span className="text-gray-600">Dimensions:</span>
+                                              <span className="font-medium">{hamperDetails.boxDetails.dimensions}</span>
+                                            </div>
+                                          )}
+                                          <div className="flex justify-between">
+                                            <span className="text-gray-600">Box Price:</span>
+                                            <span className="font-medium">₹{hamper.hamperBoxPrice}</span>
+                                          </div>
+                                        </div>
+                                      </div>
+
+                                      {/* Items List */}
+                                      {hamperDetails?.items && hamperDetails.items.length > 0 && (
+                                        <div className="bg-white rounded-lg p-3 border border-gray-200">
+                                          <h6 className="font-semibold text-sm text-gray-700 mb-2">
+                                            🎁 Items ({hamperDetails.items.length})
+                                          </h6>
+                                          <div className="space-y-2 max-h-60 overflow-y-auto">
+                                            {hamperDetails.items.map((item, itemIndex) => (
+                                              <div key={itemIndex} className="flex justify-between items-start text-sm border-b border-gray-100 pb-2 last:border-0">
+                                                <div className="flex-1">
+                                                  <p className="font-medium text-gray-900">{item.productName}</p>
+                                                  {item.position !== undefined && (
+                                                    <p className="text-xs text-gray-500">Position: Spot {item.position + 1}</p>
+                                                  )}
+                                                  {item.rotation?.needsRotation && (
+                                                    <p className="text-xs text-accent-600">⚠️ Laid on side to fit</p>
+                                                  )}
+                                                </div>
+                                                <div className="text-right ml-2">
+                                                  <p className="font-semibold text-gray-900">₹{item.price}</p>
+                                                  {item.quantity > 1 && (
+                                                    <p className="text-xs text-gray-500">Qty: {item.quantity}</p>
+                                                  )}
+                                                </div>
+                                              </div>
+                                            ))}
+                                          </div>
+                                        </div>
+                                      )}
+
+                                      {/* Price Breakdown */}
+                                      <div className="bg-white rounded-lg p-3 border border-gray-200">
+                                        <h6 className="font-semibold text-sm text-gray-700 mb-2">💰 Price Breakdown</h6>
+                                        <div className="space-y-1 text-sm">
+                                          <div className="flex justify-between">
+                                            <span className="text-gray-600">Items Total:</span>
+                                            <span className="font-medium">₹{hamper.itemsTotal}</span>
+                                          </div>
+                                          <div className="flex justify-between">
+                                            <span className="text-gray-600">Box Price:</span>
+                                            <span className="font-medium">₹{hamper.hamperBoxPrice}</span>
+                                          </div>
+                                          {hamper.withArrangement && hamper.arrangementCharge > 0 && (
+                                            <div className="flex justify-between text-accent-600">
+                                              <span>Arrangement Charge:</span>
+                                              <span className="font-medium">+₹{hamper.arrangementCharge}</span>
+                                            </div>
+                                          )}
+                                          <div className="flex justify-between pt-2 border-t border-gray-200 font-bold text-primary-600">
+                                            <span>Total:</span>
+                                            <span>₹{hamper.totalPrice}</span>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              );
+                            })}
                           </div>
                         </div>
                       )}
