@@ -1,12 +1,9 @@
 import { X, Plus, Minus, ShoppingBag, Trash2, Sparkles } from 'lucide-react';
 import { useCart } from '../context/CartContext';
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import PurchaseFlowModal from './PurchaseFlowModal';
 
 export default function Cart() {
   const { cartItems, removeFromCart, updateQuantity, getCartTotal, getCartCount, isCartOpen, setIsCartOpen } = useCart();
-  const [showFlowModal, setShowFlowModal] = useState(false);
   const navigate = useNavigate();
 
   if (!isCartOpen) return null;
@@ -181,8 +178,13 @@ export default function Cart() {
             {/* Proceed to Checkout Button */}
             <button
               onClick={() => {
-                setShowFlowModal(true);
                 setIsCartOpen(false);
+                // Scroll to top for smooth transition
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                // Navigate to checkout
+                setTimeout(() => {
+                  navigate('/checkout');
+                }, 100);
               }}
               className="w-full bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white font-bold text-sm sm:text-base py-2.5 sm:py-3 px-3 sm:px-4 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg flex items-center justify-center gap-2"
             >
@@ -192,12 +194,6 @@ export default function Cart() {
           </div>
         )}
       </div>
-
-      {/* Purchase Flow Modal */}
-      <PurchaseFlowModal
-        isOpen={showFlowModal}
-        onClose={() => setShowFlowModal(false)}
-      />
     </>
   );
 }
