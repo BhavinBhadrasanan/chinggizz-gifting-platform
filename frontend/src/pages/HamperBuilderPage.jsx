@@ -1139,8 +1139,8 @@ export default function HamperBuilderPage() {
       addHamperToCart(hamperData);
       console.log('✅ Hamper added to cart');
 
-      // Clear hamper builder state
-      localStorage.removeItem('hamperBuilderState');
+      // DON'T clear hamper builder state here - preserve it in case user navigates back
+      // It will be cleared only when order is successfully placed in CheckoutPage
 
       toast.success('✓ Hamper added to cart!', { id: 'hamper-checkout' });
 

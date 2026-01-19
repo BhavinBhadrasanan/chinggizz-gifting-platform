@@ -103,7 +103,10 @@ export default function CheckoutPage() {
         toast.success('Order placed successfully!');
         setOrderPlaced(true);
 
-        // Clear cart after 3 seconds and redirect
+        // Clear hamper builder state since order is successfully placed
+        localStorage.removeItem('hamperBuilderState');
+
+        // Clear cart after 5 seconds and redirect
         setTimeout(() => {
           clearCart();
           navigate('/');
