@@ -325,23 +325,23 @@ export default function ProductCustomizationModalMobile({ product, isOpen, onClo
 
           </div>
 
-          {/* Footer - Add to Cart - WITH NAVIGATION BAR CLEARANCE */}
-          <div className="flex-shrink-0 bg-gradient-to-t from-white to-gray-50 border-t-2 border-gray-200 shadow-2xl p-4 pb-20">
-            <div className="flex items-center justify-between mb-3 bg-white rounded-xl p-3 shadow-sm border border-gray-200">
+          {/* Footer - Add to Cart - COMPACT VERSION */}
+          <div className="flex-shrink-0 bg-white border-t-2 border-gray-200 shadow-lg p-3 pb-20">
+            <div className="flex items-center justify-between mb-2 bg-gray-50 rounded-lg p-2 border border-gray-200">
               <div>
-                <p className="text-xs text-gray-600 font-medium mb-1">Total Price</p>
-                <p className="text-3xl font-bold text-primary-600">₹{totalPrice.toFixed(2)}</p>
+                <p className="text-xs text-gray-600 font-medium">Total Price</p>
+                <p className="text-xl font-bold text-primary-600">₹{totalPrice.toFixed(2)}</p>
               </div>
               <div className="text-right">
-                <p className="text-xs text-gray-600 font-medium mb-1">Quantity</p>
-                <p className="text-2xl font-bold text-gray-900">{quantity}</p>
+                <p className="text-xs text-gray-600 font-medium">Quantity</p>
+                <p className="text-lg font-bold text-gray-900">{quantity}</p>
               </div>
             </div>
             <button
               onClick={handleAddToCart}
-              className="w-full bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white py-4 px-6 rounded-2xl font-bold text-lg shadow-xl hover:shadow-2xl active:scale-98 transition-all duration-200 flex items-center justify-center gap-3"
+              className="w-full bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white py-3 px-4 rounded-xl font-bold text-base shadow-lg hover:shadow-xl active:scale-98 transition-all duration-200 flex items-center justify-center gap-2"
             >
-              <ShoppingCart className="h-6 w-6" />
+              <ShoppingCart className="h-5 w-5" />
               <span>Add to Cart</span>
             </button>
           </div>
