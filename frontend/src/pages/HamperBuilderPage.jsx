@@ -209,6 +209,25 @@ export default function HamperBuilderPage() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [selectedItemForControls, placedItems, selectedBox]);
 
+  // Hide mobile bottom nav when control panel is active
+  useEffect(() => {
+    const mobileNav = document.querySelector('nav.lg\\:hidden.fixed.bottom-0');
+    if (mobileNav) {
+      if (selectedItemForControls) {
+        mobileNav.style.display = 'none';
+      } else {
+        mobileNav.style.display = '';
+      }
+    }
+
+    // Cleanup on unmount
+    return () => {
+      if (mobileNav) {
+        mobileNav.style.display = '';
+      }
+    };
+  }, [selectedItemForControls]);
+
   const handleBoxSelect = (box) => {
     // If changing box, keep items that still fit in the new box
     if (placedItems.length > 0) {
@@ -1649,8 +1668,10 @@ export default function HamperBuilderPage() {
                     </div>
                   )}
 
-                  {/* 3D Box Container - Responsive Height */}
-                  <div className="w-full h-[350px] sm:h-[450px] lg:h-[600px] relative">
+                  {/* 3D Box Container - Responsive Height - Taller when control panel is active */}
+                  <div className={`w-full sm:h-[450px] lg:h-[600px] relative transition-all duration-300 ${
+                    selectedItemForControls ? 'h-[280px]' : 'h-[400px]'
+                  }`}>
                     {/* Drop Zone Overlay - Captures HTML5 drag events with Grid */}
                     {isDragging && draggedItem && (
                       <div
@@ -1759,7 +1780,7 @@ export default function HamperBuilderPage() {
 
                   {/* MOBILE: Floating Bottom Control Bar - ALWAYS VISIBLE, DOESN'T BLOCK VIEW */}
                   {selectedItemForControls && (
-                    <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-t-2 border-primary-300 shadow-2xl pb-20">
+                    <div className="lg:hidden fixed bottom-0 left-0 right-0 z-[60] bg-white/95 backdrop-blur-md border-t-2 border-primary-300 shadow-2xl pb-2">
                       {/* Item Info Bar - Compact */}
                       <div className="flex items-center justify-between px-3 py-2 bg-gradient-to-r from-primary-50 to-purple-50 border-b border-primary-200">
                         <div className="flex items-center gap-2">
