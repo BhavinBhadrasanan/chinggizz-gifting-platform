@@ -168,39 +168,39 @@ export default function ProductCustomizationModalMobile({ product, isOpen, onClo
 
       {/* MOBILE MODAL - Bottom Sheet Style */}
       <div className="flex min-h-full items-end justify-center p-0">
-        <div className="relative bg-white rounded-t-3xl shadow-2xl w-full max-h-[90vh] flex flex-col">
+        <div className="relative bg-white rounded-t-3xl shadow-2xl w-full max-h-[85vh] flex flex-col">
 
-          {/* Header - Compact */}
-          <div className="flex-shrink-0 bg-gradient-to-r from-primary-500 to-secondary-500 text-white p-3 flex items-center justify-between rounded-t-3xl">
+          {/* Header - Compact & Sticky */}
+          <div className="flex-shrink-0 bg-gradient-to-r from-primary-500 to-secondary-500 text-white p-4 flex items-center justify-between rounded-t-3xl sticky top-0 z-10 shadow-md">
             <div className="flex items-center gap-2">
               <Sparkles className="h-5 w-5" />
-              <h2 className="text-base font-bold">Customize</h2>
+              <h2 className="text-lg font-bold">Customize</h2>
             </div>
-            <button onClick={onClose} className="p-1.5 hover:bg-white/20 rounded-full">
-              <X className="h-5 w-5" />
+            <button onClick={onClose} className="p-2 hover:bg-white/20 rounded-full transition-colors">
+              <X className="h-6 w-6" />
             </button>
           </div>
 
           {/* Scrollable Content */}
-          <div className="flex-1 overflow-y-auto px-3 py-3 space-y-3">
+          <div className="flex-1 overflow-y-auto px-4 py-4 space-y-4 pb-4">
 
-            {/* Product Info */}
-            <div className="flex items-center gap-3 bg-gray-50 rounded-xl p-2 border border-gray-200">
-              <div className="w-16 h-16 rounded-lg overflow-hidden bg-white shadow-sm flex-shrink-0">
+            {/* Product Info - Enhanced */}
+            <div className="flex items-center gap-3 bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl p-3 border-2 border-gray-200 shadow-sm">
+              <div className="w-20 h-20 rounded-xl overflow-hidden bg-white shadow-md flex-shrink-0 ring-2 ring-primary-100">
                 {product.imageUrl ? (
                   <img src={product.imageUrl} alt={product.name} className="w-full h-full object-cover" />
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center bg-gray-100">
-                    <Package className="h-8 w-8 text-gray-400" />
+                  <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200">
+                    <Package className="h-10 w-10 text-gray-400" />
                   </div>
                 )}
               </div>
               <div className="flex-1 min-w-0">
-                <h3 className="text-sm font-bold text-gray-900 mb-1 line-clamp-2">{product.name}</h3>
-                <div className="flex items-center gap-2">
-                  <span className="text-lg font-bold text-primary-600">₹{product.price}</span>
+                <h3 className="text-base font-bold text-gray-900 mb-1.5 line-clamp-2">{product.name}</h3>
+                <div className="flex items-center gap-2 flex-wrap">
+                  <span className="text-xl font-bold text-primary-600">₹{product.price}</span>
                   {product.isCustomizable && product.customizationCharge > 0 && (
-                    <span className="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full font-bold">
+                    <span className="text-xs bg-green-100 text-green-700 px-2.5 py-1 rounded-full font-bold">
                       +₹{product.customizationCharge}
                     </span>
                   )}
@@ -208,38 +208,40 @@ export default function ProductCustomizationModalMobile({ product, isOpen, onClo
               </div>
             </div>
 
-            {/* Customization Options */}
+            {/* Customization Options - Enhanced */}
             {optionsArray.length > 0 && optionsArray.map((optionGroup, index) => (
-              <div key={index} className="bg-white rounded-xl shadow-sm border-2 border-gray-200">
-                <div className="bg-primary-500 px-3 py-2 flex items-center gap-2 rounded-t-xl">
-                  <span className="bg-white text-primary-600 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold">
+              <div key={index} className="bg-white rounded-2xl shadow-md border-2 border-gray-200 overflow-hidden">
+                <div className="bg-gradient-to-r from-primary-500 to-primary-600 px-4 py-3 flex items-center gap-2">
+                  <span className="bg-white text-primary-600 w-7 h-7 rounded-full flex items-center justify-center text-sm font-bold shadow-sm">
                     {index + 1}
                   </span>
-                  <span className="text-sm font-bold text-white">Select {optionGroup.category}</span>
+                  <span className="text-base font-bold text-white">Select {optionGroup.category}</span>
                 </div>
-                <div className="p-2 grid grid-cols-2 gap-2">
+                <div className="p-3 grid grid-cols-2 gap-2.5">
                   {optionGroup.choices.map((choice, choiceIndex) => {
                     const isSelected = selectedOptions[optionGroup.category] === choice.name;
                     return (
                       <button
                         key={choiceIndex}
                         onClick={() => handleOptionSelect(optionGroup.category, choice.name)}
-                        className={`p-2.5 rounded-lg border-2 transition-all ${
+                        className={`p-3 rounded-xl border-2 transition-all active:scale-95 ${
                           isSelected
-                            ? 'border-primary-500 bg-primary-50 shadow-md'
-                            : 'border-gray-300 bg-white hover:border-primary-300'
+                            ? 'border-primary-500 bg-primary-50 shadow-lg ring-2 ring-primary-200'
+                            : 'border-gray-300 bg-white hover:border-primary-300 hover:shadow-md'
                         }`}
                       >
                         <div className="flex items-center justify-between gap-1 mb-1">
-                          <span className={`text-xs font-bold truncate ${
+                          <span className={`text-sm font-bold truncate ${
                             isSelected ? 'text-primary-600' : 'text-gray-700'
                           }`}>
                             {choice.name}
                           </span>
-                          {isSelected && <span className="text-primary-600 text-sm">✓</span>}
+                          {isSelected && <span className="text-primary-600 text-lg">✓</span>}
                         </div>
                         {choice.price > 0 && (
-                          <span className="text-xs text-green-600 font-bold">+₹{choice.price}</span>
+                          <span className="text-xs text-green-600 font-bold bg-green-50 px-2 py-0.5 rounded-full">
+                            +₹{choice.price}
+                          </span>
                         )}
                       </button>
                     );
@@ -293,15 +295,15 @@ export default function ProductCustomizationModalMobile({ product, isOpen, onClo
               </div>
             )}
 
-            {/* Quantity Selector */}
-            <div className="bg-white rounded-xl shadow-sm border-2 border-green-200">
-              <div className="bg-green-500 px-3 py-2 rounded-t-xl">
-                <span className="text-sm font-bold text-white">Select Quantity</span>
+            {/* Quantity Selector - Enhanced */}
+            <div className="bg-white rounded-2xl shadow-md border-2 border-green-200 overflow-hidden">
+              <div className="bg-gradient-to-r from-green-500 to-green-600 px-4 py-3">
+                <span className="text-base font-bold text-white">Select Quantity</span>
               </div>
-              <div className="p-3 flex items-center justify-center gap-4">
+              <div className="p-4 flex items-center justify-center gap-5">
                 <button
                   onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                  className="w-10 h-10 rounded-full bg-gray-200 hover:bg-gray-300 active:bg-gray-400 flex items-center justify-center font-bold text-lg transition-colors"
+                  className="w-12 h-12 rounded-full bg-gray-200 hover:bg-gray-300 active:bg-gray-400 flex items-center justify-center font-bold text-xl transition-all active:scale-95 shadow-md"
                 >
                   −
                 </button>
@@ -310,11 +312,11 @@ export default function ProductCustomizationModalMobile({ product, isOpen, onClo
                   min="1"
                   value={quantity}
                   onChange={(e) => setQuantity(Math.max(1, parseInt(e.target.value) || 1))}
-                  className="w-20 text-center text-2xl font-bold border-2 border-primary-300 rounded-lg py-2 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                  className="w-24 text-center text-3xl font-bold border-2 border-primary-300 rounded-xl py-2 focus:outline-none focus:ring-2 focus:ring-primary-500 shadow-sm"
                 />
                 <button
                   onClick={() => setQuantity(quantity + 1)}
-                  className="w-10 h-10 rounded-full bg-primary-500 hover:bg-primary-600 active:bg-primary-700 text-white flex items-center justify-center font-bold text-lg transition-colors"
+                  className="w-12 h-12 rounded-full bg-primary-500 hover:bg-primary-600 active:bg-primary-700 text-white flex items-center justify-center font-bold text-xl transition-all active:scale-95 shadow-md"
                 >
                   +
                 </button>
@@ -323,23 +325,23 @@ export default function ProductCustomizationModalMobile({ product, isOpen, onClo
 
           </div>
 
-          {/* Footer - Add to Cart */}
-          <div className="flex-shrink-0 bg-white border-t-2 border-gray-200 shadow-lg p-3 pb-24">
-            <div className="flex items-center justify-between mb-3">
+          {/* Footer - Add to Cart - FIXED BOTTOM PADDING */}
+          <div className="flex-shrink-0 bg-gradient-to-t from-white to-gray-50 border-t-2 border-gray-200 shadow-2xl p-4 pb-safe">
+            <div className="flex items-center justify-between mb-3 bg-white rounded-xl p-3 shadow-sm border border-gray-200">
               <div>
-                <p className="text-xs text-gray-600 font-medium mb-0.5">Total Price</p>
-                <p className="text-2xl font-bold text-primary-600">₹{totalPrice.toFixed(2)}</p>
+                <p className="text-xs text-gray-600 font-medium mb-1">Total Price</p>
+                <p className="text-3xl font-bold text-primary-600">₹{totalPrice.toFixed(2)}</p>
               </div>
               <div className="text-right">
-                <p className="text-xs text-gray-600 font-medium mb-0.5">Quantity</p>
-                <p className="text-xl font-bold text-gray-900">{quantity}</p>
+                <p className="text-xs text-gray-600 font-medium mb-1">Quantity</p>
+                <p className="text-2xl font-bold text-gray-900">{quantity}</p>
               </div>
             </div>
             <button
               onClick={handleAddToCart}
-              className="w-full bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white py-4 px-6 rounded-xl font-bold text-base shadow-xl hover:shadow-2xl active:scale-98 transition-all duration-200 flex items-center justify-center gap-2"
+              className="w-full bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white py-4 px-6 rounded-2xl font-bold text-lg shadow-xl hover:shadow-2xl active:scale-98 transition-all duration-200 flex items-center justify-center gap-3"
             >
-              <ShoppingCart className="h-5 w-5" />
+              <ShoppingCart className="h-6 w-6" />
               <span>Add to Cart</span>
             </button>
           </div>
