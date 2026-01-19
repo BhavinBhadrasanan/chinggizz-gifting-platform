@@ -30,13 +30,31 @@ export default function Footer() {
               Creating unforgettable gift experiences with personalized touches and premium quality.
             </p>
             <div className="flex space-x-3">
-              <a href="#" className="w-10 h-10 bg-neutral-800 rounded-lg flex items-center justify-center hover:bg-primary-600 transition-colors">
+              <a
+                href="https://www.facebook.com/share/1C8DV49upr/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 bg-neutral-800 rounded-lg flex items-center justify-center hover:bg-blue-600 transition-colors"
+                aria-label="Visit our Facebook page"
+              >
                 <Facebook className="h-5 w-5" />
               </a>
-              <a href="#" className="w-10 h-10 bg-neutral-800 rounded-lg flex items-center justify-center hover:bg-primary-600 transition-colors">
+              <a
+                href="https://www.instagram.com/chinggizz_?igsh=MXFoMnpwYWt4bDh5cw%3D%3D&utm_source=qr"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 bg-neutral-800 rounded-lg flex items-center justify-center hover:bg-pink-600 transition-colors"
+                aria-label="Visit our Instagram page"
+              >
                 <Instagram className="h-5 w-5" />
               </a>
-              <a href="#" className="w-10 h-10 bg-neutral-800 rounded-lg flex items-center justify-center hover:bg-primary-600 transition-colors">
+              <a
+                href="https://twitter.com/chinggizz"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 bg-neutral-800 rounded-lg flex items-center justify-center hover:bg-sky-500 transition-colors"
+                aria-label="Visit our Twitter page"
+              >
                 <Twitter className="h-5 w-5" />
               </a>
             </div>
@@ -86,15 +104,22 @@ export default function Footer() {
             <ul className="space-y-3">
               <li className="flex items-start space-x-3">
                 <Mail className="h-5 w-5 text-primary-400 mt-0.5 flex-shrink-0" />
-                <span className="text-sm">info@chinggizz.com</span>
+                <a href="mailto:chinggezz@gmail.com" className="text-sm hover:text-primary-400 transition-colors">
+                  chinggezz@gmail.com
+                </a>
               </li>
               <li className="flex items-start space-x-3">
                 <Phone className="h-5 w-5 text-primary-400 mt-0.5 flex-shrink-0" />
-                <span className="text-sm">+91 70128 97008</span>
+                <a href="tel:+917012897008" className="text-sm hover:text-primary-400 transition-colors">
+                  +91 70128 97008
+                </a>
               </li>
               <li className="flex items-start space-x-3">
                 <MapPin className="h-5 w-5 text-primary-400 mt-0.5 flex-shrink-0" />
-                <span className="text-sm">123 Gift Street, City, State 12345</span>
+                <span className="text-sm">
+                  64A, Kuzuvalil, Chalikkavattom,<br />
+                  Vennala P.O, 682028
+                </span>
               </li>
             </ul>
           </div>
