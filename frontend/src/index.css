@@ -1388,11 +1388,11 @@ button, .btn-primary, .btn-secondary {
   overflow: hidden;
 }
 
-/* Banner Message Fade In Animation */
+/* Banner Message Fade In Animation - Slower & Smoother */
 @keyframes fade-in {
   from {
     opacity: 0;
-    transform: translateY(-5px);
+    transform: translateY(-10px);
   }
   to {
     opacity: 1;
@@ -1401,10 +1401,10 @@ button, .btn-primary, .btn-secondary {
 }
 
 .animate-fade-in {
-  animation: fade-in 0.6s ease-out;
+  animation: fade-in 1.2s ease-in-out;
 }
 
-/* Shimmer Effect for Banner Background */
+/* Shimmer Effect for Banner Background - Slower & Smoother */
 @keyframes shimmer {
   0% {
     transform: translateX(-100%);
@@ -1415,5 +1415,5 @@ button, .btn-primary, .btn-secondary {
 }
 
 .animate-shimmer {
-  animation: shimmer 3s infinite;
+  animation: shimmer 6s infinite ease-in-out;
 }

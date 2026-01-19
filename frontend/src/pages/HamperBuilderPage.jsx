@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { useCart } from '../context/CartContext';
 import { useNavigate } from 'react-router-dom';
-import { Sparkles, Package, ShoppingBag, ArrowRight, ArrowLeft, Box, RotateCcw, Eye, Move, Plus, Trash2, AlertCircle, Check, Gift, X, ArrowUp, ArrowDown, RotateCw, RefreshCw } from 'lucide-react';
+import { Sparkles, Package, ShoppingBag, ArrowRight, ArrowLeft, Box, RotateCcw, Eye, Move, Plus, Trash2, AlertCircle, Check, Gift, X, ArrowUp, ArrowDown, RotateCw, RefreshCw, ChevronDown, ChevronUp } from 'lucide-react';
 import toast from 'react-hot-toast';
 import HamperScene3D from '../components/HamperScene3D';
 import HamperPreview3D from '../components/HamperPreview3D';
@@ -137,6 +137,10 @@ export default function HamperBuilderPage() {
   const [isDragging, setIsDragging] = useState(false);
   const [hoveredSpotIndex, setHoveredSpotIndex] = useState(null);
   const [selectedItemForControls, setSelectedItemForControls] = useState(null); // For game controls
+
+  // Collapsible sections state
+  const [showQuickGuide, setShowQuickGuide] = useState(false);
+  const [showQuickTips, setShowQuickTips] = useState(false);
 
   // Error notification modal state
   const [showErrorModal, setShowErrorModal] = useState(false);
@@ -1430,18 +1434,30 @@ export default function HamperBuilderPage() {
               {/* MOBILE: Available Items Section FIRST (shows at top on mobile) - ENHANCED */}
               <div className="lg:hidden">
                 <div className="card p-3 glass-card animate-fadeInUp">
-                  {/* Mobile Instructions - Enhanced with Glassy Effect */}
-                  <div className="mb-3 p-3 bg-gradient-to-r from-blue-50 via-indigo-50 to-purple-50 border-2 border-blue-300 rounded-xl shadow-lg relative overflow-hidden">
+                  {/* Mobile Instructions - Collapsible Quick Guide */}
+                  <div className="mb-3 bg-gradient-to-r from-blue-50 via-indigo-50 to-purple-50 border-2 border-blue-300 rounded-xl shadow-lg relative overflow-hidden">
                     {/* Glassy overlay */}
                     <div className="absolute inset-0 bg-white/40 backdrop-blur-sm"></div>
 
-                    {/* Content */}
-                    <div className="relative z-10">
-                      <h4 className="font-bold text-blue-900 mb-2 flex items-center text-sm">
-                        <span className="text-xl mr-2 animate-bounce">👇</span>
-                        Quick Guide
-                      </h4>
-                      <div className="space-y-1">
+                    {/* Header - Always Visible */}
+                    <button
+                      onClick={() => setShowQuickGuide(!showQuickGuide)}
+                      className="relative z-10 w-full p-3 flex items-center justify-between text-left tap-target"
+                    >
+                      <div className="flex items-center gap-2">
+                        <span className="text-xl animate-bounce">👇</span>
+                        <h4 className="font-bold text-blue-900 text-sm">Quick Guide</h4>
+                      </div>
+                      {showQuickGuide ? (
+                        <ChevronUp className="h-4 w-4 text-blue-900 flex-shrink-0" />
+                      ) : (
+                        <ChevronDown className="h-4 w-4 text-blue-900 flex-shrink-0" />
+                      )}
+                    </button>
+
+                    {/* Collapsible Content */}
+                    {showQuickGuide && (
+                      <div className="relative z-10 px-3 pb-3 space-y-1 animate-fadeIn">
                         <p className="text-xs text-blue-800 flex items-center gap-2">
                           <span className="bg-blue-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-[10px] font-bold flex-shrink-0">1</span>
                           <span><strong>Tap</strong> an item below</span>
@@ -1455,7 +1471,7 @@ export default function HamperBuilderPage() {
                           <span><strong>Tap</strong> green spot to place</span>
                         </p>
                       </div>
-                    </div>
+                    )}
                   </div>
 
                   {/* Available Items - Mobile - ENHANCED */}
@@ -1627,18 +1643,33 @@ export default function HamperBuilderPage() {
                     </div>
                   )}
 
-                  {/* Mobile Instructions - Visible only on Mobile */}
-                  <div className="lg:hidden mb-3 mx-2 p-3 bg-gradient-to-r from-purple-50 to-pink-50 border-2 border-purple-300 rounded-xl">
-                    <h4 className="font-bold text-purple-900 mb-1.5 flex items-center text-sm">
-                      <span className="text-lg mr-2">💡</span>
-                      Quick Tips
-                    </h4>
-                    <ul className="text-xs text-purple-800 space-y-1">
-                      <li>• <strong>Add Items:</strong> Tap items from list, then tap green spots</li>
-                      <li>• <strong>Adjust Position:</strong> Touch a product in the box to select it</li>
-                      <li>• <strong>Move & Rotate:</strong> Use the control bar at the bottom</li>
-                      <li>• <strong>Rotate View:</strong> Swipe on the 3D box to rotate</li>
-                    </ul>
+                  {/* Mobile Instructions - Collapsible Quick Tips */}
+                  <div className="lg:hidden mb-3 mx-2 bg-gradient-to-r from-purple-50 to-pink-50 border-2 border-purple-300 rounded-xl overflow-hidden">
+                    {/* Header - Always Visible */}
+                    <button
+                      onClick={() => setShowQuickTips(!showQuickTips)}
+                      className="w-full p-3 flex items-center justify-between text-left tap-target"
+                    >
+                      <div className="flex items-center gap-2">
+                        <span className="text-lg">💡</span>
+                        <h4 className="font-bold text-purple-900 text-sm">Quick Tips</h4>
+                      </div>
+                      {showQuickTips ? (
+                        <ChevronUp className="h-4 w-4 text-purple-900 flex-shrink-0" />
+                      ) : (
+                        <ChevronDown className="h-4 w-4 text-purple-900 flex-shrink-0" />
+                      )}
+                    </button>
+
+                    {/* Collapsible Content */}
+                    {showQuickTips && (
+                      <ul className="px-3 pb-3 text-xs text-purple-800 space-y-1 animate-fadeIn">
+                        <li>• <strong>Add Items:</strong> Tap items from list, then tap green spots</li>
+                        <li>• <strong>Adjust Position:</strong> Touch a product in the box to select it</li>
+                        <li>• <strong>Move & Rotate:</strong> Use the control bar at the bottom</li>
+                        <li>• <strong>Rotate View:</strong> Swipe on the 3D box to rotate</li>
+                      </ul>
+                    )}
                   </div>
 
                   {/* Desktop Instructions - Hidden on Mobile */}
