@@ -325,8 +325,8 @@ export default function ProductCustomizationModalMobile({ product, isOpen, onClo
 
           </div>
 
-          {/* Footer - Add to Cart - FIXED BOTTOM PADDING */}
-          <div className="flex-shrink-0 bg-gradient-to-t from-white to-gray-50 border-t-2 border-gray-200 shadow-2xl p-4 pb-safe">
+          {/* Footer - Add to Cart - WITH NAVIGATION BAR CLEARANCE */}
+          <div className="flex-shrink-0 bg-gradient-to-t from-white to-gray-50 border-t-2 border-gray-200 shadow-2xl p-4 pb-20">
             <div className="flex items-center justify-between mb-3 bg-white rounded-xl p-3 shadow-sm border border-gray-200">
               <div>
                 <p className="text-xs text-gray-600 font-medium mb-1">Total Price</p>
