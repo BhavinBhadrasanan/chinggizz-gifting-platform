@@ -304,7 +304,6 @@ export default function CheckoutPage() {
                       value={formData.city}
                       onChange={handleInputChange}
                       className="input-field focus:ring-2 focus:ring-accent-500 focus:border-accent-500"
-                      placeholder="Kochi"
                       required
                     />
                   </div>
@@ -318,7 +317,6 @@ export default function CheckoutPage() {
                       value={formData.state}
                       onChange={handleInputChange}
                       className="input-field focus:ring-2 focus:ring-accent-500 focus:border-accent-500"
-                      placeholder="Kerala"
                       required
                     />
                   </div>
@@ -332,7 +330,6 @@ export default function CheckoutPage() {
                       value={formData.pincode}
                       onChange={handleInputChange}
                       className="input-field focus:ring-2 focus:ring-accent-500 focus:border-accent-500"
-                      placeholder="682001"
                       required
                     />
                   </div>
