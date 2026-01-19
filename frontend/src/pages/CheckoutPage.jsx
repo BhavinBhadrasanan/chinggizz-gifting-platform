@@ -157,59 +157,96 @@ export default function CheckoutPage() {
   }
 
   return (
-    <div className="min-h-screen bg-neutral-50 py-6 sm:py-12">
-      <div className="container-custom">
-        <h1 className="text-2xl sm:text-3xl font-bold text-neutral-900 mb-6 sm:mb-8 px-2 sm:px-0">Checkout</h1>
+    <div className="min-h-screen bg-gradient-to-br from-neutral-50 via-primary-50/30 to-neutral-50 py-6 sm:py-12">
+      <div className="container-custom max-w-7xl">
+        {/* Header with Progress Indicator */}
+        <div className="mb-8">
+          <h1 className="text-3xl sm:text-4xl font-extrabold text-neutral-900 mb-3 px-2 sm:px-0">
+            Checkout
+          </h1>
+          <div className="flex items-center gap-2 px-2 sm:px-0">
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 rounded-full bg-primary-600 text-white flex items-center justify-center text-sm font-bold">1</div>
+              <span className="text-sm font-medium text-neutral-700">Information</span>
+            </div>
+            <div className="h-0.5 w-12 bg-neutral-300"></div>
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 rounded-full bg-neutral-300 text-neutral-600 flex items-center justify-center text-sm font-bold">2</div>
+              <span className="text-sm font-medium text-neutral-500">Payment</span>
+            </div>
+            <div className="h-0.5 w-12 bg-neutral-300"></div>
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 rounded-full bg-neutral-300 text-neutral-600 flex items-center justify-center text-sm font-bold">3</div>
+              <span className="text-sm font-medium text-neutral-500">Complete</span>
+            </div>
+          </div>
+        </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
           {/* Checkout Form */}
           <div className="lg:col-span-2">
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-5">
               {/* Contact Information */}
-              <div className="card p-4 sm:p-6">
-                <h2 className="text-lg sm:text-xl font-bold text-neutral-900 mb-4 flex items-center">
-                  <User className="h-5 w-5 mr-2 text-primary-600" />
-                  Contact Information
-                </h2>
+              <div className="bg-white rounded-2xl shadow-lg border border-neutral-200/50 p-5 sm:p-7 hover:shadow-xl transition-shadow">
+                <div className="flex items-center gap-3 mb-5">
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center">
+                    <User className="h-5 w-5 text-white" />
+                  </div>
+                  <h2 className="text-xl sm:text-2xl font-bold text-neutral-900">
+                    Contact Information
+                  </h2>
+                </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-neutral-700 mb-2">
-                      Full Name *
+                    <label className="block text-sm font-semibold text-neutral-700 mb-2">
+                      Full Name <span className="text-red-500">*</span>
                     </label>
-                    <input
-                      type="text"
-                      name="fullName"
-                      value={formData.fullName}
-                      onChange={handleInputChange}
-                      className="input-field"
-                      required
-                    />
+                    <div className="relative">
+                      <input
+                        type="text"
+                        name="fullName"
+                        value={formData.fullName}
+                        onChange={handleInputChange}
+                        className="input-field pl-10 focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                        placeholder="John Doe"
+                        required
+                      />
+                      <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-neutral-400" />
+                    </div>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-neutral-700 mb-2">
-                      Email *
+                    <label className="block text-sm font-semibold text-neutral-700 mb-2">
+                      Email <span className="text-red-500">*</span>
                     </label>
-                    <input
-                      type="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      className="input-field"
-                      required
-                    />
+                    <div className="relative">
+                      <input
+                        type="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        className="input-field pl-10 focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                        placeholder="john@example.com"
+                        required
+                      />
+                      <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-neutral-400" />
+                    </div>
                   </div>
                   <div className="md:col-span-2">
-                    <label className="block text-sm font-medium text-neutral-700 mb-2">
-                      Phone Number *
+                    <label className="block text-sm font-semibold text-neutral-700 mb-2">
+                      Phone Number <span className="text-red-500">*</span>
                     </label>
-                    <input
-                      type="tel"
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleInputChange}
-                      className="input-field"
-                      required
-                    />
+                    <div className="relative">
+                      <input
+                        type="tel"
+                        name="phone"
+                        value={formData.phone}
+                        onChange={handleInputChange}
+                        className="input-field pl-10 focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                        placeholder="9876543210"
+                        required
+                      />
+                      <Phone className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-neutral-400" />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -217,61 +254,69 @@ export default function CheckoutPage() {
 
 
               {/* Shipping Address */}
-              <div className="card p-4 sm:p-6">
-                <h2 className="text-lg sm:text-xl font-bold text-neutral-900 mb-4 flex items-center">
-                  <MapPin className="h-5 w-5 mr-2 text-primary-600" />
-                  Shipping Address
-                </h2>
+              <div className="bg-white rounded-2xl shadow-lg border border-neutral-200/50 p-5 sm:p-7 hover:shadow-xl transition-shadow">
+                <div className="flex items-center gap-3 mb-5">
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-accent-500 to-accent-600 flex items-center justify-center">
+                    <MapPin className="h-5 w-5 text-white" />
+                  </div>
+                  <h2 className="text-xl sm:text-2xl font-bold text-neutral-900">
+                    Shipping Address
+                  </h2>
+                </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="md:col-span-2">
-                    <label className="block text-sm font-medium text-neutral-700 mb-2">
-                      Address *
+                    <label className="block text-sm font-semibold text-neutral-700 mb-2">
+                      Address <span className="text-red-500">*</span>
                     </label>
                     <textarea
                       name="address"
                       value={formData.address}
                       onChange={handleInputChange}
                       rows="3"
-                      className="input-field"
+                      className="input-field focus:ring-2 focus:ring-accent-500 focus:border-accent-500"
+                      placeholder="House/Flat No., Street, Area"
                       required
                     ></textarea>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-neutral-700 mb-2">
-                      City *
+                    <label className="block text-sm font-semibold text-neutral-700 mb-2">
+                      City <span className="text-red-500">*</span>
                     </label>
                     <input
                       type="text"
                       name="city"
                       value={formData.city}
                       onChange={handleInputChange}
-                      className="input-field"
+                      className="input-field focus:ring-2 focus:ring-accent-500 focus:border-accent-500"
+                      placeholder="Kochi"
                       required
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-neutral-700 mb-2">
-                      State *
+                    <label className="block text-sm font-semibold text-neutral-700 mb-2">
+                      State <span className="text-red-500">*</span>
                     </label>
                     <input
                       type="text"
                       name="state"
                       value={formData.state}
                       onChange={handleInputChange}
-                      className="input-field"
+                      className="input-field focus:ring-2 focus:ring-accent-500 focus:border-accent-500"
+                      placeholder="Kerala"
                       required
                     />
                   </div>
-                  <div>
-                    <label className="block text-sm font-medium text-neutral-700 mb-2">
-                      Pincode *
+                  <div className="md:col-span-2">
+                    <label className="block text-sm font-semibold text-neutral-700 mb-2">
+                      Pincode <span className="text-red-500">*</span>
                     </label>
                     <input
                       type="text"
                       name="pincode"
                       value={formData.pincode}
                       onChange={handleInputChange}
-                      className="input-field"
+                      className="input-field focus:ring-2 focus:ring-accent-500 focus:border-accent-500"
+                      placeholder="682001"
                       required
                     />
                   </div>
@@ -279,47 +324,61 @@ export default function CheckoutPage() {
               </div>
 
               {/* Delivery Method */}
-              <div className="card p-6">
-                <h2 className="text-xl font-bold text-neutral-900 mb-4 flex items-center">
-                  <Truck className="h-5 w-5 mr-2 text-primary-600" />
-                  Delivery Method
-                </h2>
+              <div className="bg-white rounded-2xl shadow-lg border border-neutral-200/50 p-5 sm:p-7 hover:shadow-xl transition-shadow">
+                <div className="flex items-center gap-3 mb-5">
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-secondary-500 to-secondary-600 flex items-center justify-center">
+                    <Truck className="h-5 w-5 text-white" />
+                  </div>
+                  <h2 className="text-xl sm:text-2xl font-bold text-neutral-900">
+                    Delivery Method
+                  </h2>
+                </div>
                 <div className="space-y-3">
-                  <label className="flex items-start p-4 border-2 border-primary-500 bg-primary-50 rounded-xl cursor-pointer hover:shadow-md transition-all">
+                  <label className={`flex items-start p-5 border-2 rounded-xl cursor-pointer transition-all ${
+                    formData.deliveryMethod === 'DIRECT_DELIVERY'
+                      ? 'border-primary-500 bg-primary-50 shadow-md'
+                      : 'border-neutral-200 hover:border-primary-300 hover:shadow-md'
+                  }`}>
                     <input
                       type="radio"
                       name="deliveryMethod"
                       value="DIRECT_DELIVERY"
                       checked={formData.deliveryMethod === 'DIRECT_DELIVERY'}
                       onChange={handleInputChange}
-                      className="mr-3 mt-1"
+                      className="mr-4 mt-1 w-5 h-5 text-primary-600"
                     />
-                    <div>
-                      <div className="font-semibold text-neutral-900 flex items-center">
-                        <Package className="h-4 w-4 mr-2 text-primary-600" />
+                    <div className="flex-1">
+                      <div className="font-bold text-neutral-900 flex items-center gap-2 mb-1">
+                        <Package className="h-5 w-5 text-primary-600" />
                         Direct Delivery
+                        <span className="ml-auto text-xs bg-primary-100 text-primary-700 px-2 py-1 rounded-full font-semibold">Recommended</span>
                       </div>
-                      <p className="text-sm text-neutral-600 mt-1">
-                        Our team will deliver directly to your address
+                      <p className="text-sm text-neutral-600">
+                        Our team will deliver directly to your address (Kochi, Ernakulam, Alappuzha)
                       </p>
                     </div>
                   </label>
-                  <label className="flex items-start p-4 border-2 border-neutral-200 rounded-xl cursor-pointer hover:border-primary-500 hover:shadow-md transition-all">
+                  <label className={`flex items-start p-5 border-2 rounded-xl cursor-pointer transition-all ${
+                    formData.deliveryMethod === 'COURIER_DELIVERY'
+                      ? 'border-accent-500 bg-accent-50 shadow-md'
+                      : 'border-neutral-200 hover:border-accent-300 hover:shadow-md'
+                  }`}>
                     <input
                       type="radio"
                       name="deliveryMethod"
                       value="COURIER_DELIVERY"
                       checked={formData.deliveryMethod === 'COURIER_DELIVERY'}
                       onChange={handleInputChange}
-                      className="mr-3 mt-1"
+                      className="mr-4 mt-1 w-5 h-5 text-accent-600"
                     />
-                    <div>
-                      <div className="font-semibold text-neutral-900 flex items-center">
-                        <Truck className="h-4 w-4 mr-2 text-accent-600" />
+                    <div className="flex-1">
+                      <div className="font-bold text-neutral-900 flex items-center gap-2 mb-1">
+                        <Truck className="h-5 w-5 text-accent-600" />
                         Courier Delivery
+                        <span className="ml-auto text-xs bg-accent-100 text-accent-700 px-2 py-1 rounded-full font-semibold">All India</span>
                       </div>
-                      <p className="text-sm text-neutral-600 mt-1">
-                        Delivery via courier service (may take 3-5 business days)
+                      <p className="text-sm text-neutral-600">
+                        Delivery via courier service (3-5 business days)
                       </p>
                     </div>
                   </label>
@@ -327,67 +386,86 @@ export default function CheckoutPage() {
               </div>
 
               {/* Special Instructions */}
-              <div className="card p-6">
-                <h2 className="text-xl font-bold text-neutral-900 mb-4">
-                  Special Instructions (Optional)
+              <div className="bg-white rounded-2xl shadow-lg border border-neutral-200/50 p-5 sm:p-7 hover:shadow-xl transition-shadow">
+                <h2 className="text-xl sm:text-2xl font-bold text-neutral-900 mb-4">
+                  Special Instructions <span className="text-sm font-normal text-neutral-500">(Optional)</span>
                 </h2>
                 <textarea
                   name="specialInstructions"
                   value={formData.specialInstructions}
                   onChange={handleInputChange}
                   rows="4"
-                  className="input-field"
-                  placeholder="Any special requests or delivery instructions..."
+                  className="input-field focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                  placeholder="Any special requests or delivery instructions... (e.g., 'Please deliver after 6 PM')"
                 ></textarea>
               </div>
 
               {/* Payment Method */}
-              <div className="card p-6">
-                <h2 className="text-xl font-bold text-neutral-900 mb-4 flex items-center">
-                  <CreditCard className="h-5 w-5 mr-2 text-primary-600" />
-                  Payment Method
-                </h2>
+              <div className="bg-white rounded-2xl shadow-lg border border-neutral-200/50 p-5 sm:p-7 hover:shadow-xl transition-shadow">
+                <div className="flex items-center gap-3 mb-5">
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center">
+                    <CreditCard className="h-5 w-5 text-white" />
+                  </div>
+                  <h2 className="text-xl sm:text-2xl font-bold text-neutral-900">
+                    Payment Method
+                  </h2>
+                </div>
                 <div className="space-y-3">
-                  <label className="flex items-center p-4 border-2 border-neutral-200 rounded-xl cursor-pointer hover:border-primary-500 transition-colors">
+                  <label className={`flex items-center p-5 border-2 rounded-xl cursor-pointer transition-all ${
+                    formData.paymentMethod === 'cod'
+                      ? 'border-green-500 bg-green-50 shadow-md'
+                      : 'border-neutral-200 hover:border-green-300 hover:shadow-md'
+                  }`}>
                     <input
                       type="radio"
                       name="paymentMethod"
                       value="cod"
                       checked={formData.paymentMethod === 'cod'}
                       onChange={handleInputChange}
-                      className="mr-3"
+                      className="mr-4 w-5 h-5 text-green-600"
                     />
-                    <span className="font-medium">Cash on Delivery</span>
+                    <div className="flex-1">
+                      <div className="font-bold text-neutral-900">Cash on Delivery</div>
+                      <p className="text-sm text-neutral-600 mt-1">Pay when you receive your order</p>
+                    </div>
                   </label>
-                  <label className="flex items-center p-4 border-2 border-neutral-200 rounded-xl cursor-pointer hover:border-primary-500 transition-colors">
+                  <label className="flex items-center p-5 border-2 border-neutral-200 rounded-xl cursor-not-allowed opacity-60">
                     <input
                       type="radio"
                       name="paymentMethod"
                       value="online"
-                      checked={formData.paymentMethod === 'online'}
-                      onChange={handleInputChange}
-                      className="mr-3"
+                      disabled
+                      className="mr-4 w-5 h-5"
                     />
-                    <span className="font-medium">Online Payment (Coming Soon)</span>
+                    <div className="flex-1">
+                      <div className="font-bold text-neutral-900 flex items-center gap-2">
+                        Online Payment
+                        <span className="text-xs bg-neutral-200 text-neutral-600 px-2 py-1 rounded-full font-semibold">Coming Soon</span>
+                      </div>
+                      <p className="text-sm text-neutral-600 mt-1">UPI, Cards, Net Banking</p>
+                    </div>
                   </label>
                 </div>
               </div>
 
               <button
                 type="submit"
-                className="btn-primary w-full text-lg py-4 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white font-bold text-lg py-5 rounded-xl shadow-xl hover:shadow-2xl active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
                 disabled={isSubmitting}
               >
                 {isSubmitting ? (
-                  <span className="flex items-center justify-center">
-                    <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <span className="flex items-center justify-center gap-3">
+                    <svg className="animate-spin h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                       <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                       <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                     </svg>
                     Processing Order...
                   </span>
                 ) : (
-                  'Place Order'
+                  <span className="flex items-center justify-center gap-2">
+                    <ShoppingBag className="h-6 w-6" />
+                    Place Order - ₹{getCartTotal().toFixed(2)}
+                  </span>
                 )}
               </button>
             </form>
@@ -395,23 +473,30 @@ export default function CheckoutPage() {
 
           {/* Order Summary */}
           <div className="lg:col-span-1">
-            <div className="card p-6 sticky top-24">
-              <h2 className="text-xl font-bold text-neutral-900 mb-4">Order Summary</h2>
+            <div className="bg-white rounded-2xl shadow-xl border border-neutral-200/50 p-6 sticky top-24">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center">
+                  <ShoppingBag className="h-5 w-5 text-white" />
+                </div>
+                <h2 className="text-xl sm:text-2xl font-bold text-neutral-900">Order Summary</h2>
+              </div>
 
-              <div className="space-y-4 mb-6">
+              <div className="space-y-4 mb-6 max-h-[400px] overflow-y-auto pr-2">
                 {cartItems.map((item, index) => (
-                  <div key={`${item.id}-${index}`} className="flex gap-3">
-                    <div className="w-16 h-16 bg-neutral-100 rounded-lg flex-shrink-0">
+                  <div key={`${item.id}-${index}`} className="flex gap-3 p-3 bg-neutral-50 rounded-xl hover:bg-neutral-100 transition-colors">
+                    <div className="w-16 h-16 bg-white rounded-lg flex-shrink-0 shadow-sm overflow-hidden">
                       {item.imageUrl ? (
-                        <img src={item.imageUrl} alt={item.name} className="w-full h-full object-cover rounded-lg" />
+                        <img src={item.imageUrl} alt={item.name} className="w-full h-full object-cover" />
                       ) : (
-                        <ShoppingBag className="h-8 w-8 text-neutral-300 m-auto mt-4" />
+                        <div className="w-full h-full flex items-center justify-center">
+                          <Package className="h-8 w-8 text-neutral-300" />
+                        </div>
                       )}
                     </div>
-                    <div className="flex-1">
-                      <h3 className="font-semibold text-sm text-neutral-900">{item.name}</h3>
-                      <p className="text-xs text-neutral-600">Qty: {item.quantity}</p>
-                      <p className="text-sm font-semibold text-primary-600">
+                    <div className="flex-1 min-w-0">
+                      <h3 className="font-bold text-sm text-neutral-900 truncate">{item.name}</h3>
+                      <p className="text-xs text-neutral-600 mt-1">Quantity: {item.quantity}</p>
+                      <p className="text-sm font-bold text-primary-600 mt-1">
                         ₹{(parseFloat(item.price) * item.quantity).toFixed(2)}
                       </p>
                     </div>
@@ -419,18 +504,41 @@ export default function CheckoutPage() {
                 ))}
               </div>
 
-              <div className="border-t border-neutral-200 pt-4 space-y-2">
-                <div className="flex justify-between text-neutral-700">
+              <div className="border-t-2 border-neutral-200 pt-4 space-y-3">
+                <div className="flex justify-between text-neutral-700 text-sm">
                   <span>Subtotal</span>
-                  <span>₹{getCartTotal().toFixed(2)}</span>
+                  <span className="font-semibold">₹{getCartTotal().toFixed(2)}</span>
                 </div>
-                <div className="flex justify-between text-neutral-700">
+                <div className="flex justify-between text-neutral-700 text-sm">
                   <span>Shipping</span>
-                  <span className="text-accent-600 font-semibold">FREE</span>
+                  <span className="text-green-600 font-bold">FREE</span>
                 </div>
-                <div className="flex justify-between text-xl font-bold text-neutral-900 pt-2 border-t border-neutral-200">
+                <div className="flex justify-between items-center text-sm text-neutral-600 bg-green-50 border border-green-200 rounded-lg p-3">
+                  <span className="flex items-center gap-2">
+                    <CheckCircle className="h-4 w-4 text-green-600" />
+                    Discount
+                  </span>
+                  <span className="font-semibold text-green-600">₹0</span>
+                </div>
+                <div className="flex justify-between items-center text-2xl font-extrabold text-neutral-900 pt-3 border-t-2 border-neutral-300">
                   <span>Total</span>
                   <span className="text-primary-600">₹{getCartTotal().toFixed(2)}</span>
+                </div>
+              </div>
+
+              {/* Trust Badges */}
+              <div className="mt-6 pt-6 border-t border-neutral-200 space-y-3">
+                <div className="flex items-center gap-3 text-sm text-neutral-600">
+                  <CheckCircle className="h-5 w-5 text-green-600 flex-shrink-0" />
+                  <span>Secure checkout</span>
+                </div>
+                <div className="flex items-center gap-3 text-sm text-neutral-600">
+                  <Truck className="h-5 w-5 text-blue-600 flex-shrink-0" />
+                  <span>Free delivery on all orders</span>
+                </div>
+                <div className="flex items-center gap-3 text-sm text-neutral-600">
+                  <Package className="h-5 w-5 text-purple-600 flex-shrink-0" />
+                  <span>Quality guaranteed</span>
                 </div>
               </div>
             </div>
