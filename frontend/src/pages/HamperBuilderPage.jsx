@@ -1077,6 +1077,8 @@ export default function HamperBuilderPage() {
 
   const handleCheckout = () => {
     toast.success('Proceeding to checkout...');
+    // Scroll to top before navigation
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     setTimeout(() => navigate('/checkout'), 1000);
   };
 

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useCart } from '../context/CartContext';
 import { useNavigate } from 'react-router-dom';
 import { ShoppingBag, CreditCard, MapPin, User, Mail, Phone, CheckCircle, Truck, Package } from 'lucide-react';
@@ -24,6 +24,11 @@ export default function CheckoutPage() {
     specialInstructions: '',
     paymentMethod: 'cod',
   });
+
+  // Scroll to top when component mounts (mobile UX improvement)
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, []);
 
   const handleInputChange = (e) => {
     setFormData({

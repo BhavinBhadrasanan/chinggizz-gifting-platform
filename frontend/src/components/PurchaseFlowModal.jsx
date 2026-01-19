@@ -8,12 +8,21 @@ export default function PurchaseFlowModal({ isOpen, onClose }) {
 
   const handleDirectPurchase = () => {
     onClose();
-    navigate('/checkout');
+    // Scroll to top before navigation for smooth transition
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Navigate after a brief delay to allow scroll animation
+    setTimeout(() => {
+      navigate('/checkout');
+    }, 100);
   };
 
   const handleHamperArrangement = () => {
     onClose();
-    navigate('/hamper-builder');
+    // Scroll to top before navigation
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setTimeout(() => {
+      navigate('/hamper-builder');
+    }, 100);
   };
 
   return (
