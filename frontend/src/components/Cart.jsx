@@ -3,7 +3,7 @@ import { useCart } from '../context/CartContext';
 import { useNavigate } from 'react-router-dom';
 
 export default function Cart() {
-  const { cartItems, removeFromCart, updateQuantity, getCartTotal, getCartCount, isCartOpen, setIsCartOpen } = useCart();
+  const { cartItems, hampers, removeFromCart, removeHamperFromCart, updateQuantity, getCartTotal, getCartCount, isCartOpen, setIsCartOpen } = useCart();
   const navigate = useNavigate();
 
   if (!isCartOpen) return null;
@@ -41,7 +41,7 @@ export default function Cart() {
 
         {/* Cart Items - Mobile Optimized */}
         <div className="flex-1 overflow-y-auto p-4 sm:p-6 overscroll-contain">
-          {cartItems.length === 0 ? (
+          {cartItems.length === 0 && hampers.length === 0 ? (
             <div className="text-center py-12 sm:py-16">
               <div className="bg-neutral-100 w-24 h-24 sm:w-32 sm:h-32 rounded-full flex items-center justify-center mx-auto mb-4">
                 <ShoppingBag className="h-12 w-12 sm:h-16 sm:w-16 text-neutral-300" />
@@ -57,6 +57,7 @@ export default function Cart() {
             </div>
           ) : (
             <div className="space-y-4">
+              {/* Regular Cart Items */}
               {cartItems.map((item, index) => (
                 <div key={`${item.id}-${index}`} className="card p-4">
                   <div className="flex gap-4">
@@ -149,12 +150,75 @@ export default function Cart() {
                   </div>
                 </div>
               ))}
+
+              {/* Custom Hampers */}
+              {hampers.map((hamper, index) => (
+                <div key={`hamper-${hamper.id}`} className="card p-4 bg-gradient-to-br from-purple-50 to-pink-50 border-2 border-purple-200">
+                  <div className="flex gap-4">
+                    {/* Hamper Screenshot */}
+                    <div className="w-20 h-20 bg-white rounded-lg flex items-center justify-center flex-shrink-0 border-2 border-purple-300">
+                      {hamper.screenshot ? (
+                        <img
+                          src={hamper.screenshot}
+                          alt={hamper.hamperName}
+                          className="w-full h-full object-cover rounded-lg"
+                        />
+                      ) : (
+                        <Sparkles className="h-8 w-8 text-purple-400" />
+                      )}
+                    </div>
+
+                    {/* Hamper Details */}
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 mb-1">
+                        <Sparkles className="h-4 w-4 text-purple-600" />
+                        <h3 className="font-bold text-neutral-900 truncate">
+                          {hamper.hamperName}
+                        </h3>
+                      </div>
+                      <p className="text-xs text-neutral-600 mb-1">
+                        {hamper.boxDetails?.dimensions} • {hamper.totalItems} items
+                      </p>
+                      <p className="text-sm font-semibold text-purple-600 mb-2">
+                        ₹{hamper.grandTotal}
+                      </p>
+
+                      {/* Hamper Items Preview */}
+                      <div className="text-xs text-neutral-500 bg-white/50 p-2 rounded mb-2">
+                        <p className="font-medium mb-1">Items:</p>
+                        <div className="space-y-0.5 max-h-16 overflow-y-auto">
+                          {hamper.items?.slice(0, 3).map((item, idx) => (
+                            <p key={idx} className="text-neutral-700 truncate">
+                              • {item.productName}
+                            </p>
+                          ))}
+                          {hamper.items?.length > 3 && (
+                            <p className="text-neutral-500 italic">
+                              +{hamper.items.length - 3} more items
+                            </p>
+                          )}
+                        </div>
+                      </div>
+
+                      {/* Remove Button */}
+                      <div className="flex justify-end">
+                        <button
+                          onClick={() => removeHamperFromCart(hamper.id)}
+                          className="p-2 hover:bg-red-50 rounded-lg transition-colors group"
+                        >
+                          <Trash2 className="h-4 w-4 text-neutral-400 group-hover:text-red-600" />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
           )}
         </div>
 
         {/* Footer - Mobile Safe Area for Bottom Nav */}
-        {cartItems.length > 0 && (
+        {(cartItems.length > 0 || hampers.length > 0) && (
           <div className="border-t border-neutral-200 p-4 sm:p-6 pb-20 lg:pb-4 bg-neutral-50 space-y-2 sm:space-y-3">
             <div className="flex items-center justify-between mb-3 sm:mb-4">
               <span className="text-base sm:text-lg font-semibold text-neutral-900">Total:</span>
