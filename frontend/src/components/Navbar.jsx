@@ -5,10 +5,27 @@ import { useCart } from '../context/CartContext';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [bannerIndex, setBannerIndex] = useState(0);
   const location = useLocation();
   const { getCartCount, setIsCartOpen } = useCart();
 
   const isActive = (path) => location.pathname === path;
+
+  // Warm, touching banner messages - rotating every 4 seconds
+  const bannerMessages = [
+    { icon: '💝', text: 'Crafted with Care, Delivered with Love' },
+    { icon: '🎁', text: 'Customize Your Perfect Hamper with Chinggizz' },
+    { icon: '✨', text: 'We\'re Here to Help You Create the Best Hampers' },
+    { icon: '❤️', text: 'Every Gift Tells a Story - Let Us Help You Tell Yours' },
+  ];
+
+  // Rotate banner messages
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setBannerIndex((prev) => (prev + 1) % bannerMessages.length);
+    }, 4000); // Change every 4 seconds
+    return () => clearInterval(interval);
+  }, []);
 
   // Close mobile menu when route changes
   useEffect(() => {
@@ -44,13 +61,30 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Top Banner */}
-      <div className="bg-gradient-to-r from-primary-600 via-primary-500 to-secondary-500 text-white py-2">
-        <div className="container-custom">
-          <div className="flex items-center justify-center space-x-2 text-xs sm:text-sm font-medium">
-            <Gift className="h-3 w-3 sm:h-4 sm:w-4 animate-pulse" />
-            <span className="text-center">Free Delivery on Orders Above ₹999 | Customization Available</span>
-            <Gift className="h-3 w-3 sm:h-4 sm:w-4 animate-pulse hidden sm:block" />
+      {/* Top Banner - Warm & Touching Messages */}
+      <div className="bg-gradient-to-r from-orange-500 via-pink-500 to-purple-500 text-white py-2.5 overflow-hidden relative">
+        {/* Animated background shimmer */}
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-shimmer"></div>
+
+        <div className="container-custom relative z-10">
+          <div className="flex items-center justify-center space-x-2 sm:space-x-3">
+            {/* Animated icon */}
+            <span className="text-base sm:text-lg animate-bounce" role="img" aria-label="gift">
+              {bannerMessages[bannerIndex].icon}
+            </span>
+
+            {/* Rotating message with fade animation */}
+            <span
+              key={bannerIndex}
+              className="text-xs sm:text-sm md:text-base font-semibold text-center tracking-wide animate-fade-in"
+            >
+              {bannerMessages[bannerIndex].text}
+            </span>
+
+            {/* Second animated icon - hidden on very small screens */}
+            <span className="hidden sm:block text-base sm:text-lg animate-bounce" role="img" aria-label="gift" style={{ animationDelay: '0.2s' }}>
+              {bannerMessages[bannerIndex].icon}
+            </span>
           </div>
         </div>
       </div>
