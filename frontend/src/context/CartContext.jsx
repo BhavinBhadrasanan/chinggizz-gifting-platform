@@ -42,11 +42,13 @@ export const CartProvider = ({ children }) => {
         // Update quantity if item already exists
         const updatedItems = [...prevItems];
         updatedItems[existingItemIndex].quantity += quantity;
-        toast.success(`Updated ${product.name} quantity in cart`);
+        // Mobile-friendly: Short and clear notification
+        toast.success(`✓ Updated quantity`, { duration: 2000, icon: '🛒' });
         return updatedItems;
       } else {
         // Add new item
-        toast.success(`Added ${product.name} to cart`);
+        // Mobile-friendly: Short and clear notification
+        toast.success(`✓ Added to cart`, { duration: 2000, icon: '🛒' });
         return [
           ...prevItems,
           {
@@ -74,7 +76,8 @@ export const CartProvider = ({ children }) => {
       const filtered = prevItems.filter(
         (item) => !(item.id === productId && JSON.stringify(item.customization) === JSON.stringify(customization))
       );
-      toast.success('Item removed from cart');
+      // Mobile-friendly: Short and clear notification
+      toast.success('✓ Removed', { duration: 1500, icon: '🗑️' });
       return filtered;
     });
   };
@@ -96,7 +99,8 @@ export const CartProvider = ({ children }) => {
 
   const clearCart = () => {
     setCartItems([]);
-    toast.success('Cart cleared');
+    // Mobile-friendly: Short and clear notification
+    toast.success('✓ Cart cleared', { duration: 2000, icon: '🛒' });
   };
 
   const getCartTotal = () => {

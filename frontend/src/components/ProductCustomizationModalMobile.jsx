@@ -155,10 +155,8 @@ export default function ProductCustomizationModalMobile({ product, isOpen, onClo
     };
 
     addToCart(product, quantity, customizationData);
-
-    if (hasPhotoUpload && Object.keys(uploadedImages).length === 0) {
-      toast.success('Added to cart! You can upload photos later if needed.');
-    }
+    // Note: Toast notification is handled by CartContext for consistency
+    // No need for duplicate notification here
 
     onClose();
   };
