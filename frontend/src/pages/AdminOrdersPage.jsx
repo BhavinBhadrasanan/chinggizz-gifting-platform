@@ -28,13 +28,6 @@ export default function AdminOrdersPage() {
     try {
       setLoading(true);
       const response = await api.get('/orders');
-      console.log('📦 Orders received from backend:', response.data);
-      // Debug: Log first order details
-      if (response.data && response.data.length > 0) {
-        console.log('🔍 First order details:', response.data[0]);
-        console.log('📋 Order items:', response.data[0].orderItems);
-        console.log('🎁 Order hampers:', response.data[0].orderHampers);
-      }
       setOrders(response.data);
     } catch (error) {
       console.error('Failed to fetch orders:', error);
@@ -265,14 +258,9 @@ export default function AdminOrdersPage() {
                 {/* Expanded Order Details - Mobile Optimized */}
                 {expandedOrder === order.id && (
                   <div className="p-4 sm:p-6 bg-gradient-to-br from-gray-50 to-gray-100">
-                    {/* DEBUG INFO */}
-                    {console.log('🔍 Expanded order:', order)}
-                    {console.log('📋 Order items count:', order.orderItems?.length || 0)}
-                    {console.log('🎁 Hampers count:', order.orderHampers?.length || 0)}
-
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
                       {/* Order Items - Mobile Friendly */}
-                      {order.orderItems && order.orderItems.length > 0 ? (
+                      {order.orderItems && order.orderItems.length > 0 && (
                         <div className="bg-white rounded-2xl p-4 shadow-md border border-gray-200">
                           <h4 className="font-bold text-gray-900 mb-3 flex items-center text-sm sm:text-base">
                             <div className="bg-primary-100 p-2 rounded-lg mr-2">
@@ -303,15 +291,6 @@ export default function AdminOrdersPage() {
                               </div>
                             ))}
                           </div>
-                        </div>
-                      ) : (
-                        <div className="bg-yellow-50 rounded-2xl p-4 border-2 border-yellow-300">
-                          <p className="text-yellow-800 font-medium">
-                            ⚠️ No order items found for this order
-                          </p>
-                          <p className="text-xs text-yellow-600 mt-2">
-                            Debug: orderItems = {JSON.stringify(order.orderItems)}
-                          </p>
                         </div>
                       )}
 
