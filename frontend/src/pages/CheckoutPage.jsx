@@ -214,9 +214,9 @@ export default function CheckoutPage() {
                     Contact Information
                   </h2>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                   <div>
-                    <label className="block text-sm font-semibold text-neutral-700 mb-2">
+                    <label className="block text-sm sm:text-base font-bold text-neutral-800 mb-2.5">
                       Full Name <span className="text-red-500">*</span>
                     </label>
                     <div className="relative">
@@ -225,14 +225,14 @@ export default function CheckoutPage() {
                         name="fullName"
                         value={formData.fullName}
                         onChange={handleInputChange}
-                        className="input-field pl-10 focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                        className="w-full px-4 py-3.5 pl-11 text-base border-2 border-neutral-300 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all duration-200 hover:border-neutral-400"
                         required
                       />
-                      <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-neutral-400" />
+                      <User className="absolute left-3.5 top-1/2 -translate-y-1/2 h-5 w-5 text-neutral-400" />
                     </div>
                   </div>
                   <div>
-                    <label className="block text-sm font-semibold text-neutral-700 mb-2">
+                    <label className="block text-sm sm:text-base font-bold text-neutral-800 mb-2.5">
                       Email <span className="text-red-500">*</span>
                     </label>
                     <div className="relative">
@@ -241,14 +241,14 @@ export default function CheckoutPage() {
                         name="email"
                         value={formData.email}
                         onChange={handleInputChange}
-                        className="input-field pl-10 focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                        className="w-full px-4 py-3.5 pl-11 text-base border-2 border-neutral-300 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all duration-200 hover:border-neutral-400"
                         required
                       />
-                      <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-neutral-400" />
+                      <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 h-5 w-5 text-neutral-400" />
                     </div>
                   </div>
                   <div className="md:col-span-2">
-                    <label className="block text-sm font-semibold text-neutral-700 mb-2">
+                    <label className="block text-sm sm:text-base font-bold text-neutral-800 mb-2.5">
                       Phone Number <span className="text-red-500">*</span>
                     </label>
                     <div className="relative">
@@ -257,10 +257,10 @@ export default function CheckoutPage() {
                         name="phone"
                         value={formData.phone}
                         onChange={handleInputChange}
-                        className="input-field pl-10 focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                        className="w-full px-4 py-3.5 pl-11 text-base border-2 border-neutral-300 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all duration-200 hover:border-neutral-400"
                         required
                       />
-                      <Phone className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-neutral-400" />
+                      <Phone className="absolute left-3.5 top-1/2 -translate-y-1/2 h-5 w-5 text-neutral-400" />
                     </div>
                   </div>
                 </div>
@@ -278,9 +278,9 @@ export default function CheckoutPage() {
                     Shipping Address
                   </h2>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                   <div className="md:col-span-2">
-                    <label className="block text-sm font-semibold text-neutral-700 mb-2">
+                    <label className="block text-sm sm:text-base font-bold text-neutral-800 mb-2.5">
                       Address <span className="text-red-500">*</span>
                     </label>
                     <textarea
@@ -288,13 +288,13 @@ export default function CheckoutPage() {
                       value={formData.address}
                       onChange={handleInputChange}
                       rows="3"
-                      className="input-field focus:ring-2 focus:ring-accent-500 focus:border-accent-500"
+                      className="w-full px-4 py-3.5 text-base border-2 border-neutral-300 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-accent-500 transition-all duration-200 hover:border-neutral-400 resize-none"
                       placeholder="House/Flat No., Street, Area"
                       required
                     ></textarea>
                   </div>
                   <div>
-                    <label className="block text-sm font-semibold text-neutral-700 mb-2">
+                    <label className="block text-sm sm:text-base font-bold text-neutral-800 mb-2.5">
                       City <span className="text-red-500">*</span>
                     </label>
                     <input
@@ -302,12 +302,12 @@ export default function CheckoutPage() {
                       name="city"
                       value={formData.city}
                       onChange={handleInputChange}
-                      className="input-field focus:ring-2 focus:ring-accent-500 focus:border-accent-500"
+                      className="w-full px-4 py-3.5 text-base border-2 border-neutral-300 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-accent-500 transition-all duration-200 hover:border-neutral-400"
                       required
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-semibold text-neutral-700 mb-2">
+                    <label className="block text-sm sm:text-base font-bold text-neutral-800 mb-2.5">
                       State <span className="text-red-500">*</span>
                     </label>
                     <input
@@ -315,12 +315,12 @@ export default function CheckoutPage() {
                       name="state"
                       value={formData.state}
                       onChange={handleInputChange}
-                      className="input-field focus:ring-2 focus:ring-accent-500 focus:border-accent-500"
+                      className="w-full px-4 py-3.5 text-base border-2 border-neutral-300 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-accent-500 transition-all duration-200 hover:border-neutral-400"
                       required
                     />
                   </div>
                   <div className="md:col-span-2">
-                    <label className="block text-sm font-semibold text-neutral-700 mb-2">
+                    <label className="block text-sm sm:text-base font-bold text-neutral-800 mb-2.5">
                       Pincode <span className="text-red-500">*</span>
                     </label>
                     <input
@@ -328,7 +328,7 @@ export default function CheckoutPage() {
                       name="pincode"
                       value={formData.pincode}
                       onChange={handleInputChange}
-                      className="input-field focus:ring-2 focus:ring-accent-500 focus:border-accent-500"
+                      className="w-full px-4 py-3.5 text-base border-2 border-neutral-300 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-accent-500 transition-all duration-200 hover:border-neutral-400"
                       required
                     />
                   </div>
@@ -417,7 +417,7 @@ export default function CheckoutPage() {
                   value={formData.specialInstructions}
                   onChange={handleInputChange}
                   rows="4"
-                  className="w-full px-4 py-3 border-2 border-neutral-200 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all resize-none text-sm sm:text-base"
+                  className="w-full px-4 py-3.5 text-base border-2 border-neutral-300 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-200 hover:border-neutral-400 resize-none"
                   placeholder="Any special requests or delivery instructions... (e.g., 'Please deliver after 6 PM')"
                 ></textarea>
               </div>
