@@ -467,23 +467,24 @@ export default function CheckoutPage() {
                 </div>
               </div>
 
+              {/* Submit Button - Desktop Only */}
               <button
                 type="submit"
-                className="w-full bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white font-bold text-base sm:text-lg py-4 sm:py-5 rounded-xl shadow-xl hover:shadow-2xl active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 sticky bottom-20 sm:static z-10"
+                className="hidden lg:block w-full bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white font-bold text-lg py-5 rounded-xl shadow-xl hover:shadow-2xl active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
                 disabled={isSubmitting}
               >
                 {isSubmitting ? (
-                  <span className="flex items-center justify-center gap-2 sm:gap-3">
-                    <svg className="animate-spin h-5 w-5 sm:h-6 sm:w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <span className="flex items-center justify-center gap-3">
+                    <svg className="animate-spin h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                       <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                       <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                     </svg>
-                    <span className="text-sm sm:text-base">Processing...</span>
+                    <span>Processing...</span>
                   </span>
                 ) : (
                   <span className="flex items-center justify-center gap-2">
-                    <ShoppingBag className="h-5 w-5 sm:h-6 sm:w-6" />
-                    <span className="text-sm sm:text-base">Place Order - ₹{getCartTotal().toFixed(2)}</span>
+                    <ShoppingBag className="h-6 w-6" />
+                    <span>Place Order - ₹{getCartTotal().toFixed(2)}</span>
                   </span>
                 )}
               </button>
@@ -492,30 +493,30 @@ export default function CheckoutPage() {
 
           {/* Order Summary */}
           <div className="lg:col-span-1">
-            <div className="bg-white rounded-xl sm:rounded-2xl shadow-xl border border-neutral-200/50 p-4 sm:p-6 lg:sticky lg:top-24">
-              <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
-                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center flex-shrink-0">
-                  <ShoppingBag className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
+            <div className="bg-white rounded-2xl shadow-2xl border-2 border-purple-100 p-5 sm:p-6 lg:sticky lg:top-24">
+              <div className="flex items-center gap-3 mb-5 sm:mb-6">
+                <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center flex-shrink-0 shadow-lg">
+                  <ShoppingBag className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
                 </div>
-                <h2 className="text-lg sm:text-2xl font-bold text-neutral-900">Order Summary</h2>
+                <h2 className="text-xl sm:text-2xl font-bold text-neutral-900">Order Summary</h2>
               </div>
 
-              <div className="space-y-3 sm:space-y-4 mb-4 sm:mb-6 max-h-[300px] sm:max-h-[400px] overflow-y-auto pr-1 sm:pr-2">
+              <div className="space-y-3 mb-5 sm:mb-6 max-h-[350px] sm:max-h-[400px] overflow-y-auto pr-2 custom-scrollbar">
                 {cartItems.map((item, index) => (
-                  <div key={`${item.id}-${index}`} className="flex gap-2 sm:gap-3 p-2 sm:p-3 bg-neutral-50 rounded-lg sm:rounded-xl hover:bg-neutral-100 transition-colors">
-                    <div className="w-14 h-14 sm:w-16 sm:h-16 bg-white rounded-lg flex-shrink-0 shadow-sm overflow-hidden">
+                  <div key={`${item.id}-${index}`} className="flex gap-3 p-3 bg-gradient-to-br from-purple-50 to-indigo-50 rounded-xl hover:shadow-md transition-all border border-purple-100">
+                    <div className="w-16 h-16 sm:w-18 sm:h-18 bg-white rounded-xl flex-shrink-0 shadow-md overflow-hidden border-2 border-white">
                       {item.imageUrl ? (
                         <img src={item.imageUrl} alt={item.name} className="w-full h-full object-cover" />
                       ) : (
-                        <div className="w-full h-full flex items-center justify-center">
-                          <Package className="h-6 w-6 sm:h-8 sm:w-8 text-neutral-300" />
+                        <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-neutral-100 to-neutral-200">
+                          <Package className="h-7 w-7 sm:h-8 sm:w-8 text-neutral-400" />
                         </div>
                       )}
                     </div>
                     <div className="flex-1 min-w-0">
-                      <h3 className="font-bold text-xs sm:text-sm text-neutral-900 truncate">{item.name}</h3>
-                      <p className="text-[10px] sm:text-xs text-neutral-600 mt-0.5 sm:mt-1">Qty: {item.quantity}</p>
-                      <p className="text-xs sm:text-sm font-bold text-primary-600 mt-0.5 sm:mt-1">
+                      <h3 className="font-bold text-sm sm:text-base text-neutral-900 truncate mb-1">{item.name}</h3>
+                      <p className="text-xs text-neutral-600 mb-2">Qty: {item.quantity}</p>
+                      <p className="text-sm sm:text-base font-bold text-primary-600">
                         ₹{(parseFloat(item.price) * item.quantity).toFixed(2)}
                       </p>
                     </div>
@@ -523,43 +524,70 @@ export default function CheckoutPage() {
                 ))}
               </div>
 
-              <div className="border-t-2 border-neutral-200 pt-4 space-y-3">
-                <div className="flex justify-between text-neutral-700 text-sm">
-                  <span>Subtotal</span>
+              <div className="border-t-2 border-purple-200 pt-5 space-y-3">
+                <div className="flex justify-between text-neutral-700 text-sm sm:text-base">
+                  <span className="font-medium">Subtotal</span>
                   <span className="font-semibold">₹{getCartTotal().toFixed(2)}</span>
                 </div>
-                <div className="flex justify-between text-neutral-700 text-sm">
-                  <span>Shipping</span>
+                <div className="flex justify-between text-neutral-700 text-sm sm:text-base">
+                  <span className="font-medium">Shipping</span>
                   <span className="text-green-600 font-bold">FREE</span>
                 </div>
-                <div className="flex justify-between items-center text-sm text-neutral-600 bg-green-50 border border-green-200 rounded-lg p-3">
-                  <span className="flex items-center gap-2">
-                    <CheckCircle className="h-4 w-4 text-green-600" />
+                <div className="flex justify-between items-center text-sm sm:text-base text-neutral-600 bg-gradient-to-r from-green-50 to-emerald-50 border-2 border-green-200 rounded-xl p-3">
+                  <span className="flex items-center gap-2 font-medium">
+                    <CheckCircle className="h-5 w-5 text-green-600" />
                     Discount
                   </span>
-                  <span className="font-semibold text-green-600">₹0</span>
+                  <span className="font-bold text-green-600">₹0</span>
                 </div>
-                <div className="flex justify-between items-center text-2xl font-extrabold text-neutral-900 pt-3 border-t-2 border-neutral-300">
+                <div className="flex justify-between items-center text-xl sm:text-2xl font-extrabold text-neutral-900 pt-4 border-t-2 border-purple-300 bg-gradient-to-r from-purple-50 to-indigo-50 rounded-xl p-4">
                   <span>Total</span>
                   <span className="text-primary-600">₹{getCartTotal().toFixed(2)}</span>
                 </div>
               </div>
 
               {/* Trust Badges */}
-              <div className="mt-4 sm:mt-6 pt-4 sm:pt-6 border-t border-neutral-200 space-y-2 sm:space-y-3">
-                <div className="flex items-center gap-2 sm:gap-3 text-xs sm:text-sm text-neutral-600">
-                  <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 text-green-600 flex-shrink-0" />
-                  <span>Secure checkout</span>
+              <div className="mt-5 sm:mt-6 pt-5 sm:pt-6 border-t-2 border-purple-200 space-y-3">
+                <div className="flex items-center gap-3 text-sm text-neutral-700">
+                  <CheckCircle className="h-5 w-5 text-green-600 flex-shrink-0" />
+                  <span className="font-medium">Secure checkout</span>
                 </div>
-                <div className="flex items-center gap-2 sm:gap-3 text-xs sm:text-sm text-neutral-600">
-                  <Truck className="h-4 w-4 sm:h-5 sm:w-5 text-blue-600 flex-shrink-0" />
-                  <span>Free delivery on all orders</span>
+                <div className="flex items-center gap-3 text-sm text-neutral-700">
+                  <Truck className="h-5 w-5 text-blue-600 flex-shrink-0" />
+                  <span className="font-medium">Free delivery on all orders</span>
                 </div>
-                <div className="flex items-center gap-2 sm:gap-3 text-xs sm:text-sm text-neutral-600">
-                  <Package className="h-4 w-4 sm:h-5 sm:w-5 text-purple-600 flex-shrink-0" />
-                  <span>Quality guaranteed</span>
+                <div className="flex items-center gap-3 text-sm text-neutral-700">
+                  <Package className="h-5 w-5 text-purple-600 flex-shrink-0" />
+                  <span className="font-medium">Quality guaranteed</span>
                 </div>
               </div>
+
+              {/* Mobile Place Order Button - After Order Summary */}
+              <button
+                type="submit"
+                onClick={(e) => {
+                  e.preventDefault();
+                  const form = document.querySelector('form');
+                  if (form) form.requestSubmit();
+                }}
+                className="lg:hidden w-full bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white font-bold text-base py-4 rounded-xl shadow-xl hover:shadow-2xl active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed mt-6"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? (
+                  <span className="flex items-center justify-center gap-2">
+                    <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    <span>Processing...</span>
+                  </span>
+                ) : (
+                  <span className="flex items-center justify-center gap-2">
+                    <ShoppingBag className="h-5 w-5" />
+                    <span>Place Order - ₹{getCartTotal().toFixed(2)}</span>
+                  </span>
+                )}
+              </button>
             </div>
           </div>
         </div>
