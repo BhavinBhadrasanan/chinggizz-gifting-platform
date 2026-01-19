@@ -157,42 +157,43 @@ export default function CheckoutPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-neutral-50 via-primary-50/30 to-neutral-50 py-6 sm:py-12">
-      <div className="container-custom max-w-7xl">
+    <div className="min-h-screen bg-gradient-to-br from-neutral-50 via-primary-50/30 to-neutral-50 py-4 sm:py-12 pb-24 sm:pb-12">
+      <div className="container-custom max-w-7xl px-3 sm:px-4">
         {/* Header with Progress Indicator */}
-        <div className="mb-8">
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-neutral-900 mb-3 px-2 sm:px-0">
+        <div className="mb-6 sm:mb-8">
+          <h1 className="text-2xl sm:text-4xl font-extrabold text-neutral-900 mb-4 sm:mb-3">
             Checkout
           </h1>
-          <div className="flex items-center gap-2 px-2 sm:px-0">
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-full bg-primary-600 text-white flex items-center justify-center text-sm font-bold">1</div>
-              <span className="text-sm font-medium text-neutral-700">Information</span>
+          {/* Mobile Progress - Compact */}
+          <div className="flex items-center justify-between sm:justify-start sm:gap-2 overflow-x-auto pb-2">
+            <div className="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
+              <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-primary-600 text-white flex items-center justify-center text-xs sm:text-sm font-bold shadow-lg">1</div>
+              <span className="text-xs sm:text-sm font-semibold text-neutral-700 whitespace-nowrap">Info</span>
             </div>
-            <div className="h-0.5 w-12 bg-neutral-300"></div>
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-full bg-neutral-300 text-neutral-600 flex items-center justify-center text-sm font-bold">2</div>
-              <span className="text-sm font-medium text-neutral-500">Payment</span>
+            <div className="h-0.5 w-8 sm:w-12 bg-neutral-300 mx-1 sm:mx-0"></div>
+            <div className="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
+              <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-neutral-300 text-neutral-600 flex items-center justify-center text-xs sm:text-sm font-bold">2</div>
+              <span className="text-xs sm:text-sm font-medium text-neutral-500 whitespace-nowrap">Payment</span>
             </div>
-            <div className="h-0.5 w-12 bg-neutral-300"></div>
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-full bg-neutral-300 text-neutral-600 flex items-center justify-center text-sm font-bold">3</div>
-              <span className="text-sm font-medium text-neutral-500">Complete</span>
+            <div className="h-0.5 w-8 sm:w-12 bg-neutral-300 mx-1 sm:mx-0"></div>
+            <div className="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
+              <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-neutral-300 text-neutral-600 flex items-center justify-center text-xs sm:text-sm font-bold">3</div>
+              <span className="text-xs sm:text-sm font-medium text-neutral-500 whitespace-nowrap">Done</span>
             </div>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-8">
           {/* Checkout Form */}
           <div className="lg:col-span-2">
-            <form onSubmit={handleSubmit} className="space-y-5">
+            <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
               {/* Contact Information */}
-              <div className="bg-white rounded-2xl shadow-lg border border-neutral-200/50 p-5 sm:p-7 hover:shadow-xl transition-shadow">
-                <div className="flex items-center gap-3 mb-5">
-                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center">
-                    <User className="h-5 w-5 text-white" />
+              <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg border border-neutral-200/50 p-4 sm:p-7 hover:shadow-xl transition-shadow">
+                <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-5">
+                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center flex-shrink-0">
+                    <User className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
                   </div>
-                  <h2 className="text-xl sm:text-2xl font-bold text-neutral-900">
+                  <h2 className="text-lg sm:text-2xl font-bold text-neutral-900">
                     Contact Information
                   </h2>
                 </div>
@@ -254,12 +255,12 @@ export default function CheckoutPage() {
 
 
               {/* Shipping Address */}
-              <div className="bg-white rounded-2xl shadow-lg border border-neutral-200/50 p-5 sm:p-7 hover:shadow-xl transition-shadow">
-                <div className="flex items-center gap-3 mb-5">
-                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-accent-500 to-accent-600 flex items-center justify-center">
-                    <MapPin className="h-5 w-5 text-white" />
+              <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg border border-neutral-200/50 p-4 sm:p-7 hover:shadow-xl transition-shadow">
+                <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-5">
+                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-gradient-to-br from-accent-500 to-accent-600 flex items-center justify-center flex-shrink-0">
+                    <MapPin className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
                   </div>
-                  <h2 className="text-xl sm:text-2xl font-bold text-neutral-900">
+                  <h2 className="text-lg sm:text-2xl font-bold text-neutral-900">
                     Shipping Address
                   </h2>
                 </div>
@@ -324,17 +325,17 @@ export default function CheckoutPage() {
               </div>
 
               {/* Delivery Method */}
-              <div className="bg-white rounded-2xl shadow-lg border border-neutral-200/50 p-5 sm:p-7 hover:shadow-xl transition-shadow">
-                <div className="flex items-center gap-3 mb-5">
-                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-secondary-500 to-secondary-600 flex items-center justify-center">
-                    <Truck className="h-5 w-5 text-white" />
+              <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg border border-neutral-200/50 p-4 sm:p-7 hover:shadow-xl transition-shadow">
+                <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-5">
+                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-gradient-to-br from-secondary-500 to-secondary-600 flex items-center justify-center flex-shrink-0">
+                    <Truck className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
                   </div>
-                  <h2 className="text-xl sm:text-2xl font-bold text-neutral-900">
+                  <h2 className="text-lg sm:text-2xl font-bold text-neutral-900">
                     Delivery Method
                   </h2>
                 </div>
                 <div className="space-y-3">
-                  <label className={`flex items-start p-5 border-2 rounded-xl cursor-pointer transition-all ${
+                  <label className={`flex items-start p-3 sm:p-5 border-2 rounded-lg sm:rounded-xl cursor-pointer transition-all ${
                     formData.deliveryMethod === 'DIRECT_DELIVERY'
                       ? 'border-primary-500 bg-primary-50 shadow-md'
                       : 'border-neutral-200 hover:border-primary-300 hover:shadow-md'
@@ -345,20 +346,20 @@ export default function CheckoutPage() {
                       value="DIRECT_DELIVERY"
                       checked={formData.deliveryMethod === 'DIRECT_DELIVERY'}
                       onChange={handleInputChange}
-                      className="mr-4 mt-1 w-5 h-5 text-primary-600"
+                      className="mr-3 sm:mr-4 mt-1 w-4 h-4 sm:w-5 sm:h-5 text-primary-600 flex-shrink-0"
                     />
-                    <div className="flex-1">
-                      <div className="font-bold text-neutral-900 flex items-center gap-2 mb-1">
-                        <Package className="h-5 w-5 text-primary-600" />
-                        Direct Delivery
-                        <span className="ml-auto text-xs bg-primary-100 text-primary-700 px-2 py-1 rounded-full font-semibold">Recommended</span>
+                    <div className="flex-1 min-w-0">
+                      <div className="font-bold text-sm sm:text-base text-neutral-900 flex items-center gap-2 mb-1 flex-wrap">
+                        <Package className="h-4 w-4 sm:h-5 sm:w-5 text-primary-600 flex-shrink-0" />
+                        <span>Direct Delivery</span>
+                        <span className="text-[10px] sm:text-xs bg-primary-100 text-primary-700 px-2 py-0.5 sm:py-1 rounded-full font-semibold">Recommended</span>
                       </div>
-                      <p className="text-sm text-neutral-600">
-                        Our team will deliver directly to your address (Kochi, Ernakulam, Alappuzha)
+                      <p className="text-xs sm:text-sm text-neutral-600">
+                        Our team will deliver directly (Kochi, Ernakulam, Alappuzha)
                       </p>
                     </div>
                   </label>
-                  <label className={`flex items-start p-5 border-2 rounded-xl cursor-pointer transition-all ${
+                  <label className={`flex items-start p-3 sm:p-5 border-2 rounded-lg sm:rounded-xl cursor-pointer transition-all ${
                     formData.deliveryMethod === 'COURIER_DELIVERY'
                       ? 'border-accent-500 bg-accent-50 shadow-md'
                       : 'border-neutral-200 hover:border-accent-300 hover:shadow-md'
@@ -369,16 +370,16 @@ export default function CheckoutPage() {
                       value="COURIER_DELIVERY"
                       checked={formData.deliveryMethod === 'COURIER_DELIVERY'}
                       onChange={handleInputChange}
-                      className="mr-4 mt-1 w-5 h-5 text-accent-600"
+                      className="mr-3 sm:mr-4 mt-1 w-4 h-4 sm:w-5 sm:h-5 text-accent-600 flex-shrink-0"
                     />
-                    <div className="flex-1">
-                      <div className="font-bold text-neutral-900 flex items-center gap-2 mb-1">
-                        <Truck className="h-5 w-5 text-accent-600" />
-                        Courier Delivery
-                        <span className="ml-auto text-xs bg-accent-100 text-accent-700 px-2 py-1 rounded-full font-semibold">All India</span>
+                    <div className="flex-1 min-w-0">
+                      <div className="font-bold text-sm sm:text-base text-neutral-900 flex items-center gap-2 mb-1 flex-wrap">
+                        <Truck className="h-4 w-4 sm:h-5 sm:w-5 text-accent-600 flex-shrink-0" />
+                        <span>Courier Delivery</span>
+                        <span className="text-[10px] sm:text-xs bg-accent-100 text-accent-700 px-2 py-0.5 sm:py-1 rounded-full font-semibold">All India</span>
                       </div>
-                      <p className="text-sm text-neutral-600">
-                        Delivery via courier service (3-5 business days)
+                      <p className="text-xs sm:text-sm text-neutral-600">
+                        Delivery via courier (3-5 business days)
                       </p>
                     </div>
                   </label>
@@ -386,9 +387,9 @@ export default function CheckoutPage() {
               </div>
 
               {/* Special Instructions */}
-              <div className="bg-white rounded-2xl shadow-lg border border-neutral-200/50 p-5 sm:p-7 hover:shadow-xl transition-shadow">
-                <h2 className="text-xl sm:text-2xl font-bold text-neutral-900 mb-4">
-                  Special Instructions <span className="text-sm font-normal text-neutral-500">(Optional)</span>
+              <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg border border-neutral-200/50 p-4 sm:p-7 hover:shadow-xl transition-shadow">
+                <h2 className="text-lg sm:text-2xl font-bold text-neutral-900 mb-3 sm:mb-4">
+                  Special Instructions <span className="text-xs sm:text-sm font-normal text-neutral-500">(Optional)</span>
                 </h2>
                 <textarea
                   name="specialInstructions"
@@ -401,12 +402,12 @@ export default function CheckoutPage() {
               </div>
 
               {/* Payment Method */}
-              <div className="bg-white rounded-2xl shadow-lg border border-neutral-200/50 p-5 sm:p-7 hover:shadow-xl transition-shadow">
-                <div className="flex items-center gap-3 mb-5">
-                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center">
-                    <CreditCard className="h-5 w-5 text-white" />
+              <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg border border-neutral-200/50 p-4 sm:p-7 hover:shadow-xl transition-shadow">
+                <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-5">
+                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center flex-shrink-0">
+                    <CreditCard className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
                   </div>
-                  <h2 className="text-xl sm:text-2xl font-bold text-neutral-900">
+                  <h2 className="text-lg sm:text-2xl font-bold text-neutral-900">
                     Payment Method
                   </h2>
                 </div>
@@ -450,21 +451,21 @@ export default function CheckoutPage() {
 
               <button
                 type="submit"
-                className="w-full bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white font-bold text-lg py-5 rounded-xl shadow-xl hover:shadow-2xl active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+                className="w-full bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white font-bold text-base sm:text-lg py-4 sm:py-5 rounded-xl shadow-xl hover:shadow-2xl active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 sticky bottom-20 sm:static z-10"
                 disabled={isSubmitting}
               >
                 {isSubmitting ? (
-                  <span className="flex items-center justify-center gap-3">
-                    <svg className="animate-spin h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <span className="flex items-center justify-center gap-2 sm:gap-3">
+                    <svg className="animate-spin h-5 w-5 sm:h-6 sm:w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                       <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                       <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                     </svg>
-                    Processing Order...
+                    <span className="text-sm sm:text-base">Processing...</span>
                   </span>
                 ) : (
                   <span className="flex items-center justify-center gap-2">
-                    <ShoppingBag className="h-6 w-6" />
-                    Place Order - ₹{getCartTotal().toFixed(2)}
+                    <ShoppingBag className="h-5 w-5 sm:h-6 sm:w-6" />
+                    <span className="text-sm sm:text-base">Place Order - ₹{getCartTotal().toFixed(2)}</span>
                   </span>
                 )}
               </button>
@@ -473,30 +474,30 @@ export default function CheckoutPage() {
 
           {/* Order Summary */}
           <div className="lg:col-span-1">
-            <div className="bg-white rounded-2xl shadow-xl border border-neutral-200/50 p-6 sticky top-24">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center">
-                  <ShoppingBag className="h-5 w-5 text-white" />
+            <div className="bg-white rounded-xl sm:rounded-2xl shadow-xl border border-neutral-200/50 p-4 sm:p-6 lg:sticky lg:top-24">
+              <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
+                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center flex-shrink-0">
+                  <ShoppingBag className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
                 </div>
-                <h2 className="text-xl sm:text-2xl font-bold text-neutral-900">Order Summary</h2>
+                <h2 className="text-lg sm:text-2xl font-bold text-neutral-900">Order Summary</h2>
               </div>
 
-              <div className="space-y-4 mb-6 max-h-[400px] overflow-y-auto pr-2">
+              <div className="space-y-3 sm:space-y-4 mb-4 sm:mb-6 max-h-[300px] sm:max-h-[400px] overflow-y-auto pr-1 sm:pr-2">
                 {cartItems.map((item, index) => (
-                  <div key={`${item.id}-${index}`} className="flex gap-3 p-3 bg-neutral-50 rounded-xl hover:bg-neutral-100 transition-colors">
-                    <div className="w-16 h-16 bg-white rounded-lg flex-shrink-0 shadow-sm overflow-hidden">
+                  <div key={`${item.id}-${index}`} className="flex gap-2 sm:gap-3 p-2 sm:p-3 bg-neutral-50 rounded-lg sm:rounded-xl hover:bg-neutral-100 transition-colors">
+                    <div className="w-14 h-14 sm:w-16 sm:h-16 bg-white rounded-lg flex-shrink-0 shadow-sm overflow-hidden">
                       {item.imageUrl ? (
                         <img src={item.imageUrl} alt={item.name} className="w-full h-full object-cover" />
                       ) : (
                         <div className="w-full h-full flex items-center justify-center">
-                          <Package className="h-8 w-8 text-neutral-300" />
+                          <Package className="h-6 w-6 sm:h-8 sm:w-8 text-neutral-300" />
                         </div>
                       )}
                     </div>
                     <div className="flex-1 min-w-0">
-                      <h3 className="font-bold text-sm text-neutral-900 truncate">{item.name}</h3>
-                      <p className="text-xs text-neutral-600 mt-1">Quantity: {item.quantity}</p>
-                      <p className="text-sm font-bold text-primary-600 mt-1">
+                      <h3 className="font-bold text-xs sm:text-sm text-neutral-900 truncate">{item.name}</h3>
+                      <p className="text-[10px] sm:text-xs text-neutral-600 mt-0.5 sm:mt-1">Qty: {item.quantity}</p>
+                      <p className="text-xs sm:text-sm font-bold text-primary-600 mt-0.5 sm:mt-1">
                         ₹{(parseFloat(item.price) * item.quantity).toFixed(2)}
                       </p>
                     </div>
@@ -527,17 +528,17 @@ export default function CheckoutPage() {
               </div>
 
               {/* Trust Badges */}
-              <div className="mt-6 pt-6 border-t border-neutral-200 space-y-3">
-                <div className="flex items-center gap-3 text-sm text-neutral-600">
-                  <CheckCircle className="h-5 w-5 text-green-600 flex-shrink-0" />
+              <div className="mt-4 sm:mt-6 pt-4 sm:pt-6 border-t border-neutral-200 space-y-2 sm:space-y-3">
+                <div className="flex items-center gap-2 sm:gap-3 text-xs sm:text-sm text-neutral-600">
+                  <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 text-green-600 flex-shrink-0" />
                   <span>Secure checkout</span>
                 </div>
-                <div className="flex items-center gap-3 text-sm text-neutral-600">
-                  <Truck className="h-5 w-5 text-blue-600 flex-shrink-0" />
+                <div className="flex items-center gap-2 sm:gap-3 text-xs sm:text-sm text-neutral-600">
+                  <Truck className="h-4 w-4 sm:h-5 sm:w-5 text-blue-600 flex-shrink-0" />
                   <span>Free delivery on all orders</span>
                 </div>
-                <div className="flex items-center gap-3 text-sm text-neutral-600">
-                  <Package className="h-5 w-5 text-purple-600 flex-shrink-0" />
+                <div className="flex items-center gap-2 sm:gap-3 text-xs sm:text-sm text-neutral-600">
+                  <Package className="h-4 w-4 sm:h-5 sm:w-5 text-purple-600 flex-shrink-0" />
                   <span>Quality guaranteed</span>
                 </div>
               </div>

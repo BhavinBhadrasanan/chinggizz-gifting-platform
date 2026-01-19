@@ -61,28 +61,35 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Top Banner - Facebook-Inspired Blue with Warm Messages */}
-      <div className="bg-gradient-to-r from-primary-600 via-primary-500 to-primary-400 text-white py-2.5 overflow-hidden relative shadow-md">
-        {/* Animated background shimmer */}
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-shimmer"></div>
+      {/* Top Banner - Beautiful Animated Announcement Bar */}
+      <div className="bg-gradient-to-r from-primary-600 via-primary-500 to-primary-600 text-white py-3 overflow-hidden relative shadow-lg">
+        {/* Animated gradient background */}
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-[shimmer_3s_ease-in-out_infinite]"></div>
+
+        {/* Floating particles effect */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-1/2 left-1/4 w-2 h-2 bg-white/30 rounded-full animate-[float_4s_ease-in-out_infinite]"></div>
+          <div className="absolute top-1/3 right-1/4 w-1.5 h-1.5 bg-white/20 rounded-full animate-[float_5s_ease-in-out_infinite]" style={{ animationDelay: '1s' }}></div>
+          <div className="absolute bottom-1/3 left-1/3 w-1 h-1 bg-white/25 rounded-full animate-[float_6s_ease-in-out_infinite]" style={{ animationDelay: '2s' }}></div>
+        </div>
 
         <div className="container-custom relative z-10">
-          <div className="flex items-center justify-center space-x-2 sm:space-x-3">
-            {/* Animated icon */}
-            <span className="text-base sm:text-lg animate-bounce" role="img" aria-label="gift">
+          <div className="flex items-center justify-center space-x-3 sm:space-x-4">
+            {/* Animated icon with pulse effect */}
+            <span className="text-lg sm:text-xl animate-[bounce_2s_ease-in-out_infinite] drop-shadow-lg" role="img" aria-label="gift">
               {bannerMessages[bannerIndex].icon}
             </span>
 
-            {/* Rotating message with fade animation */}
+            {/* Rotating message with smooth slide animation */}
             <span
               key={bannerIndex}
-              className="text-xs sm:text-sm md:text-base font-semibold text-center tracking-wide animate-fade-in"
+              className="text-xs sm:text-sm md:text-base font-bold text-center tracking-wide animate-[slideIn_0.6s_ease-out] drop-shadow-md"
             >
               {bannerMessages[bannerIndex].text}
             </span>
 
-            {/* Second animated icon - hidden on very small screens */}
-            <span className="hidden sm:block text-base sm:text-lg animate-bounce" role="img" aria-label="gift" style={{ animationDelay: '0.2s' }}>
+            {/* Second animated icon with delayed pulse */}
+            <span className="hidden sm:block text-lg sm:text-xl animate-[bounce_2s_ease-in-out_infinite] drop-shadow-lg" role="img" aria-label="gift" style={{ animationDelay: '0.3s' }}>
               {bannerMessages[bannerIndex].icon}
             </span>
           </div>

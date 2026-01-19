@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Gift, Mail, Phone, MapPin, Facebook, Instagram, Twitter } from 'lucide-react';
+import { Gift, Mail, Phone, MapPin, Facebook, Instagram } from 'lucide-react';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -34,7 +34,7 @@ export default function Footer() {
                 href="https://www.facebook.com/share/1C8DV49upr/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 bg-neutral-800 rounded-lg flex items-center justify-center hover:bg-blue-600 transition-colors"
+                className="w-10 h-10 bg-neutral-800 rounded-lg flex items-center justify-center hover:bg-blue-600 hover:scale-110 transition-all duration-300"
                 aria-label="Visit our Facebook page"
               >
                 <Facebook className="h-5 w-5" />
@@ -43,19 +43,10 @@ export default function Footer() {
                 href="https://www.instagram.com/chinggizz_?igsh=MXFoMnpwYWt4bDh5cw%3D%3D&utm_source=qr"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 bg-neutral-800 rounded-lg flex items-center justify-center hover:bg-pink-600 transition-colors"
+                className="w-10 h-10 bg-neutral-800 rounded-lg flex items-center justify-center hover:bg-pink-600 hover:scale-110 transition-all duration-300"
                 aria-label="Visit our Instagram page"
               >
                 <Instagram className="h-5 w-5" />
-              </a>
-              <a
-                href="https://twitter.com/chinggizz"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 bg-neutral-800 rounded-lg flex items-center justify-center hover:bg-sky-500 transition-colors"
-                aria-label="Visit our Twitter page"
-              >
-                <Twitter className="h-5 w-5" />
               </a>
             </div>
           </div>
