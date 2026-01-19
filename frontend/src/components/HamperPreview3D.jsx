@@ -1,59 +1,8 @@
 import React, { Suspense, useRef, useState, useEffect } from 'react';
-import { Canvas, useFrame, useThree } from '@react-three/fiber';
+import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, PerspectiveCamera, Html, Environment, ContactShadows, Text, Sparkles, Float } from '@react-three/drei';
 import HamperBoxMesh from './HamperBox3D';
 import { Eye, Download, Share2, RotateCcw, Package } from 'lucide-react';
-import * as THREE from 'three';
-
-/**
- * Animated Camera Component - Zooms in when lid animation completes
- */
-function AnimatedCamera({ isMobile, lidAnimationComplete }) {
-  const cameraRef = useRef();
-  const { camera } = useThree();
-  const [isZooming, setIsZooming] = useState(false);
-  const startTime = useRef(null);
-  const startPosition = useRef(null);
-  const targetPosition = useRef(null);
-
-  useEffect(() => {
-    if (lidAnimationComplete && !isZooming) {
-      // Start zoom animation when lid completes
-      setIsZooming(true);
-      startTime.current = Date.now();
-      startPosition.current = camera.position.clone();
-
-      // Target position: closer and better angle
-      targetPosition.current = new THREE.Vector3(
-        isMobile ? 2.5 : 3.5,  // Closer on mobile
-        isMobile ? 3.5 : 3,    // Higher angle on mobile for top-down view
-        isMobile ? 2.5 : 3.5   // Closer on mobile
-      );
-    }
-  }, [lidAnimationComplete, isMobile, camera, isZooming]);
-
-  useFrame(() => {
-    if (isZooming && startTime.current && startPosition.current && targetPosition.current) {
-      const elapsed = (Date.now() - startTime.current) / 1000;
-      const duration = 1.5; // 1.5 seconds zoom animation
-      const progress = Math.min(elapsed / duration, 1);
-
-      // Smooth easing function
-      const easeInOutCubic = progress < 0.5
-        ? 4 * progress * progress * progress
-        : 1 - Math.pow(-2 * progress + 2, 3) / 2;
-
-      // Interpolate camera position
-      camera.position.lerpVectors(startPosition.current, targetPosition.current, easeInOutCubic);
-
-      if (progress >= 1) {
-        setIsZooming(false);
-      }
-    }
-  });
-
-  return null;
-}
 
 /**
  * Animated Lid Component - Drops from top, flips, and lands on box
@@ -419,15 +368,12 @@ export default function HamperPreview3D({ selectedBox, placedItems, hamperName }
               </div>
             </Html>
           }>
-            {/* Camera - Initial position, will zoom in when lid completes */}
+            {/* Camera - Closer angle for mobile, beautiful angle for desktop */}
             <PerspectiveCamera
               makeDefault
               position={isMobile ? [3, 4, 3] : [4.5, 3.5, 4.5]}
               fov={isMobile ? 60 : 55}
             />
-
-            {/* Animated Camera - Zooms in when lid animation completes */}
-            <AnimatedCamera isMobile={isMobile} lidAnimationComplete={lidAnimationComplete} />
 
             {/* LIGHTWEIGHT LIGHTING - Beautiful but fast */}
             <ambientLight intensity={1.3} color="#ffffff" />
