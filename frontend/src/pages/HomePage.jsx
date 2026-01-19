@@ -79,91 +79,91 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-neutral-50">
-      {/* Hero Banner - Beautiful & Modern */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-primary-600 via-primary-500 to-secondary-500">
-        {/* Animated Background Elements */}
+      {/* Hero Banner - Facebook-Inspired Professional Design */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-primary-500 via-primary-600 to-primary-700">
+        {/* Animated Background Elements - Subtle & Professional */}
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-0 left-1/4 w-96 h-96 bg-white/10 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-secondary-400/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary-400/10 rounded-full blur-3xl"></div>
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-white/5 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-primary-400/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-white/5 rounded-full blur-3xl"></div>
         </div>
 
         <div className="container-custom py-16 md:py-24 relative z-10">
           <div className="text-center max-w-4xl mx-auto">
-            {/* Premium Badge */}
-            <div className="inline-flex items-center space-x-2 bg-white/20 backdrop-blur-md px-6 py-3 rounded-full mb-6 border border-white/30 shadow-xl">
-              <Sparkles className="h-5 w-5 text-yellow-300 animate-pulse" />
-              <span className="text-sm font-bold text-white tracking-wide">PREMIUM CUSTOMIZED GIFTS</span>
-              <Sparkles className="h-5 w-5 text-yellow-300 animate-pulse" />
+            {/* Premium Badge - Clean & Professional */}
+            <div className="inline-flex items-center space-x-2 bg-white/15 backdrop-blur-md px-6 py-3 rounded-full mb-6 border border-white/20 shadow-xl">
+              <Sparkles className="h-5 w-5 text-secondary-300 animate-pulse" />
+              <span className="text-sm font-bold text-white tracking-wide">✨ PREMIUM CUSTOMIZED GIFTS ✨</span>
+              <Sparkles className="h-5 w-5 text-secondary-300 animate-pulse" />
             </div>
 
-            {/* Main Heading */}
+            {/* Main Heading - Bold & Clear */}
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-tight text-white drop-shadow-2xl">
               Discover Perfect Gifts
               <br />
-              <span className="bg-gradient-to-r from-yellow-300 via-yellow-200 to-yellow-300 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-secondary-300 via-secondary-200 to-secondary-300 bg-clip-text text-transparent">
                 For Every Occasion
               </span>
             </h1>
 
-            {/* Subtitle */}
-            <p className="text-xl md:text-2xl text-white/90 mb-10 font-medium drop-shadow-lg">
+            {/* Subtitle - Clear & Meaningful */}
+            <p className="text-xl md:text-2xl text-white/95 mb-10 font-medium drop-shadow-lg">
               Personalized gifts, gourmet treats, and luxury hampers crafted with love
             </p>
 
-            {/* Feature Stats */}
-            <div className="flex flex-wrap items-center justify-center gap-6 md:gap-8 mb-8">
-              <div className="flex items-center space-x-3 bg-white/20 backdrop-blur-md px-6 py-3 rounded-xl border border-white/30 shadow-lg">
-                <div className="bg-white/30 p-2 rounded-lg">
-                  <Package className="h-6 w-6 text-white" />
+            {/* Feature Stats - Clean & Professional */}
+            <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6 mb-8">
+              <div className="flex items-center space-x-3 bg-white/15 backdrop-blur-md px-5 py-3 rounded-2xl border border-white/20 shadow-lg hover:bg-white/20 transition-all">
+                <div className="bg-white/20 p-2.5 rounded-xl">
+                  <Package className="h-5 w-5 text-white" />
                 </div>
                 <div className="text-left">
                   <div className="text-2xl font-bold text-white">{allProducts.length}+</div>
-                  <div className="text-xs text-white/80 font-medium">Products</div>
+                  <div className="text-xs text-white/90 font-medium">Products</div>
                 </div>
               </div>
 
-              <div className="flex items-center space-x-3 bg-white/20 backdrop-blur-md px-6 py-3 rounded-xl border border-white/30 shadow-lg">
-                <div className="bg-white/30 p-2 rounded-lg">
-                  <Gift className="h-6 w-6 text-white" />
+              <div className="flex items-center space-x-3 bg-white/15 backdrop-blur-md px-5 py-3 rounded-2xl border border-white/20 shadow-lg hover:bg-white/20 transition-all">
+                <div className="bg-white/20 p-2.5 rounded-xl">
+                  <Gift className="h-5 w-5 text-white" />
                 </div>
                 <div className="text-left">
                   <div className="text-2xl font-bold text-white">100%</div>
-                  <div className="text-xs text-white/80 font-medium">Customizable</div>
+                  <div className="text-xs text-white/90 font-medium">Customizable</div>
                 </div>
               </div>
 
-              <div className="flex items-center space-x-3 bg-white/20 backdrop-blur-md px-6 py-3 rounded-xl border border-white/30 shadow-lg">
-                <div className="bg-white/30 p-2 rounded-lg">
-                  <Star className="h-6 w-6 text-yellow-300" />
+              <div className="flex items-center space-x-3 bg-white/15 backdrop-blur-md px-5 py-3 rounded-2xl border border-white/20 shadow-lg hover:bg-white/20 transition-all">
+                <div className="bg-white/20 p-2.5 rounded-xl">
+                  <Star className="h-5 w-5 text-secondary-300" />
                 </div>
                 <div className="text-left">
                   <div className="text-2xl font-bold text-white">5.0</div>
-                  <div className="text-xs text-white/80 font-medium">Rating</div>
+                  <div className="text-xs text-white/90 font-medium">Rating</div>
                 </div>
               </div>
 
-              <div className="flex items-center space-x-3 bg-white/20 backdrop-blur-md px-6 py-3 rounded-xl border border-white/30 shadow-lg">
-                <div className="bg-white/30 p-2 rounded-lg">
-                  <Users className="h-6 w-6 text-white" />
+              <div className="flex items-center space-x-3 bg-white/15 backdrop-blur-md px-5 py-3 rounded-2xl border border-white/20 shadow-lg hover:bg-white/20 transition-all">
+                <div className="bg-white/20 p-2.5 rounded-xl">
+                  <Users className="h-5 w-5 text-white" />
                 </div>
                 <div className="text-left">
                   <div className="text-2xl font-bold text-white">10K+</div>
-                  <div className="text-xs text-white/80 font-medium">Happy Customers</div>
+                  <div className="text-xs text-white/90 font-medium">Happy Customers</div>
                 </div>
               </div>
             </div>
 
-            {/* CTA Buttons - Mobile Optimized */}
+            {/* CTA Buttons - Professional & Clean */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4 w-full sm:w-auto px-4 sm:px-0 max-w-md sm:max-w-none mx-auto">
               <button
                 onClick={() => window.scrollTo({ top: document.getElementById('products-section')?.offsetTop - 100, behavior: 'smooth' })}
-                className="group w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 bg-white text-primary-600 rounded-xl font-bold text-base sm:text-lg shadow-2xl hover:shadow-white/50 active:scale-95 sm:hover:scale-105 transition-all duration-200 flex items-center justify-center space-x-2 tap-target"
+                className="group w-full sm:w-auto px-8 sm:px-10 py-4 bg-white text-primary-600 rounded-xl font-bold text-base sm:text-lg shadow-2xl hover:shadow-white/50 hover:bg-neutral-50 active:scale-95 sm:hover:scale-105 transition-all duration-200 flex items-center justify-center space-x-2 tap-target"
               >
                 <ShoppingBag className="h-5 w-5 sm:h-6 sm:w-6 group-active:scale-110 sm:group-hover:scale-110 transition-transform flex-shrink-0" />
                 <span>Shop Now</span>
               </button>
-              <Link to="/hamper-builder" className="group w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 bg-white/20 backdrop-blur-md text-white border-2 border-white/50 rounded-xl font-bold text-base sm:text-lg hover:bg-white/30 active:scale-95 sm:hover:scale-105 transition-all duration-200 flex items-center justify-center space-x-2 tap-target">
+              <Link to="/hamper-builder" className="group w-full sm:w-auto px-8 sm:px-10 py-4 bg-secondary-500 text-white border-2 border-secondary-400 rounded-xl font-bold text-base sm:text-lg hover:bg-secondary-600 active:scale-95 sm:hover:scale-105 transition-all duration-200 flex items-center justify-center space-x-2 tap-target shadow-xl">
                 <Sparkles className="h-5 w-5 sm:h-6 sm:w-6 group-active:rotate-12 sm:group-hover:rotate-12 transition-transform flex-shrink-0" />
                 <span className="whitespace-nowrap">Build Custom Hamper</span>
               </Link>
@@ -216,68 +216,6 @@ export default function HomePage() {
             {/* Product Count - Compact */}
             <div className="text-xs sm:text-sm text-neutral-600 whitespace-nowrap ml-auto flex-shrink-0 px-2">
               <span className="font-semibold text-neutral-900">{filteredProducts.length}</span> <span className="hidden sm:inline">items</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* WhatsApp Contact Card - Mobile Optimized */}
-      <section className="py-6 sm:py-8 bg-gradient-to-br from-green-50 to-emerald-50">
-        <div className="container-custom">
-          <div className="card bg-gradient-to-r from-green-500 to-emerald-600 text-white p-5 sm:p-8 shadow-2xl border-2 border-green-400 overflow-hidden relative">
-            {/* Decorative Elements */}
-            <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-3xl"></div>
-            <div className="absolute bottom-0 left-0 w-24 h-24 bg-yellow-300/10 rounded-full blur-2xl"></div>
-
-            <div className="flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6 relative z-10">
-              {/* Left Content - Mobile Optimized */}
-              <div className="flex-1 text-center md:text-left">
-                <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start space-y-2 sm:space-y-0 sm:space-x-3 mb-3 sm:mb-4">
-                  <MessageCircle className="h-7 w-7 sm:h-8 sm:w-8 text-yellow-300 animate-pulse" />
-                  <h3 className="text-xl sm:text-2xl md:text-3xl font-bold leading-tight">Can't Find What You Need?</h3>
-                </div>
-                <p className="text-sm sm:text-base md:text-lg text-white/90 mb-3 sm:mb-4 leading-relaxed">
-                  Chat with <span className="font-bold text-yellow-300">Chinggis</span> on WhatsApp for custom hampers, bulk orders & special requests!
-                </p>
-                <div className="flex flex-wrap items-center justify-center md:justify-start gap-2 sm:gap-4 text-xs sm:text-sm">
-                  <div className="flex items-center space-x-1.5 sm:space-x-2 bg-white/20 backdrop-blur-sm px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg">
-                    <CheckCircle className="h-3 w-3 sm:h-4 sm:w-4 text-yellow-300 flex-shrink-0" />
-                    <span>Custom Designs</span>
-                  </div>
-                  <div className="flex items-center space-x-1.5 sm:space-x-2 bg-white/20 backdrop-blur-sm px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg">
-                    <CheckCircle className="h-3 w-3 sm:h-4 sm:w-4 text-yellow-300 flex-shrink-0" />
-                    <span>Bulk Orders</span>
-                  </div>
-                  <div className="flex items-center space-x-1.5 sm:space-x-2 bg-white/20 backdrop-blur-sm px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg">
-                    <CheckCircle className="h-3 w-3 sm:h-4 sm:w-4 text-yellow-300 flex-shrink-0" />
-                    <span>Special Requests</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Right CTA - Mobile Optimized */}
-              <div className="flex flex-col items-center space-y-2 sm:space-y-3 w-full md:w-auto">
-                <a
-                  href="https://wa.me/917012897008?text=Hi%20Chinggizz!%20I'm%20interested%20in%20creating%20a%20custom%20hamper."
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group bg-white text-green-600 px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-bold text-base sm:text-lg shadow-xl hover:shadow-2xl active:scale-95 sm:hover:scale-105 transition-all duration-200 flex items-center space-x-2 sm:space-x-3 w-full sm:w-auto justify-center tap-target"
-                >
-                  <MessageCircle className="h-5 w-5 sm:h-6 sm:w-6 group-hover:scale-110 transition-transform flex-shrink-0" />
-                  <span>Chat on WhatsApp</span>
-                </a>
-                <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 text-xs sm:text-sm">
-                  <a href="tel:+917012897008" className="flex items-center space-x-1.5 sm:space-x-2 hover:text-yellow-300 active:text-yellow-200 transition-colors tap-target">
-                    <Phone className="h-3.5 w-3.5 sm:h-4 sm:w-4 flex-shrink-0" />
-                    <span className="whitespace-nowrap">+91 70128 97008</span>
-                  </a>
-                  <span className="text-white/50 hidden sm:inline">|</span>
-                  <a href="mailto:hello@chinggis.com" className="flex items-center space-x-1.5 sm:space-x-2 hover:text-yellow-300 active:text-yellow-200 transition-colors tap-target">
-                    <Mail className="h-3.5 w-3.5 sm:h-4 sm:w-4 flex-shrink-0" />
-                    <span>Email Us</span>
-                  </a>
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -403,6 +341,68 @@ export default function HomePage() {
               ))}
             </div>
           )}
+        </div>
+      </section>
+
+      {/* WhatsApp Contact Card - Mobile Optimized - Positioned After Products */}
+      <section className="py-6 sm:py-8 bg-gradient-to-br from-green-50 to-emerald-50">
+        <div className="container-custom">
+          <div className="card bg-gradient-to-r from-green-500 to-emerald-600 text-white p-5 sm:p-8 shadow-2xl border-2 border-green-400 overflow-hidden relative">
+            {/* Decorative Elements */}
+            <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-3xl"></div>
+            <div className="absolute bottom-0 left-0 w-24 h-24 bg-yellow-300/10 rounded-full blur-2xl"></div>
+
+            <div className="flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6 relative z-10">
+              {/* Left Content - Mobile Optimized */}
+              <div className="flex-1 text-center md:text-left">
+                <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start space-y-2 sm:space-y-0 sm:space-x-3 mb-3 sm:mb-4">
+                  <MessageCircle className="h-7 w-7 sm:h-8 sm:w-8 text-yellow-300 animate-pulse" />
+                  <h3 className="text-xl sm:text-2xl md:text-3xl font-bold leading-tight">Can't Find What You Need?</h3>
+                </div>
+                <p className="text-sm sm:text-base md:text-lg text-white/90 mb-3 sm:mb-4 leading-relaxed">
+                  Chat with <span className="font-bold text-yellow-300">Chinggis</span> on WhatsApp for custom hampers, bulk orders & special requests!
+                </p>
+                <div className="flex flex-wrap items-center justify-center md:justify-start gap-2 sm:gap-4 text-xs sm:text-sm">
+                  <div className="flex items-center space-x-1.5 sm:space-x-2 bg-white/20 backdrop-blur-sm px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg">
+                    <CheckCircle className="h-3 w-3 sm:h-4 sm:w-4 text-yellow-300 flex-shrink-0" />
+                    <span>Custom Designs</span>
+                  </div>
+                  <div className="flex items-center space-x-1.5 sm:space-x-2 bg-white/20 backdrop-blur-sm px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg">
+                    <CheckCircle className="h-3 w-3 sm:h-4 sm:w-4 text-yellow-300 flex-shrink-0" />
+                    <span>Bulk Orders</span>
+                  </div>
+                  <div className="flex items-center space-x-1.5 sm:space-x-2 bg-white/20 backdrop-blur-sm px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg">
+                    <CheckCircle className="h-3 w-3 sm:h-4 sm:w-4 text-yellow-300 flex-shrink-0" />
+                    <span>Special Requests</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Right CTA - Mobile Optimized */}
+              <div className="flex flex-col items-center space-y-2 sm:space-y-3 w-full md:w-auto">
+                <a
+                  href="https://wa.me/917012897008?text=Hi%20Chinggizz!%20I'm%20interested%20in%20creating%20a%20custom%20hamper."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group bg-white text-green-600 px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-bold text-base sm:text-lg shadow-xl hover:shadow-2xl active:scale-95 sm:hover:scale-105 transition-all duration-200 flex items-center space-x-2 sm:space-x-3 w-full sm:w-auto justify-center tap-target"
+                >
+                  <MessageCircle className="h-5 w-5 sm:h-6 sm:w-6 group-hover:scale-110 transition-transform flex-shrink-0" />
+                  <span>Chat on WhatsApp</span>
+                </a>
+                <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 text-xs sm:text-sm">
+                  <a href="tel:+917012897008" className="flex items-center space-x-1.5 sm:space-x-2 hover:text-yellow-300 active:text-yellow-200 transition-colors tap-target">
+                    <Phone className="h-3.5 w-3.5 sm:h-4 sm:w-4 flex-shrink-0" />
+                    <span className="whitespace-nowrap">+91 70128 97008</span>
+                  </a>
+                  <span className="text-white/50 hidden sm:inline">|</span>
+                  <a href="mailto:hello@chinggis.com" className="flex items-center space-x-1.5 sm:space-x-2 hover:text-yellow-300 active:text-yellow-200 transition-colors tap-target">
+                    <Mail className="h-3.5 w-3.5 sm:h-4 sm:w-4 flex-shrink-0" />
+                    <span>Email Us</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 

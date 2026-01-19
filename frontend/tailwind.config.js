@@ -27,32 +27,32 @@ export default {
     },
     extend: {
       colors: {
-        // Professional Blue - Trust, Reliability, Corporate
+        // Facebook-Inspired Blue - Trust, Professional, Recognizable
         primary: {
-          50: '#eff6ff',
-          100: '#dbeafe',
-          200: '#bfdbfe',
-          300: '#93c5fd',
-          400: '#60a5fa',
-          500: '#3b82f6',
-          600: '#2563eb',
-          700: '#1d4ed8',
-          800: '#1e40af',
-          900: '#1e3a8a',
-          950: '#172554',
+          50: '#e8f4ff',
+          100: '#d4e9ff',
+          200: '#b0d7ff',
+          300: '#7bbfff',
+          400: '#4a9eff',
+          500: '#1877f2',  // Facebook Blue
+          600: '#0c63d4',
+          700: '#0a52b3',
+          800: '#084491',
+          900: '#063870',
+          950: '#042a52',
         },
-        // Warm Coral - Friendly, Approachable, Gift-giving
+        // Warm Gold/Yellow - Premium, Luxury, Gift-giving
         secondary: {
-          50: '#fff1f2',
-          100: '#ffe4e6',
-          200: '#fecdd3',
-          300: '#fda4af',
-          400: '#fb7185',
-          500: '#f43f5e',
-          600: '#e11d48',
-          700: '#be123c',
-          800: '#9f1239',
-          900: '#881337',
+          50: '#fffbeb',
+          100: '#fef3c7',
+          200: '#fde68a',
+          300: '#fcd34d',
+          400: '#fbbf24',
+          500: '#f59e0b',  // Warm Gold
+          600: '#d97706',
+          700: '#b45309',
+          800: '#92400e',
+          900: '#78350f',
         },
         // Success Green - Positive, Fresh, Natural
         accent: {

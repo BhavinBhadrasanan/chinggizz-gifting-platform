@@ -61,8 +61,8 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Top Banner - Warm & Touching Messages */}
-      <div className="bg-gradient-to-r from-orange-500 via-pink-500 to-purple-500 text-white py-2.5 overflow-hidden relative">
+      {/* Top Banner - Facebook-Inspired Blue with Warm Messages */}
+      <div className="bg-gradient-to-r from-primary-600 via-primary-500 to-primary-400 text-white py-2.5 overflow-hidden relative shadow-md">
         {/* Animated background shimmer */}
         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-shimmer"></div>
 
