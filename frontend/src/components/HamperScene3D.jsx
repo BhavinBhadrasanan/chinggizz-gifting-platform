@@ -253,24 +253,37 @@ export default function HamperScene3D({
 
   return (
     <Canvas3DErrorBoundary fallback={<FallbackUI />}>
-      {/* CLEAN CONTAINER - No blur for better visibility */}
-      <div className="w-full h-full rounded-xl md:rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 relative">
-        {/* Removed glassy overlay - was making hamper hard to see */}
+      {/* BEAUTIFUL GLASSY CONTAINER - Premium smooth experience */}
+      <div className="w-full h-full rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl relative border-2 border-white/60">
+        {/* Multi-layer gradient background for depth and smoothness */}
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50"></div>
+        <div className="absolute inset-0 bg-gradient-to-tl from-indigo-50/60 via-transparent to-cyan-50/60"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
 
-        {/* Subtle background orbs - very light */}
-        <div className="absolute top-0 left-0 w-32 h-32 bg-gradient-to-br from-blue-200/10 to-purple-200/10 rounded-full blur-3xl animate-pulse pointer-events-none"></div>
-        <div className="absolute bottom-0 right-0 w-40 h-40 bg-gradient-to-br from-pink-200/10 to-purple-200/10 rounded-full blur-3xl animate-pulse delay-1000 pointer-events-none"></div>
+        {/* Animated gradient orbs - beautiful smooth movement */}
+        <div className="absolute top-10 left-10 w-48 h-48 bg-gradient-to-br from-blue-400/20 via-purple-400/15 to-transparent rounded-full blur-3xl animate-pulse pointer-events-none"></div>
+        <div className="absolute bottom-10 right-10 w-56 h-56 bg-gradient-to-tl from-pink-400/20 via-purple-400/15 to-transparent rounded-full blur-3xl animate-pulse pointer-events-none" style={{ animationDelay: '1s' }}></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-r from-cyan-300/10 via-blue-300/10 to-purple-300/10 rounded-full blur-3xl animate-pulse pointer-events-none" style={{ animationDelay: '2s' }}></div>
 
-        {/* 3D Canvas */}
+        {/* Glossy glass overlay - smooth and transparent */}
+        <div className="absolute inset-0 bg-white/30 backdrop-blur-[0.5px] pointer-events-none"></div>
+
+        {/* Shine effect - premium feel */}
+        <div className="absolute inset-0 bg-gradient-to-br from-white/40 via-transparent to-transparent pointer-events-none"></div>
+        <div className="absolute top-0 left-0 right-0 h-1/3 bg-gradient-to-b from-white/20 to-transparent pointer-events-none"></div>
+
+        {/* 3D Canvas - Beautiful smooth rendering */}
         <Canvas
           shadows={settings.shadows}
           dpr={settings.dpr}
           gl={{
-            antialias: settings.antialias,
-            alpha: true,
+            antialias: true, // Always enable for smooth edges
+            alpha: true, // Transparent background
             powerPreference: settings.powerPreference,
-            failIfMajorPerformanceCaveat: false, // Don't fail on slow devices - CRITICAL for mobile
-            precision: settings.precision,
+            failIfMajorPerformanceCaveat: false, // Don't fail on slow devices
+            precision: 'highp', // High precision for smooth rendering
+            toneMapping: THREE.ACESFilmicToneMapping, // Beautiful color grading
+            toneMappingExposure: 1.2, // Slightly brighter
             // Mobile-specific optimizations
             ...(isMobile && {
               stencil: false, // Disable stencil buffer on mobile
@@ -307,13 +320,37 @@ export default function HamperScene3D({
           }}
         >
         <Suspense fallback={<Loader />}>
-          {/* Camera - Optimized angle and zoom for attractive view */}
+          {/* Camera - Beautiful angle for premium view */}
           <PerspectiveCamera makeDefault position={[3.5, 3, 3.5]} fov={50} />
 
-          {/* Lighting - Simplified for mobile */}
-          <ambientLight intensity={isMobile ? 0.8 : 0.5} />
+          {/* Beautiful Lighting Setup - Smooth and glossy */}
+          <ambientLight intensity={0.9} color="#ffffff" />
+
+          {/* Key light - main illumination */}
+          <directionalLight
+            position={[5, 8, 5]}
+            intensity={isMobile ? 0.8 : 1.0}
+            color="#fff5e6"
+            castShadow={!isMobile}
+          />
+
+          {/* Fill light - soften shadows */}
+          <directionalLight
+            position={[-5, 3, -5]}
+            intensity={0.4}
+            color="#e6f3ff"
+          />
+
+          {/* Rim light - glossy edge highlight */}
+          <directionalLight
+            position={[0, 5, -8]}
+            intensity={0.3}
+            color="#fff0f5"
+          />
+
           {!isMobile && (
             <>
+              {/* Additional desktop lighting for extra smoothness */}
               <directionalLight
                 position={[10, 10, 5]}
                 intensity={1}

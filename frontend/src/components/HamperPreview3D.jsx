@@ -274,11 +274,31 @@ export default function HamperPreview3D({ selectedBox, placedItems, hamperName }
   const [showLidAnimation, setShowLidAnimation] = useState(true);
   const [lidAnimationComplete, setLidAnimationComplete] = useState(false);
 
-  // Reset animation when box or items change
+  // Detect mobile FIRST - before any animations
+  const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
-    setShowLidAnimation(true);
-    setLidAnimationComplete(false);
-  }, [selectedBox, placedItems]);
+    const checkMobile = () => {
+      const mobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
+      setIsMobile(mobile);
+
+      // MOBILE OPTIMIZATION: Skip heavy lid animation on mobile
+      if (mobile) {
+        setShowLidAnimation(false);
+        setLidAnimationComplete(true);
+      }
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Reset animation when box or items change - ONLY ON DESKTOP
+  useEffect(() => {
+    if (!isMobile) {
+      setShowLidAnimation(true);
+      setLidAnimationComplete(false);
+    }
+  }, [selectedBox, placedItems, isMobile]);
 
   const handleDownload = () => {
     // TODO: Implement screenshot functionality
@@ -294,32 +314,34 @@ export default function HamperPreview3D({ selectedBox, placedItems, hamperName }
     setLidAnimationComplete(true);
   };
 
-  // Detect mobile
-  const [isMobile, setIsMobile] = useState(false);
-  useEffect(() => {
-    const checkMobile = () => {
-      const mobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
-      setIsMobile(mobile);
-    };
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
-
   return (
     <div className="relative w-full h-full">
-      {/* 3D Canvas */}
-      <div className="w-full h-full rounded-xl overflow-hidden shadow-2xl bg-gradient-to-br from-amber-50 via-yellow-50 to-orange-50">
+      {/* BEAUTIFUL GLASSY CONTAINER - Lightweight for mobile */}
+      <div className="w-full h-full rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl relative border-2 border-white/60">
+        {/* Multi-layer gradient background - smooth and beautiful */}
+        <div className="absolute inset-0 bg-gradient-to-br from-amber-50 via-yellow-50 to-orange-50"></div>
+        <div className="absolute inset-0 bg-gradient-to-tl from-orange-50/60 via-transparent to-yellow-50/60"></div>
+
+        {/* Subtle animated orbs - lightweight */}
+        <div className="absolute top-10 left-10 w-40 h-40 bg-gradient-to-br from-amber-300/15 via-yellow-300/10 to-transparent rounded-full blur-3xl animate-pulse pointer-events-none"></div>
+        <div className="absolute bottom-10 right-10 w-48 h-48 bg-gradient-to-tl from-orange-300/15 via-yellow-300/10 to-transparent rounded-full blur-3xl animate-pulse pointer-events-none" style={{ animationDelay: '1s' }}></div>
+
+        {/* Glossy overlay - very subtle */}
+        <div className="absolute inset-0 bg-white/20 backdrop-blur-[0.5px] pointer-events-none"></div>
+
+        {/* Shine effect */}
+        <div className="absolute inset-0 bg-gradient-to-br from-white/30 via-transparent to-transparent pointer-events-none"></div>
+
         <Canvas
-          shadows={!isMobile}
-          dpr={isMobile ? [0.5, 0.75] : [1, 2]}
+          shadows={false} // Disable shadows on mobile for performance
+          dpr={isMobile ? [0.5, 1] : [1, 2]} // Lower DPR on mobile
           gl={{
-            antialias: !isMobile,
+            antialias: isMobile ? false : true, // Disable antialiasing on mobile
             alpha: true,
             preserveDrawingBuffer: true,
-            powerPreference: isMobile ? "low-power" : "high-performance",
+            powerPreference: "low-power", // Always use low-power for preview
             failIfMajorPerformanceCaveat: false,
-            precision: isMobile ? "lowp" : "highp",
+            precision: isMobile ? "lowp" : "mediump", // Lower precision on mobile
             ...(isMobile && {
               stencil: false,
               depth: true,
@@ -328,51 +350,58 @@ export default function HamperPreview3D({ selectedBox, placedItems, hamperName }
           }}
           performance={{
             min: 0.1,
-            max: 1,
-            debounce: 200
+            max: isMobile ? 0.5 : 1, // Lower max performance on mobile
+            debounce: isMobile ? 300 : 200 // Higher debounce on mobile
           }}
-          frameloop="demand"
+          frameloop="demand" // Only render when needed
           onCreated={({ gl }) => {
-            console.log('✅ Preview Canvas created successfully');
+            console.log('✅ Preview Canvas created - Mobile optimized');
             if (isMobile) {
-              gl.setPixelRatio(Math.min(window.devicePixelRatio, 1));
+              gl.setPixelRatio(Math.min(window.devicePixelRatio, 1)); // Cap at 1x on mobile
             }
           }}
         >
           <Suspense fallback={
             <Html center>
-              <div className="text-purple-600 font-bold">Loading 3D Preview...</div>
+              <div className="bg-white/90 backdrop-blur-sm px-4 py-2 rounded-lg shadow-lg">
+                <div className="text-orange-600 font-bold text-sm">Loading Preview...</div>
+              </div>
             </Html>
           }>
-            {/* Camera - Zoomed out for better mobile view */}
+            {/* Camera - Beautiful angle */}
             <PerspectiveCamera makeDefault position={[4.5, 3.5, 4.5]} fov={55} />
 
-            {/* Lighting - Simplified for mobile */}
-            <ambientLight intensity={isMobile ? 1.2 : 1.0} />
-            {!isMobile && (
+            {/* LIGHTWEIGHT LIGHTING - Beautiful but fast */}
+            <ambientLight intensity={1.3} color="#ffffff" />
+
+            {isMobile ? (
+              // MOBILE: Single directional light only
+              <directionalLight
+                position={[8, 12, 8]}
+                intensity={1.5}
+                color="#fff5e6"
+              />
+            ) : (
+              // DESKTOP: Multiple lights for premium look
               <>
-                <directionalLight position={[10, 15, 8]} intensity={1.5} />
-                <pointLight position={[-8, 10, -8]} intensity={0.5} color="#FFFFFF" />
-                <pointLight position={[8, 10, 8]} intensity={0.5} color="#FFFFFF" />
+                <directionalLight position={[10, 15, 8]} intensity={1.5} color="#fff5e6" />
+                <directionalLight position={[-5, 8, -5]} intensity={0.5} color="#e6f3ff" />
                 <pointLight position={[0, 10, 0]} intensity={0.3} color="#FFFFFF" />
+                <Environment preset="sunset" />
               </>
             )}
-            {isMobile && (
-              <directionalLight position={[10, 15, 8]} intensity={1.8} />
+
+            {/* Elegant Pedestal/Platform - LIGHTWEIGHT on mobile */}
+            {!isMobile && (
+              <mesh position={[0, -0.15, 0]} receiveShadow>
+                <cylinderGeometry args={[4, 4.5, 0.2, 32]} />
+                <meshStandardMaterial
+                  color="#F5F5DC"
+                  roughness={0.7}
+                  metalness={0.2}
+                />
+              </mesh>
             )}
-
-            {/* Environment - Only on desktop */}
-            {!isMobile && <Environment preset="sunset" />}
-
-            {/* Elegant Pedestal/Platform - Simplified on mobile */}
-            <mesh position={[0, -0.15, 0]} receiveShadow>
-              <cylinderGeometry args={[4, 4.5, 0.2, isMobile ? 16 : 32]} />
-              <meshStandardMaterial
-                color="#F5F5DC"
-                roughness={0.7}
-                metalness={0.2}
-              />
-            </mesh>
 
             {/* Hamper Box - Transparent gift box with visible products */}
             {selectedBox && placedItems && (
@@ -406,19 +435,21 @@ export default function HamperPreview3D({ selectedBox, placedItems, hamperName }
 
 
 
-            {/* Hamper Name Label */}
-            <Text
-              position={[0, -1, 0]}
-              fontSize={0.5}
-              color="#4A148C"
-              anchorX="center"
-              anchorY="middle"
-            >
-              {hamperName || 'My Custom Hamper'}
-            </Text>
+            {/* Hamper Name Label - SKIP on mobile for performance */}
+            {!isMobile && (
+              <Text
+                position={[0, -1, 0]}
+                fontSize={0.5}
+                color="#4A148C"
+                anchorX="center"
+                anchorY="middle"
+              >
+                {hamperName || 'My Custom Hamper'}
+              </Text>
+            )}
 
-            {/* "Ready to Dispatch" Badge - Shows after lid animation */}
-            {lidAnimationComplete && (
+            {/* "Ready to Dispatch" Badge - Desktop only */}
+            {!isMobile && lidAnimationComplete && (
               <Text
                 position={[0, -1.5, 0]}
                 fontSize={0.35}
@@ -432,14 +463,18 @@ export default function HamperPreview3D({ selectedBox, placedItems, hamperName }
               </Text>
             )}
 
-            {/* Static Ground Plane with shadow receiver */}
-            <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.05, 0]} receiveShadow>
-              <planeGeometry args={[20, 20]} />
-              <shadowMaterial opacity={0.2} />
-            </mesh>
+            {/* Static Ground Plane - Desktop only */}
+            {!isMobile && (
+              <>
+                <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.05, 0]} receiveShadow>
+                  <planeGeometry args={[20, 20]} />
+                  <shadowMaterial opacity={0.2} />
+                </mesh>
 
-            {/* Subtle Grid - Elegant presentation surface */}
-            <gridHelper args={[20, 20, '#D4AF37', '#F5F5DC']} position={[0, -0.05, 0]} />
+                {/* Subtle Grid - Elegant presentation surface */}
+                <gridHelper args={[20, 20, '#D4AF37', '#F5F5DC']} position={[0, -0.05, 0]} />
+              </>
+            )}
 
             {/* Controls - Optimized for hamper viewing */}
             <OrbitControls
@@ -460,48 +495,64 @@ export default function HamperPreview3D({ selectedBox, placedItems, hamperName }
         </Canvas>
       </div>
 
-      {/* Control Buttons */}
-      <div className="absolute top-4 right-4 flex flex-col gap-2">
-        {/* Replay Lid Animation Button */}
-        <button
-          onClick={() => {
-            setShowLidAnimation(true);
-            setLidAnimationComplete(false);
-          }}
-          className="p-3 bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-full shadow-lg hover:scale-110 transition-all"
-          title="Replay Lid Animation"
-        >
-          <Package className="h-5 w-5" />
-        </button>
+      {/* Control Buttons - Compact on mobile */}
+      <div className="absolute top-2 right-2 md:top-4 md:right-4 flex flex-col gap-2">
+        {/* Replay Lid Animation Button - Desktop only */}
+        {!isMobile && (
+          <button
+            onClick={() => {
+              setShowLidAnimation(true);
+              setLidAnimationComplete(false);
+            }}
+            className="p-3 bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-full shadow-lg hover:scale-110 transition-all"
+            title="Replay Lid Animation"
+          >
+            <Package className="h-5 w-5" />
+          </button>
+        )}
 
         <button
           onClick={() => setAutoRotate(!autoRotate)}
-          className={`p-3 rounded-full shadow-lg transition-all ${
+          className={`p-2 md:p-3 rounded-full shadow-lg transition-all tap-target ${
             autoRotate
               ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white'
               : 'bg-white text-gray-700 hover:bg-gray-100'
           }`}
           title={autoRotate ? 'Stop Rotation' : 'Auto Rotate'}
         >
-          <RotateCcw className="h-5 w-5" />
+          <RotateCcw className="h-4 w-4 md:h-5 md:w-5" />
         </button>
 
-        <button
-          onClick={handleDownload}
-          className="p-3 bg-white rounded-full shadow-lg hover:bg-gray-100 transition-all"
-          title="Download Screenshot"
-        >
-          <Download className="h-5 w-5 text-gray-700" />
-        </button>
+        {/* Download/Share - Desktop only */}
+        {!isMobile && (
+          <>
+            <button
+              onClick={handleDownload}
+              className="p-3 bg-white rounded-full shadow-lg hover:bg-gray-100 transition-all"
+              title="Download Screenshot"
+            >
+              <Download className="h-5 w-5 text-gray-700" />
+            </button>
 
-        <button
-          onClick={handleShare}
-          className="p-3 bg-white rounded-full shadow-lg hover:bg-gray-100 transition-all"
-          title="Share Hamper"
-        >
-          <Share2 className="h-5 w-5 text-gray-700" />
-        </button>
+            <button
+              onClick={handleShare}
+              className="p-3 bg-white rounded-full shadow-lg hover:bg-gray-100 transition-all"
+              title="Share Hamper"
+            >
+              <Share2 className="h-5 w-5 text-gray-700" />
+            </button>
+          </>
+        )}
       </div>
+
+      {/* Mobile Controls Info */}
+      {isMobile && (
+        <div className="absolute bottom-2 left-2 right-2 bg-white/90 backdrop-blur-sm rounded-lg px-3 py-2 shadow-lg pointer-events-none">
+          <p className="text-[10px] text-gray-600 font-semibold text-center">
+            👆 <strong>Swipe:</strong> Rotate | <strong>Pinch:</strong> Zoom
+          </p>
+        </div>
+      )}
     </div>
   );
 }

@@ -2135,23 +2135,28 @@ export default function HamperBuilderPage() {
           </div>
         )}
 
-        {/* Step 3: Preview */}
+        {/* Step 3: Preview - MOBILE OPTIMIZED */}
         {step === 3 && selectedBox && (
           <div className="max-w-7xl mx-auto" ref={previewSectionRef}>
-            <div className="text-center mb-8">
-              <h2 className="text-3xl font-bold text-neutral-900 mb-2">Your Custom Hamper</h2>
-              <p className="text-neutral-600">Review your beautiful creation</p>
+            <div className="text-center mb-4 md:mb-8">
+              <h2 className="text-2xl md:text-3xl font-bold text-neutral-900 mb-2">Your Custom Hamper</h2>
+              <p className="text-sm md:text-base text-neutral-600">Review your beautiful creation</p>
             </div>
 
-            <div className="card p-8 mb-6">
-              <h3 className="text-2xl font-bold text-neutral-900 mb-6 text-center">🎁 Final Preview</h3>
-              <div className="w-full h-[600px] mb-6">
+            <div className="card p-4 md:p-8 mb-6">
+              <h3 className="text-xl md:text-2xl font-bold text-neutral-900 mb-4 md:mb-6 text-center">🎁 Final Preview</h3>
+              {/* MOBILE: Smaller height for faster loading */}
+              <div className="w-full h-[400px] md:h-[600px] mb-4 md:mb-6">
                 <HamperPreview3D
                   selectedBox={selectedBox}
                   placedItems={placedItems}
                   hamperName={hamperName}
                 />
               </div>
+              {/* Mobile loading tip */}
+              <p className="text-xs text-center text-gray-500 md:hidden mb-2">
+                💡 Swipe to rotate • Pinch to zoom
+              </p>
             </div>
 
             <div className="card p-8 mb-6">
