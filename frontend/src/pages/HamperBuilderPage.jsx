@@ -2257,16 +2257,13 @@ export default function HamperBuilderPage() {
             {/* MOBILE: Compact 3D Preview */}
             <div className="card p-3 lg:p-8 mb-3 lg:mb-6">
               <h3 className="text-base lg:text-2xl font-bold text-neutral-900 mb-2 lg:mb-6 text-center">🎁 Final Preview</h3>
-              <div className="w-full h-[300px] lg:h-[600px] mb-2 lg:mb-6" ref={hamperPreviewCanvasRef}>
+              <div className="w-full h-[300px] lg:h-[600px]" ref={hamperPreviewCanvasRef}>
                 <HamperPreview3D
                   selectedBox={selectedBox}
                   placedItems={placedItems}
                   hamperName={hamperName}
                 />
               </div>
-              <p className="text-xs text-center text-gray-500 lg:hidden">
-                💡 Swipe to rotate • Pinch to zoom
-              </p>
             </div>
 
             {/* MOBILE: Ultra Compact Details Card */}

@@ -368,8 +368,12 @@ export default function HamperPreview3D({ selectedBox, placedItems, hamperName }
               </div>
             </Html>
           }>
-            {/* Camera - Beautiful angle */}
-            <PerspectiveCamera makeDefault position={[4.5, 3.5, 4.5]} fov={55} />
+            {/* Camera - Closer angle for mobile, beautiful angle for desktop */}
+            <PerspectiveCamera
+              makeDefault
+              position={isMobile ? [3, 4, 3] : [4.5, 3.5, 4.5]}
+              fov={isMobile ? 60 : 55}
+            />
 
             {/* LIGHTWEIGHT LIGHTING - Beautiful but fast */}
             <ambientLight intensity={1.3} color="#ffffff" />
