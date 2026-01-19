@@ -85,16 +85,21 @@ export default function HamperBuilderPage() {
   const { cartItems } = useCart();
   const navigate = useNavigate();
 
-  // Debug: Log when component mounts
+  // Debug: Log when component mounts and scroll to top
   useEffect(() => {
     console.log('🎁 HamperBuilderPage mounted successfully!');
     console.log('📱 Screen width:', window.innerWidth);
     console.log('📦 Cart items:', cartItems.length);
+
+    // Scroll to top when page loads (especially important on mobile)
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
 
   // Refs for scrolling to sections
   const hamperViewRef = useRef(null);
   const previewSectionRef = useRef(null);
+  const availableItemsRef = useRef(null);
+  const boxSelectionRef = useRef(null);
 
   // Load saved hamper state from localStorage on mount
   const loadSavedHamperState = () => {
@@ -244,6 +249,16 @@ export default function HamperBuilderPage() {
     setSelectedItemToPlace(null);
     setStep(2);
     toast.success(`${box.name} box selected!`);
+
+    // Auto-scroll to available items on mobile after box selection
+    setTimeout(() => {
+      if (window.innerWidth < 1024 && availableItemsRef.current) {
+        availableItemsRef.current.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    }, 300);
   };
 
   const handleReset = () => {
@@ -610,6 +625,16 @@ export default function HamperBuilderPage() {
     }
     setSelectedItemToPlace(item);
     toast.info(`Click a green spot in the box to place ${item.name}`);
+
+    // Auto-scroll to hamper box view on mobile when item is selected
+    setTimeout(() => {
+      if (window.innerWidth < 1024 && hamperViewRef.current) {
+        hamperViewRef.current.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    }, 300);
   };
 
   const handleSpotClick = (position) => {
@@ -718,6 +743,16 @@ export default function HamperBuilderPage() {
           }
         } else {
           toast.success(`✅ ${selectedItemToPlace.name} added to hamper!`);
+        }
+
+        // Show toast about adjusting positions on mobile after first item is placed
+        if (window.innerWidth < 1024 && placedItems.length === 0) {
+          setTimeout(() => {
+            toast.info('💡 Touch products in the box to adjust their positions', {
+              duration: 4000,
+              icon: '👆'
+            });
+          }, 1500);
         }
       }
 
@@ -1193,7 +1228,7 @@ export default function HamperBuilderPage() {
 
         {/* Step 1: Select Hamper Box */}
         {step === 1 && (
-          <div className="max-w-6xl mx-auto">
+          <div className="max-w-6xl mx-auto" ref={boxSelectionRef}>
             <h2 className="text-3xl font-bold text-center mb-8 text-neutral-900">
               Choose Your Hamper Box
             </h2>
@@ -1427,7 +1462,7 @@ export default function HamperBuilderPage() {
             {/* Mobile: Reverse order - Items first, then 3D box */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 sm:gap-6 lg:gap-8">
               {/* MOBILE: Available Items Section FIRST (shows at top on mobile) - ENHANCED */}
-              <div className="lg:hidden">
+              <div className="lg:hidden" ref={availableItemsRef}>
                 <div className="card p-3 glass-card animate-fadeInUp">
                   {/* Mobile Instructions - Collapsible Quick Guide */}
                   <div className="mb-3 bg-gradient-to-r from-blue-50 via-indigo-50 to-purple-50 border-2 border-blue-300 rounded-xl shadow-lg relative overflow-hidden">

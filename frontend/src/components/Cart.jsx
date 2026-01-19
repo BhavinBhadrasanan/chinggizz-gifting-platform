@@ -166,8 +166,13 @@ export default function Cart() {
             {/* Build Your Own Hamper Button */}
             <button
               onClick={() => {
-                navigate('/hamper-builder');
                 setIsCartOpen(false);
+                // Scroll to top for smooth transition
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                // Navigate to hamper builder
+                setTimeout(() => {
+                  navigate('/hamper-builder');
+                }, 100);
               }}
               className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-bold text-sm sm:text-base py-2.5 sm:py-3 px-3 sm:px-4 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 shadow-md hover:shadow-lg"
             >
