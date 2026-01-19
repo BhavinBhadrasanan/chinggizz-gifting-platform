@@ -310,25 +310,38 @@ export default function HomePage() {
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
               {filteredProducts.map((product) => (
-                <div key={product.id} className="card card-hover group flex flex-col">
+                <div
+                  key={product.id}
+                  className="card group flex flex-col relative overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 active:scale-[0.98]"
+                >
+                  {/* Glassy overlay on hover */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary-500/0 to-secondary-500/0 group-hover:from-primary-500/5 group-hover:to-secondary-500/5 transition-all duration-300 pointer-events-none z-10"></div>
+
                   {/* Product Image */}
-                  <div className="aspect-square bg-neutral-100 flex items-center justify-center relative overflow-hidden">
+                  <div className="aspect-square bg-gradient-to-br from-neutral-100 via-neutral-50 to-neutral-100 flex items-center justify-center relative overflow-hidden">
                     {product.imageUrl ? (
-                      <img src={product.imageUrl} alt={product.name} className="w-full h-full object-cover" />
+                      <img
+                        src={product.imageUrl}
+                        alt={product.name}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
+                      />
                     ) : (
-                      <Gift className="h-24 w-24 text-neutral-300" />
+                      <Gift className="h-24 w-24 text-neutral-300 group-hover:scale-110 transition-transform duration-500" />
                     )}
 
-                    {/* Badges */}
-                    <div className="absolute top-3 left-3 right-3 flex items-start justify-between">
+                    {/* Gradient overlay for better badge visibility */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent pointer-events-none"></div>
+
+                    {/* Badges - Enhanced */}
+                    <div className="absolute top-3 left-3 right-3 flex items-start justify-between z-20">
                       {product.isCustomizable && (
-                        <span className="badge badge-primary text-xs">
-                          <Sparkles className="h-3 w-3 mr-1" />
+                        <span className="inline-flex items-center gap-1 bg-gradient-to-r from-primary-500 to-primary-600 text-white px-3 py-1.5 rounded-full shadow-lg text-xs font-bold backdrop-blur-sm">
+                          <Sparkles className="h-3 w-3" />
                           Customizable
                         </span>
                       )}
                       {product.stockQuantity !== null && product.stockQuantity < 10 && (
-                        <span className="badge badge-secondary text-xs ml-auto">
+                        <span className="inline-flex items-center gap-1 bg-gradient-to-r from-secondary-500 to-secondary-600 text-white px-3 py-1.5 rounded-full shadow-lg text-xs font-bold ml-auto backdrop-blur-sm animate-pulse">
                           Only {product.stockQuantity} left
                         </span>
                       )}
@@ -336,14 +349,14 @@ export default function HomePage() {
                   </div>
 
                   {/* Product Details */}
-                  <div className="p-4 flex flex-col flex-1">
+                  <div className="p-4 flex flex-col flex-1 relative z-10">
                     <div className="mb-2">
-                      <span className="text-xs font-medium text-neutral-500 uppercase tracking-wide">
+                      <span className="text-xs font-bold text-primary-600 uppercase tracking-wider">
                         {product.categoryName}
                       </span>
                     </div>
 
-                    <h3 className="font-bold text-base mb-2 text-neutral-900 line-clamp-2 min-h-[3rem]">
+                    <h3 className="font-bold text-base mb-2 text-neutral-900 line-clamp-2 min-h-[3rem] group-hover:text-primary-600 transition-colors duration-300">
                       {product.name}
                     </h3>
 
@@ -355,12 +368,12 @@ export default function HomePage() {
                     <div className="mt-auto">
                       <div className="flex items-center justify-between mb-3">
                         <div>
-                          <span className="text-2xl font-bold text-primary-600">
+                          <span className="text-2xl font-bold bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent">
                             ₹{parseFloat(product.price).toFixed(2)}
                           </span>
                           {product.isCustomizable && product.customizationCharge > 0 && (
-                            <p className="text-xs text-neutral-500 mt-1">
-                              +₹{parseFloat(product.customizationCharge).toFixed(2)} for customization
+                            <p className="text-xs text-neutral-500 mt-1 font-medium">
+                              +₹{parseFloat(product.customizationCharge).toFixed(2)} customization
                             </p>
                           )}
                         </div>
@@ -368,7 +381,11 @@ export default function HomePage() {
 
                       <button
                         onClick={() => handleAddToCart(product)}
-                        className="btn-primary w-full text-sm py-2.5 inline-flex items-center justify-center"
+                        className={`w-full text-sm py-2.5 rounded-xl font-bold transition-all transform active:scale-95 shadow-lg tap-target inline-flex items-center justify-center ${
+                          product.stockQuantity === 0
+                            ? 'bg-gray-300 text-gray-600 cursor-not-allowed'
+                            : 'bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white shadow-primary-200 hover:shadow-xl'
+                        }`}
                         disabled={product.stockQuantity === 0}
                       >
                         {product.stockQuantity === 0 ? (

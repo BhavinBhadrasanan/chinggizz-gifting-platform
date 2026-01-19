@@ -1408,50 +1408,70 @@ export default function HamperBuilderPage() {
 
             {/* Mobile: Reverse order - Items first, then 3D box */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 sm:gap-6 lg:gap-8">
-              {/* MOBILE: Available Items Section FIRST (shows at top on mobile) - COMPACT */}
+              {/* MOBILE: Available Items Section FIRST (shows at top on mobile) - ENHANCED */}
               <div className="lg:hidden">
-                <div className="card p-2">
-                  {/* Mobile Instructions - Compact */}
-                  <div className="mb-3 p-2 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-300 rounded-lg">
-                    <h4 className="font-bold text-blue-900 mb-1 flex items-center text-xs">
-                      <span className="text-base mr-1">👇</span>
-                      Quick Guide
-                    </h4>
-                    <p className="text-[10px] text-blue-800">
-                      <strong>1.</strong> Tap item → <strong>2.</strong> Scroll to 3D box → <strong>3.</strong> Tap green spot
-                    </p>
+                <div className="card p-3 glass-card animate-fadeInUp">
+                  {/* Mobile Instructions - Enhanced with Glassy Effect */}
+                  <div className="mb-3 p-3 bg-gradient-to-r from-blue-50 via-indigo-50 to-purple-50 border-2 border-blue-300 rounded-xl shadow-lg relative overflow-hidden">
+                    {/* Glassy overlay */}
+                    <div className="absolute inset-0 bg-white/40 backdrop-blur-sm"></div>
+
+                    {/* Content */}
+                    <div className="relative z-10">
+                      <h4 className="font-bold text-blue-900 mb-2 flex items-center text-sm">
+                        <span className="text-xl mr-2 animate-bounce">👇</span>
+                        Quick Guide
+                      </h4>
+                      <div className="space-y-1">
+                        <p className="text-xs text-blue-800 flex items-center gap-2">
+                          <span className="bg-blue-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-[10px] font-bold flex-shrink-0">1</span>
+                          <span><strong>Tap</strong> an item below</span>
+                        </p>
+                        <p className="text-xs text-blue-800 flex items-center gap-2">
+                          <span className="bg-blue-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-[10px] font-bold flex-shrink-0">2</span>
+                          <span><strong>Scroll</strong> to 3D box</span>
+                        </p>
+                        <p className="text-xs text-blue-800 flex items-center gap-2">
+                          <span className="bg-green-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-[10px] font-bold flex-shrink-0">3</span>
+                          <span><strong>Tap</strong> green spot to place</span>
+                        </p>
+                      </div>
+                    </div>
                   </div>
 
-                  {/* Available Items - Mobile - COMPACT */}
-                  <div className="bg-white rounded-lg border-2 border-orange-300 shadow-sm overflow-hidden">
-                    <div className="bg-gradient-to-r from-orange-500 to-amber-500 px-2 py-1.5 flex items-center justify-between">
-                      <h3 className="text-white font-bold text-xs flex items-center gap-1">
-                        <ShoppingBag className="h-3 w-3" />
-                        Items ({availableItems.length})
+                  {/* Available Items - Mobile - ENHANCED */}
+                  <div className="bg-white/90 backdrop-blur-sm rounded-xl border-2 border-orange-300 shadow-lg overflow-hidden">
+                    <div className="bg-gradient-to-r from-orange-500 via-orange-600 to-amber-500 px-3 py-2 flex items-center justify-between shadow-md">
+                      <h3 className="text-white font-bold text-sm flex items-center gap-2">
+                        <ShoppingBag className="h-4 w-4 animate-bounce" />
+                        Available Items ({availableItems.length})
                       </h3>
                       <button
                         onClick={() => navigate('/products')}
-                        className="bg-white hover:bg-orange-50 text-orange-700 font-semibold text-[10px] px-1.5 py-0.5 rounded flex items-center gap-0.5 transition-colors"
+                        className="bg-white hover:bg-orange-50 text-orange-700 font-bold text-xs px-3 py-1.5 rounded-lg flex items-center gap-1 transition-all hover:scale-105 active:scale-95 shadow-md tap-target"
                       >
-                        <Plus className="h-2.5 w-2.5" />
-                        Add
+                        <Plus className="h-3 w-3" />
+                        Add More
                       </button>
                     </div>
 
-                    <div className="p-2 space-y-1.5 max-h-[200px] overflow-y-auto">
+                    <div className="p-3 space-y-2 max-h-[220px] overflow-y-auto scrollbar-hide">
                       {availableItems.length === 0 ? (
-                        <div className="text-center py-4">
-                          <ShoppingBag className="h-8 w-8 text-neutral-300 mx-auto mb-1" />
-                          <p className="text-xs text-neutral-600 mb-2">All items placed!</p>
+                        <div className="text-center py-6 animate-fadeInUp">
+                          <div className="bg-gradient-to-br from-neutral-100 to-neutral-200 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-3">
+                            <ShoppingBag className="h-8 w-8 text-neutral-400" />
+                          </div>
+                          <p className="text-sm font-semibold text-neutral-700 mb-1">All items placed!</p>
+                          <p className="text-xs text-neutral-500 mb-3">Great job building your hamper</p>
                           <button
                             onClick={() => navigate('/products')}
-                            className="btn-primary text-[10px] py-1.5 px-3"
+                            className="bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-bold text-xs py-2 px-4 rounded-lg transition-all hover:scale-105 active:scale-95 shadow-lg tap-target"
                           >
                             Add More Items
                           </button>
                         </div>
                       ) : (
-                        availableItems.map((item) => (
+                        availableItems.map((item, index) => (
                           <div
                             key={item.id}
                             draggable
@@ -1459,30 +1479,39 @@ export default function HamperBuilderPage() {
                             onDragEnd={handleDragEnd}
                             onClick={() => {
                               setSelectedItemToPlace(item);
-                              toast.info(`📦 ${item.name} selected! Scroll down and tap a green spot.`);
+                              toast.info(`📦 ${item.name} selected! Scroll down and tap a green spot.`, {
+                                duration: 3000,
+                                icon: '👆',
+                              });
                             }}
-                            className={`bg-white border-2 rounded-lg p-1.5 cursor-pointer transition-all hover:shadow-md active:scale-95 ${
+                            className={`bg-white border-2 rounded-xl p-2 cursor-pointer transition-all duration-300 tap-target relative overflow-hidden ${
                               selectedItemToPlace?.id === item.id
-                                ? 'border-green-500 bg-green-50 shadow-lg'
-                                : 'border-neutral-200 hover:border-orange-400'
+                                ? 'border-green-500 bg-gradient-to-r from-green-50 to-emerald-50 shadow-xl scale-105 animate-pulseGlow'
+                                : 'border-neutral-200 hover:border-orange-400 hover:shadow-lg active:scale-95'
                             }`}
+                            style={{ animationDelay: `${index * 0.05}s` }}
                           >
-                            <div className="flex items-center gap-1.5">
-                              <div className="w-10 h-10 bg-neutral-100 rounded flex items-center justify-center flex-shrink-0">
+                            {/* Glassy overlay on selected */}
+                            {selectedItemToPlace?.id === item.id && (
+                              <div className="absolute inset-0 bg-gradient-to-r from-green-400/10 to-emerald-400/10 backdrop-blur-[1px] pointer-events-none"></div>
+                            )}
+
+                            <div className="flex items-center gap-2 relative z-10">
+                              <div className="w-12 h-12 bg-gradient-to-br from-neutral-100 to-neutral-200 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden shadow-sm">
                                 {item.imageUrl ? (
-                                  <img src={item.imageUrl} alt={item.name} className="w-full h-full object-cover rounded" />
+                                  <img src={item.imageUrl} alt={item.name} className="w-full h-full object-cover" />
                                 ) : (
-                                  <Gift className="h-5 w-5 text-neutral-400" />
+                                  <Gift className="h-6 w-6 text-neutral-400" />
                                 )}
                               </div>
                               <div className="flex-1 min-w-0">
-                                <p className="font-semibold text-[11px] text-neutral-900 truncate leading-tight">{item.name}</p>
-                                <p className="text-[10px] text-neutral-600">₹{item.price}</p>
+                                <p className="font-bold text-xs text-neutral-900 truncate leading-tight mb-0.5">{item.name}</p>
+                                <p className="text-xs font-semibold text-orange-600">₹{item.price}</p>
                               </div>
                               {selectedItemToPlace?.id === item.id && (
-                                <div className="flex-shrink-0">
-                                  <div className="bg-green-500 text-white rounded-full p-0.5">
-                                    <Check className="h-2.5 w-2.5" />
+                                <div className="flex-shrink-0 animate-bounceIn">
+                                  <div className="bg-gradient-to-br from-green-500 to-emerald-600 text-white rounded-full p-1 shadow-lg">
+                                    <Check className="h-3 w-3" />
                                   </div>
                                 </div>
                               )}

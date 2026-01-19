@@ -418,79 +418,99 @@ export default function ProductsPage() {
               const willNotFit = !fitCheck.fits;
 
               return (
-                <div key={product.id} className={`card card-hover group ${willNotFit ? 'opacity-90' : ''}`}>
-                  <div className="relative h-56 bg-gradient-to-br from-primary-100 to-secondary-100 overflow-hidden">
+                <div
+                  key={product.id}
+                  className={`card group relative overflow-hidden transition-all duration-300 ${
+                    willNotFit
+                      ? 'opacity-90 hover:shadow-lg'
+                      : 'hover:shadow-2xl hover:-translate-y-1 active:scale-[0.98]'
+                  }`}
+                >
+                  {/* Glassy overlay on hover - mobile optimized */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary-500/0 to-secondary-500/0 group-hover:from-primary-500/5 group-hover:to-secondary-500/5 transition-all duration-300 pointer-events-none z-10"></div>
+
+                  <div className="relative h-56 bg-gradient-to-br from-primary-100 via-primary-50 to-secondary-100 overflow-hidden">
                     {product.imageUrl ? (
                       <img
                         src={product.imageUrl}
                         alt={product.name}
-                        className="h-full w-full object-cover group-hover:scale-110 transition-transform duration-500"
+                        className="h-full w-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
                       />
                     ) : (
                       <div className="h-full w-full flex items-center justify-center">
-                        <ShoppingBag className="h-20 w-20 text-primary-400" />
+                        <ShoppingBag className="h-20 w-20 text-primary-400 group-hover:scale-110 transition-transform duration-500" />
                       </div>
                     )}
 
-                    {/* Hamper Fit Warning Badge */}
+                    {/* Gradient overlay for better badge visibility */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none"></div>
+
+                    {/* Hamper Fit Warning Badge - Enhanced */}
                     {willNotFit && (
-                      <div className="absolute top-3 left-3">
-                        <span className="badge bg-red-500 text-white shadow-lg animate-pulse">
+                      <div className="absolute top-3 left-3 z-20">
+                        <span className="inline-flex items-center gap-1 bg-red-500 text-white px-3 py-1.5 rounded-full shadow-lg animate-pulse text-xs font-bold">
                           ⚠️ Won't Fit in Hamper
                         </span>
                       </div>
                     )}
 
+                    {/* Customizable Badge - Enhanced */}
                     {product.isCustomizable && !willNotFit && (
-                      <div className="absolute top-3 right-3">
-                        <span className="badge badge-primary shadow-md">
-                          <Sparkles className="h-3 w-3 mr-1" />
+                      <div className="absolute top-3 right-3 z-20">
+                        <span className="inline-flex items-center gap-1 bg-gradient-to-r from-primary-500 to-primary-600 text-white px-3 py-1.5 rounded-full shadow-lg text-xs font-bold backdrop-blur-sm">
+                          <Sparkles className="h-3 w-3" />
                           Customizable
                         </span>
                       </div>
                     )}
+
+                    {/* Predefined Hamper Badge - Enhanced */}
                     {product.productType === 'PREDEFINED_HAMPER' && (
-                      <div className="absolute top-3 right-3">
-                        <span className="badge badge-secondary shadow-md">
+                      <div className="absolute top-3 right-3 z-20">
+                        <span className="inline-flex items-center gap-1 bg-gradient-to-r from-secondary-500 to-secondary-600 text-white px-3 py-1.5 rounded-full shadow-lg text-xs font-bold backdrop-blur-sm">
                           Ready Hamper
                         </span>
                       </div>
                     )}
                   </div>
-                <div className="p-5">
-                  <h3 className="font-bold text-lg mb-2 line-clamp-1 group-hover:text-primary-600 transition-colors">
+
+                <div className="p-5 relative z-10">
+                  <h3 className="font-bold text-lg mb-2 line-clamp-1 group-hover:text-primary-600 transition-colors duration-300">
                     {product.name}
                   </h3>
                   <p className="text-gray-600 text-sm mb-4 line-clamp-2 leading-relaxed">
                     {product.description}
                   </p>
 
-                  {/* Hamper Warning Message */}
+                  {/* Hamper Warning Message - Enhanced */}
                   {willNotFit && (
-                    <div className="mb-3 p-2 bg-red-50 border border-red-200 rounded-lg">
-                      <p className="text-xs text-red-700 font-semibold">
+                    <div className="mb-3 p-3 bg-gradient-to-r from-red-50 to-orange-50 border-2 border-red-300 rounded-xl shadow-sm">
+                      <p className="text-xs text-red-800 font-bold flex items-center gap-2">
+                        <span className="text-base">⚠️</span>
                         {fitCheck.reason === 'capacity'
-                          ? `📦 Hamper ${fitCheck.currentFill}% full - this won't fit!`
-                          : `📏 Too large for ${fitCheck.boxName} box`}
+                          ? `Hamper ${fitCheck.currentFill}% full - this won't fit!`
+                          : `Too large for ${fitCheck.boxName} box`}
                       </p>
                     </div>
                   )}
 
-                  <div className="flex items-end justify-between">
+                  <div className="flex items-end justify-between gap-3">
                     <div>
-                      <span className="text-2xl font-bold text-primary-600">₹{product.price}</span>
+                      <span className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent">
+                        ₹{product.price}
+                      </span>
                       {product.isCustomizable && product.customizationCharge > 0 && (
-                        <p className="text-xs text-gray-500 mt-1">
+                        <p className="text-xs text-gray-500 mt-1 font-medium">
                           +₹{product.customizationCharge} customization
                         </p>
                       )}
                     </div>
                     <button
                       onClick={() => handleProductClick(product)}
-                      className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all transform hover:scale-105 ${
+                      className={`px-4 py-2.5 rounded-xl text-sm font-bold transition-all transform active:scale-95 shadow-lg tap-target ${
                         willNotFit
-                          ? 'bg-red-500 hover:bg-red-600 text-white'
-                          : 'bg-primary-500 hover:bg-primary-600 text-white'
+                          ? 'bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white shadow-red-200'
+                          : 'bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white shadow-primary-200 hover:shadow-xl'
                       }`}
                     >
                       {willNotFit

@@ -2,6 +2,7 @@ import React, { Suspense, useState, useEffect } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, PerspectiveCamera, Html, Environment, ContactShadows, Sky } from '@react-three/drei';
 import * as THREE from 'three';
+import { Package, Sparkles } from 'lucide-react';
 import HamperBoxMesh from './HamperBox3D';
 
 /**
@@ -173,36 +174,57 @@ export default function HamperScene3D({
 
   const settings = isMobile ? mobileSettings : desktopSettings;
 
-  // Fallback UI if WebGL fails
+  // Fallback UI if WebGL fails - GLASSY MOBILE DESIGN
   const FallbackUI = () => (
-    <div className="w-full h-full rounded-xl overflow-hidden shadow-2xl bg-gradient-to-br from-blue-50 to-purple-50 relative p-6">
-      <div className="text-center">
-        <div className="bg-white rounded-xl p-6 shadow-lg">
-          <h3 className="text-xl font-bold text-gray-900 mb-4">
+    <div className="w-full h-full rounded-xl overflow-hidden shadow-2xl bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 relative p-4 md:p-6">
+      {/* Glassy overlay effect */}
+      <div className="absolute inset-0 bg-white/40 backdrop-blur-md"></div>
+
+      {/* Animated background orbs */}
+      <div className="absolute top-10 left-10 w-32 h-32 bg-gradient-to-br from-blue-400/30 to-purple-400/30 rounded-full blur-2xl animate-pulse"></div>
+      <div className="absolute bottom-10 right-10 w-40 h-40 bg-gradient-to-br from-pink-400/30 to-purple-400/30 rounded-full blur-2xl animate-pulse delay-1000"></div>
+
+      <div className="relative z-10 text-center h-full flex flex-col justify-center">
+        <div className="bg-white/60 backdrop-blur-lg rounded-2xl p-4 md:p-6 shadow-xl border border-white/50">
+          {/* Icon */}
+          <div className="mb-4 flex justify-center">
+            <div className="bg-gradient-to-br from-primary-500 to-secondary-500 p-4 rounded-2xl shadow-lg">
+              <Package className="h-12 w-12 text-white" />
+            </div>
+          </div>
+
+          <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-4 bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent">
             📦 {selectedBox.name} Box
           </h3>
-          <div className="space-y-3 text-left">
-            <p className="text-sm text-gray-600">
-              <strong>Dimensions:</strong> {selectedBox.dimensionsCm}
+
+          <div className="space-y-3 text-left bg-white/50 backdrop-blur-sm rounded-xl p-4 border border-white/60">
+            <p className="text-sm md:text-base text-gray-700 flex items-center justify-between">
+              <strong className="text-primary-700">Dimensions:</strong>
+              <span className="font-mono text-gray-900">{selectedBox.dimensionsCm}</span>
             </p>
-            <p className="text-sm text-gray-600">
-              <strong>Capacity:</strong> {selectedBox.capacity} items
+            <p className="text-sm md:text-base text-gray-700 flex items-center justify-between">
+              <strong className="text-primary-700">Capacity:</strong>
+              <span className="font-semibold text-gray-900">{selectedBox.capacity} items</span>
             </p>
-            <p className="text-sm text-gray-600">
-              <strong>Items Placed:</strong> {placedItems.length} / {selectedBox.capacity}
+            <p className="text-sm md:text-base text-gray-700 flex items-center justify-between">
+              <strong className="text-primary-700">Items Placed:</strong>
+              <span className="font-bold text-secondary-600">{placedItems.length} / {selectedBox.capacity}</span>
             </p>
           </div>
 
           {placedItems.length > 0 && (
-            <div className="mt-4 pt-4 border-t border-gray-200">
-              <h4 className="font-semibold text-gray-900 mb-2">Items in Box:</h4>
-              <div className="space-y-2 max-h-48 overflow-y-auto">
+            <div className="mt-4 pt-4 border-t border-white/60">
+              <h4 className="font-semibold text-gray-900 mb-3 flex items-center justify-center gap-2">
+                <Sparkles className="h-5 w-5 text-yellow-500" />
+                Items in Box
+              </h4>
+              <div className="space-y-2 max-h-48 overflow-y-auto scrollbar-hide">
                 {placedItems.map((item, idx) => (
-                  <div key={idx} className="flex items-center justify-between bg-gray-50 p-2 rounded">
-                    <span className="text-sm text-gray-700">{item.name}</span>
+                  <div key={idx} className="flex items-center justify-between bg-white/70 backdrop-blur-sm p-3 rounded-lg border border-white/80 hover:bg-white/90 transition-all">
+                    <span className="text-sm font-medium text-gray-800">{item.name}</span>
                     <button
                       onClick={() => onItemClick && onItemClick(item)}
-                      className="text-xs text-blue-600 hover:text-blue-800"
+                      className="text-xs font-semibold text-primary-600 hover:text-primary-800 bg-primary-50 px-3 py-1 rounded-full transition-all hover:scale-105"
                     >
                       Select
                     </button>
@@ -212,9 +234,12 @@ export default function HamperScene3D({
             </div>
           )}
 
-          <p className="text-xs text-gray-500 mt-4">
-            💡 3D view unavailable. Using simplified view.
-          </p>
+          <div className="mt-4 p-3 bg-blue-50/80 backdrop-blur-sm border border-blue-200/60 rounded-lg">
+            <p className="text-xs text-blue-700 font-medium flex items-center justify-center gap-2">
+              <span className="text-base">💡</span>
+              3D view unavailable. Using simplified glassy view.
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -228,7 +253,16 @@ export default function HamperScene3D({
 
   return (
     <Canvas3DErrorBoundary fallback={<FallbackUI />}>
-      <div className="w-full h-full rounded-xl overflow-hidden shadow-2xl bg-gradient-to-br from-blue-50 to-purple-50 relative">
+      {/* GLASSY CONTAINER - Mobile Optimized */}
+      <div className="w-full h-full rounded-xl md:rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 relative">
+        {/* Glassy overlay effect - subtle on mobile */}
+        <div className="absolute inset-0 bg-white/20 backdrop-blur-[2px] pointer-events-none z-10"></div>
+
+        {/* Animated background orbs - lightweight */}
+        <div className="absolute top-0 left-0 w-32 h-32 bg-gradient-to-br from-blue-300/20 to-purple-300/20 rounded-full blur-2xl animate-pulse pointer-events-none"></div>
+        <div className="absolute bottom-0 right-0 w-40 h-40 bg-gradient-to-br from-pink-300/20 to-purple-300/20 rounded-full blur-2xl animate-pulse delay-1000 pointer-events-none"></div>
+
+        {/* 3D Canvas */}
         <Canvas
           shadows={settings.shadows}
           dpr={settings.dpr}
