@@ -227,7 +227,6 @@ export default function CheckoutPage() {
                         value={formData.fullName}
                         onChange={handleInputChange}
                         className="input-field pl-10 focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
-                        placeholder="John Doe"
                         required
                       />
                       <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-neutral-400" />
@@ -244,7 +243,6 @@ export default function CheckoutPage() {
                         value={formData.email}
                         onChange={handleInputChange}
                         className="input-field pl-10 focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
-                        placeholder="john@example.com"
                         required
                       />
                       <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-neutral-400" />
@@ -261,7 +259,6 @@ export default function CheckoutPage() {
                         value={formData.phone}
                         onChange={handleInputChange}
                         className="input-field pl-10 focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
-                        placeholder="9876543210"
                         required
                       />
                       <Phone className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-neutral-400" />
