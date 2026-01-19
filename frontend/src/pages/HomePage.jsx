@@ -107,9 +107,54 @@ export default function HomePage() {
             </h1>
 
             {/* Subtitle - Clear & Meaningful */}
-            <p className="text-xl md:text-2xl text-white/95 mb-10 font-medium drop-shadow-lg">
-              Personalized gifts, gourmet treats, and luxury hampers crafted with love
+            <p className="text-xl md:text-2xl text-white/95 mb-8 font-medium drop-shadow-lg">
+              🎁 Surprise gifts & celebrations
             </p>
+
+            {/* Services Grid - Professional Look */}
+            <div className="bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 shadow-2xl p-6 mb-8 max-w-4xl mx-auto">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-white/95">
+                {/* Left Column */}
+                <div className="space-y-3">
+                  <div className="flex items-center space-x-2 text-base md:text-lg">
+                    <span className="text-xl">🎂</span>
+                    <span className="font-medium">Birthdays</span>
+                  </div>
+                  <div className="flex items-center space-x-2 text-base md:text-lg">
+                    <span className="text-xl">🌙</span>
+                    <span className="font-medium">Midnight surprises</span>
+                  </div>
+                  <div className="flex items-center space-x-2 text-base md:text-lg">
+                    <span className="text-xl">🎁</span>
+                    <span className="font-medium">Custom gifts</span>
+                  </div>
+                  <div className="flex items-center space-x-2 text-base md:text-lg">
+                    <span className="text-xl">🏢</span>
+                    <span className="font-medium">Corporate gifts</span>
+                  </div>
+                </div>
+
+                {/* Right Column */}
+                <div className="space-y-3">
+                  <div className="flex items-center space-x-2 text-base md:text-lg">
+                    <span className="text-xl">🎀</span>
+                    <span className="font-medium">Return gifts</span>
+                  </div>
+                  <div className="flex items-center space-x-2 text-base md:text-lg">
+                    <span className="text-xl">🎉</span>
+                    <span className="font-medium">Festive hampers</span>
+                  </div>
+                  <div className="flex items-center space-x-2 text-base md:text-lg">
+                    <span className="text-xl">🚚</span>
+                    <span className="font-medium">Direct delivery: Kochi | Ernakulam | Alappuzha (Weekends)</span>
+                  </div>
+                  <div className="flex items-center space-x-2 text-base md:text-lg">
+                    <span className="text-xl">🇮🇳</span>
+                    <span className="font-medium">All-India courier service available</span>
+                  </div>
+                </div>
+              </div>
+            </div>
 
             {/* Feature Stats - Clean & Professional */}
             <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6 mb-8">
@@ -140,16 +185,6 @@ export default function HomePage() {
                 <div className="text-left">
                   <div className="text-2xl font-bold text-white">5.0</div>
                   <div className="text-xs text-white/90 font-medium">Rating</div>
-                </div>
-              </div>
-
-              <div className="flex items-center space-x-3 bg-white/15 backdrop-blur-md px-5 py-3 rounded-2xl border border-white/20 shadow-lg hover:bg-white/20 transition-all">
-                <div className="bg-white/20 p-2.5 rounded-xl">
-                  <Users className="h-5 w-5 text-white" />
-                </div>
-                <div className="text-left">
-                  <div className="text-2xl font-bold text-white">10K+</div>
-                  <div className="text-xs text-white/90 font-medium">Happy Customers</div>
                 </div>
               </div>
             </div>
