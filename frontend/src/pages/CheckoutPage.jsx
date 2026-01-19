@@ -182,21 +182,20 @@ export default function CheckoutPage() {
           <h1 className="text-2xl sm:text-4xl font-extrabold text-neutral-900 mb-4 sm:mb-3">
             Checkout
           </h1>
-          {/* Mobile Progress - Compact */}
-          <div className="flex items-center justify-between sm:justify-start sm:gap-2 overflow-x-auto pb-2">
-            <div className="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
-              <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-primary-600 text-white flex items-center justify-center text-xs sm:text-sm font-bold shadow-lg">1</div>
-              <span className="text-xs sm:text-sm font-semibold text-neutral-700 whitespace-nowrap">Info</span>
+          {/* 2-Step Progress - Accurate Flow */}
+          <div className="flex items-center justify-center sm:justify-start gap-3 sm:gap-4">
+            <div className="flex items-center gap-2 sm:gap-3">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-primary-600 to-primary-700 text-white flex items-center justify-center text-sm sm:text-base font-bold shadow-lg">
+                1
+              </div>
+              <span className="text-sm sm:text-base font-bold text-neutral-900">Complete Your Order</span>
             </div>
-            <div className="h-0.5 w-8 sm:w-12 bg-neutral-300 mx-1 sm:mx-0"></div>
-            <div className="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
-              <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-neutral-300 text-neutral-600 flex items-center justify-center text-xs sm:text-sm font-bold">2</div>
-              <span className="text-xs sm:text-sm font-medium text-neutral-500 whitespace-nowrap">Payment</span>
-            </div>
-            <div className="h-0.5 w-8 sm:w-12 bg-neutral-300 mx-1 sm:mx-0"></div>
-            <div className="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
-              <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-neutral-300 text-neutral-600 flex items-center justify-center text-xs sm:text-sm font-bold">3</div>
-              <span className="text-xs sm:text-sm font-medium text-neutral-500 whitespace-nowrap">Done</span>
+            <div className="h-0.5 w-12 sm:w-16 bg-neutral-300"></div>
+            <div className="flex items-center gap-2 sm:gap-3">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-neutral-200 text-neutral-500 flex items-center justify-center text-sm sm:text-base font-bold">
+                2
+              </div>
+              <span className="text-sm sm:text-base font-medium text-neutral-500">Order Confirmed</span>
             </div>
           </div>
         </div>
