@@ -1114,22 +1114,30 @@ export default function HamperBuilderPage() {
 
   const handleCheckout = async () => {
     try {
+      console.log('🛒 Checkout button clicked');
       toast.loading('Preparing your hamper...', { id: 'hamper-checkout' });
 
       // Capture screenshot of the 3D hamper
       const canvasElement = hamperPreviewCanvasRef.current;
-      const screenshot = await captureHamperScreenshot(canvasElement);
+      console.log('📸 Canvas element:', canvasElement);
 
-      if (!screenshot) {
-        toast.error('Failed to capture hamper image. Please try again.', { id: 'hamper-checkout' });
-        return;
+      let screenshot = null;
+      try {
+        screenshot = await captureHamperScreenshot(canvasElement);
+        console.log('📸 Screenshot captured:', screenshot ? 'Success' : 'Failed');
+      } catch (screenshotError) {
+        console.error('Screenshot error:', screenshotError);
+        // Continue without screenshot on mobile if it fails
+        screenshot = null;
       }
 
-      // Prepare hamper data
+      // Prepare hamper data (with or without screenshot)
       const hamperData = prepareHamperData(selectedBox, placedItems, hamperName, screenshot);
+      console.log('📦 Hamper data prepared:', hamperData);
 
       // Add hamper to cart
       addHamperToCart(hamperData);
+      console.log('✅ Hamper added to cart');
 
       // Clear hamper builder state
       localStorage.removeItem('hamperBuilderState');
@@ -1138,9 +1146,14 @@ export default function HamperBuilderPage() {
 
       // Scroll to top before navigation
       window.scrollTo({ top: 0, behavior: 'smooth' });
-      setTimeout(() => navigate('/checkout'), 1000);
+
+      // Navigate to checkout
+      console.log('🚀 Navigating to checkout...');
+      setTimeout(() => {
+        navigate('/checkout');
+      }, 1000);
     } catch (error) {
-      console.error('Error during checkout:', error);
+      console.error('❌ Error during checkout:', error);
       toast.error('Failed to prepare hamper. Please try again.', { id: 'hamper-checkout' });
     }
   };
@@ -2322,12 +2335,27 @@ export default function HamperBuilderPage() {
               </div>
 
               {/* MOBILE: Compact Action Buttons */}
-              <div className="flex gap-2 lg:gap-4">
-                <button onClick={() => setStep(2)} className="btn-secondary flex-1 text-sm lg:text-base py-2 lg:py-3">
+              <div className="flex gap-2 lg:gap-4 relative z-10">
+                <button
+                  onClick={() => {
+                    console.log('Edit button clicked');
+                    setStep(2);
+                  }}
+                  className="btn-secondary flex-1 text-sm lg:text-base py-2 lg:py-3 active:scale-95 transition-transform"
+                >
                   <ArrowLeft className="h-4 w-4 lg:h-5 lg:w-5 mr-1 lg:mr-2" />
                   Edit
                 </button>
-                <button onClick={handleCheckout} className="btn-primary flex-1 text-sm lg:text-base py-2 lg:py-3">
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log('Checkout button clicked - event triggered');
+                    handleCheckout();
+                  }}
+                  className="btn-primary flex-1 text-sm lg:text-base py-2 lg:py-3 active:scale-95 transition-transform"
+                  type="button"
+                >
                   Checkout
                   <ArrowRight className="h-4 w-4 lg:h-5 lg:w-5 ml-1 lg:ml-2" />
                 </button>
