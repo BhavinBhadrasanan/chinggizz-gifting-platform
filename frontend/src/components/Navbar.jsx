@@ -59,19 +59,27 @@ export default function Navbar() {
       <nav className="bg-white shadow-md sticky top-0 z-40 border-b border-neutral-200">
         <div className="container-custom">
           <div className="flex items-center justify-between h-16 sm:h-20">
-            {/* Logo */}
-            <Link to="/" className="flex items-center space-x-3 group">
+            {/* Logo - BEAUTIFUL ROUND LOGO */}
+            <Link to="/" className="flex items-center space-x-2 sm:space-x-3 group">
+              {/* Round Logo with Glow Effect */}
               <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-br from-primary-600 to-secondary-500 rounded-xl blur opacity-50 group-hover:opacity-75 transition-opacity"></div>
-                <div className="relative bg-gradient-to-br from-primary-600 to-secondary-500 p-3 rounded-xl group-hover:scale-110 transition-transform">
-                  <Gift className="h-7 w-7 text-white" />
-                </div>
+                {/* Glow effect on hover */}
+                <div className="absolute inset-0 bg-gradient-to-br from-orange-400 to-teal-500 rounded-full blur-md opacity-0 group-hover:opacity-60 transition-opacity duration-300"></div>
+
+                {/* Logo Image - Round */}
+                <img
+                  src="/chinggizz-logo-round.png"
+                  alt="Chinggizz Logo"
+                  className="relative h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16 rounded-full object-cover shadow-lg group-hover:scale-105 transition-transform duration-300 ring-2 ring-white/50"
+                />
               </div>
-              <div className="flex flex-col">
-                <span className="text-2xl font-bold bg-gradient-to-r from-primary-600 to-secondary-500 bg-clip-text text-transparent">
+
+              {/* Text - Hidden on very small mobile, visible on larger screens */}
+              <div className="hidden xs:flex flex-col">
+                <span className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-primary-600 to-secondary-500 bg-clip-text text-transparent">
                   Chinggizz
                 </span>
-                <span className="text-xs text-neutral-500 font-medium -mt-1">Customised Gifts</span>
+                <span className="text-[10px] sm:text-xs text-neutral-500 font-medium -mt-1">Customised Gifts</span>
               </div>
             </Link>
 

@@ -8,12 +8,15 @@ export default function Footer() {
     <footer className="bg-neutral-900 text-neutral-300">
       <div className="container-custom py-8 sm:py-12">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
-          {/* Brand */}
+          {/* Brand - BEAUTIFUL ROUND LOGO */}
           <div>
-            <div className="flex items-center space-x-2 mb-4">
-              <div className="bg-primary-600 p-2 rounded-lg">
-                <Gift className="h-6 w-6 text-white" />
-              </div>
+            <div className="flex items-center space-x-3 mb-4">
+              {/* Round Logo */}
+              <img
+                src="/chinggizz-logo-round.png"
+                alt="Chinggizz Logo"
+                className="h-14 w-14 sm:h-16 sm:w-16 rounded-full object-cover shadow-xl ring-2 ring-white/20 hover:ring-primary-400/50 transition-all duration-300"
+              />
               <span className="text-xl font-bold text-white">Chinggizz</span>
             </div>
             <p className="text-sm text-neutral-400 mb-4">
