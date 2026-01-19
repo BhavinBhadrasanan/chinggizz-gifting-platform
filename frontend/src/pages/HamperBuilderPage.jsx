@@ -2254,10 +2254,10 @@ export default function HamperBuilderPage() {
               <p className="text-xs lg:text-base text-neutral-600">Review your creation</p>
             </div>
 
-            {/* MOBILE: Compact 3D Preview */}
+            {/* MOBILE: Larger 3D Preview for better animation visibility */}
             <div className="card p-3 lg:p-8 mb-3 lg:mb-6">
               <h3 className="text-base lg:text-2xl font-bold text-neutral-900 mb-2 lg:mb-6 text-center">🎁 Final Preview</h3>
-              <div className="w-full h-[300px] lg:h-[600px]" ref={hamperPreviewCanvasRef}>
+              <div className="w-full h-[400px] lg:h-[600px]" ref={hamperPreviewCanvasRef}>
                 <HamperPreview3D
                   selectedBox={selectedBox}
                   placedItems={placedItems}
@@ -2282,45 +2282,37 @@ export default function HamperBuilderPage() {
                 />
               </div>
 
-              {/* MOBILE: Single Column Compact Layout */}
-              <div className="space-y-3 lg:grid lg:grid-cols-2 lg:gap-6 lg:space-y-0 mb-3 lg:mb-6">
-                {/* Box Details - Compact */}
-                <div className="bg-neutral-50 p-3 lg:p-6 rounded-lg lg:rounded-xl">
-                  <h4 className="font-bold text-sm lg:text-base text-neutral-900 mb-2 lg:mb-4">Box Details</h4>
-                  <div className="space-y-1 lg:space-y-2 text-xs lg:text-sm">
-                    <div className="flex justify-between">
-                      <span className="text-neutral-600">Box Type:</span>
-                      <span className="font-semibold text-neutral-900">{selectedBox.name}</span>
+              {/* MOBILE: Combined Price Summary - Clear and Simple */}
+              <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-4 lg:p-6 rounded-xl border-2 border-blue-200 mb-3 lg:mb-6">
+                <h4 className="font-bold text-base lg:text-lg text-blue-900 mb-3 lg:mb-4 flex items-center gap-2">
+                  <span>💰</span>
+                  <span>Price Summary</span>
+                </h4>
+                <div className="space-y-2 lg:space-y-3 text-sm lg:text-base">
+                  {/* Box Info */}
+                  <div className="flex justify-between items-center pb-2 border-b border-blue-200">
+                    <div>
+                      <span className="text-neutral-700 font-medium">Box:</span>
+                      <span className="text-neutral-600 text-xs lg:text-sm ml-2">{selectedBox.name} ({selectedBox.dimensions})</span>
                     </div>
-                    <div className="flex justify-between">
-                      <span className="text-neutral-600">Dimensions:</span>
-                      <span className="font-semibold text-neutral-900">{selectedBox.dimensions}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-neutral-600">Box Price:</span>
-                      <span className="font-semibold text-neutral-900">₹{selectedBox.price}</span>
-                    </div>
+                    <span className="font-semibold text-neutral-900">₹{selectedBox.price}</span>
                   </div>
-                </div>
 
-                {/* Items Summary - Compact */}
-                <div className="bg-neutral-50 p-3 lg:p-6 rounded-lg lg:rounded-xl">
-                  <h4 className="font-bold text-sm lg:text-base text-neutral-900 mb-2 lg:mb-4">Items Summary</h4>
-                  <div className="space-y-1 lg:space-y-2 text-xs lg:text-sm">
-                    <div className="flex justify-between">
-                      <span className="text-neutral-600">Total Items:</span>
-                      <span className="font-semibold text-neutral-900">{placedItems.length}</span>
+                  {/* Items Info */}
+                  <div className="flex justify-between items-center pb-2 border-b border-blue-200">
+                    <div>
+                      <span className="text-neutral-700 font-medium">Products:</span>
+                      <span className="text-neutral-600 text-xs lg:text-sm ml-2">({placedItems.length} items)</span>
                     </div>
-                    <div className="flex justify-between">
-                      <span className="text-neutral-600">Items Total:</span>
-                      <span className="font-semibold text-neutral-900">
-                        ₹{placedItems.reduce((sum, item) => sum + parseFloat(item.price), 0)}
-                      </span>
-                    </div>
-                    <div className="flex justify-between pt-1 lg:pt-2 border-t border-neutral-200">
-                      <span className="text-neutral-900 font-bold">Grand Total:</span>
-                      <span className="font-bold text-primary-600 text-base lg:text-lg">₹{getTotalPrice()}</span>
-                    </div>
+                    <span className="font-semibold text-neutral-900">
+                      ₹{placedItems.reduce((sum, item) => sum + parseFloat(item.price), 0)}
+                    </span>
+                  </div>
+
+                  {/* Grand Total */}
+                  <div className="flex justify-between items-center pt-2 bg-white/60 rounded-lg px-3 py-2 lg:py-3">
+                    <span className="text-neutral-900 font-bold text-base lg:text-lg">Grand Total:</span>
+                    <span className="font-bold text-primary-600 text-xl lg:text-2xl">₹{getTotalPrice()}</span>
                   </div>
                 </div>
               </div>
