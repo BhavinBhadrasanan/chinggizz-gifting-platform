@@ -1526,9 +1526,9 @@ export default function HamperBuilderPage() {
 
               {/* 3D Box Section */}
               <div className="lg:col-span-2" ref={hamperViewRef}>
-                <div className="card p-2 sm:p-6 lg:p-8">
+                <div className="card px-0 py-2 sm:p-6 lg:p-8">
                   {/* MOBILE: Compact header with all info */}
-                  <div className="lg:hidden mb-3 pb-2 border-b border-neutral-200">
+                  <div className="lg:hidden mb-3 pb-2 border-b border-neutral-200 px-2">
                     <div className="flex items-center justify-between mb-2">
                       <div className="flex items-center gap-2">
                         <Box className="h-4 w-4 text-primary-600" />
@@ -1597,7 +1597,7 @@ export default function HamperBuilderPage() {
 
                   {/* Mobile: Selected Item Indicator */}
                   {selectedItemToPlace && (
-                    <div className="lg:hidden mb-3 p-3 bg-gradient-to-r from-green-50 to-emerald-50 border-2 border-green-400 rounded-xl">
+                    <div className="lg:hidden mb-3 mx-2 p-3 bg-gradient-to-r from-green-50 to-emerald-50 border-2 border-green-400 rounded-xl">
                       <h4 className="font-bold text-green-900 mb-1 flex items-center text-sm">
                         <span className="text-lg mr-2">✅</span>
                         Selected: {selectedItemToPlace.name}
@@ -1609,7 +1609,7 @@ export default function HamperBuilderPage() {
                   )}
 
                   {/* Mobile Instructions - Visible only on Mobile */}
-                  <div className="lg:hidden mb-3 p-3 bg-gradient-to-r from-purple-50 to-pink-50 border-2 border-purple-300 rounded-xl">
+                  <div className="lg:hidden mb-3 mx-2 p-3 bg-gradient-to-r from-purple-50 to-pink-50 border-2 border-purple-300 rounded-xl">
                     <h4 className="font-bold text-purple-900 mb-1.5 flex items-center text-sm">
                       <span className="text-lg mr-2">💡</span>
                       Quick Tips
