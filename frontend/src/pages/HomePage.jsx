@@ -91,10 +91,43 @@ export default function HomePage() {
         <div className="container-custom py-16 md:py-24 relative z-10">
           <div className="text-center max-w-4xl mx-auto">
             {/* Premium Badge - Clean & Professional */}
-            <div className="inline-flex items-center space-x-2 bg-white/15 backdrop-blur-md px-6 py-3 rounded-full mb-6 border border-white/20 shadow-xl">
+            <div className="inline-flex items-center space-x-2 bg-white/15 backdrop-blur-md px-6 py-3 rounded-full mb-4 border border-white/20 shadow-xl">
               <Sparkles className="h-5 w-5 text-secondary-300 animate-pulse" />
               <span className="text-sm font-bold text-white tracking-wide">✨ PREMIUM CUSTOMIZED GIFTS ✨</span>
               <Sparkles className="h-5 w-5 text-secondary-300 animate-pulse" />
+            </div>
+
+            {/* Feature Stats - Compact Mobile View at Top */}
+            <div className="flex items-center justify-center gap-2 md:gap-4 mb-6 px-2">
+              <div className="flex items-center space-x-2 bg-white/15 backdrop-blur-md px-3 py-2 md:px-5 md:py-3 rounded-xl md:rounded-2xl border border-white/20 shadow-lg">
+                <div className="bg-white/20 p-1.5 md:p-2.5 rounded-lg md:rounded-xl">
+                  <Package className="h-4 w-4 md:h-5 md:w-5 text-white" />
+                </div>
+                <div className="text-left">
+                  <div className="text-lg md:text-2xl font-bold text-white">{allProducts.length}+</div>
+                  <div className="text-[10px] md:text-xs text-white/90 font-medium">Products</div>
+                </div>
+              </div>
+
+              <div className="flex items-center space-x-2 bg-white/15 backdrop-blur-md px-3 py-2 md:px-5 md:py-3 rounded-xl md:rounded-2xl border border-white/20 shadow-lg">
+                <div className="bg-white/20 p-1.5 md:p-2.5 rounded-lg md:rounded-xl">
+                  <Gift className="h-4 w-4 md:h-5 md:w-5 text-white" />
+                </div>
+                <div className="text-left">
+                  <div className="text-lg md:text-2xl font-bold text-white">100%</div>
+                  <div className="text-[10px] md:text-xs text-white/90 font-medium">Custom</div>
+                </div>
+              </div>
+
+              <div className="flex items-center space-x-2 bg-white/15 backdrop-blur-md px-3 py-2 md:px-5 md:py-3 rounded-xl md:rounded-2xl border border-white/20 shadow-lg">
+                <div className="bg-white/20 p-1.5 md:p-2.5 rounded-lg md:rounded-xl">
+                  <Star className="h-4 w-4 md:h-5 md:w-5 text-secondary-300" />
+                </div>
+                <div className="text-left">
+                  <div className="text-lg md:text-2xl font-bold text-white">5.0</div>
+                  <div className="text-[10px] md:text-xs text-white/90 font-medium">Rating</div>
+                </div>
+              </div>
             </div>
 
             {/* Main Heading - Bold & Clear */}
@@ -152,39 +185,6 @@ export default function HomePage() {
                 <div className="flex items-center gap-2 text-white/95 text-sm md:text-base">
                   <span className="text-lg">🇮🇳</span>
                   <span className="font-medium">All-India courier service available</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Feature Stats - Clean & Professional */}
-            <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6 mb-8">
-              <div className="flex items-center space-x-3 bg-white/15 backdrop-blur-md px-5 py-3 rounded-2xl border border-white/20 shadow-lg hover:bg-white/20 transition-all">
-                <div className="bg-white/20 p-2.5 rounded-xl">
-                  <Package className="h-5 w-5 text-white" />
-                </div>
-                <div className="text-left">
-                  <div className="text-2xl font-bold text-white">{allProducts.length}+</div>
-                  <div className="text-xs text-white/90 font-medium">Products</div>
-                </div>
-              </div>
-
-              <div className="flex items-center space-x-3 bg-white/15 backdrop-blur-md px-5 py-3 rounded-2xl border border-white/20 shadow-lg hover:bg-white/20 transition-all">
-                <div className="bg-white/20 p-2.5 rounded-xl">
-                  <Gift className="h-5 w-5 text-white" />
-                </div>
-                <div className="text-left">
-                  <div className="text-2xl font-bold text-white">100%</div>
-                  <div className="text-xs text-white/90 font-medium">Customizable</div>
-                </div>
-              </div>
-
-              <div className="flex items-center space-x-3 bg-white/15 backdrop-blur-md px-5 py-3 rounded-2xl border border-white/20 shadow-lg hover:bg-white/20 transition-all">
-                <div className="bg-white/20 p-2.5 rounded-xl">
-                  <Star className="h-5 w-5 text-secondary-300" />
-                </div>
-                <div className="text-left">
-                  <div className="text-2xl font-bold text-white">5.0</div>
-                  <div className="text-xs text-white/90 font-medium">Rating</div>
                 </div>
               </div>
             </div>
