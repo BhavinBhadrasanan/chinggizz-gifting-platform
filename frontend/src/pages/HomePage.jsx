@@ -144,32 +144,45 @@ export default function HomePage() {
               🎁 Surprise gifts & celebrations
             </p>
 
-            {/* Services - Elegant Inline Display */}
-            <div className="mb-6 max-w-5xl mx-auto px-4">
-              <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-white/90 text-sm md:text-base">
-                <span className="flex items-center gap-1.5 font-medium">
-                  <span className="text-lg">🎂</span> Birthdays
-                </span>
-                <span className="text-white/40">•</span>
-                <span className="flex items-center gap-1.5 font-medium">
-                  <span className="text-lg">🌙</span> Midnight surprises
-                </span>
-                <span className="text-white/40">•</span>
-                <span className="flex items-center gap-1.5 font-medium">
-                  <span className="text-lg">🎁</span> Custom gifts
-                </span>
-                <span className="text-white/40">•</span>
-                <span className="flex items-center gap-1.5 font-medium">
-                  <span className="text-lg">🏢</span> Corporate gifts
-                </span>
-                <span className="text-white/40">•</span>
-                <span className="flex items-center gap-1.5 font-medium">
-                  <span className="text-lg">🎀</span> Return gifts
-                </span>
-                <span className="text-white/40">•</span>
-                <span className="flex items-center gap-1.5 font-medium">
-                  <span className="text-lg">🎉</span> Festive hampers
-                </span>
+            {/* Services - Beautiful Grid Cards */}
+            <div className="mb-6 max-w-4xl mx-auto px-4">
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-3">
+                <div className="bg-white/10 backdrop-blur-sm px-3 py-2 md:px-4 md:py-2.5 rounded-lg border border-white/20 hover:bg-white/15 transition-all">
+                  <div className="flex items-center gap-2 text-white/95 text-xs md:text-sm font-medium">
+                    <span className="text-base md:text-lg">🎂</span>
+                    <span>Birthdays</span>
+                  </div>
+                </div>
+                <div className="bg-white/10 backdrop-blur-sm px-3 py-2 md:px-4 md:py-2.5 rounded-lg border border-white/20 hover:bg-white/15 transition-all">
+                  <div className="flex items-center gap-2 text-white/95 text-xs md:text-sm font-medium">
+                    <span className="text-base md:text-lg">🌙</span>
+                    <span>Midnight surprises</span>
+                  </div>
+                </div>
+                <div className="bg-white/10 backdrop-blur-sm px-3 py-2 md:px-4 md:py-2.5 rounded-lg border border-white/20 hover:bg-white/15 transition-all">
+                  <div className="flex items-center gap-2 text-white/95 text-xs md:text-sm font-medium">
+                    <span className="text-base md:text-lg">🎁</span>
+                    <span>Custom gifts</span>
+                  </div>
+                </div>
+                <div className="bg-white/10 backdrop-blur-sm px-3 py-2 md:px-4 md:py-2.5 rounded-lg border border-white/20 hover:bg-white/15 transition-all">
+                  <div className="flex items-center gap-2 text-white/95 text-xs md:text-sm font-medium">
+                    <span className="text-base md:text-lg">🏢</span>
+                    <span>Corporate gifts</span>
+                  </div>
+                </div>
+                <div className="bg-white/10 backdrop-blur-sm px-3 py-2 md:px-4 md:py-2.5 rounded-lg border border-white/20 hover:bg-white/15 transition-all">
+                  <div className="flex items-center gap-2 text-white/95 text-xs md:text-sm font-medium">
+                    <span className="text-base md:text-lg">🎀</span>
+                    <span>Return gifts</span>
+                  </div>
+                </div>
+                <div className="bg-white/10 backdrop-blur-sm px-3 py-2 md:px-4 md:py-2.5 rounded-lg border border-white/20 hover:bg-white/15 transition-all">
+                  <div className="flex items-center gap-2 text-white/95 text-xs md:text-sm font-medium">
+                    <span className="text-base md:text-lg">🎉</span>
+                    <span>Festive hampers</span>
+                  </div>
+                </div>
               </div>
             </div>
 
