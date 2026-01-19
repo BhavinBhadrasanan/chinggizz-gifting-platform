@@ -107,51 +107,51 @@ export default function HomePage() {
             </h1>
 
             {/* Subtitle - Clear & Meaningful */}
-            <p className="text-xl md:text-2xl text-white/95 mb-8 font-medium drop-shadow-lg">
+            <p className="text-xl md:text-2xl text-white/95 mb-6 font-medium drop-shadow-lg">
               🎁 Surprise gifts & celebrations
             </p>
 
-            {/* Services Grid - Professional Look */}
-            <div className="bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 shadow-2xl p-6 mb-8 max-w-4xl mx-auto">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-white/95">
-                {/* Left Column */}
-                <div className="space-y-3">
-                  <div className="flex items-center space-x-2 text-base md:text-lg">
-                    <span className="text-xl">🎂</span>
-                    <span className="font-medium">Birthdays</span>
-                  </div>
-                  <div className="flex items-center space-x-2 text-base md:text-lg">
-                    <span className="text-xl">🌙</span>
-                    <span className="font-medium">Midnight surprises</span>
-                  </div>
-                  <div className="flex items-center space-x-2 text-base md:text-lg">
-                    <span className="text-xl">🎁</span>
-                    <span className="font-medium">Custom gifts</span>
-                  </div>
-                  <div className="flex items-center space-x-2 text-base md:text-lg">
-                    <span className="text-xl">🏢</span>
-                    <span className="font-medium">Corporate gifts</span>
-                  </div>
-                </div>
+            {/* Services - Elegant Inline Display */}
+            <div className="mb-6 max-w-5xl mx-auto px-4">
+              <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-white/90 text-sm md:text-base">
+                <span className="flex items-center gap-1.5 font-medium">
+                  <span className="text-lg">🎂</span> Birthdays
+                </span>
+                <span className="text-white/40">•</span>
+                <span className="flex items-center gap-1.5 font-medium">
+                  <span className="text-lg">🌙</span> Midnight surprises
+                </span>
+                <span className="text-white/40">•</span>
+                <span className="flex items-center gap-1.5 font-medium">
+                  <span className="text-lg">🎁</span> Custom gifts
+                </span>
+                <span className="text-white/40">•</span>
+                <span className="flex items-center gap-1.5 font-medium">
+                  <span className="text-lg">🏢</span> Corporate gifts
+                </span>
+                <span className="text-white/40">•</span>
+                <span className="flex items-center gap-1.5 font-medium">
+                  <span className="text-lg">🎀</span> Return gifts
+                </span>
+                <span className="text-white/40">•</span>
+                <span className="flex items-center gap-1.5 font-medium">
+                  <span className="text-lg">🎉</span> Festive hampers
+                </span>
+              </div>
+            </div>
 
-                {/* Right Column */}
-                <div className="space-y-3">
-                  <div className="flex items-center space-x-2 text-base md:text-lg">
-                    <span className="text-xl">🎀</span>
-                    <span className="font-medium">Return gifts</span>
-                  </div>
-                  <div className="flex items-center space-x-2 text-base md:text-lg">
-                    <span className="text-xl">🎉</span>
-                    <span className="font-medium">Festive hampers</span>
-                  </div>
-                  <div className="flex items-center space-x-2 text-base md:text-lg">
-                    <span className="text-xl">🚚</span>
-                    <span className="font-medium">Direct delivery: Kochi | Ernakulam | Alappuzha (Weekends)</span>
-                  </div>
-                  <div className="flex items-center space-x-2 text-base md:text-lg">
-                    <span className="text-xl">🇮🇳</span>
-                    <span className="font-medium">All-India courier service available</span>
-                  </div>
+            {/* Delivery Info - Elegant Cards */}
+            <div className="flex flex-wrap items-center justify-center gap-3 mb-8 px-4 max-w-4xl mx-auto">
+              <div className="bg-white/15 backdrop-blur-md px-4 py-2.5 rounded-xl border border-white/20 shadow-lg">
+                <div className="flex items-center gap-2 text-white/95 text-sm md:text-base">
+                  <span className="text-lg">🚚</span>
+                  <span className="font-medium">Direct delivery: Kochi | Ernakulam | Alappuzha (Weekends)</span>
+                </div>
+              </div>
+              <div className="bg-white/15 backdrop-blur-md px-4 py-2.5 rounded-xl border border-white/20 shadow-lg">
+                <div className="flex items-center gap-2 text-white/95 text-sm md:text-base">
+                  <span className="text-lg">🇮🇳</span>
+                  <span className="font-medium">All-India courier service available</span>
                 </div>
               </div>
             </div>
