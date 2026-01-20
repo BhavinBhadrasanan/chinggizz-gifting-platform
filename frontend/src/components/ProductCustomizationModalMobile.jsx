@@ -99,18 +99,11 @@ export default function ProductCustomizationModalMobile({ product, isOpen, onClo
       [category]: choiceName
     }));
 
-    // Show box type image preview
+    // Show box type image preview only
     if (category === 'Box Type') {
       setPreviewType('boxType');
       setShowBoxPreview(true);
       setTimeout(() => setShowBoxPreview(false), 3000); // Hide after 3 seconds
-    }
-
-    // Show 3D box size preview
-    if (category === 'Box Size') {
-      setPreviewType('boxSize');
-      setShowBoxPreview(true);
-      setTimeout(() => setShowBoxPreview(false), 4000); // Hide after 4 seconds
     }
 
     if (category === 'Type' && customizationOptions?.type === 'caricature') {
@@ -264,61 +257,6 @@ export default function ProductCustomizationModalMobile({ product, isOpen, onClo
                     </div>
                     <p className="text-sm font-semibold text-center text-primary-800">
                       {selectedOptions['Box Type']}
-                    </p>
-                  </div>
-                )}
-
-                {previewType === 'boxSize' && selectedOptions['Box Size'] && getSelectedBoxSize() && (
-                  <div className="space-y-3">
-                    <div className="flex items-center gap-2 mb-2">
-                      <Package className="h-5 w-5 text-primary-600" />
-                      <h4 className="text-sm font-bold text-primary-900">3D Box Size Preview</h4>
-                    </div>
-                    <div className="bg-white rounded-xl p-4 shadow-md">
-                      {/* 3D Box Visualization */}
-                      <div className="relative w-full h-48 flex items-center justify-center perspective-1000">
-                        <div
-                          className="relative transform-style-3d animate-rotate3d"
-                          style={{
-                            width: `${Math.min(getSelectedBoxSize().width * 4, 150)}px`,
-                            height: `${Math.min(getSelectedBoxSize().height * 4, 150)}px`,
-                          }}
-                        >
-                          {/* Front face */}
-                          <div className="absolute inset-0 bg-gradient-to-br from-amber-100 to-amber-200 border-2 border-amber-400 rounded-lg shadow-xl flex items-center justify-center">
-                            <Package className="h-12 w-12 text-amber-600 opacity-50" />
-                          </div>
-                          {/* Top face */}
-                          <div className="absolute inset-0 bg-gradient-to-br from-amber-200 to-amber-300 border-2 border-amber-500 rounded-lg shadow-xl opacity-70 transform -translate-y-2 -translate-x-2"></div>
-                        </div>
-                      </div>
-
-                      {/* Size Details */}
-                      <div className="mt-4 grid grid-cols-3 gap-2 text-center">
-                        <div className="bg-primary-50 rounded-lg p-2">
-                          <p className="text-xs text-gray-600">Width</p>
-                          <p className="text-sm font-bold text-primary-700">{getSelectedBoxSize().width}cm</p>
-                        </div>
-                        <div className="bg-primary-50 rounded-lg p-2">
-                          <p className="text-xs text-gray-600">Height</p>
-                          <p className="text-sm font-bold text-primary-700">{getSelectedBoxSize().height}cm</p>
-                        </div>
-                        <div className="bg-primary-50 rounded-lg p-2">
-                          <p className="text-xs text-gray-600">Depth</p>
-                          <p className="text-sm font-bold text-primary-700">{getSelectedBoxSize().depth}cm</p>
-                        </div>
-                      </div>
-
-                      {getSelectedBoxSize().maxItems && (
-                        <div className="mt-3 bg-green-50 border border-green-200 rounded-lg p-2 text-center">
-                          <p className="text-xs text-green-700">
-                            <span className="font-bold">Capacity:</span> Up to {getSelectedBoxSize().maxItems} items
-                          </p>
-                        </div>
-                      )}
-                    </div>
-                    <p className="text-sm font-semibold text-center text-primary-800">
-                      {selectedOptions['Box Size']}
                     </p>
                   </div>
                 )}
