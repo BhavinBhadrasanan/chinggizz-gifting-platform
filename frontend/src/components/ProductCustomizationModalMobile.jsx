@@ -40,16 +40,16 @@ export default function ProductCustomizationModalMobile({ product, isOpen, onClo
     return labels[type] || 'Option';
   };
 
-  // Get box type image URL
+  // Get box type image URL - Using same images as HamperBuilderPage
   const getBoxTypeImage = (boxTypeName) => {
     const boxTypeImages = {
-      'Closed Box': 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=500',
-      'Open Display Box': 'https://images.unsplash.com/photo-1513885535751-8b9238bd345a?w=500',
-      'Transparent Box': 'https://images.unsplash.com/photo-1607083206968-13611e3d76db?w=500',
-      'Semi Transparent Box': 'https://images.unsplash.com/photo-1606914469633-bd39206ea739?w=500',
-      'Theme Based Hamper': 'https://images.unsplash.com/photo-1513885535751-8b9238bd345a?w=500'
+      'Closed Box': '/hamperboxtypes/Gift-Hamper-Box-For-Packaging-In-Bulk.webp',
+      'Open Display Box': '/hamperboxtypes/Cover_3943e81e-f566-4397-a68a-a9539cb3008b.webp',
+      'Transparent Box': '/hamperboxtypes/IMG20220924170938.webp',
+      'Semi Transparent Box': '/hamperboxtypes/NCOYghLIT1AvPSwkPI4.webp',
+      'Theme Based Hamper': '/hamperboxtypes/happiness-hamper-box-tearaja-3.webp'
     };
-    return boxTypeImages[boxTypeName] || 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=500';
+    return boxTypeImages[boxTypeName] || '/hamperboxtypes/Gift-Hamper-Box-For-Packaging-In-Bulk.webp';
   };
 
   // Get selected box size details for 3D preview
