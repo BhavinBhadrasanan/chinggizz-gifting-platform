@@ -215,27 +215,20 @@ export default function ProductCustomizationModalMobile({ product, isOpen, onClo
           {/* Scrollable Content */}
           <div className="flex-1 overflow-y-auto px-4 py-4 space-y-4 pb-4">
 
-            {/* Product Info - Enhanced */}
-            <div className="flex items-center gap-3 bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl p-3 border-2 border-gray-200 shadow-sm">
-              <div className="w-20 h-20 rounded-xl overflow-hidden bg-white shadow-md flex-shrink-0 ring-2 ring-primary-100">
+            {/* Product Info - Compact */}
+            <div className="flex items-center gap-2 bg-gray-50 rounded-lg p-2 border border-gray-200">
+              <div className="w-10 h-10 rounded-lg overflow-hidden bg-white flex-shrink-0">
                 {product.imageUrl ? (
                   <img src={product.imageUrl} alt={product.name} className="w-full h-full object-cover" />
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200">
-                    <Package className="h-10 w-10 text-gray-400" />
+                  <div className="w-full h-full flex items-center justify-center bg-gray-100">
+                    <Package className="h-5 w-5 text-gray-400" />
                   </div>
                 )}
               </div>
               <div className="flex-1 min-w-0">
-                <h3 className="text-base font-bold text-gray-900 mb-1.5 line-clamp-2">{product.name}</h3>
-                <div className="flex items-center gap-2 flex-wrap">
-                  <span className="text-xl font-bold text-primary-600">₹{product.price}</span>
-                  {product.isCustomizable && product.customizationCharge > 0 && (
-                    <span className="text-xs bg-green-100 text-green-700 px-2.5 py-1 rounded-full font-bold">
-                      +₹{product.customizationCharge}
-                    </span>
-                  )}
-                </div>
+                <h3 className="text-xs font-semibold text-gray-700 line-clamp-1">{product.name}</h3>
+                <span className="text-sm font-bold text-primary-600">₹{product.price}</span>
               </div>
             </div>
 
