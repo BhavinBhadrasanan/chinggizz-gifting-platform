@@ -248,8 +248,8 @@ export default function ProductCustomizationModalMobile({ product, isOpen, onClo
                           </span>
                         </div>
 
-                        {/* Price Badge - Hide for Box Type category */}
-                        {choice.price > 0 && optionGroup.category !== 'Box Type' && (
+                        {/* Price Badge - Hide for Box Type and Box Size categories */}
+                        {choice.price > 0 && optionGroup.category !== 'Box Type' && optionGroup.category !== 'Box Size' && (
                           <div className="flex justify-center">
                             <span className={`text-xs font-bold px-3 py-1 rounded-full inline-block ${
                               isSelected
