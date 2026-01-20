@@ -32,9 +32,9 @@ function Box3D({ widthCm, heightCm, depthCm, boxType }) {
   const isTransparent = boxType?.toLowerCase().includes('transparent');
 
   return (
-    <group ref={boxRef}>
+    <group ref={boxRef} position={[0, 0, 0]}>
       {/* Box Floor */}
-      <mesh position={[0, -0.05, 0]} castShadow receiveShadow>
+      <mesh position={[0, 0, 0]} castShadow receiveShadow>
         <boxGeometry args={[length, 0.1, width]} />
         <meshStandardMaterial
           color={boxColor}
@@ -45,7 +45,7 @@ function Box3D({ widthCm, heightCm, depthCm, boxType }) {
 
       {/* Box Walls - Transparent or Solid */}
       {/* Back Wall */}
-      <mesh position={[0, height / 2, -width / 2]}>
+      <mesh position={[0, height / 2 + 0.05, -width / 2]}>
         <boxGeometry args={[length, height, 0.1]} />
         <meshStandardMaterial
           color={boxColor}
@@ -58,7 +58,7 @@ function Box3D({ widthCm, heightCm, depthCm, boxType }) {
       </mesh>
 
       {/* Left Wall */}
-      <mesh position={[-length / 2, height / 2, 0]}>
+      <mesh position={[-length / 2, height / 2 + 0.05, 0]}>
         <boxGeometry args={[0.1, height, width]} />
         <meshStandardMaterial
           color={boxColor}
@@ -71,7 +71,7 @@ function Box3D({ widthCm, heightCm, depthCm, boxType }) {
       </mesh>
 
       {/* Right Wall */}
-      <mesh position={[length / 2, height / 2, 0]}>
+      <mesh position={[length / 2, height / 2 + 0.05, 0]}>
         <boxGeometry args={[0.1, height, width]} />
         <meshStandardMaterial
           color={boxColor}
@@ -84,7 +84,7 @@ function Box3D({ widthCm, heightCm, depthCm, boxType }) {
       </mesh>
 
       {/* Front Wall */}
-      <mesh position={[0, height / 2, width / 2]}>
+      <mesh position={[0, height / 2 + 0.05, width / 2]}>
         <boxGeometry args={[length, height, 0.1]} />
         <meshStandardMaterial
           color={boxColor}
@@ -112,18 +112,18 @@ export default function CartBoxPreview3D({ widthCm, heightCm, depthCm, boxType }
       </div>
       
       {/* 3D Canvas */}
-      <div className="relative w-full h-32 bg-gradient-to-br from-white to-gray-50 rounded-lg overflow-hidden">
+      <div className="relative w-full h-40 bg-gradient-to-br from-white to-gray-50 rounded-lg overflow-hidden">
         <Canvas
           shadows
           dpr={[1, 2]}
           gl={{ antialias: true, alpha: true }}
         >
           <Suspense fallback={null}>
-            {/* Camera */}
+            {/* Camera - Positioned further back to show complete box */}
             <PerspectiveCamera
               makeDefault
-              position={[3, 2.5, 3]}
-              fov={50}
+              position={[4, 3, 4]}
+              fov={45}
             />
 
             {/* Lights */}
@@ -144,11 +144,11 @@ export default function CartBoxPreview3D({ widthCm, heightCm, depthCm, boxType }
 
             {/* Ground Shadows */}
             <ContactShadows
-              position={[0, -0.05, 0]}
+              position={[0, 0, 0]}
               opacity={0.3}
-              scale={5}
+              scale={6}
               blur={1.5}
-              far={2}
+              far={3}
             />
           </Suspense>
         </Canvas>
