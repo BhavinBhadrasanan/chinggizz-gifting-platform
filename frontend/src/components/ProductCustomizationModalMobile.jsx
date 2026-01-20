@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { X, Upload, ShoppingCart, Sparkles, Package, Image as ImageIcon } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import toast from 'react-hot-toast';
@@ -11,12 +11,22 @@ export default function ProductCustomizationModalMobile({ product, isOpen, onClo
   const [totalPrice, setTotalPrice] = useState(product?.price || 0);
   const [showBoxPreview, setShowBoxPreview] = useState(false);
   const [previewType, setPreviewType] = useState(null); // 'boxType' or 'boxSize'
+  const previewTimeoutRef = useRef(null);
 
   useEffect(() => {
     if (product) {
       calculateTotalPrice();
     }
   }, [selectedOptions, quantity, product]);
+
+  // Cleanup timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (previewTimeoutRef.current) {
+        clearTimeout(previewTimeoutRef.current);
+      }
+    };
+  }, []);
 
   if (!isOpen || !product) return null;
 
@@ -101,9 +111,19 @@ export default function ProductCustomizationModalMobile({ product, isOpen, onClo
 
     // Show box type image preview only
     if (category === 'Box Type') {
+      // Clear any existing timeout
+      if (previewTimeoutRef.current) {
+        clearTimeout(previewTimeoutRef.current);
+      }
+
       setPreviewType('boxType');
       setShowBoxPreview(true);
-      setTimeout(() => setShowBoxPreview(false), 3000); // Hide after 3 seconds
+
+      // Set new timeout and store reference
+      previewTimeoutRef.current = setTimeout(() => {
+        setShowBoxPreview(false);
+        previewTimeoutRef.current = null;
+      }, 6000); // Hide after 6 seconds (increased from 3)
     }
 
     if (category === 'Type' && customizationOptions?.type === 'caricature') {
