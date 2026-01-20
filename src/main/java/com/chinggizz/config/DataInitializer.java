@@ -155,11 +155,6 @@ public class DataInitializer implements CommandLineRunner {
                     "{\"name\":\"Small (4×6 inch)\",\"price\":0,\"width\":10,\"height\":15}," +
                     "{\"name\":\"Medium (5×7 inch)\",\"price\":150,\"width\":13,\"height\":18}," +
                     "{\"name\":\"Large (8×10 inch)\",\"price\":300,\"width\":20,\"height\":25}" +
-                "]}," +
-                "{\"category\":\"Wood Type\",\"choices\":[" +
-                    "{\"name\":\"Walnut\",\"price\":0,\"description\":\"Rich dark brown wood\"}," +
-                    "{\"name\":\"Oak\",\"price\":100,\"description\":\"Classic light wood\"}," +
-                    "{\"name\":\"Mahogany\",\"price\":200,\"description\":\"Premium reddish-brown wood\"}" +
                 "]}" +
             "]}");
 
