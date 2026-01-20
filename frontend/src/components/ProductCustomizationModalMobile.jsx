@@ -201,10 +201,12 @@ export default function ProductCustomizationModalMobile({ product, isOpen, onClo
     }
 
     let customDimensions = null;
-    if (selectedOptions['Size']) {
+    // Check for both 'Size' and 'Box Size' categories (Hamper Boxes use 'Box Size')
+    const sizeCategory = selectedOptions['Box Size'] ? 'Box Size' : 'Size';
+    if (selectedOptions[sizeCategory]) {
       const sizeOption = optionsArray
-        .find(opt => opt.category === 'Size')
-        ?.choices.find(choice => choice.name === selectedOptions['Size']);
+        .find(opt => opt.category === sizeCategory)
+        ?.choices.find(choice => choice.name === selectedOptions[sizeCategory]);
 
       if (sizeOption) {
         customDimensions = {
