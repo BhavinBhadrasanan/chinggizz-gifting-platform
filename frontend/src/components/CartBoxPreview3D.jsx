@@ -8,7 +8,7 @@ import { Package } from 'lucide-react';
  */
 function Box3D({ widthCm, heightCm, depthCm, boxType }) {
   const boxRef = useRef();
-  
+
   // Auto-rotate the box
   useFrame(() => {
     if (boxRef.current) {
@@ -20,6 +20,8 @@ function Box3D({ widthCm, heightCm, depthCm, boxType }) {
   const length = widthCm / 10;
   const height = heightCm / 10;
   const width = depthCm / 10;
+
+  console.log('📦 Box3D rendering:', { widthCm, heightCm, depthCm, length, height, width, boxType });
 
   // Determine box color based on type
   const getBoxColor = () => {
@@ -104,21 +106,71 @@ function Box3D({ widthCm, heightCm, depthCm, boxType }) {
  * Displays a realistic 3D rotating box with dimensions
  */
 export default function CartBoxPreview3D({ widthCm, heightCm, depthCm, boxType }) {
+  const [error, setError] = React.useState(false);
+
+  if (error) {
+    // Fallback to simple CSS 3D if WebGL fails
+    return (
+      <div className="bg-gradient-to-br from-primary-50 to-secondary-50 rounded-lg p-3 border border-primary-200">
+        <div className="flex items-center gap-2 mb-2">
+          <Package className="h-4 w-4 text-primary-600" />
+          <p className="text-xs font-bold text-primary-900">Your Selected Box</p>
+        </div>
+
+        {/* Simple 2D Box Preview */}
+        <div className="relative w-full h-40 bg-gradient-to-br from-white to-gray-50 rounded-lg flex items-center justify-center">
+          <div className="text-center">
+            <Package className="h-16 w-16 text-amber-600 mx-auto mb-2" />
+            <p className="text-xs text-gray-600">{boxType}</p>
+          </div>
+        </div>
+
+        {/* Dimensions */}
+        <div className="grid grid-cols-3 gap-2 text-center mt-3">
+          <div className="bg-white rounded-lg p-2">
+            <p className="text-[10px] text-gray-600">Width</p>
+            <p className="text-xs font-bold text-primary-700">{widthCm}cm</p>
+          </div>
+          <div className="bg-white rounded-lg p-2">
+            <p className="text-[10px] text-gray-600">Height</p>
+            <p className="text-xs font-bold text-primary-700">{heightCm}cm</p>
+          </div>
+          <div className="bg-white rounded-lg p-2">
+            <p className="text-[10px] text-gray-600">Depth</p>
+            <p className="text-xs font-bold text-primary-700">{depthCm}cm</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="bg-gradient-to-br from-primary-50 to-secondary-50 rounded-lg p-3 border border-primary-200">
       <div className="flex items-center gap-2 mb-2">
         <Package className="h-4 w-4 text-primary-600" />
         <p className="text-xs font-bold text-primary-900">Your Selected Box</p>
       </div>
-      
+
       {/* 3D Canvas */}
       <div className="relative w-full h-40 bg-gradient-to-br from-white to-gray-50 rounded-lg overflow-hidden">
         <Canvas
           shadows
           dpr={[1, 2]}
           gl={{ antialias: true, alpha: true }}
+          onCreated={({ gl }) => {
+            console.log('✅ Cart 3D Canvas created');
+          }}
+          onError={(error) => {
+            console.error('❌ Cart 3D Canvas error:', error);
+            setError(true);
+          }}
         >
-          <Suspense fallback={null}>
+          <Suspense fallback={
+            <mesh>
+              <boxGeometry args={[1, 1, 1]} />
+              <meshBasicMaterial color="#F5E6D3" />
+            </mesh>
+          }>
             {/* Camera - Positioned further back to show complete box */}
             <PerspectiveCamera
               makeDefault
@@ -126,18 +178,27 @@ export default function CartBoxPreview3D({ widthCm, heightCm, depthCm, boxType }
               fov={45}
             />
 
+            {/* Orbit Controls for debugging */}
+            <OrbitControls
+              enableZoom={false}
+              enablePan={false}
+              autoRotate={false}
+              minPolarAngle={Math.PI / 4}
+              maxPolarAngle={Math.PI / 2}
+            />
+
             {/* Lights */}
-            <ambientLight intensity={0.6} />
-            <directionalLight position={[5, 5, 5]} intensity={0.8} castShadow />
-            <pointLight position={[-5, 5, -5]} intensity={0.4} />
+            <ambientLight intensity={0.8} />
+            <directionalLight position={[5, 5, 5]} intensity={1.0} castShadow />
+            <pointLight position={[-5, 5, -5]} intensity={0.5} />
 
             {/* Environment for reflections */}
             <Environment preset="sunset" />
 
             {/* 3D Box */}
-            <Box3D 
-              widthCm={widthCm} 
-              heightCm={heightCm} 
+            <Box3D
+              widthCm={widthCm}
+              heightCm={heightCm}
               depthCm={depthCm}
               boxType={boxType}
             />
