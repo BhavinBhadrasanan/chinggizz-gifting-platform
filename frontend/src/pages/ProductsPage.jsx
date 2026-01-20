@@ -429,7 +429,16 @@ export default function ProductsPage() {
                   {/* Glassy overlay on hover - mobile optimized */}
                   <div className="absolute inset-0 bg-gradient-to-br from-primary-500/0 to-secondary-500/0 group-hover:from-primary-500/5 group-hover:to-secondary-500/5 transition-all duration-300 pointer-events-none z-10"></div>
 
-                  <div className="relative h-56 bg-gradient-to-br from-primary-100 via-primary-50 to-secondary-100 overflow-hidden">
+                  <div
+                    className="relative h-56 bg-gradient-to-br from-primary-100 via-primary-50 to-secondary-100 overflow-hidden md:cursor-default cursor-pointer"
+                    onClick={(e) => {
+                      // Only trigger on mobile (< 768px)
+                      if (window.innerWidth < 768) {
+                        e.stopPropagation();
+                        handleProductClick(product);
+                      }
+                    }}
+                  >
                     {product.imageUrl ? (
                       <img
                         src={product.imageUrl}
@@ -589,7 +598,16 @@ export default function ProductsPage() {
               return (
                 <div key={product.id} className={`card hover:shadow-xl transition-all group ${willNotFit ? 'opacity-90' : ''}`}>
                   <div className="flex flex-col md:flex-row">
-                    <div className="relative md:w-64 h-48 md:h-auto bg-gradient-to-br from-primary-100 to-secondary-100 overflow-hidden flex-shrink-0">
+                    <div
+                      className="relative md:w-64 h-48 md:h-auto bg-gradient-to-br from-primary-100 to-secondary-100 overflow-hidden flex-shrink-0 md:cursor-default cursor-pointer"
+                      onClick={(e) => {
+                        // Only trigger on mobile (< 768px)
+                        if (window.innerWidth < 768) {
+                          e.stopPropagation();
+                          handleProductClick(product);
+                        }
+                      }}
+                    >
                       {product.imageUrl ? (
                         <img
                           src={product.imageUrl}

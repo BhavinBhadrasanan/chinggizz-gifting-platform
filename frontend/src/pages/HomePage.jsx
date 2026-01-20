@@ -304,7 +304,16 @@ export default function HomePage() {
                   <div className="absolute inset-0 bg-gradient-to-br from-primary-500/0 to-secondary-500/0 group-hover:from-primary-500/5 group-hover:to-secondary-500/5 transition-all duration-300 pointer-events-none z-10"></div>
 
                   {/* Product Image */}
-                  <div className="aspect-square bg-gradient-to-br from-neutral-100 via-neutral-50 to-neutral-100 flex items-center justify-center relative overflow-hidden">
+                  <div
+                    className="aspect-square bg-gradient-to-br from-neutral-100 via-neutral-50 to-neutral-100 flex items-center justify-center relative overflow-hidden md:cursor-default cursor-pointer"
+                    onClick={(e) => {
+                      // Only trigger on mobile (< 768px)
+                      if (window.innerWidth < 768) {
+                        e.stopPropagation();
+                        handleAddToCart(product);
+                      }
+                    }}
+                  >
                     {product.imageUrl ? (
                       <img
                         src={product.imageUrl}
@@ -319,7 +328,7 @@ export default function HomePage() {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent pointer-events-none"></div>
 
                     {/* Badges - Enhanced */}
-                    <div className="absolute top-3 left-3 right-3 flex items-start justify-between z-20">
+                    <div className="absolute top-3 left-3 right-3 flex items-start justify-between z-20 pointer-events-none">
                       {product.isCustomizable && (
                         <span className="inline-flex items-center gap-1 bg-gradient-to-r from-primary-500 to-primary-600 text-white px-3 py-1.5 rounded-full shadow-lg text-xs font-bold backdrop-blur-sm">
                           <Sparkles className="h-3 w-3" />
