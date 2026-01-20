@@ -1,0 +1,89 @@
+╔═══════════════════════════════════════════════════════════════════════╗
+║                                                                       ║
+║   📝 APPLY DATABASE UPDATE - Wooden Engraved Photo Stand             ║
+║                                                                       ║
+╚═══════════════════════════════════════════════════════════════════════╝
+
+🎯 WHAT THIS UPDATE DOES:
+   Removes the "Wood Type" customization option from Wooden Engraved Photo Stand
+   Only "Size" selection will remain (Small, Medium, Large)
+
+📋 INSTRUCTIONS:
+
+METHOD 1: Using Supabase Dashboard (RECOMMENDED)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. Open Supabase Dashboard
+   → https://supabase.com/dashboard
+
+2. Select your project
+   → Click on your Chinggizz project
+
+3. Go to SQL Editor
+   → Click "SQL Editor" in the left sidebar
+
+4. Open the migration file
+   → Open: database/update-wooden-stand-remove-wood-type.sql
+   → Copy the entire SQL content
+
+5. Paste and Run
+   → Paste the SQL into Supabase SQL Editor
+   → Click "Run" button
+
+6. Verify the result
+   → You should see the updated product details
+   → customization_options should only contain "Size" category
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+METHOD 2: Using psql Command Line
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+psql "postgresql://postgres.iqxqxqxqxqxqxqxq:Chinggizz@2024Secure!@aws-1-ap-south-1.pooler.supabase.com:5432/postgres?sslmode=require" -f database/update-wooden-stand-remove-wood-type.sql
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ AFTER APPLYING THE UPDATE:
+
+1. Restart the backend server (if running)
+2. Clear browser cache or hard refresh (Ctrl+Shift+R)
+3. Test the Wooden Engraved Photo Stand product
+4. Verify only "Size" option appears (no "Wood Type")
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📝 EXPECTED RESULT:
+
+BEFORE:
+┌─────────────────────────┐
+│ 1️⃣ Select Size          │
+│   - Small (4×6 inch)    │
+│   - Medium (5×7 inch)   │
+│   - Large (8×10 inch)   │
+├─────────────────────────┤
+│ 2️⃣ Select Wood Type     │  ← THIS WILL BE REMOVED
+│   - Walnut              │
+│   - Oak                 │
+│   - Mahogany            │
+└─────────────────────────┘
+
+AFTER:
+┌─────────────────────────┐
+│ 1️⃣ Select Size          │
+│   - Small (4×6 inch)    │
+│   - Medium (5×7 inch)   │
+│   - Large (8×10 inch)   │
+└─────────────────────────┘
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🔍 TROUBLESHOOTING:
+
+If the change doesn't appear:
+1. Clear browser cache (Ctrl+Shift+R)
+2. Restart backend server
+3. Check if SQL was executed successfully in Supabase
+4. Verify the product name is exactly "Wooden Engraved Photo Stand"
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
