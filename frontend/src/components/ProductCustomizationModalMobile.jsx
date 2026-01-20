@@ -217,39 +217,48 @@ export default function ProductCustomizationModalMobile({ product, isOpen, onClo
                   </span>
                   <span className="text-base font-bold text-white">Select {optionGroup.category}</span>
                 </div>
-                <div className="p-3 grid grid-cols-2 gap-2.5">
+                <div className="p-4 grid grid-cols-2 gap-3">
                   {optionGroup.choices.map((choice, choiceIndex) => {
                     const isSelected = selectedOptions[optionGroup.category] === choice.name;
                     return (
                       <button
                         key={choiceIndex}
                         onClick={() => handleOptionSelect(optionGroup.category, choice.name)}
-                        className={`p-3.5 rounded-xl border-2 transition-all duration-200 active:scale-95 ${
+                        className={`relative p-4 rounded-2xl border-[3px] transition-all duration-300 active:scale-95 min-h-[80px] flex flex-col justify-center ${
                           isSelected
-                            ? 'border-primary-600 bg-gradient-to-br from-primary-500 to-primary-600 shadow-lg'
-                            : 'border-gray-400 bg-white hover:border-primary-400 hover:shadow-md'
+                            ? 'border-primary-600 bg-gradient-to-br from-primary-500 to-primary-600 shadow-xl shadow-primary-200'
+                            : 'border-gray-300 bg-white hover:border-primary-400 hover:shadow-lg shadow-md'
                         }`}
                       >
-                        <div className="flex items-center justify-between gap-1 mb-1">
-                          <span className={`text-sm font-bold truncate ${
-                            isSelected ? 'text-white' : 'text-gray-800'
+                        {/* Checkmark Badge - Top Right */}
+                        {isSelected && (
+                          <div className="absolute -top-2 -right-2 bg-white rounded-full p-1 shadow-lg">
+                            <div className="bg-gradient-to-br from-green-400 to-green-600 text-white w-6 h-6 rounded-full flex items-center justify-center">
+                              <span className="text-sm font-bold">✓</span>
+                            </div>
+                          </div>
+                        )}
+
+                        {/* Option Name */}
+                        <div className="mb-2">
+                          <span className={`text-base font-bold block text-center leading-tight ${
+                            isSelected ? 'text-white' : 'text-gray-900'
                           }`}>
                             {choice.name}
                           </span>
-                          {isSelected && (
-                            <span className="bg-white text-primary-600 w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold">
-                              ✓
-                            </span>
-                          )}
                         </div>
+
+                        {/* Price Badge */}
                         {choice.price > 0 && (
-                          <span className={`text-xs font-bold px-2 py-0.5 rounded-full inline-block ${
-                            isSelected
-                              ? 'bg-white text-primary-600'
-                              : 'bg-green-50 text-green-600'
-                          }`}>
-                            +₹{choice.price}
-                          </span>
+                          <div className="flex justify-center">
+                            <span className={`text-xs font-bold px-3 py-1 rounded-full inline-block ${
+                              isSelected
+                                ? 'bg-white text-primary-600 shadow-md'
+                                : 'bg-green-50 text-green-700 border border-green-200'
+                            }`}>
+                              +₹{choice.price}
+                            </span>
+                          </div>
                         )}
                       </button>
                     );
