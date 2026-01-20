@@ -171,11 +171,12 @@ export default function CartBoxPreview3D({ widthCm, heightCm, depthCm, boxType }
               <meshBasicMaterial color="#F5E6D3" />
             </mesh>
           }>
-            {/* Camera - Positioned further back to show complete box */}
+            {/* Camera - Positioned to show box centered and slightly lower */}
             <PerspectiveCamera
               makeDefault
-              position={[4, 3, 4]}
+              position={[4, 2, 4]}
               fov={45}
+              lookAt={[0, 1, 0]}
             />
 
             {/* Orbit Controls for debugging */}
@@ -183,6 +184,7 @@ export default function CartBoxPreview3D({ widthCm, heightCm, depthCm, boxType }
               enableZoom={false}
               enablePan={false}
               autoRotate={false}
+              target={[0, 1, 0]}
               minPolarAngle={Math.PI / 4}
               maxPolarAngle={Math.PI / 2}
             />
