@@ -4,7 +4,7 @@ import { OrbitControls, PerspectiveCamera, Environment, ContactShadows } from '@
 import { Package } from 'lucide-react';
 
 /**
- * 3D Box Component - Closed gift box with lid on top
+ * 3D Box Component - Simple container box with lid
  */
 function Box3D({ widthCm, heightCm, depthCm, boxType }) {
   const boxRef = useRef();
@@ -25,70 +25,80 @@ function Box3D({ widthCm, heightCm, depthCm, boxType }) {
 
   // Determine box color based on type
   const getBoxColor = () => {
-    if (boxType?.toLowerCase().includes('transparent')) return '#F5E6D3';
+    if (boxType?.toLowerCase().includes('transparent')) return '#E8D5C4';
     if (boxType?.toLowerCase().includes('closed')) return '#D4A574';
-    return '#F5E6D3';
+    return '#E8D5C4';
   };
 
   const boxColor = getBoxColor();
   const isTransparent = boxType?.toLowerCase().includes('transparent');
 
-  // Lid dimensions (slightly larger than box body)
-  const lidHeight = 0.3;
-  const lidOverhang = 0.1;
+  // Wall thickness
+  const wallThickness = 0.08;
 
   return (
     <group ref={boxRef} position={[0, 0, 0]}>
-      {/* Box Body - Main container */}
-      <mesh position={[0, height / 2, 0]} castShadow receiveShadow>
-        <boxGeometry args={[length, height, width]} />
+      {/* Bottom */}
+      <mesh position={[0, wallThickness / 2, 0]} castShadow receiveShadow>
+        <boxGeometry args={[length, wallThickness, width]} />
         <meshStandardMaterial
           color={boxColor}
-          roughness={0.6}
+          roughness={0.7}
+          metalness={0.1}
+        />
+      </mesh>
+
+      {/* Front Wall */}
+      <mesh position={[0, height / 2, width / 2]} castShadow receiveShadow>
+        <boxGeometry args={[length, height, wallThickness]} />
+        <meshStandardMaterial
+          color={boxColor}
+          roughness={0.7}
           metalness={0.1}
           transparent={isTransparent}
           opacity={isTransparent ? 0.3 : 1.0}
         />
       </mesh>
 
-      {/* Box Lid - Sits on top */}
-      <mesh position={[0, height + lidHeight / 2, 0]} castShadow receiveShadow>
-        <boxGeometry args={[length + lidOverhang, lidHeight, width + lidOverhang]} />
+      {/* Back Wall */}
+      <mesh position={[0, height / 2, -width / 2]} castShadow receiveShadow>
+        <boxGeometry args={[length, height, wallThickness]} />
         <meshStandardMaterial
           color={boxColor}
-          roughness={0.5}
-          metalness={0.2}
+          roughness={0.7}
+          metalness={0.1}
+        />
+      </mesh>
+
+      {/* Left Wall */}
+      <mesh position={[-length / 2, height / 2, 0]} castShadow receiveShadow>
+        <boxGeometry args={[wallThickness, height, width]} />
+        <meshStandardMaterial
+          color={boxColor}
+          roughness={0.7}
+          metalness={0.1}
+        />
+      </mesh>
+
+      {/* Right Wall */}
+      <mesh position={[length / 2, height / 2, 0]} castShadow receiveShadow>
+        <boxGeometry args={[wallThickness, height, width]} />
+        <meshStandardMaterial
+          color={boxColor}
+          roughness={0.7}
+          metalness={0.1}
+        />
+      </mesh>
+
+      {/* Lid - Flat top cover */}
+      <mesh position={[0, height + wallThickness / 2, 0]} castShadow receiveShadow>
+        <boxGeometry args={[length, wallThickness, width]} />
+        <meshStandardMaterial
+          color={boxColor}
+          roughness={0.6}
+          metalness={0.15}
           transparent={isTransparent}
           opacity={isTransparent ? 0.4 : 1.0}
-        />
-      </mesh>
-
-      {/* Ribbon - Decorative element on lid */}
-      <mesh position={[0, height + lidHeight + 0.05, 0]} castShadow>
-        <boxGeometry args={[0.2, 0.1, width + lidOverhang + 0.1]} />
-        <meshStandardMaterial
-          color="#C41E3A"
-          roughness={0.3}
-          metalness={0.5}
-        />
-      </mesh>
-
-      <mesh position={[0, height + lidHeight + 0.05, 0]} castShadow>
-        <boxGeometry args={[length + lidOverhang + 0.1, 0.1, 0.2]} />
-        <meshStandardMaterial
-          color="#C41E3A"
-          roughness={0.3}
-          metalness={0.5}
-        />
-      </mesh>
-
-      {/* Ribbon Bow - Center decoration */}
-      <mesh position={[0, height + lidHeight + 0.2, 0]} castShadow>
-        <sphereGeometry args={[0.25, 16, 16]} />
-        <meshStandardMaterial
-          color="#C41E3A"
-          roughness={0.3}
-          metalness={0.5}
         />
       </mesh>
     </group>
