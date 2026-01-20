@@ -4,7 +4,7 @@ import { OrbitControls, PerspectiveCamera, Environment, ContactShadows } from '@
 import { Package } from 'lucide-react';
 
 /**
- * 3D Box Component - Realistic transparent gift box
+ * 3D Box Component - Closed gift box with lid on top
  */
 function Box3D({ widthCm, heightCm, depthCm, boxType }) {
   const boxRef = useRef();
@@ -33,68 +33,62 @@ function Box3D({ widthCm, heightCm, depthCm, boxType }) {
   const boxColor = getBoxColor();
   const isTransparent = boxType?.toLowerCase().includes('transparent');
 
+  // Lid dimensions (slightly larger than box body)
+  const lidHeight = 0.3;
+  const lidOverhang = 0.1;
+
   return (
     <group ref={boxRef} position={[0, 0, 0]}>
-      {/* Box Floor */}
-      <mesh position={[0, 0, 0]} castShadow receiveShadow>
-        <boxGeometry args={[length, 0.1, width]} />
+      {/* Box Body - Main container */}
+      <mesh position={[0, height / 2, 0]} castShadow receiveShadow>
+        <boxGeometry args={[length, height, width]} />
         <meshStandardMaterial
           color={boxColor}
           roughness={0.6}
           metalness={0.1}
+          transparent={isTransparent}
+          opacity={isTransparent ? 0.3 : 1.0}
         />
       </mesh>
 
-      {/* Box Walls - Transparent or Solid */}
-      {/* Back Wall */}
-      <mesh position={[0, height / 2 + 0.05, -width / 2]}>
-        <boxGeometry args={[length, height, 0.1]} />
+      {/* Box Lid - Sits on top */}
+      <mesh position={[0, height + lidHeight / 2, 0]} castShadow receiveShadow>
+        <boxGeometry args={[length + lidOverhang, lidHeight, width + lidOverhang]} />
         <meshStandardMaterial
           color={boxColor}
-          roughness={0.1}
-          metalness={0.3}
+          roughness={0.5}
+          metalness={0.2}
           transparent={isTransparent}
-          opacity={isTransparent ? 0.25 : 0.9}
-          envMapIntensity={1.5}
+          opacity={isTransparent ? 0.4 : 1.0}
         />
       </mesh>
 
-      {/* Left Wall */}
-      <mesh position={[-length / 2, height / 2 + 0.05, 0]}>
-        <boxGeometry args={[0.1, height, width]} />
+      {/* Ribbon - Decorative element on lid */}
+      <mesh position={[0, height + lidHeight + 0.05, 0]} castShadow>
+        <boxGeometry args={[0.2, 0.1, width + lidOverhang + 0.1]} />
         <meshStandardMaterial
-          color={boxColor}
-          roughness={0.1}
-          metalness={0.3}
-          transparent={isTransparent}
-          opacity={isTransparent ? 0.25 : 0.9}
-          envMapIntensity={1.5}
+          color="#C41E3A"
+          roughness={0.3}
+          metalness={0.5}
         />
       </mesh>
 
-      {/* Right Wall */}
-      <mesh position={[length / 2, height / 2 + 0.05, 0]}>
-        <boxGeometry args={[0.1, height, width]} />
+      <mesh position={[0, height + lidHeight + 0.05, 0]} castShadow>
+        <boxGeometry args={[length + lidOverhang + 0.1, 0.1, 0.2]} />
         <meshStandardMaterial
-          color={boxColor}
-          roughness={0.1}
-          metalness={0.3}
-          transparent={isTransparent}
-          opacity={isTransparent ? 0.25 : 0.9}
-          envMapIntensity={1.5}
+          color="#C41E3A"
+          roughness={0.3}
+          metalness={0.5}
         />
       </mesh>
 
-      {/* Front Wall */}
-      <mesh position={[0, height / 2 + 0.05, width / 2]}>
-        <boxGeometry args={[length, height, 0.1]} />
+      {/* Ribbon Bow - Center decoration */}
+      <mesh position={[0, height + lidHeight + 0.2, 0]} castShadow>
+        <sphereGeometry args={[0.25, 16, 16]} />
         <meshStandardMaterial
-          color={boxColor}
-          roughness={0.1}
-          metalness={0.3}
-          transparent={isTransparent}
-          opacity={isTransparent ? 0.25 : 0.9}
-          envMapIntensity={1.5}
+          color="#C41E3A"
+          roughness={0.3}
+          metalness={0.5}
         />
       </mesh>
     </group>
