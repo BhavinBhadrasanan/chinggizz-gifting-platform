@@ -227,22 +227,34 @@ export default function Cart() {
               </span>
             </div>
 
-            {/* Build Your Own Hamper Button */}
-            <button
-              onClick={() => {
-                setIsCartOpen(false);
-                // Scroll to top for smooth transition
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-                // Navigate to hamper builder
-                setTimeout(() => {
-                  navigate('/hamper-builder');
-                }, 100);
-              }}
-              className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-bold text-sm sm:text-base py-2.5 sm:py-3 px-3 sm:px-4 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 shadow-md hover:shadow-lg"
-            >
-              <Sparkles className="h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" />
-              <span className="truncate">Build Your Own Hamper</span>
-            </button>
+            {/* Build Your Own Hamper Button - Only show if cart has items that are NOT just hamper boxes */}
+            {(() => {
+              // Check if cart has only hamper boxes (product name contains "Hamper Box")
+              const hasOnlyHamperBoxes = cartItems.length > 0 &&
+                cartItems.every(item => item.name && item.name.toLowerCase().includes('hamper box'));
+
+              // Only show "Build Your Own Hamper" if there are non-hamper-box items
+              if (!hasOnlyHamperBoxes && cartItems.length > 0) {
+                return (
+                  <button
+                    onClick={() => {
+                      setIsCartOpen(false);
+                      // Scroll to top for smooth transition
+                      window.scrollTo({ top: 0, behavior: 'smooth' });
+                      // Navigate to hamper builder
+                      setTimeout(() => {
+                        navigate('/hamper-builder');
+                      }, 100);
+                    }}
+                    className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-bold text-sm sm:text-base py-2.5 sm:py-3 px-3 sm:px-4 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 shadow-md hover:shadow-lg"
+                  >
+                    <Sparkles className="h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" />
+                    <span className="truncate">Build Your Own Hamper</span>
+                  </button>
+                );
+              }
+              return null;
+            })()}
 
             {/* Proceed to Checkout Button */}
             <button

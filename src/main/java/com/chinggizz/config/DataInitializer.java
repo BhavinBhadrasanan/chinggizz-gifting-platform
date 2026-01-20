@@ -517,18 +517,26 @@ public class DataInitializer implements CommandLineRunner {
         // 🎁 GIFT BOXES CATEGORY
         // ========================================
 
-        // 22. Hamper Boxes - with Size Variants
+        // 22. Hamper Boxes - with Size Variants and Box Types
         createProductWithOptions("Hamper Boxes",
-            "Create your perfect gift hamper! Choose from different box sizes and fill with your favorite items.",
+            "Create your perfect gift hamper! Choose from different box types and sizes, then fill with your favorite items.",
             new BigDecimal("199.00"), ProductType.HAMPER_BOX, hamperBoxes,
             "https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=500",
             false, BigDecimal.ZERO, 100,
             new BigDecimal("25"), new BigDecimal("25"), new BigDecimal("10"),
             "{\"type\":\"hamper_size\",\"options\":[" +
+                "{\"category\":\"Box Type\",\"choices\":[" +
+                    "{\"name\":\"Closed Box\",\"price\":0,\"description\":\"Traditional closed gift box with lid\"}," +
+                    "{\"name\":\"Open Display Box\",\"price\":50,\"description\":\"Open box for visible display\"}," +
+                    "{\"name\":\"Transparent Box\",\"price\":100,\"description\":\"Clear box to showcase contents\"}," +
+                    "{\"name\":\"Semi Transparent Box\",\"price\":150,\"description\":\"Luxury packaging with ribbon\"}," +
+                    "{\"name\":\"Theme Based Hamper\",\"price\":120,\"description\":\"For your special occasion\"}" +
+                "]}," +
                 "{\"category\":\"Box Size\",\"choices\":[" +
-                    "{\"name\":\"Small Gift Box\",\"price\":0,\"maxItems\":5,\"description\":\"Perfect for 3-5 items. Ideal for personal gifts.\",\"width\":25,\"height\":25,\"depth\":10}," +
-                    "{\"name\":\"Medium Gift Box\",\"price\":150,\"maxItems\":10,\"description\":\"Spacious box for 6-10 items. Great for celebrations.\",\"width\":35,\"height\":35,\"depth\":15}," +
-                    "{\"name\":\"Large Gift Box\",\"price\":400,\"maxItems\":15,\"description\":\"Premium box for 10-15 items. Perfect for special occasions.\",\"width\":45,\"height\":45,\"depth\":20}" +
+                    "{\"name\":\"Small Gift Box\",\"price\":0,\"maxItems\":6,\"description\":\"Perfect for 3-6 items\",\"width\":20,\"height\":15,\"depth\":8}," +
+                    "{\"name\":\"Small-Medium Gift Box\",\"price\":50,\"maxItems\":8,\"description\":\"Great for 6-8 items\",\"width\":23,\"height\":18,\"depth\":10}," +
+                    "{\"name\":\"Medium Gift Box\",\"price\":100,\"maxItems\":9,\"description\":\"Ideal for 9 items\",\"width\":25,\"height\":20,\"depth\":10}," +
+                    "{\"name\":\"Large Gift Box\",\"price\":200,\"maxItems\":12,\"description\":\"Best for 12 items\",\"width\":30,\"height\":25,\"depth\":13}" +
                 "]}" +
             "]}");
 
