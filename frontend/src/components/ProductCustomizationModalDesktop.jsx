@@ -251,10 +251,13 @@ export default function ProductCustomizationModalDesktop({ product, isOpen, onCl
                                     {choice.width}×{choice.height} cm
                                   </span>
                                 )}
-                                {choice.price > 0 ? (
-                                  <span className="text-sm bg-green-100 text-green-700 font-bold px-3 py-1 rounded-full">+₹{choice.price}</span>
-                                ) : (
-                                  <span className="text-sm bg-blue-100 text-blue-700 font-bold px-3 py-1 rounded-full">Included</span>
+                                {/* Hide price badges for Box Type category */}
+                                {optionGroup.category !== 'Box Type' && (
+                                  choice.price > 0 ? (
+                                    <span className="text-sm bg-green-100 text-green-700 font-bold px-3 py-1 rounded-full">+₹{choice.price}</span>
+                                  ) : (
+                                    <span className="text-sm bg-blue-100 text-blue-700 font-bold px-3 py-1 rounded-full">Included</span>
+                                  )
                                 )}
                               </div>
                             </div>
