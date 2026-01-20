@@ -1480,3 +1480,31 @@ button, .btn-primary, .btn-secondary {
 .animate-shimmer {
   animation: shimmer 6s infinite ease-in-out;
 }
+
+/* 3D Box Preview Animations */
+@keyframes rotate3d {
+  0%, 100% {
+    transform: rotateY(0deg) rotateX(0deg);
+  }
+  25% {
+    transform: rotateY(15deg) rotateX(5deg);
+  }
+  50% {
+    transform: rotateY(0deg) rotateX(10deg);
+  }
+  75% {
+    transform: rotateY(-15deg) rotateX(5deg);
+  }
+}
+
+.animate-rotate3d {
+  animation: rotate3d 4s ease-in-out infinite;
+}
+
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.transform-style-3d {
+  transform-style: preserve-3d;
+}
