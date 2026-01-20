@@ -1347,9 +1347,9 @@ export default function HamperBuilderPage() {
                   </h3>
 
                   {/* Horizontal Scrollable Container */}
-                  <div className="relative">
-                    <div className="overflow-x-auto pb-4 hide-scrollbar">
-                      <div className="flex gap-3 sm:gap-4 px-2 min-w-max">
+                  <div className="relative -mx-2 sm:mx-0">
+                    <div className="overflow-x-auto overflow-y-visible pb-4 hide-scrollbar">
+                      <div className="flex gap-3 sm:gap-4 px-2" style={{ width: 'max-content' }}>
                         {HAMPER_BOX_TYPES.map((boxType) => (
                           <div
                             key={boxType.id}

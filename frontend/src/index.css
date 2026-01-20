@@ -25,6 +25,8 @@
 .hide-scrollbar {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
+  scroll-behavior: smooth;  /* Smooth scrolling */
+  -webkit-overflow-scrolling: touch;  /* iOS momentum scrolling */
 }
 
 .hide-scrollbar::-webkit-scrollbar {
