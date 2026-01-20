@@ -176,10 +176,9 @@ export default function CartBoxPreview3D({ widthCm, heightCm, depthCm, boxType }
               makeDefault
               position={[4, 2, 4]}
               fov={45}
-              lookAt={[0, 1, 0]}
             />
 
-            {/* Orbit Controls for debugging */}
+            {/* Orbit Controls - targets the box center */}
             <OrbitControls
               enableZoom={false}
               enablePan={false}
