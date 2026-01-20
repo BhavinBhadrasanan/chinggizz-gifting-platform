@@ -1,12 +1,32 @@
-import { X, Plus, Minus, ShoppingBag, Trash2, Sparkles } from 'lucide-react';
+import { X, Plus, Minus, ShoppingBag, Trash2, Sparkles, Package } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 export default function Cart() {
   const { cartItems, hampers, removeFromCart, removeHamperFromCart, updateQuantity, getCartTotal, getCartCount, isCartOpen, setIsCartOpen } = useCart();
   const navigate = useNavigate();
+  const [expandedBoxPreview, setExpandedBoxPreview] = useState(null);
 
   if (!isCartOpen) return null;
+
+  // Helper function to check if item is a Hamper Box
+  const isHamperBox = (item) => {
+    return item.name?.toLowerCase().includes('hamper box') ||
+           item.productType === 'HAMPER_BOX';
+  };
+
+  // Helper function to get box dimensions
+  const getBoxDimensions = (item) => {
+    if (item.customization?.dimensions) {
+      return item.customization.dimensions;
+    }
+    return {
+      widthCm: item.widthCm || 0,
+      heightCm: item.heightCm || 0,
+      depthCm: item.depthCm || 0
+    };
+  };
 
   return (
     <>
@@ -115,6 +135,57 @@ export default function Cart() {
                             </div>
                           ) : (
                             <p className="truncate">{item.customization}</p>
+                          )}
+                        </div>
+                      )}
+
+                      {/* 3D Box Preview for Hamper Boxes */}
+                      {isHamperBox(item) && getBoxDimensions(item).widthCm > 0 && (
+                        <div className="mb-2">
+                          <button
+                            onClick={() => setExpandedBoxPreview(expandedBoxPreview === `${item.id}-${index}` ? null : `${item.id}-${index}`)}
+                            className="w-full text-xs bg-primary-50 hover:bg-primary-100 text-primary-700 font-medium py-2 px-3 rounded-lg transition-colors flex items-center justify-center gap-2"
+                          >
+                            <Package className="h-4 w-4" />
+                            {expandedBoxPreview === `${item.id}-${index}` ? 'Hide' : 'View'} 3D Box Preview
+                          </button>
+
+                          {expandedBoxPreview === `${item.id}-${index}` && (
+                            <div className="mt-2 bg-gradient-to-br from-primary-50 to-secondary-50 rounded-lg p-3 border border-primary-200 animate-fadeIn">
+                              {/* 3D Box Visualization */}
+                              <div className="relative w-full h-32 flex items-center justify-center perspective-1000 mb-3">
+                                <div
+                                  className="relative transform-style-3d animate-rotate3d"
+                                  style={{
+                                    width: `${Math.min(getBoxDimensions(item).widthCm * 3, 120)}px`,
+                                    height: `${Math.min(getBoxDimensions(item).heightCm * 3, 120)}px`,
+                                  }}
+                                >
+                                  {/* Front face */}
+                                  <div className="absolute inset-0 bg-gradient-to-br from-amber-100 to-amber-200 border-2 border-amber-400 rounded-lg shadow-xl flex items-center justify-center">
+                                    <Package className="h-8 w-8 text-amber-600 opacity-50" />
+                                  </div>
+                                  {/* Top face */}
+                                  <div className="absolute inset-0 bg-gradient-to-br from-amber-200 to-amber-300 border-2 border-amber-500 rounded-lg shadow-xl opacity-70 transform -translate-y-2 -translate-x-2"></div>
+                                </div>
+                              </div>
+
+                              {/* Dimensions */}
+                              <div className="grid grid-cols-3 gap-2 text-center">
+                                <div className="bg-white rounded-lg p-2">
+                                  <p className="text-[10px] text-gray-600">Width</p>
+                                  <p className="text-xs font-bold text-primary-700">{getBoxDimensions(item).widthCm}cm</p>
+                                </div>
+                                <div className="bg-white rounded-lg p-2">
+                                  <p className="text-[10px] text-gray-600">Height</p>
+                                  <p className="text-xs font-bold text-primary-700">{getBoxDimensions(item).heightCm}cm</p>
+                                </div>
+                                <div className="bg-white rounded-lg p-2">
+                                  <p className="text-[10px] text-gray-600">Depth</p>
+                                  <p className="text-xs font-bold text-primary-700">{getBoxDimensions(item).depthCm}cm</p>
+                                </div>
+                              </div>
+                            </div>
                           )}
                         </div>
                       )}
