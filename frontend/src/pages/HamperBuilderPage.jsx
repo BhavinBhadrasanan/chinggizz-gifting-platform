@@ -16,7 +16,7 @@ const HAMPER_BOX_TYPES = [
     id: 'closed-box',
     name: 'Closed Box',
     description: 'Traditional closed gift box with lid',
-    image: '/hamperboxtypes/Cover_3943e81e-f566-4397-a68a-a9539cb3008b.webp',
+    image: '/hamperboxtypes/Gift-Hamper-Box-For-Packaging-In-Bulk.webp',
     priceModifier: 0, // Base price
     popular: true,
   },
@@ -24,7 +24,7 @@ const HAMPER_BOX_TYPES = [
     id: 'open-box',
     name: 'Open Display Box',
     description: 'Open box for visible display',
-    image: '/hamperboxtypes/Gift-Hamper-Box-For-Packaging-In-Bulk.webp',
+    image: '/hamperboxtypes/Cover_3943e81e-f566-4397-a68a-a9539cb3008b.webp',
     priceModifier: 50, // +₹50
     popular: false,
   },
@@ -37,17 +37,17 @@ const HAMPER_BOX_TYPES = [
     popular: false,
   },
   {
-    id: 'premium-box',
-    name: 'Premium Gift Box',
+    id: 'semi-transparent-box',
+    name: 'Semi Transparent Box',
     description: 'Luxury packaging with ribbon',
     image: '/hamperboxtypes/NCOYghLIT1AvPSwkPI4.webp',
     priceModifier: 150, // +₹150
     popular: false,
   },
   {
-    id: 'happiness-box',
-    name: 'Happiness Hamper',
-    description: 'Colorful celebration box',
+    id: 'theme-based-box',
+    name: 'Theme Based Hamper',
+    description: 'For your special occasion',
     image: '/hamperboxtypes/happiness-hamper-box-tearaja-3.webp',
     priceModifier: 120, // +₹120
     popular: false,
@@ -1387,17 +1387,9 @@ export default function HamperBuilderPage() {
                               <h4 className="font-bold text-sm sm:text-base text-neutral-900 mb-1 line-clamp-1">
                                 {boxType.name}
                               </h4>
-                              <p className="text-xs text-neutral-600 mb-2 line-clamp-2">
+                              <p className="text-xs text-neutral-600 line-clamp-2">
                                 {boxType.description}
                               </p>
-                              <div className="flex items-center justify-between">
-                                <span className={`text-sm font-bold ${boxType.priceModifier === 0 ? 'text-green-600' : 'text-primary-600'}`}>
-                                  {boxType.priceModifier === 0 ? 'Included' : `+₹${boxType.priceModifier}`}
-                                </span>
-                                {selectedBoxType?.id === boxType.id && (
-                                  <Check className="h-4 w-4 text-green-500" />
-                                )}
-                              </div>
                             </div>
                           </div>
                         ))}
