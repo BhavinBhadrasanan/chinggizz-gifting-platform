@@ -1,6 +1,7 @@
-import { X, Plus, Minus, ShoppingBag, Trash2, Sparkles, Package } from 'lucide-react';
+import { X, Plus, Minus, ShoppingBag, Trash2, Sparkles } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { useNavigate } from 'react-router-dom';
+import CartBoxPreview3D from './CartBoxPreview3D';
 
 export default function Cart() {
   const { cartItems, hampers, removeFromCart, removeHamperFromCart, updateQuantity, getCartTotal, getCartCount, isCartOpen, setIsCartOpen } = useCart();
@@ -139,45 +140,13 @@ export default function Cart() {
 
                       {/* 3D Box Preview for Hamper Boxes - Always Visible */}
                       {isHamperBox(item) && getBoxDimensions(item).widthCm > 0 && (
-                        <div className="mb-2 bg-gradient-to-br from-primary-50 to-secondary-50 rounded-lg p-3 border border-primary-200">
-                          <div className="flex items-center gap-2 mb-2">
-                            <Package className="h-4 w-4 text-primary-600" />
-                            <p className="text-xs font-bold text-primary-900">Your Selected Box</p>
-                          </div>
-
-                          {/* 3D Box Visualization */}
-                          <div className="relative w-full h-32 flex items-center justify-center perspective-1000 mb-3">
-                            <div
-                              className="relative transform-style-3d animate-rotate3d"
-                              style={{
-                                width: `${Math.min(getBoxDimensions(item).widthCm * 3, 120)}px`,
-                                height: `${Math.min(getBoxDimensions(item).heightCm * 3, 120)}px`,
-                              }}
-                            >
-                              {/* Front face */}
-                              <div className="absolute inset-0 bg-gradient-to-br from-amber-100 to-amber-200 border-2 border-amber-400 rounded-lg shadow-xl flex items-center justify-center">
-                                <Package className="h-8 w-8 text-amber-600 opacity-50" />
-                              </div>
-                              {/* Top face */}
-                              <div className="absolute inset-0 bg-gradient-to-br from-amber-200 to-amber-300 border-2 border-amber-500 rounded-lg shadow-xl opacity-70 transform -translate-y-2 -translate-x-2"></div>
-                            </div>
-                          </div>
-
-                          {/* Dimensions */}
-                          <div className="grid grid-cols-3 gap-2 text-center">
-                            <div className="bg-white rounded-lg p-2">
-                              <p className="text-[10px] text-gray-600">Width</p>
-                              <p className="text-xs font-bold text-primary-700">{getBoxDimensions(item).widthCm}cm</p>
-                            </div>
-                            <div className="bg-white rounded-lg p-2">
-                              <p className="text-[10px] text-gray-600">Height</p>
-                              <p className="text-xs font-bold text-primary-700">{getBoxDimensions(item).heightCm}cm</p>
-                            </div>
-                            <div className="bg-white rounded-lg p-2">
-                              <p className="text-[10px] text-gray-600">Depth</p>
-                              <p className="text-xs font-bold text-primary-700">{getBoxDimensions(item).depthCm}cm</p>
-                            </div>
-                          </div>
+                        <div className="mb-2">
+                          <CartBoxPreview3D
+                            widthCm={getBoxDimensions(item).widthCm}
+                            heightCm={getBoxDimensions(item).heightCm}
+                            depthCm={getBoxDimensions(item).depthCm}
+                            boxType={item.customization?.selectedOptions?.['Box Type'] || 'Transparent Box'}
+                          />
                         </div>
                       )}
 
