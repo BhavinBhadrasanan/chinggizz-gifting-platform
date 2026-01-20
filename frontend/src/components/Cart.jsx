@@ -1,4 +1,4 @@
-import { X, Plus, Minus, ShoppingBag, Trash2, Sparkles } from 'lucide-react';
+import { X, Plus, Minus, ShoppingBag, Trash2, Sparkles, ArrowLeft } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { useNavigate } from 'react-router-dom';
 import CartBoxPreview3D from './CartBoxPreview3D';
@@ -6,6 +6,12 @@ import CartBoxPreview3D from './CartBoxPreview3D';
 export default function Cart() {
   const { cartItems, hampers, removeFromCart, removeHamperFromCart, updateQuantity, getCartTotal, getCartCount, isCartOpen, setIsCartOpen } = useCart();
   const navigate = useNavigate();
+
+  // Handle back navigation
+  const handleBack = () => {
+    setIsCartOpen(false);
+    navigate(-1); // Go back to previous page
+  };
 
   if (!isCartOpen) return null;
 
@@ -39,6 +45,15 @@ export default function Cart() {
       <div className="fixed right-0 top-0 h-full w-full sm:max-w-md bg-white shadow-2xl z-50 flex flex-col animate-slideInRight">
         {/* Header - Mobile Friendly */}
         <div className="flex items-center justify-between p-4 sm:p-6 border-b border-neutral-200 bg-gradient-to-r from-primary-50 to-secondary-50">
+          {/* Back Button - Mobile Only */}
+          <button
+            onClick={handleBack}
+            className="sm:hidden p-2 hover:bg-primary-100 active:bg-primary-200 rounded-lg transition-colors tap-target"
+            aria-label="Go back"
+          >
+            <ArrowLeft className="h-6 w-6 text-primary-600" />
+          </button>
+
           <div className="flex items-center space-x-2">
             <div className="bg-primary-600 p-2 rounded-lg">
               <ShoppingBag className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
