@@ -1286,7 +1286,7 @@ export default function HamperBuilderPage() {
             )}
 
             {cartItems.length > 0 && (
-              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
                 {HAMPER_BOXES.map((box) => (
                   <div
                     key={box.id}
@@ -1297,43 +1297,68 @@ export default function HamperBuilderPage() {
                         : 'hover:shadow-xl'
                     }`}
                   >
-                    <div className="relative h-48 overflow-hidden rounded-t-xl bg-gradient-to-br from-neutral-100 to-neutral-200">
-                      <div className={`absolute inset-0 bg-gradient-to-br ${box.color} opacity-60`} />
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <Box className="h-24 w-24 text-neutral-400" />
-                      </div>
-                      {selectedBox?.id === box.id && (
-                        <div className="absolute top-4 right-4 bg-green-500 text-white rounded-full p-2">
-                          <Sparkles className="h-5 w-5" />
+                    {/* Mobile Compact Layout */}
+                    <div className="sm:hidden">
+                      <div className="flex items-center gap-3 p-3">
+                        <div className={`w-16 h-16 flex-shrink-0 rounded-lg bg-gradient-to-br ${box.color} border-2 ${box.borderColor} flex items-center justify-center relative`}>
+                          <Box className="h-8 w-8 text-neutral-700" />
+                          {selectedBox?.id === box.id && (
+                            <div className="absolute -top-1 -right-1 bg-green-500 text-white rounded-full p-1">
+                              <Sparkles className="h-3 w-3" />
+                            </div>
+                          )}
                         </div>
-                      )}
+                        <div className="flex-1 min-w-0">
+                          <h3 className="text-base font-bold text-neutral-900 mb-0.5">{box.name}</h3>
+                          <p className="text-xs text-neutral-600 mb-1 line-clamp-1">{box.description}</p>
+                          <div className="flex items-center justify-between">
+                            <span className="text-lg font-bold text-primary-600">₹{box.price}</span>
+                            <span className="text-xs text-neutral-500">{box.capacity} items</span>
+                          </div>
+                        </div>
+                      </div>
                     </div>
 
-                    <div className="p-6">
-                      <h3 className="text-xl font-bold text-neutral-900 mb-2">{box.name}</h3>
-                      <p className="text-sm text-neutral-600 mb-4">{box.description}</p>
-
-                      <div className="space-y-2 mb-4">
-                        <div className="flex items-center justify-between text-sm">
-                          <span className="text-neutral-600">Capacity:</span>
-                          <span className="font-semibold text-neutral-900">{box.capacity} items</span>
+                    {/* Desktop/Tablet Layout */}
+                    <div className="hidden sm:block">
+                      <div className="relative h-48 overflow-hidden rounded-t-xl bg-gradient-to-br from-neutral-100 to-neutral-200">
+                        <div className={`absolute inset-0 bg-gradient-to-br ${box.color} opacity-60`} />
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <Box className="h-24 w-24 text-neutral-400" />
                         </div>
-                        <div className="flex items-center justify-between text-sm">
-                          <span className="text-neutral-600">Size:</span>
-                          <span className="font-semibold text-neutral-900">{box.dimensions}</span>
-                        </div>
-                        <div className="flex items-center justify-between text-sm">
-                          <span className="text-neutral-600">Best for:</span>
-                          <span className="font-semibold text-neutral-900 text-right text-xs">{box.bestUsedFor}</span>
-                        </div>
+                        {selectedBox?.id === box.id && (
+                          <div className="absolute top-4 right-4 bg-green-500 text-white rounded-full p-2">
+                            <Sparkles className="h-5 w-5" />
+                          </div>
+                        )}
                       </div>
 
-                      <div className="flex items-center justify-between pt-4 border-t border-neutral-200">
-                        <span className="text-2xl font-bold text-primary-600">₹{box.price}</span>
-                        <button className="btn-primary text-sm py-2 px-4">
-                          Select
-                          <ArrowRight className="h-4 w-4 ml-2" />
-                        </button>
+                      <div className="p-6">
+                        <h3 className="text-xl font-bold text-neutral-900 mb-2">{box.name}</h3>
+                        <p className="text-sm text-neutral-600 mb-4">{box.description}</p>
+
+                        <div className="space-y-2 mb-4">
+                          <div className="flex items-center justify-between text-sm">
+                            <span className="text-neutral-600">Capacity:</span>
+                            <span className="font-semibold text-neutral-900">{box.capacity} items</span>
+                          </div>
+                          <div className="flex items-center justify-between text-sm">
+                            <span className="text-neutral-600">Size:</span>
+                            <span className="font-semibold text-neutral-900">{box.dimensions}</span>
+                          </div>
+                          <div className="flex items-center justify-between text-sm">
+                            <span className="text-neutral-600">Best for:</span>
+                            <span className="font-semibold text-neutral-900 text-right text-xs">{box.bestUsedFor}</span>
+                          </div>
+                        </div>
+
+                        <div className="flex items-center justify-between pt-4 border-t border-neutral-200">
+                          <span className="text-2xl font-bold text-primary-600">₹{box.price}</span>
+                          <button className="btn-primary text-sm py-2 px-4">
+                            Select
+                            <ArrowRight className="h-4 w-4 ml-2" />
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -1364,12 +1389,13 @@ export default function HamperBuilderPage() {
 
             {/* Box Change Modal */}
             {showBoxChangeModal && (
-              <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+              <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-2 sm:p-4">
                 <div className="bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
-                  <div className="sticky top-0 bg-white border-b border-neutral-200 p-6 flex items-center justify-between">
+                  {/* Header - Compact on Mobile */}
+                  <div className="sticky top-0 bg-white border-b border-neutral-200 p-3 sm:p-6 flex items-center justify-between">
                     <div>
-                      <h3 className="text-2xl font-bold text-neutral-900">Change Hamper Box Size</h3>
-                      <p className="text-sm text-neutral-600 mt-1">
+                      <h3 className="text-lg sm:text-2xl font-bold text-neutral-900">Change Box Size</h3>
+                      <p className="text-xs sm:text-sm text-neutral-600 mt-1 hidden sm:block">
                         {placedItems.length > 0
                           ? `Your ${placedItems.length} item${placedItems.length !== 1 ? 's' : ''} will be preserved if they fit in the new box`
                           : 'Select a new box size for your hamper'}
@@ -1379,14 +1405,14 @@ export default function HamperBuilderPage() {
                       onClick={() => setShowBoxChangeModal(false)}
                       className="text-neutral-400 hover:text-neutral-600 transition-colors"
                     >
-                      <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <svg className="h-5 w-5 sm:h-6 sm:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                       </svg>
                     </button>
                   </div>
 
-                  <div className="p-6">
-                    <div className="grid md:grid-cols-2 gap-4">
+                  <div className="p-3 sm:p-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                       {HAMPER_BOXES.map((box) => {
                         const isCurrentBox = selectedBox?.id === box.id;
                         const boxVolume = box.lengthCm * box.widthCm * box.heightCm;
@@ -1405,7 +1431,7 @@ export default function HamperBuilderPage() {
                         return (
                           <div
                             key={box.id}
-                            className={`relative border-2 rounded-xl p-4 transition-all cursor-pointer ${
+                            className={`relative border-2 rounded-xl p-2.5 sm:p-4 transition-all cursor-pointer ${
                               isCurrentBox
                                 ? 'border-primary-500 bg-primary-50'
                                 : willItemsFit
@@ -1419,53 +1445,53 @@ export default function HamperBuilderPage() {
                             }}
                           >
                             {isCurrentBox && (
-                              <div className="absolute top-2 right-2 bg-primary-600 text-white text-xs font-bold px-2 py-1 rounded-full">
+                              <div className="absolute top-1.5 right-1.5 sm:top-2 sm:right-2 bg-primary-600 text-white text-xs font-bold px-1.5 py-0.5 sm:px-2 sm:py-1 rounded-full">
                                 Current
                               </div>
                             )}
 
-                            <div className="flex items-start gap-4">
-                              <div className={`w-20 h-20 rounded-lg bg-gradient-to-br ${box.color} border-2 ${box.borderColor} flex items-center justify-center`}>
-                                <Package className="h-10 w-10 text-neutral-700" />
+                            <div className="flex items-start gap-2 sm:gap-4">
+                              <div className={`w-14 h-14 sm:w-20 sm:h-20 flex-shrink-0 rounded-lg bg-gradient-to-br ${box.color} border-2 ${box.borderColor} flex items-center justify-center`}>
+                                <Package className="h-7 w-7 sm:h-10 sm:w-10 text-neutral-700" />
                               </div>
 
-                              <div className="flex-1">
-                                <h4 className="font-bold text-lg text-neutral-900">{box.name}</h4>
-                                <p className="text-sm text-neutral-600">{box.description}</p>
-                                <p className="text-xs text-neutral-500 mt-1">
+                              <div className="flex-1 min-w-0">
+                                <h4 className="font-bold text-sm sm:text-lg text-neutral-900">{box.name}</h4>
+                                <p className="text-xs sm:text-sm text-neutral-600 line-clamp-1 sm:line-clamp-none">{box.description}</p>
+                                <p className="text-xs text-neutral-500 mt-0.5 sm:mt-1">
                                   📏 {box.dimensionsCm}
                                 </p>
-                                <p className="text-sm font-semibold text-primary-600 mt-2">
+                                <p className="text-sm font-semibold text-primary-600 mt-1 sm:mt-2">
                                   ₹{box.price}
                                 </p>
                               </div>
                             </div>
 
                             {placedItems.length > 0 && (
-                              <div className="mt-4 pt-4 border-t border-neutral-200">
-                                <div className="flex items-center justify-between text-xs mb-2">
+                              <div className="mt-2 sm:mt-4 pt-2 sm:pt-4 border-t border-neutral-200">
+                                <div className="flex items-center justify-between text-xs mb-1.5 sm:mb-2">
                                   <span className="text-neutral-600">Items fit:</span>
                                   <span className={`font-bold ${willItemsFit ? 'text-green-600' : 'text-red-600'}`}>
                                     {willItemsFit ? '✅ Yes' : '❌ Too small'}
                                   </span>
                                 </div>
-                                <div className="w-full bg-neutral-200 rounded-full h-2">
+                                <div className="w-full bg-neutral-200 rounded-full h-1.5 sm:h-2">
                                   <div
-                                    className={`h-2 rounded-full transition-all ${
+                                    className={`h-1.5 sm:h-2 rounded-full transition-all ${
                                       fillPercentage > 85 ? 'bg-red-500' : fillPercentage > 70 ? 'bg-yellow-500' : 'bg-green-500'
                                     }`}
                                     style={{ width: `${Math.min(fillPercentage, 100)}%` }}
                                   />
                                 </div>
                                 <p className="text-xs text-neutral-500 mt-1">
-                                  {fillPercentage.toFixed(1)}% full with current items
+                                  {fillPercentage.toFixed(1)}% full
                                 </p>
                               </div>
                             )}
 
                             {!isCurrentBox && willItemsFit && (
                               <button
-                                className="mt-4 w-full btn-primary text-sm py-2"
+                                className="mt-2 sm:mt-4 w-full btn-primary text-xs sm:text-sm py-1.5 sm:py-2"
                                 onClick={(e) => {
                                   e.stopPropagation();
                                   handleChangeBoxFromModal(box);
