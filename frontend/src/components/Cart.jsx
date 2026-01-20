@@ -7,10 +7,9 @@ export default function Cart() {
   const { cartItems, hampers, removeFromCart, removeHamperFromCart, updateQuantity, getCartTotal, getCartCount, isCartOpen, setIsCartOpen } = useCart();
   const navigate = useNavigate();
 
-  // Handle back navigation
+  // Handle back - just close the cart
   const handleBack = () => {
     setIsCartOpen(false);
-    navigate(-1); // Go back to previous page
   };
 
   if (!isCartOpen) return null;
@@ -44,17 +43,18 @@ export default function Cart() {
       {/* Cart Sidebar - Mobile Optimized */}
       <div className="fixed right-0 top-0 h-full w-full sm:max-w-md bg-white shadow-2xl z-50 flex flex-col animate-slideInRight">
         {/* Header - Mobile Friendly */}
-        <div className="flex items-center justify-between p-4 sm:p-6 border-b border-neutral-200 bg-gradient-to-r from-primary-50 to-secondary-50">
-          {/* Back Button - Mobile Only */}
+        <div className="relative flex items-center p-4 sm:p-6 border-b border-neutral-200 bg-gradient-to-r from-primary-50 to-secondary-50">
+          {/* Back Button - Mobile Only - Absolute Left */}
           <button
             onClick={handleBack}
-            className="sm:hidden p-2 hover:bg-primary-100 active:bg-primary-200 rounded-lg transition-colors tap-target"
+            className="sm:hidden absolute left-4 p-2 hover:bg-primary-100 active:bg-primary-200 rounded-lg transition-colors tap-target"
             aria-label="Go back"
           >
             <ArrowLeft className="h-6 w-6 text-primary-600" />
           </button>
 
-          <div className="flex items-center space-x-2">
+          {/* Center Content */}
+          <div className="flex items-center space-x-2 mx-auto">
             <div className="bg-primary-600 p-2 rounded-lg">
               <ShoppingBag className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
             </div>
@@ -65,9 +65,11 @@ export default function Cart() {
               <p className="text-xs text-neutral-600">{getCartCount()} {getCartCount() === 1 ? 'item' : 'items'}</p>
             </div>
           </div>
+
+          {/* Close Button - Absolute Right */}
           <button
             onClick={() => setIsCartOpen(false)}
-            className="p-2 hover:bg-white/50 active:bg-white rounded-lg transition-colors tap-target"
+            className="absolute right-4 p-2 hover:bg-white/50 active:bg-white rounded-lg transition-colors tap-target"
           >
             <X className="h-6 w-6 text-neutral-600" />
           </button>
