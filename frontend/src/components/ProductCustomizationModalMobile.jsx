@@ -224,22 +224,30 @@ export default function ProductCustomizationModalMobile({ product, isOpen, onClo
                       <button
                         key={choiceIndex}
                         onClick={() => handleOptionSelect(optionGroup.category, choice.name)}
-                        className={`p-3 rounded-xl border-2 transition-all active:scale-95 ${
+                        className={`p-3.5 rounded-xl border-2 transition-all duration-200 active:scale-95 ${
                           isSelected
-                            ? 'border-primary-500 bg-primary-50 shadow-lg ring-2 ring-primary-200'
-                            : 'border-gray-300 bg-white hover:border-primary-300 hover:shadow-md'
+                            ? 'border-primary-600 bg-gradient-to-br from-primary-500 to-primary-600 shadow-lg'
+                            : 'border-gray-400 bg-white hover:border-primary-400 hover:shadow-md'
                         }`}
                       >
                         <div className="flex items-center justify-between gap-1 mb-1">
                           <span className={`text-sm font-bold truncate ${
-                            isSelected ? 'text-primary-600' : 'text-gray-700'
+                            isSelected ? 'text-white' : 'text-gray-800'
                           }`}>
                             {choice.name}
                           </span>
-                          {isSelected && <span className="text-primary-600 text-lg">✓</span>}
+                          {isSelected && (
+                            <span className="bg-white text-primary-600 w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold">
+                              ✓
+                            </span>
+                          )}
                         </div>
                         {choice.price > 0 && (
-                          <span className="text-xs text-green-600 font-bold bg-green-50 px-2 py-0.5 rounded-full">
+                          <span className={`text-xs font-bold px-2 py-0.5 rounded-full inline-block ${
+                            isSelected
+                              ? 'bg-white text-primary-600'
+                              : 'bg-green-50 text-green-600'
+                          }`}>
                             +₹{choice.price}
                           </span>
                         )}
