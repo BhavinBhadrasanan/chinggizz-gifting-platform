@@ -11,6 +11,7 @@ export default function ProductCustomizationModalMobile({ product, isOpen, onClo
   const [totalPrice, setTotalPrice] = useState(product?.price || 0);
   const [showBoxPreview, setShowBoxPreview] = useState(false);
   const [previewType, setPreviewType] = useState(null); // 'boxType' or 'boxSize'
+  const [imageLoading, setImageLoading] = useState(false);
   const previewTimeoutRef = useRef(null);
 
   useEffect(() => {
@@ -18,6 +19,25 @@ export default function ProductCustomizationModalMobile({ product, isOpen, onClo
       calculateTotalPrice();
     }
   }, [selectedOptions, quantity, product]);
+
+  // Preload box type images when modal opens
+  useEffect(() => {
+    if (isOpen) {
+      const boxTypeImages = [
+        '/hamperboxtypes/Gift-Hamper-Box-For-Packaging-In-Bulk.webp',
+        '/hamperboxtypes/Cover_3943e81e-f566-4397-a68a-a9539cb3008b.webp',
+        '/hamperboxtypes/IMG20220924170938.webp',
+        '/hamperboxtypes/NCOYghLIT1AvPSwkPI4.webp',
+        '/hamperboxtypes/happiness-hamper-box-tearaja-3.webp'
+      ];
+
+      // Preload images in background
+      boxTypeImages.forEach(src => {
+        const img = new Image();
+        img.src = src;
+      });
+    }
+  }, [isOpen]);
 
   // Cleanup timeout on unmount
   useEffect(() => {
@@ -116,6 +136,7 @@ export default function ProductCustomizationModalMobile({ product, isOpen, onClo
         clearTimeout(previewTimeoutRef.current);
       }
 
+      setImageLoading(true);
       setPreviewType('boxType');
       setShowBoxPreview(true);
 
@@ -261,11 +282,20 @@ export default function ProductCustomizationModalMobile({ product, isOpen, onClo
                       <Package className="h-5 w-5 text-primary-600" />
                       <h4 className="text-sm font-bold text-primary-900">Box Type Preview</h4>
                     </div>
-                    <div className="bg-white rounded-xl overflow-hidden shadow-md">
+                    <div className="bg-white rounded-xl overflow-hidden shadow-md relative">
+                      {imageLoading && (
+                        <div className="absolute inset-0 flex items-center justify-center bg-gray-100">
+                          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600"></div>
+                        </div>
+                      )}
                       <img
                         src={getBoxTypeImage(selectedOptions['Box Type'])}
                         alt={selectedOptions['Box Type']}
                         className="w-full h-48 object-cover"
+                        loading="eager"
+                        decoding="async"
+                        onLoad={() => setImageLoading(false)}
+                        onError={() => setImageLoading(false)}
                       />
                     </div>
                     <p className="text-sm font-semibold text-center text-primary-800">
