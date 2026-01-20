@@ -21,6 +21,16 @@
   background: linear-gradient(to bottom, #9333ea, #7c3aed);
 }
 
+/* Hide Scrollbar for Horizontal Scroll */
+.hide-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;  /* Chrome, Safari and Opera */
+}
+
 /* Top Banner Animations */
 @keyframes shimmer {
   0%, 100% {

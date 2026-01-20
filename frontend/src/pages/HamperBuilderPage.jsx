@@ -10,7 +10,51 @@ import ErrorNotificationModal from '../components/ErrorNotificationModal';
 import ProductControlPanel from '../components/ProductControlPanel';
 import { captureHamperScreenshot, prepareHamperData } from '../utils/hamperScreenshot';
 
-// Hamper Boxes Configuration
+// Hamper Box Types Configuration
+const HAMPER_BOX_TYPES = [
+  {
+    id: 'closed-box',
+    name: 'Closed Box',
+    description: 'Traditional closed gift box with lid',
+    image: '/hamperboxtypes/Cover_3943e81e-f566-4397-a68a-a9539cb3008b.webp',
+    priceModifier: 0, // Base price
+    popular: true,
+  },
+  {
+    id: 'open-box',
+    name: 'Open Display Box',
+    description: 'Open box for visible display',
+    image: '/hamperboxtypes/Gift-Hamper-Box-For-Packaging-In-Bulk.webp',
+    priceModifier: 50, // +₹50
+    popular: false,
+  },
+  {
+    id: 'transparent-box',
+    name: 'Transparent Box',
+    description: 'Clear box to showcase contents',
+    image: '/hamperboxtypes/IMG20220924170938.webp',
+    priceModifier: 100, // +₹100
+    popular: false,
+  },
+  {
+    id: 'premium-box',
+    name: 'Premium Gift Box',
+    description: 'Luxury packaging with ribbon',
+    image: '/hamperboxtypes/NCOYghLIT1AvPSwkPI4.webp',
+    priceModifier: 150, // +₹150
+    popular: false,
+  },
+  {
+    id: 'happiness-box',
+    name: 'Happiness Hamper',
+    description: 'Colorful celebration box',
+    image: '/hamperboxtypes/happiness-hamper-box-tearaja-3.webp',
+    priceModifier: 120, // +₹120
+    popular: false,
+  },
+];
+
+// Hamper Boxes Configuration (Sizes)
 const HAMPER_BOXES = [
   {
     id: 1,
@@ -134,6 +178,7 @@ export default function HamperBuilderPage() {
 
   const savedState = loadSavedHamperState();
   const [step, setStep] = useState(savedState.step);
+  const [selectedBoxType, setSelectedBoxType] = useState(HAMPER_BOX_TYPES[0]); // Default to first type
   const [selectedBox, setSelectedBox] = useState(savedState.selectedBox);
   const [placedItems, setPlacedItems] = useState(savedState.placedItems);
   const [selectedItemToPlace, setSelectedItemToPlace] = useState(null);
@@ -247,10 +292,18 @@ export default function HamperBuilderPage() {
       setPlacedItems(itemsThatFit);
     }
 
-    setSelectedBox(box);
+    // Add box type price to the selected box
+    const boxWithType = {
+      ...box,
+      price: box.price + selectedBoxType.priceModifier,
+      boxType: selectedBoxType.name,
+      boxTypeImage: selectedBoxType.image
+    };
+
+    setSelectedBox(boxWithType);
     setSelectedItemToPlace(null);
     setStep(2);
-    toast.success(`${box.name} box selected!`);
+    toast.success(`${selectedBoxType.name} - ${box.name} box selected!`);
 
     // Auto-scroll to available items on mobile after box selection
     setTimeout(() => {
@@ -1286,7 +1339,84 @@ export default function HamperBuilderPage() {
             )}
 
             {cartItems.length > 0 && (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
+              <>
+                {/* Step 1.1: Select Box Type - Horizontal Scroll */}
+                <div className="mb-8">
+                  <h3 className="text-xl sm:text-2xl font-bold text-neutral-900 mb-4 px-2">
+                    1️⃣ Select Box Type
+                  </h3>
+
+                  {/* Horizontal Scrollable Container */}
+                  <div className="relative">
+                    <div className="overflow-x-auto pb-4 hide-scrollbar">
+                      <div className="flex gap-3 sm:gap-4 px-2 min-w-max">
+                        {HAMPER_BOX_TYPES.map((boxType) => (
+                          <div
+                            key={boxType.id}
+                            onClick={() => setSelectedBoxType(boxType)}
+                            className={`flex-shrink-0 w-40 sm:w-48 cursor-pointer transition-all duration-300 rounded-xl overflow-hidden ${
+                              selectedBoxType?.id === boxType.id
+                                ? 'ring-4 ring-primary-500 shadow-2xl scale-105'
+                                : 'ring-2 ring-neutral-200 hover:ring-primary-300 hover:shadow-lg'
+                            }`}
+                          >
+                            {/* Image */}
+                            <div className="relative h-32 sm:h-40 bg-neutral-100">
+                              <img
+                                src={boxType.image}
+                                alt={boxType.name}
+                                className="w-full h-full object-cover"
+                                onError={(e) => {
+                                  e.target.src = 'https://via.placeholder.com/200x200?text=Box+Type';
+                                }}
+                              />
+                              {boxType.popular && (
+                                <div className="absolute top-2 right-2 bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-xs font-bold px-2 py-1 rounded-full shadow-lg">
+                                  ⭐ Popular
+                                </div>
+                              )}
+                              {selectedBoxType?.id === boxType.id && (
+                                <div className="absolute top-2 left-2 bg-green-500 text-white rounded-full p-1.5 shadow-lg">
+                                  <Check className="h-4 w-4" />
+                                </div>
+                              )}
+                            </div>
+
+                            {/* Info */}
+                            <div className="bg-white p-3">
+                              <h4 className="font-bold text-sm sm:text-base text-neutral-900 mb-1 line-clamp-1">
+                                {boxType.name}
+                              </h4>
+                              <p className="text-xs text-neutral-600 mb-2 line-clamp-2">
+                                {boxType.description}
+                              </p>
+                              <div className="flex items-center justify-between">
+                                <span className={`text-sm font-bold ${boxType.priceModifier === 0 ? 'text-green-600' : 'text-primary-600'}`}>
+                                  {boxType.priceModifier === 0 ? 'Included' : `+₹${boxType.priceModifier}`}
+                                </span>
+                                {selectedBoxType?.id === boxType.id && (
+                                  <Check className="h-4 w-4 text-green-500" />
+                                )}
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Scroll Indicator */}
+                    <div className="text-center mt-2">
+                      <p className="text-xs text-neutral-500">← Scroll to see more types →</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Step 1.2: Select Box Size */}
+                <div className="mb-6">
+                  <h3 className="text-xl sm:text-2xl font-bold text-neutral-900 mb-4 px-2">
+                    2️⃣ Select Box Size
+                  </h3>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
                 {HAMPER_BOXES.map((box) => (
                   <div
                     key={box.id}
@@ -1312,7 +1442,14 @@ export default function HamperBuilderPage() {
                           <h3 className="text-base font-bold text-neutral-900 mb-0.5">{box.name}</h3>
                           <p className="text-xs text-neutral-600 mb-1 line-clamp-1">{box.description}</p>
                           <div className="flex items-center justify-between">
-                            <span className="text-lg font-bold text-primary-600">₹{box.price}</span>
+                            <div>
+                              <span className="text-lg font-bold text-primary-600">
+                                ₹{box.price + selectedBoxType.priceModifier}
+                              </span>
+                              {selectedBoxType.priceModifier > 0 && (
+                                <p className="text-xs text-neutral-500">+₹{selectedBoxType.priceModifier}</p>
+                              )}
+                            </div>
                             <span className="text-xs text-neutral-500">{box.capacity} items</span>
                           </div>
                         </div>
@@ -1353,7 +1490,16 @@ export default function HamperBuilderPage() {
                         </div>
 
                         <div className="flex items-center justify-between pt-4 border-t border-neutral-200">
-                          <span className="text-2xl font-bold text-primary-600">₹{box.price}</span>
+                          <div>
+                            <span className="text-2xl font-bold text-primary-600">
+                              ₹{box.price + selectedBoxType.priceModifier}
+                            </span>
+                            {selectedBoxType.priceModifier > 0 && (
+                              <p className="text-xs text-neutral-500 mt-1">
+                                Base: ₹{box.price} + Type: ₹{selectedBoxType.priceModifier}
+                              </p>
+                            )}
+                          </div>
                           <button className="btn-primary text-sm py-2 px-4">
                             Select
                             <ArrowRight className="h-4 w-4 ml-2" />
@@ -1363,7 +1509,9 @@ export default function HamperBuilderPage() {
                     </div>
                   </div>
                 ))}
-              </div>
+                  </div>
+                </div>
+              </>
             )}
           </div>
         )}
