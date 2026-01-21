@@ -9,12 +9,7 @@ import { Package } from 'lucide-react';
 function Box3D({ widthCm, heightCm, depthCm, boxType }) {
   const boxRef = useRef();
 
-  // Auto-rotate the box
-  useFrame(() => {
-    if (boxRef.current) {
-      boxRef.current.rotation.y += 0.005;
-    }
-  });
+  // No auto-rotation - using OrbitControls instead
 
   // Convert cm to 3D units (scale down)
   const length = widthCm / 10;
@@ -23,84 +18,85 @@ function Box3D({ widthCm, heightCm, depthCm, boxType }) {
 
   console.log('📦 Box3D rendering:', { widthCm, heightCm, depthCm, length, height, width, boxType });
 
-  // Determine box color based on type
+  // Determine box color based on type - Lighter, more transparent look
   const getBoxColor = () => {
-    if (boxType?.toLowerCase().includes('transparent')) return '#E8D5C4';
-    if (boxType?.toLowerCase().includes('closed')) return '#D4A574';
-    return '#E8D5C4';
+    if (boxType?.toLowerCase().includes('transparent')) return '#F5F0E8';
+    if (boxType?.toLowerCase().includes('closed')) return '#F5F0E8';
+    return '#F5F0E8';
   };
 
   const boxColor = getBoxColor();
   const isTransparent = boxType?.toLowerCase().includes('transparent');
 
-  // Wall thickness
-  const wallThickness = 0.08;
+  // Wall thickness - thinner for cleaner look
+  const wallThickness = 0.05;
 
   return (
-    <group ref={boxRef} position={[0, 0, 0]}>
-      {/* Bottom */}
-      <mesh position={[0, wallThickness / 2, 0]} castShadow receiveShadow>
-        <boxGeometry args={[length, wallThickness, width]} />
+    <group ref={boxRef}>
+      {/* Box Floor - EXACT match to HamperBox3D */}
+      <mesh position={[0, -0.05, 0]} castShadow receiveShadow>
+        <boxGeometry args={[length, 0.1, width]} />
         <meshStandardMaterial
-          color={boxColor}
-          roughness={0.7}
-          metalness={0.1}
-        />
-      </mesh>
-
-      {/* Front Wall */}
-      <mesh position={[0, height / 2, width / 2]} castShadow receiveShadow>
-        <boxGeometry args={[length, height, wallThickness]} />
-        <meshStandardMaterial
-          color={boxColor}
-          roughness={0.7}
-          metalness={0.1}
-          transparent={isTransparent}
-          opacity={isTransparent ? 0.3 : 1.0}
-        />
-      </mesh>
-
-      {/* Back Wall */}
-      <mesh position={[0, height / 2, -width / 2]} castShadow receiveShadow>
-        <boxGeometry args={[length, height, wallThickness]} />
-        <meshStandardMaterial
-          color={boxColor}
-          roughness={0.7}
-          metalness={0.1}
-        />
-      </mesh>
-
-      {/* Left Wall */}
-      <mesh position={[-length / 2, height / 2, 0]} castShadow receiveShadow>
-        <boxGeometry args={[wallThickness, height, width]} />
-        <meshStandardMaterial
-          color={boxColor}
-          roughness={0.7}
-          metalness={0.1}
-        />
-      </mesh>
-
-      {/* Right Wall */}
-      <mesh position={[length / 2, height / 2, 0]} castShadow receiveShadow>
-        <boxGeometry args={[wallThickness, height, width]} />
-        <meshStandardMaterial
-          color={boxColor}
-          roughness={0.7}
-          metalness={0.1}
-        />
-      </mesh>
-
-      {/* Lid - Flat top cover */}
-      <mesh position={[0, height + wallThickness / 2, 0]} castShadow receiveShadow>
-        <boxGeometry args={[length, wallThickness, width]} />
-        <meshStandardMaterial
-          color={boxColor}
+          color="#F5E6D3"
           roughness={0.6}
-          metalness={0.15}
-          transparent={isTransparent}
-          opacity={isTransparent ? 0.4 : 1.0}
+          metalness={0.1}
+          side={2}
         />
       </mesh>
+
+      {/* Back Wall - EXACT match to HamperBox3D */}
+      <mesh position={[0, height / 2, -width / 2]} castShadow receiveShadow>
+        <boxGeometry args={[length, height, 0.1]} />
+        <meshStandardMaterial
+          color="#F5E6D3"
+          roughness={0.1}
+          metalness={0.3}
+          transparent
+          opacity={0.3}
+          envMapIntensity={1.5}
+        />
+      </mesh>
+
+      {/* Left Wall - EXACT match to HamperBox3D */}
+      <mesh position={[-length / 2, height / 2, 0]} castShadow receiveShadow>
+        <boxGeometry args={[0.1, height, width]} />
+        <meshStandardMaterial
+          color="#F5E6D3"
+          roughness={0.1}
+          metalness={0.3}
+          transparent
+          opacity={0.3}
+          envMapIntensity={1.5}
+        />
+      </mesh>
+
+      {/* Right Wall - EXACT match to HamperBox3D */}
+      <mesh position={[length / 2, height / 2, 0]} castShadow receiveShadow>
+        <boxGeometry args={[0.1, height, width]} />
+        <meshStandardMaterial
+          color="#F5E6D3"
+          roughness={0.1}
+          metalness={0.3}
+          transparent
+          opacity={0.3}
+          envMapIntensity={1.5}
+        />
+      </mesh>
+
+      {/* Front Wall - EXACT match to HamperBox3D */}
+      <mesh position={[0, height / 2, width / 2]} castShadow receiveShadow>
+        <boxGeometry args={[length, height, 0.1]} />
+        <meshStandardMaterial
+          color="#F5E6D3"
+          roughness={0.1}
+          metalness={0.3}
+          transparent
+          opacity={0.3}
+          envMapIntensity={1.5}
+        />
+      </mesh>
+
+      {/* NO LID - Open box design matching HamperBox3D */}
     </group>
   );
 }
@@ -155,8 +151,8 @@ export default function CartBoxPreview3D({ widthCm, heightCm, depthCm, boxType }
         <p className="text-xs font-bold text-primary-900">Your Selected Box</p>
       </div>
 
-      {/* 3D Canvas */}
-      <div className="relative w-full h-40 bg-gradient-to-br from-white to-gray-50 rounded-lg overflow-hidden">
+      {/* 3D Canvas - Light background like expected image */}
+      <div className="relative w-full h-40 bg-gradient-to-br from-purple-50 via-white to-blue-50 rounded-lg overflow-hidden">
         <Canvas
           shadows
           dpr={[1, 2]}
@@ -175,33 +171,36 @@ export default function CartBoxPreview3D({ widthCm, heightCm, depthCm, boxType }
               <meshBasicMaterial color="#F5E6D3" />
             </mesh>
           }>
-            {/* Camera - Positioned to show box centered and slightly lower */}
+            {/* Camera - Matching HamperScene3D viewing angle */}
             <PerspectiveCamera
               makeDefault
-              position={[4, 2, 4]}
-              fov={45}
+              position={[3, 2.5, 3]}
+              fov={40}
             />
 
-            {/* Orbit Controls - targets the box center */}
+            {/* Orbit Controls - targets the box center at floor level */}
             <OrbitControls
               enableZoom={false}
               enablePan={false}
-              autoRotate={false}
-              target={[0, 1, 0]}
-              minPolarAngle={Math.PI / 4}
-              maxPolarAngle={Math.PI / 2}
+              autoRotate={true}
+              autoRotateSpeed={1.5}
+              target={[0, 0, 0]}
+              minPolarAngle={Math.PI / 6}
+              maxPolarAngle={Math.PI / 2.5}
             />
 
-            {/* Lights */}
-            <ambientLight intensity={0.8} />
-            <directionalLight position={[5, 5, 5]} intensity={1.0} castShadow />
-            <pointLight position={[-5, 5, -5]} intensity={0.5} />
+            {/* Lights - Soft, even lighting like expected image */}
+            <ambientLight intensity={1.0} />
+            <directionalLight position={[5, 10, 5]} intensity={0.8} castShadow />
+            <directionalLight position={[-5, 8, -5]} intensity={0.5} />
+            <pointLight position={[0, 15, 0]} intensity={0.4} color="#ffffff" />
 
-            {/* Environment for reflections */}
-            <Environment preset="sunset" />
+            {/* Environment for soft reflections */}
+            <Environment preset="city" />
 
-            {/* 3D Box */}
+            {/* 3D Box - Force re-render with key */}
             <Box3D
+              key={`${widthCm}-${heightCm}-${depthCm}-${boxType}-v2`}
               widthCm={widthCm}
               heightCm={heightCm}
               depthCm={depthCm}

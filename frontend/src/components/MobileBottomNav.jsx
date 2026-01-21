@@ -1,11 +1,12 @@
 import { Home, Package, Sparkles, ShoppingBag } from 'lucide-react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 
 export default function MobileBottomNav() {
   const location = useLocation();
+  const navigate = useNavigate();
   const { getCartCount, setIsCartOpen } = useCart();
-  
+
   const isActive = (path) => location.pathname === path;
   
   // Hide on admin pages
@@ -20,7 +21,7 @@ export default function MobileBottomNav() {
   ];
 
   return (
-    <nav className="lg:hidden fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-lg border-t border-neutral-200 shadow-2xl z-50 safe-area-bottom">
+    <nav className="lg:hidden fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-lg border-t border-neutral-200 shadow-2xl z-[60] safe-area-bottom">
       {/* Glassy top border effect */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary-200 to-transparent"></div>
 
@@ -30,9 +31,13 @@ export default function MobileBottomNav() {
           const active = isActive(item.path);
 
           return (
-            <Link
+            <button
               key={item.path}
-              to={item.path}
+              onClick={() => {
+                setIsCartOpen(false);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                navigate(item.path);
+              }}
               className={`flex flex-col items-center justify-center space-y-1 transition-all duration-300 tap-target relative group ${
                 active
                   ? 'text-primary-600'
@@ -69,7 +74,7 @@ export default function MobileBottomNav() {
               {active && (
                 <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-gradient-to-r from-primary-400 via-primary-600 to-primary-400 rounded-t-full shadow-lg"></div>
               )}
-            </Link>
+            </button>
           );
         })}
 

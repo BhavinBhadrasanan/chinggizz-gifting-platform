@@ -56,16 +56,40 @@ export default function Footer() {
             <h3 className="text-white font-bold mb-4">Quick Links</h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/" className="text-sm hover:text-primary-400 transition-colors">Home</Link>
+                <Link
+                  to="/"
+                  onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                  className="text-sm hover:text-primary-400 transition-colors"
+                >
+                  Home
+                </Link>
               </li>
               <li>
-                <Link to="/products" className="text-sm hover:text-primary-400 transition-colors">Products</Link>
+                <Link
+                  to="/products"
+                  onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                  className="text-sm hover:text-primary-400 transition-colors"
+                >
+                  Products
+                </Link>
               </li>
               <li>
-                <Link to="/hamper-builder" className="text-sm hover:text-primary-400 transition-colors">Build Hamper</Link>
+                <Link
+                  to="/hamper-builder"
+                  onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                  className="text-sm hover:text-primary-400 transition-colors"
+                >
+                  Build Hamper
+                </Link>
               </li>
               <li>
-                <Link to="/admin/login" className="text-sm hover:text-primary-400 transition-colors">Admin</Link>
+                <Link
+                  to="/admin/login"
+                  onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                  className="text-sm hover:text-primary-400 transition-colors"
+                >
+                  Admin
+                </Link>
               </li>
             </ul>
           </div>

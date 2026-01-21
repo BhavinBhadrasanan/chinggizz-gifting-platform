@@ -29,9 +29,9 @@ export default function Cart() {
 
   return (
     <>
-      {/* Backdrop */}
+      {/* Backdrop - Exclude bottom nav area on mobile */}
       <div
-        className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 transition-opacity animate-fadeIn"
+        className="fixed inset-0 lg:inset-0 bottom-16 lg:bottom-0 bg-black/50 backdrop-blur-sm z-40 transition-opacity animate-fadeIn"
         onClick={() => setIsCartOpen(false)}
       ></div>
 
@@ -68,7 +68,10 @@ export default function Cart() {
               <h3 className="text-lg sm:text-xl font-bold text-neutral-900 mb-2">Your cart is empty</h3>
               <p className="text-sm sm:text-base text-neutral-600 mb-6">Add some amazing products to get started!</p>
               <button
-                onClick={() => setIsCartOpen(false)}
+                onClick={() => {
+                  setIsCartOpen(false);
+                  navigate('/');
+                }}
                 className="btn-primary tap-target"
               >
                 Start Shopping
