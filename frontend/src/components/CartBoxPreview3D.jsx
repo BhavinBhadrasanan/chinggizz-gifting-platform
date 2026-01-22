@@ -1,7 +1,33 @@
-import React, { Suspense, useRef } from 'react';
+import React, { Suspense, useRef, Component } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, PerspectiveCamera, Environment, ContactShadows } from '@react-three/drei';
 import { Package } from 'lucide-react';
+
+/**
+ * Error Boundary for 3D Canvas
+ */
+class Canvas3DErrorBoundary extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError(error) {
+    console.error('🚨 Canvas3D Error Boundary caught error:', error);
+    return { hasError: true };
+  }
+
+  componentDidCatch(error, errorInfo) {
+    console.error('🚨 Canvas3D Error Details:', error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return this.props.fallback;
+    }
+    return this.props.children;
+  }
+}
 
 /**
  * 3D Box Component - Simple container box with lid
@@ -11,10 +37,10 @@ function Box3D({ widthCm, heightCm, depthCm, boxType }) {
 
   // No auto-rotation - using OrbitControls instead
 
-  // Convert cm to 3D units (scale down)
-  const length = widthCm / 10;
-  const height = heightCm / 10;
-  const width = depthCm / 10;
+  // Convert cm to 3D units (scale down) - with safety checks
+  const length = Math.max(0.1, widthCm / 10);
+  const height = Math.max(0.1, heightCm / 10);
+  const width = Math.max(0.1, depthCm / 10);
 
   console.log('📦 Box3D rendering:', { widthCm, heightCm, depthCm, length, height, width, boxType });
 
@@ -108,7 +134,13 @@ function Box3D({ widthCm, heightCm, depthCm, boxType }) {
 export default function CartBoxPreview3D({ widthCm, heightCm, depthCm, boxType }) {
   const [error, setError] = React.useState(false);
 
-  if (error) {
+  // Validate dimensions - prevent crashes from invalid values
+  const isValidDimensions = widthCm > 0 && heightCm > 0 && depthCm > 0 &&
+                           !isNaN(widthCm) && !isNaN(heightCm) && !isNaN(depthCm);
+
+  console.log('🔍 CartBoxPreview3D props:', { widthCm, heightCm, depthCm, boxType, isValidDimensions });
+
+  if (!isValidDimensions || error) {
     // Fallback to simple CSS 3D if WebGL fails
     return (
       <div className="bg-gradient-to-br from-primary-50 to-secondary-50 rounded-lg p-3 border border-primary-200">
@@ -144,21 +176,60 @@ export default function CartBoxPreview3D({ widthCm, heightCm, depthCm, boxType }
     );
   }
 
-  return (
+  // Fallback UI component
+  const FallbackUI = () => (
     <div className="bg-gradient-to-br from-primary-50 to-secondary-50 rounded-lg p-3 border border-primary-200">
       <div className="flex items-center gap-2 mb-2">
         <Package className="h-4 w-4 text-primary-600" />
         <p className="text-xs font-bold text-primary-900">Your Selected Box</p>
       </div>
 
-      {/* 3D Canvas - Light background like expected image */}
-      <div className="relative w-full h-40 bg-gradient-to-br from-purple-50 via-white to-blue-50 rounded-lg overflow-hidden">
-        <Canvas
+      {/* Simple 2D Box Preview */}
+      <div className="relative w-full h-40 bg-gradient-to-br from-white to-gray-50 rounded-lg flex items-center justify-center">
+        <div className="text-center">
+          <Package className="h-16 w-16 text-amber-600 mx-auto mb-2" />
+          <p className="text-xs text-gray-600">{boxType}</p>
+        </div>
+      </div>
+
+      {/* Dimensions */}
+      <div className="grid grid-cols-3 gap-2 text-center mt-3">
+        <div className="bg-white rounded-lg p-2">
+          <p className="text-[10px] text-gray-600">Width</p>
+          <p className="text-xs font-bold text-primary-700">{widthCm}cm</p>
+        </div>
+        <div className="bg-white rounded-lg p-2">
+          <p className="text-[10px] text-gray-600">Height</p>
+          <p className="text-xs font-bold text-primary-700">{heightCm}cm</p>
+        </div>
+        <div className="bg-white rounded-lg p-2">
+          <p className="text-[10px] text-gray-600">Depth</p>
+          <p className="text-xs font-bold text-primary-700">{depthCm}cm</p>
+        </div>
+      </div>
+    </div>
+  );
+
+  return (
+    <Canvas3DErrorBoundary fallback={<FallbackUI />}>
+      <div className="bg-gradient-to-br from-primary-50 to-secondary-50 rounded-lg p-3 border border-primary-200">
+        <div className="flex items-center gap-2 mb-2">
+          <Package className="h-4 w-4 text-primary-600" />
+          <p className="text-xs font-bold text-primary-900">Your Selected Box</p>
+        </div>
+
+        {/* 3D Canvas - Light background like expected image */}
+        <div className="relative w-full h-40 bg-gradient-to-br from-purple-50 via-white to-blue-50 rounded-lg overflow-hidden">
+          <Canvas
           shadows
           dpr={[1, 2]}
-          gl={{ antialias: true, alpha: true }}
+          gl={{
+            antialias: true,
+            alpha: true,
+            powerPreference: 'high-performance'
+          }}
           onCreated={({ gl }) => {
-            console.log('✅ Cart 3D Canvas created');
+            console.log('✅ Cart 3D Canvas created successfully');
           }}
           onError={(error) => {
             console.error('❌ Cart 3D Canvas error:', error);
@@ -234,7 +305,8 @@ export default function CartBoxPreview3D({ widthCm, heightCm, depthCm, boxType }
           <p className="text-xs font-bold text-primary-700">{depthCm}cm</p>
         </div>
       </div>
-    </div>
+      </div>
+    </Canvas3DErrorBoundary>
   );
 }
 
