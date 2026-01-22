@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { X, Upload, ShoppingCart, Sparkles, Package, Image as ImageIcon } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import toast from 'react-hot-toast';
+import { getPricingData } from '../utils/priceUtils';
 
 export default function ProductCustomizationModalMobile({ product, isOpen, onClose }) {
   const { addToCart } = useCart();
@@ -271,7 +272,16 @@ export default function ProductCustomizationModalMobile({ product, isOpen, onClo
               </div>
               <div className="flex-1 min-w-0">
                 <h3 className="text-xs font-semibold text-gray-700 line-clamp-1">{product.name}</h3>
-                <span className="text-sm font-bold text-primary-600">₹{product.price}</span>
+                {(() => {
+                  const pricing = getPricingData(product);
+                  return (
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs text-neutral-400 line-through">₹{pricing.originalPrice}</span>
+                      <span className="text-sm font-bold text-primary-600">₹{pricing.currentPrice}</span>
+                      <span className="text-[10px] font-bold bg-green-100 text-green-700 px-1.5 py-0.5 rounded-full">{pricing.discount}% OFF</span>
+                    </div>
+                  );
+                })()}
               </div>
             </div>
 

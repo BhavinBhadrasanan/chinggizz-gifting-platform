@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { X, Upload, ShoppingCart, Sparkles, Package, Image as ImageIcon } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import toast from 'react-hot-toast';
+import { getPricingData } from '../utils/priceUtils';
 
 export default function ProductCustomizationModalDesktop({ product, isOpen, onClose }) {
   const { addToCart } = useCart();
@@ -198,13 +199,25 @@ export default function ProductCustomizationModalDesktop({ product, isOpen, onCl
                     )}
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">{product.name}</h3>
-                  <div className="flex items-center gap-3 mb-4">
-                    <span className="text-3xl font-bold text-primary-600">₹{product.price}</span>
-                    {product.isCustomizable && product.customizationCharge > 0 && (
-                      <span className="text-sm bg-green-100 text-green-700 px-3 py-1 rounded-full font-bold">
-                        +₹{product.customizationCharge} customization
-                      </span>
-                    )}
+                  <div className="mb-4">
+                    {(() => {
+                      const pricing = getPricingData(product);
+                      return (
+                        <>
+                          {/* Original Price - Strikethrough */}
+                          <div className="flex items-center gap-2 mb-1">
+                            <span className="text-base text-neutral-400 line-through font-medium">
+                              ₹{pricing.originalPrice}
+                            </span>
+                            <span className="text-xs font-bold bg-green-100 text-green-700 px-2 py-1 rounded-full">
+                              {pricing.discount}% OFF
+                            </span>
+                          </div>
+                          {/* Offer Price - Current Price */}
+                          <span className="text-3xl font-bold text-primary-600">₹{pricing.currentPrice}</span>
+                        </>
+                      );
+                    })()}
                   </div>
                   {product.description && (
                     <p className="text-sm text-gray-600 leading-relaxed">{product.description}</p>

@@ -7,6 +7,8 @@ import MobileBottomNav from './components/MobileBottomNav';
 import MobileToast from './components/MobileToast';
 import HomePage from './pages/HomePage';
 import ProductsPage from './pages/ProductsPage';
+import ProductCustomizationPage from './pages/ProductCustomizationPage';
+import CartPage from './pages/CartPage';
 import HamperBuilderPage from './pages/HamperBuilderPage';
 import CheckoutPage from './pages/CheckoutPage';
 import AdminLogin from './pages/AdminLogin';
@@ -25,6 +27,8 @@ function App() {
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/products" element={<ProductsPage />} />
+              <Route path="/customize/:productId" element={<ProductCustomizationPage />} />
+              <Route path="/cart" element={<CartPage />} />
               <Route path="/hamper-builder" element={<HamperBuilderPage />} />
               <Route path="/checkout" element={<CheckoutPage />} />
               <Route path="/admin/login" element={<AdminLogin />} />

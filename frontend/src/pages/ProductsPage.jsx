@@ -3,8 +3,9 @@ import { useSearchParams, useNavigate } from 'react-router-dom';
 import { ShoppingBag, Search, Filter, Sparkles, X, Grid, List, MessageCircle, Phone } from 'lucide-react';
 import api from '../config/api';
 import toast from 'react-hot-toast';
-import ProductCustomizationModal from '../components/ProductCustomizationModal';
 import { useCart } from '../context/CartContext';
+import ScrollButton from '../components/ScrollButton';
+import { getPricingData } from '../utils/priceUtils';
 
 export default function ProductsPage() {
   const navigate = useNavigate();
@@ -16,8 +17,6 @@ export default function ProductsPage() {
   const [selectedCategory, setSelectedCategory] = useState(searchParams.get('category') || 'all');
   const [selectedType, setSelectedType] = useState('all');
   const [viewMode, setViewMode] = useState('grid');
-  const [selectedProduct, setSelectedProduct] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const { addToCart } = useCart();
 
   // Get hamper state from localStorage
@@ -237,8 +236,8 @@ export default function ProductsPage() {
     const hasCustomization = product.customizationOptions || product.isCustomizable;
 
     if (hasCustomization) {
-      setSelectedProduct(product);
-      setIsModalOpen(true);
+      // Navigate to customization page
+      navigate(`/customize/${product.id}`);
     } else {
       // Directly add to cart if no customization needed
       addToCart(product, 1);
@@ -505,14 +504,26 @@ export default function ProductsPage() {
 
                   <div className="flex items-end justify-between gap-3">
                     <div>
-                      <span className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent">
-                        ₹{product.price}
-                      </span>
-                      {product.isCustomizable && product.customizationCharge > 0 && (
-                        <p className="text-xs text-gray-500 mt-1 font-medium">
-                          +₹{product.customizationCharge} customization
-                        </p>
-                      )}
+                      {(() => {
+                        const pricing = getPricingData(product);
+                        return (
+                          <>
+                            {/* Original Price - Strikethrough */}
+                            <div className="flex items-center gap-2 mb-1">
+                              <span className="text-sm text-neutral-400 line-through font-medium">
+                                ₹{pricing.originalPrice}
+                              </span>
+                              <span className="text-xs font-bold bg-green-100 text-green-700 px-2 py-0.5 rounded-full">
+                                {pricing.discount}% OFF
+                              </span>
+                            </div>
+                            {/* Offer Price - Current Price */}
+                            <span className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent">
+                              ₹{pricing.currentPrice}
+                            </span>
+                          </>
+                        );
+                      })()}
                     </div>
                     <button
                       onClick={() => handleProductClick(product)}
@@ -675,12 +686,24 @@ export default function ProductsPage() {
                       </div>
                     <div className="flex items-end justify-between mt-4">
                       <div>
-                        <span className="text-3xl font-bold text-primary-600">₹{product.price}</span>
-                        {product.isCustomizable && product.customizationCharge > 0 && (
-                          <p className="text-sm text-gray-500 mt-1">
-                            +₹{product.customizationCharge} for customization
-                          </p>
-                        )}
+                        {(() => {
+                          const pricing = getPricingData(product);
+                          return (
+                            <>
+                              {/* Original Price - Strikethrough */}
+                              <div className="flex items-center gap-2 mb-1">
+                                <span className="text-base text-neutral-400 line-through font-medium">
+                                  ₹{pricing.originalPrice}
+                                </span>
+                                <span className="text-xs font-bold bg-green-100 text-green-700 px-2 py-0.5 rounded-full">
+                                  {pricing.discount}% OFF
+                                </span>
+                              </div>
+                              {/* Offer Price - Current Price */}
+                              <span className="text-3xl font-bold text-primary-600">₹{pricing.currentPrice}</span>
+                            </>
+                          );
+                        })()}
                       </div>
                       <button
                         onClick={() => handleProductClick(product)}
@@ -704,15 +727,8 @@ export default function ProductsPage() {
         )}
       </div>
 
-      {/* Customization Modal */}
-      <ProductCustomizationModal
-        product={selectedProduct}
-        isOpen={isModalOpen}
-        onClose={() => {
-          setIsModalOpen(false);
-          setSelectedProduct(null);
-        }}
-      />
+      {/* Scroll to Top/Bottom Button */}
+      <ScrollButton />
     </div>
   );
 }

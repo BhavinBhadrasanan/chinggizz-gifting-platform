@@ -35,8 +35,8 @@ export default function Cart() {
         onClick={() => setIsCartOpen(false)}
       ></div>
 
-      {/* Cart Sidebar - Mobile Optimized */}
-      <div className="fixed right-0 top-0 h-full w-full sm:max-w-md bg-white shadow-2xl z-50 flex flex-col animate-slideInRight">
+      {/* Cart Sidebar - Mobile Optimized - Leave space for footer nav on mobile */}
+      <div className="fixed right-0 top-0 h-[calc(100vh-4rem)] lg:h-full w-full sm:max-w-md bg-white shadow-2xl z-[200] flex flex-col animate-slideInRight relative overflow-hidden">
         {/* Header - Mobile Friendly */}
         <div className="flex items-center justify-between p-4 sm:p-6 border-b border-neutral-200 bg-gradient-to-r from-primary-50 to-secondary-50">
           <div className="flex items-center space-x-2">
@@ -58,8 +58,8 @@ export default function Cart() {
           </button>
         </div>
 
-        {/* Cart Items - Mobile Optimized */}
-        <div className="flex-1 overflow-y-auto p-4 sm:p-6 overscroll-contain">
+        {/* Cart Items - Mobile Optimized - Add bottom padding for fixed footer */}
+        <div className="flex-1 overflow-y-auto p-4 sm:p-6 pb-48 overscroll-contain">
           {cartItems.length === 0 && hampers.length === 0 ? (
             <div className="text-center py-12 sm:py-16">
               <div className="bg-neutral-100 w-24 h-24 sm:w-32 sm:h-32 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -101,14 +101,34 @@ export default function Cart() {
                       <h3 className="font-semibold text-neutral-900 mb-1 truncate">
                         {item.name}
                       </h3>
+
+                      {/* Customization Details - Show FIRST for clarity */}
+                      {item.customization && typeof item.customization === 'object' && item.customization.selectedOptions && (
+                        <div className="text-xs mb-2 bg-primary-50 p-2 rounded border border-primary-200">
+                          {Object.entries(item.customization.selectedOptions).map(([key, value]) => (
+                            <p key={key} className="text-neutral-800 font-semibold">
+                              ✓ {value}
+                            </p>
+                          ))}
+                          {item.customization.uploadedImages && Object.keys(item.customization.uploadedImages).length > 0 && (
+                            <p className="text-neutral-700 mt-1">
+                              <span className="font-medium">Photo:</span> Uploaded ✓
+                            </p>
+                          )}
+                        </div>
+                      )}
+
+                      {/* Price Display - Show total price clearly */}
                       <p className="text-sm text-neutral-600 mb-2">
                         {item.customization && typeof item.customization === 'object' && item.customization.totalPrice ? (
-                          <span className="font-semibold text-primary-600">
+                          <span className="font-bold text-primary-600 text-base">
                             ₹{parseFloat(item.customization.totalPrice).toFixed(2)}
                           </span>
                         ) : (
                           <>
-                            ₹{parseFloat(item.price).toFixed(2)}
+                            <span className="font-bold text-primary-600 text-base">
+                              ₹{parseFloat(item.price).toFixed(2)}
+                            </span>
                             {item.customization && item.customizationCharge > 0 && (
                               <span className="text-primary-600">
                                 {' '}+ ₹{parseFloat(item.customizationCharge).toFixed(2)} (Custom)
@@ -117,29 +137,6 @@ export default function Cart() {
                           </>
                         )}
                       </p>
-
-                      {/* Customization Details */}
-                      {item.customization && (
-                        <div className="text-xs text-neutral-500 mb-2 bg-neutral-50 p-2 rounded">
-                          <p className="font-medium mb-1">Customization:</p>
-                          {typeof item.customization === 'object' ? (
-                            <div className="space-y-1">
-                              {item.customization.selectedOptions && Object.entries(item.customization.selectedOptions).map(([key, value]) => (
-                                <p key={key} className="text-neutral-700">
-                                  <span className="font-medium">{key}:</span> {value}
-                                </p>
-                              ))}
-                              {item.customization.uploadedImages && Object.keys(item.customization.uploadedImages).length > 0 && (
-                                <p className="text-neutral-700">
-                                  <span className="font-medium">Photo:</span> Uploaded ✓
-                                </p>
-                              )}
-                            </div>
-                          ) : (
-                            <p className="truncate">{item.customization}</p>
-                          )}
-                        </div>
-                      )}
 
                       {/* 3D Box Preview for Hamper Boxes - Always Visible */}
                       {isHamperBox(item) && getBoxDimensions(item).widthCm > 0 && (
@@ -251,12 +248,12 @@ export default function Cart() {
           )}
         </div>
 
-        {/* Footer - Mobile Safe Area for Bottom Nav */}
+        {/* Footer - Absolutely positioned at bottom of cart sidebar - Compact */}
         {(cartItems.length > 0 || hampers.length > 0) && (
-          <div className="border-t border-neutral-200 p-4 sm:p-6 pb-20 lg:pb-4 bg-neutral-50 space-y-2 sm:space-y-3">
-            <div className="flex items-center justify-between mb-3 sm:mb-4">
-              <span className="text-base sm:text-lg font-semibold text-neutral-900">Total:</span>
-              <span className="text-xl sm:text-2xl font-bold text-primary-600">
+          <div className="absolute bottom-0 left-0 right-0 border-t border-neutral-200 px-3 sm:px-4 pt-2 sm:pt-3 pb-2 bg-white space-y-2 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]">
+            <div className="flex items-center justify-between mb-1">
+              <span className="text-xs sm:text-sm font-semibold text-neutral-900">Total:</span>
+              <span className="text-base sm:text-lg font-bold text-primary-600">
                 ₹{getCartTotal().toFixed(2)}
               </span>
             </div>
@@ -280,9 +277,9 @@ export default function Cart() {
                         navigate('/hamper-builder');
                       }, 100);
                     }}
-                    className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-bold text-sm sm:text-base py-2.5 sm:py-3 px-3 sm:px-4 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 shadow-md hover:shadow-lg"
+                    className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold text-xs py-2 px-3 rounded-lg transition-all duration-300 flex items-center justify-center gap-1.5 shadow-md hover:shadow-lg"
                   >
-                    <Sparkles className="h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" />
+                    <Sparkles className="h-3.5 w-3.5 flex-shrink-0" />
                     <span className="truncate">Build Your Own Hamper</span>
                   </button>
                 );
@@ -301,9 +298,9 @@ export default function Cart() {
                   navigate('/checkout');
                 }, 100);
               }}
-              className="w-full bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white font-bold text-sm sm:text-base py-2.5 sm:py-3 px-3 sm:px-4 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg flex items-center justify-center gap-2"
+              className="w-full bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white font-semibold text-xs py-2 px-3 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg flex items-center justify-center gap-1.5"
             >
-              <ShoppingBag className="h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" />
+              <ShoppingBag className="h-3.5 w-3.5 flex-shrink-0" />
               <span className="truncate">Proceed to Checkout</span>
             </button>
           </div>

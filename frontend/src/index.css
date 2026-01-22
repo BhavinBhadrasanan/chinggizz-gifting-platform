@@ -22,15 +22,26 @@
 }
 
 /* Hide Scrollbar for Horizontal Scroll */
-.hide-scrollbar {
+.hide-scrollbar,
+.scrollbar-hide {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
   scroll-behavior: smooth;  /* Smooth scrolling */
   -webkit-overflow-scrolling: touch;  /* iOS momentum scrolling */
 }
 
-.hide-scrollbar::-webkit-scrollbar {
+.hide-scrollbar::-webkit-scrollbar,
+.scrollbar-hide::-webkit-scrollbar {
   display: none;  /* Chrome, Safari and Opera */
+}
+
+/* Safe Area for Mobile Devices */
+.safe-area-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.pb-safe {
+  padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
 }
 
 /* Top Banner Animations */

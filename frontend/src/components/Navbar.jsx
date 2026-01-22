@@ -1,4 +1,4 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { Gift, Menu, X, ShoppingBag, Home, Package, ShieldCheck, Sparkles } from 'lucide-react';
 import { useCart } from '../context/CartContext';
@@ -7,7 +7,8 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [bannerIndex, setBannerIndex] = useState(0);
   const location = useLocation();
-  const { getCartCount, setIsCartOpen } = useCart();
+  const navigate = useNavigate();
+  const { getCartCount } = useCart();
 
   const isActive = (path) => location.pathname === path;
 
@@ -156,7 +157,7 @@ export default function Navbar() {
 
               {/* Cart Button - Desktop */}
               <button
-                onClick={() => setIsCartOpen(true)}
+                onClick={() => navigate('/cart')}
                 className="relative group ml-3 px-5 py-2.5 rounded-xl font-semibold text-white bg-gradient-to-r from-secondary-500 to-secondary-600 hover:from-secondary-600 hover:to-secondary-700 shadow-lg shadow-secondary-500/30 hover:shadow-xl hover:shadow-secondary-500/40 transition-all duration-200 flex items-center space-x-2"
               >
                 <ShoppingBag className="h-5 w-5" />
@@ -173,7 +174,7 @@ export default function Navbar() {
             <div className="flex lg:hidden items-center space-x-2">
               {/* Cart Button - Mobile */}
               <button
-                onClick={() => setIsCartOpen(true)}
+                onClick={() => navigate('/cart')}
                 className="relative p-3 rounded-xl text-white bg-gradient-to-r from-secondary-500 to-secondary-600 shadow-lg shadow-secondary-500/30 tap-target"
               >
                 <ShoppingBag className="h-5 w-5 sm:h-6 sm:w-6" />

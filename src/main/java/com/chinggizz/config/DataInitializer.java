@@ -99,16 +99,16 @@ public class DataInitializer implements CommandLineRunner {
         // 1. Polaroids - Customer chooses quantity and uploads photos
         createProductWithOptions("Polaroid Photo Prints",
             "Instant-style polaroid prints. Upload your photos and choose quantity.",
-            new BigDecimal("49.00"), ProductType.CUSTOMISED_ITEM, photoMemory,
+            new BigDecimal("199.00"), ProductType.CUSTOMISED_ITEM, photoMemory,
             "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=500",
             true, new BigDecimal("0"), 200,
             new BigDecimal("9"), new BigDecimal("11"), new BigDecimal("0.2"),
-            "{\"type\":\"polaroid\",\"hasPhotoUpload\":true,\"pricePerUnit\":49,\"options\":[" +
+            "{\"type\":\"polaroid\",\"hasPhotoUpload\":true,\"pricePerUnit\":0,\"options\":[" +
                 "{\"category\":\"Quantity\",\"choices\":[" +
-                    "{\"name\":\"5 Prints\",\"quantity\":5,\"price\":0}," +
-                    "{\"name\":\"10 Prints\",\"quantity\":10,\"price\":40}," +
-                    "{\"name\":\"20 Prints\",\"quantity\":20,\"price\":100}," +
-                    "{\"name\":\"50 Prints\",\"quantity\":50,\"price\":300}" +
+                    "{\"name\":\"9 Prints\",\"quantity\":9,\"price\":0}," +
+                    "{\"name\":\"18 Prints\",\"quantity\":18,\"price\":51}," +
+                    "{\"name\":\"27 Prints\",\"quantity\":27,\"price\":151}," +
+                    "{\"name\":\"36 Prints\",\"quantity\":36,\"price\":251}" +
                 "]}" +
             "]}");
 
@@ -160,7 +160,7 @@ public class DataInitializer implements CommandLineRunner {
 
         // 5. Acrylic Photo Stand - NEW
         createProductWithOptions("Acrylic Photo Stand",
-            "Modern acrylic photo stand with LED backlight option. Sleek and contemporary design.",
+            "Modern acrylic photo stand. Sleek and contemporary design.",
             new BigDecimal("599.00"), ProductType.CUSTOMISED_ITEM, photoMemory,
             "https://images.unsplash.com/photo-1611095564732-2f3a5c3e8d3e?w=500",
             true, new BigDecimal("150.00"), 70,
@@ -170,11 +170,6 @@ public class DataInitializer implements CommandLineRunner {
                     "{\"name\":\"Small (4×6 inch)\",\"price\":0,\"width\":10,\"height\":15}," +
                     "{\"name\":\"Medium (6×8 inch)\",\"price\":150,\"width\":15,\"height\":20}," +
                     "{\"name\":\"Large (8×10 inch)\",\"price\":300,\"width\":20,\"height\":25}" +
-                "]}," +
-                "{\"category\":\"LED Backlight\",\"choices\":[" +
-                    "{\"name\":\"No LED\",\"price\":0,\"description\":\"Standard acrylic stand\"}," +
-                    "{\"name\":\"Warm White LED\",\"price\":200,\"description\":\"Soft warm glow\"}," +
-                    "{\"name\":\"RGB Color LED\",\"price\":350,\"description\":\"Multi-color changing lights\"}" +
                 "]}" +
             "]}");
 

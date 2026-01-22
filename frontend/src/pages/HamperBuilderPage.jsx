@@ -1746,20 +1746,10 @@ export default function HamperBuilderPage() {
                         availableItems.map((item, index) => (
                           <div
                             key={item.id}
-                            draggable
-                            onDragStart={(e) => handleDragStart(e, item)}
-                            onDragEnd={handleDragEnd}
-                            onClick={() => {
-                              setSelectedItemToPlace(item);
-                              toast.info(`${item.name} - Tap green spot below`, {
-                                duration: 2000,
-                                icon: '👇',
-                              });
-                            }}
-                            className={`bg-white border-2 rounded-xl p-2 cursor-pointer transition-all duration-300 tap-target relative overflow-hidden ${
+                            className={`bg-white border-2 rounded-xl p-2 transition-all duration-300 tap-target relative overflow-hidden ${
                               selectedItemToPlace?.id === item.id
                                 ? 'border-green-500 bg-gradient-to-r from-green-50 to-emerald-50 shadow-xl scale-105 animate-pulseGlow'
-                                : 'border-neutral-200 hover:border-orange-400 hover:shadow-lg active:scale-95'
+                                : 'border-neutral-200 hover:border-orange-400 hover:shadow-lg'
                             }`}
                             style={{ animationDelay: `${index * 0.05}s` }}
                           >
@@ -1769,24 +1759,54 @@ export default function HamperBuilderPage() {
                             )}
 
                             <div className="flex items-center gap-2 relative z-10">
-                              <div className="w-12 h-12 bg-gradient-to-br from-neutral-100 to-neutral-200 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden shadow-sm">
-                                {item.imageUrl ? (
-                                  <img src={item.imageUrl} alt={item.name} className="w-full h-full object-cover" />
-                                ) : (
-                                  <Gift className="h-6 w-6 text-neutral-400" />
-                                )}
-                              </div>
-                              <div className="flex-1 min-w-0">
-                                <p className="font-bold text-xs text-neutral-900 truncate leading-tight mb-0.5">{item.name}</p>
-                                <p className="text-xs font-semibold text-orange-600">₹{item.price}</p>
-                              </div>
-                              {selectedItemToPlace?.id === item.id && (
-                                <div className="flex-shrink-0 animate-bounceIn">
-                                  <div className="bg-gradient-to-br from-green-500 to-emerald-600 text-white rounded-full p-1 shadow-lg">
-                                    <Check className="h-3 w-3" />
-                                  </div>
+                              <div
+                                draggable
+                                onDragStart={(e) => handleDragStart(e, item)}
+                                onDragEnd={handleDragEnd}
+                                onClick={() => {
+                                  setSelectedItemToPlace(item);
+                                  toast.info(`${item.name} - Tap green spot below`, {
+                                    duration: 2000,
+                                    icon: '👇',
+                                  });
+                                }}
+                                className="flex items-center gap-2 flex-1 min-w-0 cursor-pointer"
+                              >
+                                <div className="w-12 h-12 bg-gradient-to-br from-neutral-100 to-neutral-200 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden shadow-sm">
+                                  {item.imageUrl ? (
+                                    <img src={item.imageUrl} alt={item.name} className="w-full h-full object-cover" />
+                                  ) : (
+                                    <Gift className="h-6 w-6 text-neutral-400" />
+                                  )}
                                 </div>
-                              )}
+                                <div className="flex-1 min-w-0">
+                                  <p className="font-bold text-xs text-neutral-900 truncate leading-tight mb-0.5">{item.name}</p>
+                                  <p className="text-xs font-semibold text-orange-600">₹{item.price}</p>
+                                </div>
+                              </div>
+
+                              {/* Action Buttons */}
+                              <div className="flex items-center gap-1 flex-shrink-0">
+                                {selectedItemToPlace?.id === item.id && (
+                                  <div className="animate-bounceIn">
+                                    <div className="bg-gradient-to-br from-green-500 to-emerald-600 text-white rounded-full p-1 shadow-lg">
+                                      <Check className="h-3 w-3" />
+                                    </div>
+                                  </div>
+                                )}
+
+                                {/* Remove Button */}
+                                <button
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    removeFromCart(item.id, item.customization);
+                                  }}
+                                  className="bg-red-100 hover:bg-red-200 text-red-600 rounded-full p-1.5 transition-all hover:scale-110 active:scale-95 shadow-sm tap-target"
+                                  title="Remove item"
+                                >
+                                  <Trash2 className="h-3 w-3" />
+                                </button>
+                              </div>
                             </div>
                           </div>
                         ))
@@ -2325,18 +2345,14 @@ export default function HamperBuilderPage() {
                         return (
                           <div
                             key={item.id}
-                            draggable={itemFits}
-                            onDragStart={(e) => handleDragStart(e, item)}
-                            onDragEnd={handleDragEnd}
-                            onClick={() => handleItemClick(item)}
                             className={`bg-white border rounded-lg p-2 transition-all ${
                               !itemFits
-                                ? 'border-red-300 opacity-60 cursor-not-allowed'
+                                ? 'border-red-300 opacity-60'
                                 : isBeingDragged
                                 ? 'border-green-500 shadow-lg opacity-50'
                                 : selectedItemToPlace?.id === item.id
                                 ? 'border-blue-500 shadow-lg'
-                                : 'border-neutral-300 hover:border-primary-500 hover:shadow cursor-grab active:cursor-grabbing'
+                                : 'border-neutral-300 hover:border-primary-500 hover:shadow'
                             }`}
                           >
                             <div className="flex items-center gap-2">
@@ -2347,23 +2363,45 @@ export default function HamperBuilderPage() {
                                 </div>
                               )}
 
-                              <div className="w-12 h-12 bg-neutral-100 rounded flex items-center justify-center flex-shrink-0">
-                                {item.imageUrl ? (
-                                  <img src={item.imageUrl} alt={item.name} className="w-full h-full object-cover rounded" />
-                                ) : (
-                                  <Package className="h-6 w-6 text-neutral-400" />
-                                )}
-                              </div>
-                              <div className="flex-1 min-w-0">
-                                <h4 className="font-bold text-xs text-neutral-900 truncate">
-                                  {item.name}
-                                </h4>
-                                <p className="text-xs text-neutral-600">₹{item.price}</p>
+                              <div
+                                draggable={itemFits}
+                                onDragStart={(e) => handleDragStart(e, item)}
+                                onDragEnd={handleDragEnd}
+                                onClick={() => handleItemClick(item)}
+                                className={`flex items-center gap-2 flex-1 min-w-0 ${
+                                  itemFits ? 'cursor-grab active:cursor-grabbing' : 'cursor-not-allowed'
+                                }`}
+                              >
+                                <div className="w-12 h-12 bg-neutral-100 rounded flex items-center justify-center flex-shrink-0">
+                                  {item.imageUrl ? (
+                                    <img src={item.imageUrl} alt={item.name} className="w-full h-full object-cover rounded" />
+                                  ) : (
+                                    <Package className="h-6 w-6 text-neutral-400" />
+                                  )}
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                  <h4 className="font-bold text-xs text-neutral-900 truncate">
+                                    {item.name}
+                                  </h4>
+                                  <p className="text-xs text-neutral-600">₹{item.price}</p>
 
-                                {!itemFits && (
-                                  <p className="text-xs text-red-600 mt-1">⚠️ Too large</p>
-                                )}
+                                  {!itemFits && (
+                                    <p className="text-xs text-red-600 mt-1">⚠️ Too large</p>
+                                  )}
+                                </div>
                               </div>
+
+                              {/* Remove Button */}
+                              <button
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  removeFromCart(item.id, item.customization);
+                                }}
+                                className="flex-shrink-0 bg-red-100 hover:bg-red-200 text-red-600 rounded-full p-1.5 transition-all hover:scale-110 active:scale-95"
+                                title="Remove item"
+                              >
+                                <Trash2 className="h-3.5 w-3.5" />
+                              </button>
                             </div>
                           </div>
                         );
