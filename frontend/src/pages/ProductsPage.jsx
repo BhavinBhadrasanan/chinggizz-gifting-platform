@@ -373,39 +373,39 @@ export default function ProductsPage() {
             </button>
           </div>
         ) : viewMode === 'grid' ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {/* WhatsApp Communication Card */}
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1.5 sm:gap-2">
+            {/* WhatsApp Communication Card - Ultra Compact */}
             <div
               onClick={handleWhatsAppChat}
               className="card card-hover group cursor-pointer bg-gradient-to-br from-green-50 to-emerald-50 border-2 border-green-200 hover:border-green-400 transition-all"
             >
               <div className="relative h-56 bg-gradient-to-br from-green-400 to-emerald-500 overflow-hidden flex items-center justify-center">
                 <div className="text-center text-white">
-                  <MessageCircle className="h-20 w-20 mx-auto mb-3 animate-bounce" />
-                  <Phone className="h-8 w-8 mx-auto" />
+                  <MessageCircle className="h-12 w-12 mx-auto mb-2 animate-bounce" />
+                  <Phone className="h-5 w-5 mx-auto" />
                 </div>
-                <div className="absolute top-3 right-3">
-                  <span className="badge bg-white text-green-600 shadow-md font-semibold">
-                    <Sparkles className="h-3 w-3 mr-1" />
-                    Need Help?
+                <div className="absolute top-2 right-2">
+                  <span className="inline-flex items-center gap-1 bg-white text-green-600 px-2 py-1 rounded-full shadow-md text-[10px] sm:text-xs font-bold">
+                    <Sparkles className="h-2.5 w-2.5" />
+                    Help?
                   </span>
                 </div>
               </div>
-              <div className="p-5">
-                <h3 className="font-bold text-lg mb-2 text-green-700">
+              <div className="p-1.5 sm:p-2">
+                <h3 className="font-bold text-xs sm:text-sm mb-1 text-green-700 line-clamp-2 leading-tight">
                   Chat with Chinggizz
                 </h3>
-                <p className="text-gray-700 text-sm mb-4 leading-relaxed">
-                  Need a special gift? Confused about what to choose? Chat with us directly on WhatsApp for personalized recommendations!
+                <p className="hidden sm:block text-gray-700 text-[10px] sm:text-xs mb-1 line-clamp-1">
+                  Need help? Chat on WhatsApp!
                 </p>
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between gap-1.5">
                   <div className="flex items-center text-green-600">
-                    <MessageCircle className="h-5 w-5 mr-2" />
-                    <span className="text-sm font-semibold">Instant Response</span>
+                    <MessageCircle className="h-3 w-3 sm:h-4 sm:w-4 mr-1" />
+                    <span className="text-[10px] sm:text-xs font-semibold">Instant</span>
                   </div>
-                  <button className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-all transform hover:scale-105 flex items-center">
-                    <MessageCircle className="h-4 w-4 mr-1" />
-                    Chat Now
+                  <button className="bg-green-500 hover:bg-green-600 text-white px-2 py-1.5 sm:py-2 rounded-md text-[10px] sm:text-xs font-bold transition-all transform active:scale-95 shadow-md tap-target flex items-center">
+                    <MessageCircle className="h-3 w-3 mr-0.5" />
+                    Chat
                   </button>
                 </div>
               </div>
@@ -482,19 +482,28 @@ export default function ProductsPage() {
                     )}
                   </div>
 
-                <div className="p-5 relative z-10">
-                  <h3 className="font-bold text-lg mb-2 line-clamp-1 group-hover:text-primary-600 transition-colors duration-300">
+                {/* Product Details - Ultra Compact Premium Style */}
+                <div className="p-1.5 sm:p-2 flex flex-col flex-1 relative z-10">
+                  {/* Category - Smaller */}
+                  <span className="text-[9px] sm:text-[10px] font-semibold text-primary-600 uppercase tracking-wide mb-0.5">
+                    {product.categoryName}
+                  </span>
+
+                  {/* Product Name - Show Full Name (2 lines) */}
+                  <h3 className="font-bold text-xs sm:text-sm mb-1 text-neutral-900 line-clamp-2 leading-tight group-hover:text-primary-600 transition-colors duration-300">
                     {product.name}
                   </h3>
-                  <p className="text-gray-600 text-sm mb-4 line-clamp-2 leading-relaxed">
+
+                  {/* Description - Hidden on Mobile, Show on Desktop */}
+                  <p className="hidden sm:block text-neutral-600 text-[10px] sm:text-xs mb-1 line-clamp-1">
                     {product.description}
                   </p>
 
-                  {/* Hamper Warning Message - Enhanced */}
+                  {/* Hamper Warning Message - Ultra Compact */}
                   {willNotFit && (
-                    <div className="mb-3 p-3 bg-gradient-to-r from-red-50 to-orange-50 border-2 border-red-300 rounded-xl shadow-sm">
-                      <p className="text-xs text-red-800 font-bold flex items-center gap-2">
-                        <span className="text-base">⚠️</span>
+                    <div className="mb-1.5 p-1.5 bg-gradient-to-r from-red-50 to-orange-50 border border-red-300 rounded-md shadow-sm">
+                      <p className="text-[9px] sm:text-[10px] text-red-800 font-bold flex items-center gap-1">
+                        <span className="text-xs">⚠️</span>
                         {fitCheck.reason === 'capacity'
                           ? `Hamper ${fitCheck.currentFill}% full - this won't fit!`
                           : `Too large for ${fitCheck.boxName} box`}
@@ -502,32 +511,35 @@ export default function ProductsPage() {
                     </div>
                   )}
 
-                  <div className="flex items-end justify-between gap-3">
-                    <div>
-                      {(() => {
-                        const pricing = getPricingData(product);
-                        return (
-                          <>
-                            {/* Original Price - Strikethrough */}
-                            <div className="flex items-center gap-2 mb-1">
-                              <span className="text-sm text-neutral-400 line-through font-medium">
-                                ₹{pricing.originalPrice}
-                              </span>
-                              <span className="text-xs font-bold bg-green-100 text-green-700 px-2 py-0.5 rounded-full">
-                                {pricing.discount}% OFF
-                              </span>
-                            </div>
-                            {/* Offer Price - Current Price */}
-                            <span className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent">
+                  {/* Price Section - Ultra Compact Premium Style */}
+                  <div className="mt-auto">
+                    {(() => {
+                      const pricing = getPricingData(product);
+                      return (
+                        <>
+                          {/* Original Price & Discount Badge - Ultra Compact */}
+                          <div className="flex items-center gap-1 mb-0.5">
+                            <span className="text-[10px] sm:text-xs text-neutral-400 line-through font-medium">
+                              ₹{pricing.originalPrice}
+                            </span>
+                            <span className="text-[8px] sm:text-[10px] font-bold bg-green-100 text-green-700 px-1 py-0.5 rounded">
+                              {pricing.discount}% OFF
+                            </span>
+                          </div>
+                          {/* Current Price - Compact */}
+                          <div className="mb-1.5">
+                            <span className="text-base sm:text-lg font-bold bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent">
                               ₹{pricing.currentPrice}
                             </span>
-                          </>
-                        );
-                      })()}
-                    </div>
+                          </div>
+                        </>
+                      );
+                    })()}
+
+                    {/* Add to Cart Button - Ultra Compact - Full Width */}
                     <button
                       onClick={() => handleProductClick(product)}
-                      className={`px-4 py-2.5 rounded-xl text-sm font-bold transition-all transform active:scale-95 shadow-lg tap-target ${
+                      className={`w-full text-[10px] sm:text-xs py-1.5 sm:py-2 rounded-md font-bold transition-all transform active:scale-95 shadow-md tap-target ${
                         willNotFit
                           ? 'bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white shadow-red-200'
                           : 'bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white shadow-primary-200 hover:shadow-xl'

@@ -20,11 +20,19 @@ export default function ProductCustomizationPage() {
   const [totalPrice, setTotalPrice] = useState(0);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const previewTimeoutRef = useRef(null);
+  const imageGalleryRef = useRef(null);
 
-  // Scroll to top when page loads (when navigating from other pages)
+  // Scroll to product image when page loads (when navigating from other pages)
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, []);
+    // Add a small delay to ensure the page is fully rendered
+    const scrollTimer = setTimeout(() => {
+      if (imageGalleryRef.current) {
+        imageGalleryRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }, 100);
+
+    return () => clearTimeout(scrollTimer);
+  }, [productId]);
 
   // Fetch product data
   useEffect(() => {
@@ -73,11 +81,6 @@ export default function ProductCustomizationPage() {
 
     setTotalPrice(price);
   }, [selectedOptions, quantity, product]);
-
-  // Scroll to top on mount
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, []);
 
   // Early returns after all hooks
   if (loading) {
@@ -241,7 +244,7 @@ export default function ProductCustomizationPage() {
           {/* Left Column - Product Images & Info */}
           <div className="space-y-3 sm:space-y-4">
             {/* Image Gallery */}
-            <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg overflow-hidden">
+            <div ref={imageGalleryRef} className="bg-white rounded-xl sm:rounded-2xl shadow-lg overflow-hidden">
               {/* Main Image with Navigation */}
               <div className="relative aspect-square bg-gray-100">
                 <img
@@ -602,32 +605,59 @@ export default function ProductCustomizationPage() {
 
       {/* Mobile Fixed Bottom Bar - Hide when cart is open */}
       {!isCartOpen && (
-        <div className="lg:hidden fixed bottom-0 left-0 right-0 z-[100] bg-white border-t-4 border-primary-200 shadow-2xl safe-area-bottom">
-        <div className="px-3 py-3 sm:px-4 sm:py-4 pb-safe">
-          {/* Total Price Section */}
-          <div className="bg-gradient-to-r from-primary-50 to-secondary-50 rounded-xl p-3 mb-3 border-2 border-primary-200">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-xs font-medium text-gray-600 mb-0.5">Total Price</p>
-                <p className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent">
-                  ₹{totalPrice}
-                </p>
+        <div className="lg:hidden fixed bottom-0 left-0 right-0 z-[100] bg-white border-t-2 border-gray-200 shadow-2xl safe-area-bottom">
+          <div className="px-2 py-2 sm:px-3 sm:py-2.5 pb-safe">
+            {/* Compact Total Price Section - Amazon Style */}
+            <div className="flex items-center justify-between gap-2 mb-2">
+              {/* Price Display */}
+              <div className="flex items-center gap-2">
+                {(() => {
+                  const pricing = getPricingData(product);
+                  return (
+                    <>
+                      {/* Original Price - Strikethrough */}
+                      <div className="flex flex-col">
+                        <span className="text-[10px] text-gray-500 leading-none">MRP</span>
+                        <span className="text-xs text-gray-400 line-through leading-tight">
+                          ₹{pricing.originalPrice * quantity}
+                        </span>
+                      </div>
+
+                      {/* Current Total Price */}
+                      <div className="flex flex-col">
+                        <span className="text-[10px] text-gray-600 font-medium leading-none">Total</span>
+                        <span className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent leading-tight">
+                          ₹{totalPrice}
+                        </span>
+                      </div>
+
+                      {/* Discount Badge */}
+                      <div className="bg-green-100 px-1.5 py-0.5 rounded">
+                        <span className="text-[10px] font-bold text-green-700">
+                          {pricing.discount}% OFF
+                        </span>
+                      </div>
+                    </>
+                  );
+                })()}
               </div>
+
+              {/* Quantity Display */}
               <div className="text-right">
-                <p className="text-xs text-gray-500">Qty: {quantity}</p>
+                <p className="text-[9px] text-gray-500 leading-none">Quantity</p>
+                <p className="text-sm font-bold text-gray-700 leading-tight">×{quantity}</p>
               </div>
             </div>
-          </div>
 
-          {/* Add to Cart Button */}
-          <button
-            onClick={handleAddToCart}
-            className="w-full bg-gradient-to-r from-primary-500 to-secondary-500 hover:from-primary-600 hover:to-secondary-600 text-white font-bold py-4 px-6 rounded-xl shadow-lg active:scale-95 transition-all flex items-center justify-center gap-2 text-base sm:text-lg"
-          >
-            <ShoppingCart className="h-5 w-5 sm:h-6 sm:w-6" />
-            <span>Add to Cart</span>
-          </button>
-        </div>
+            {/* Add to Cart Button - Compact */}
+            <button
+              onClick={handleAddToCart}
+              className="w-full bg-gradient-to-r from-primary-500 to-secondary-500 hover:from-primary-600 hover:to-secondary-600 text-white font-bold py-3 px-4 rounded-lg shadow-lg active:scale-95 transition-all flex items-center justify-center gap-2 text-sm sm:text-base"
+            >
+              <ShoppingCart className="h-4 w-4 sm:h-5 sm:w-5" />
+              <span>Add to Cart</span>
+            </button>
+          </div>
         </div>
       )}
 

@@ -273,7 +273,7 @@ export default function HomePage() {
       <section id="products-section" className="py-8 sm:py-12 bg-neutral-50 scroll-mt-20">
         <div className="container-custom">
           {loading ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-6">
               {[...Array(12)].map((_, i) => (
                 <div key={i} className="shimmer h-96 rounded-xl"></div>
               ))}
@@ -294,7 +294,7 @@ export default function HomePage() {
               </button>
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-6">
               {filteredProducts.map((product) => (
                 <div
                   key={product.id}
@@ -343,55 +343,55 @@ export default function HomePage() {
                     </div>
                   </div>
 
-                  {/* Product Details */}
-                  <div className="p-4 flex flex-col flex-1 relative z-10">
-                    <div className="mb-2">
-                      <span className="text-xs font-bold text-primary-600 uppercase tracking-wider">
-                        {product.categoryName}
-                      </span>
-                    </div>
+                  {/* Product Details - Ultra Compact Amazon Style */}
+                  <div className="p-1.5 sm:p-2 flex flex-col flex-1 relative z-10">
+                    {/* Category - Smaller */}
+                    <span className="text-[9px] sm:text-[10px] font-semibold text-primary-600 uppercase tracking-wide mb-0.5">
+                      {product.categoryName}
+                    </span>
 
-                    <h3 className="font-bold text-base mb-2 text-neutral-900 line-clamp-2 min-h-[3rem] group-hover:text-primary-600 transition-colors duration-300">
+                    {/* Product Name - Show Full Name (2 lines) */}
+                    <h3 className="font-bold text-xs sm:text-sm mb-1 text-neutral-900 line-clamp-2 leading-tight group-hover:text-primary-600 transition-colors duration-300">
                       {product.name}
                     </h3>
 
-                    <p className="text-neutral-600 text-sm mb-4 line-clamp-2 flex-1">
+                    {/* Description - Hidden on Mobile, Show on Desktop */}
+                    <p className="hidden sm:block text-neutral-600 text-[10px] sm:text-xs mb-1 line-clamp-1">
                       {product.description}
                     </p>
 
-                    {/* Price and Add to Cart */}
+                    {/* Price Section - Ultra Compact */}
                     <div className="mt-auto">
-                      <div className="flex items-center justify-between mb-3">
-                        <div>
-                          {(() => {
-                            const pricing = getPricingData(product);
-                            return (
-                              <>
-                                {/* Original Price - Strikethrough */}
-                                <div className="flex items-center gap-2 mb-1">
-                                  <span className="text-sm text-neutral-400 line-through font-medium">
-                                    ₹{pricing.originalPrice}
-                                  </span>
-                                  <span className="text-xs font-bold bg-green-100 text-green-700 px-2 py-0.5 rounded-full">
-                                    {pricing.discount}% OFF
-                                  </span>
-                                </div>
-                                {/* Offer Price - Current Price */}
-                                <span className="text-2xl font-bold bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent">
-                                  ₹{pricing.currentPrice}
-                                </span>
-                              </>
-                            );
-                          })()}
-                        </div>
-                      </div>
+                      {(() => {
+                        const pricing = getPricingData(product);
+                        return (
+                          <>
+                            {/* Original Price & Discount Badge - Ultra Compact */}
+                            <div className="flex items-center gap-1 mb-0.5">
+                              <span className="text-[10px] sm:text-xs text-neutral-400 line-through font-medium">
+                                ₹{pricing.originalPrice}
+                              </span>
+                              <span className="text-[8px] sm:text-[10px] font-bold bg-green-100 text-green-700 px-1 py-0.5 rounded">
+                                {pricing.discount}% OFF
+                              </span>
+                            </div>
+                            {/* Current Price - Compact */}
+                            <div className="mb-1.5">
+                              <span className="text-base sm:text-lg font-bold bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent">
+                                ₹{pricing.currentPrice}
+                              </span>
+                            </div>
+                          </>
+                        );
+                      })()}
 
+                      {/* Add to Cart Button - Ultra Compact */}
                       <button
                         onClick={() => handleAddToCart(product)}
-                        className={`w-full text-sm py-2.5 rounded-xl font-bold transition-all transform active:scale-95 shadow-lg tap-target inline-flex items-center justify-center ${
+                        className={`w-full text-[10px] sm:text-xs py-1.5 sm:py-2 rounded-md font-bold transition-all transform active:scale-95 tap-target inline-flex items-center justify-center ${
                           product.stockQuantity === 0
                             ? 'bg-gray-300 text-gray-600 cursor-not-allowed'
-                            : 'bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white shadow-primary-200 hover:shadow-xl'
+                            : 'bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white shadow-md hover:shadow-lg'
                         }`}
                         disabled={product.stockQuantity === 0}
                       >
@@ -399,7 +399,7 @@ export default function HomePage() {
                           'Out of Stock'
                         ) : (
                           <>
-                            <Plus className="h-4 w-4 mr-2" />
+                            <Plus className="h-3 w-3 sm:h-3.5 sm:w-3.5 mr-0.5" />
                             Add to Cart
                           </>
                         )}

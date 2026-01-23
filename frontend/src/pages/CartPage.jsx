@@ -1,16 +1,22 @@
+import { useState } from 'react';
 import { Plus, Minus, ShoppingBag, Trash2, Sparkles, ArrowLeft } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { useNavigate } from 'react-router-dom';
 import CartBoxPreview3D from '../components/CartBoxPreview3D';
+import ConfirmationModal from '../components/ConfirmationModal';
 
 export default function CartPage() {
   const { cartItems, hampers, removeFromCart, removeHamperFromCart, updateQuantity, clearCart, getCartTotal, getCartCount } = useCart();
   const navigate = useNavigate();
+  const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
 
   const handleEmptyCart = () => {
-    if (window.confirm('Are you sure you want to empty your cart? This will remove all items and hampers.')) {
-      clearCart();
-    }
+    setIsConfirmModalOpen(true);
+  };
+
+  const confirmEmptyCart = () => {
+    clearCart();
+    setIsConfirmModalOpen(false);
   };
 
   // Helper function to check if item is a Hamper Box
@@ -56,18 +62,18 @@ export default function CartPage() {
                 </div>
               </div>
             </div>
-          </div>
 
-          {/* Empty Cart Button - Only show when cart has items */}
-          {(cartItems.length > 0 || hampers.length > 0) && (
-            <button
-              onClick={handleEmptyCart}
-              className="w-full sm:w-auto bg-red-50 hover:bg-red-100 text-red-600 font-semibold text-sm sm:text-base py-2.5 sm:py-3 px-4 sm:px-6 rounded-xl flex items-center justify-center gap-2 transition-all hover:shadow-md active:scale-98 border border-red-200"
-            >
-              <Trash2 className="h-4 w-4 sm:h-5 sm:w-5" />
-              Empty Cart
-            </button>
-          )}
+            {/* Empty Cart Button - Compact Icon Version */}
+            {(cartItems.length > 0 || hampers.length > 0) && (
+              <button
+                onClick={handleEmptyCart}
+                className="p-2 sm:p-3 hover:bg-red-50 text-red-600 rounded-xl transition-all hover:scale-110 active:scale-95 shadow-md hover:shadow-lg group"
+                title="Empty Cart"
+              >
+                <Trash2 className="h-5 w-5 sm:h-6 sm:w-6 group-hover:animate-pulse" />
+              </button>
+            )}
+          </div>
         </div>
 
         {/* Empty Cart State */}
@@ -298,6 +304,19 @@ export default function CartPage() {
           </div>
         )}
       </div>
+
+      {/* Confirmation Modal for Empty Cart */}
+      <ConfirmationModal
+        isOpen={isConfirmModalOpen}
+        onClose={() => setIsConfirmModalOpen(false)}
+        onConfirm={confirmEmptyCart}
+        title="Empty Cart?"
+        message="Are you sure you want to empty your cart? This will remove all items and hampers."
+        confirmText="Yes, Empty Cart"
+        cancelText="Cancel"
+        variant="danger"
+        icon={<Trash2 className="h-6 w-6" />}
+      />
     </div>
   );
 }
