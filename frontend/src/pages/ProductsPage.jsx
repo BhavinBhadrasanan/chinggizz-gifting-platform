@@ -258,40 +258,57 @@ export default function ProductsPage() {
   console.log('🎯 RENDERING ProductsPage - viewMode:', viewMode, 'products:', products.length);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-primary-50/30 py-12">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-primary-50/30 py-4 sm:py-6">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="section-title">
-            Our <span className="gradient-text">Products</span>
-          </h1>
-          <p className="section-subtitle">
-            Discover our collection of premium gifts and customizable items
-          </p>
+        {/* Header - Beautiful Premium Design */}
+        <div className="relative mb-4 overflow-hidden">
+          {/* Decorative background */}
+          <div className="absolute inset-0 bg-gradient-to-r from-primary-500/5 via-secondary-500/5 to-primary-500/5 rounded-2xl"></div>
+
+          <div className="relative text-center py-4 sm:py-5">
+            {/* Decorative top accent */}
+            <div className="flex items-center justify-center mb-2">
+              <div className="h-1 w-12 bg-gradient-to-r from-transparent via-primary-500 to-transparent rounded-full"></div>
+              <Sparkles className="h-4 w-4 text-primary-500 mx-2" />
+              <div className="h-1 w-12 bg-gradient-to-r from-transparent via-primary-500 to-transparent rounded-full"></div>
+            </div>
+
+            {/* Main heading */}
+            <h1 className="text-2xl sm:text-4xl font-extrabold mb-1">
+              <span className="bg-gradient-to-r from-gray-900 via-primary-800 to-gray-900 bg-clip-text text-transparent">
+                Discover Our Collection
+              </span>
+            </h1>
+
+            {/* Subtitle */}
+            <p className="text-xs sm:text-sm text-gray-600 font-medium">
+              Premium gifts & customizable products for every occasion
+            </p>
+          </div>
         </div>
 
-        {/* Filters */}
-        <div className="bg-white rounded-2xl shadow-soft p-6 mb-8 border border-gray-100">
-          <div className="grid md:grid-cols-3 gap-4 mb-4">
+        {/* Filters - Ultra Compact */}
+        <div className="bg-white rounded-xl shadow-soft p-3 mb-4 border border-gray-100">
+          <div className="grid md:grid-cols-3 gap-2 mb-2">
             {/* Search */}
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+              <Search className="absolute left-2.5 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
               <input
                 type="text"
                 placeholder="Search products..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
+                className="w-full pl-9 pr-3 py-2 text-sm border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
               />
             </div>
 
             {/* Category Filter */}
             <div className="relative">
-              <Filter className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+              <Filter className="absolute left-2.5 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
               <select
                 value={selectedCategory}
                 onChange={(e) => setSelectedCategory(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent appearance-none bg-white transition-all"
+                className="w-full pl-9 pr-3 py-2 text-sm border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent appearance-none bg-white transition-all"
               >
                 <option value="all">All Categories</option>
                 {categories.map(category => (
@@ -304,11 +321,11 @@ export default function ProductsPage() {
 
             {/* Type Filter */}
             <div className="relative">
-              <Sparkles className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+              <Sparkles className="absolute left-2.5 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
               <select
                 value={selectedType}
                 onChange={(e) => setSelectedType(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent appearance-none bg-white transition-all"
+                className="w-full pl-9 pr-3 py-2 text-sm border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent appearance-none bg-white transition-all"
               >
                 {productTypes.map(type => (
                   <option key={type.value} value={type.value}>
@@ -325,28 +342,28 @@ export default function ProductsPage() {
               {(searchTerm || selectedCategory !== 'all' || selectedType !== 'all') && (
                 <button
                   onClick={clearFilters}
-                  className="flex items-center space-x-1 text-sm text-gray-600 hover:text-primary-600 transition-colors"
+                  className="flex items-center space-x-1 text-xs text-gray-600 hover:text-primary-600 transition-colors"
                 >
-                  <X className="h-4 w-4" />
-                  <span>Clear Filters</span>
+                  <X className="h-3.5 w-3.5" />
+                  <span>Clear</span>
                 </button>
               )}
-              <span className="text-sm text-gray-600">
-                {filteredProducts.length} {filteredProducts.length === 1 ? 'product' : 'products'} found
+              <span className="text-xs text-gray-600">
+                {filteredProducts.length} {filteredProducts.length === 1 ? 'product' : 'products'}
               </span>
             </div>
 
             {/* View Mode Toggle */}
-            <div className="flex items-center space-x-2 bg-gray-100 rounded-lg p-1">
+            <div className="flex items-center space-x-1 bg-gray-100 rounded-lg p-0.5">
               <button
                 onClick={() => setViewMode('grid')}
-                className={`p-2 rounded-md transition-all ${
+                className={`p-1.5 rounded-md transition-all ${
                   viewMode === 'grid'
                     ? 'bg-white shadow-sm text-primary-600'
                     : 'text-gray-600 hover:text-primary-600'
                 }`}
               >
-                <Grid className="h-5 w-5" />
+                <Grid className="h-4 w-4" />
               </button>
               <button
                 onClick={() => setViewMode('list')}
@@ -419,7 +436,7 @@ export default function ProductsPage() {
               return (
                 <div
                   key={product.id}
-                  className={`card group relative overflow-hidden transition-all duration-300 ${
+                  className={`card group flex flex-col relative overflow-hidden transition-all duration-300 ${
                     willNotFit
                       ? 'opacity-90 hover:shadow-lg'
                       : 'hover:shadow-2xl hover:-translate-y-1 active:scale-[0.98]'
@@ -429,7 +446,7 @@ export default function ProductsPage() {
                   <div className="absolute inset-0 bg-gradient-to-br from-primary-500/0 to-secondary-500/0 group-hover:from-primary-500/5 group-hover:to-secondary-500/5 transition-all duration-300 pointer-events-none z-10"></div>
 
                   <div
-                    className="relative h-56 bg-gradient-to-br from-primary-100 via-primary-50 to-secondary-100 overflow-hidden md:cursor-default cursor-pointer"
+                    className="aspect-square bg-gradient-to-br from-neutral-100 via-neutral-50 to-neutral-100 flex items-center justify-center relative overflow-hidden md:cursor-default cursor-pointer"
                     onClick={(e) => {
                       // Only trigger on mobile (< 768px)
                       if (window.innerWidth < 768) {

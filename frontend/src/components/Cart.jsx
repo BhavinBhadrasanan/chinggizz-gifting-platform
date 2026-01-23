@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from 'react';
 import { X, Plus, Minus, ShoppingBag, Trash2, Sparkles } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { useNavigate } from 'react-router-dom';
-import CartBoxPreview3D from './CartBoxPreview3D';
 import ConfirmationModal from './ConfirmationModal';
 
 export default function Cart() {
@@ -176,17 +175,7 @@ export default function Cart() {
                         )}
                       </p>
 
-                      {/* 3D Box Preview for Hamper Boxes - Always Visible */}
-                      {isHamperBox(item) && getBoxDimensions(item).widthCm > 0 && (
-                        <div className="mb-2">
-                          <CartBoxPreview3D
-                            widthCm={getBoxDimensions(item).widthCm}
-                            heightCm={getBoxDimensions(item).heightCm}
-                            depthCm={getBoxDimensions(item).depthCm}
-                            boxType={item.customization?.selectedOptions?.['Box Type'] || 'Transparent Box'}
-                          />
-                        </div>
-                      )}
+
 
                       {/* Quantity Controls */}
                       <div className="flex items-center justify-between">

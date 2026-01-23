@@ -1,8 +1,7 @@
 import { useState } from 'react';
-import { Plus, Minus, ShoppingBag, Trash2, Sparkles, ArrowLeft } from 'lucide-react';
+import { Plus, Minus, ShoppingBag, Trash2, Sparkles, ArrowLeft, Package } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { useNavigate } from 'react-router-dom';
-import CartBoxPreview3D from '../components/CartBoxPreview3D';
 import ConfirmationModal from '../components/ConfirmationModal';
 
 export default function CartPage() {
@@ -103,7 +102,7 @@ export default function CartPage() {
                     <div className="flex-shrink-0">
                       {isHamperBox(item) ? (
                         <div className="w-20 h-20 sm:w-24 sm:h-24 bg-gradient-to-br from-primary-100 to-secondary-100 rounded-xl flex items-center justify-center">
-                          <CartBoxPreview3D dimensions={getBoxDimensions(item)} />
+                          <Package className="h-10 w-10 text-primary-600" />
                         </div>
                       ) : (
                         <img
