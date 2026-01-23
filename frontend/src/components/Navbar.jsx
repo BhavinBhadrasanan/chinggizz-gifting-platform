@@ -157,7 +157,7 @@ export default function Navbar() {
 
               {/* Cart Button - Desktop */}
               <button
-                onClick={() => navigate('/cart')}
+                onClick={() => navigate('/cart', { state: { scrollToCart: true } })}
                 className="relative group ml-3 px-5 py-2.5 rounded-xl font-semibold text-white bg-gradient-to-r from-secondary-500 to-secondary-600 hover:from-secondary-600 hover:to-secondary-700 shadow-lg shadow-secondary-500/30 hover:shadow-xl hover:shadow-secondary-500/40 transition-all duration-200 flex items-center space-x-2"
               >
                 <ShoppingBag className="h-5 w-5" />
@@ -174,7 +174,7 @@ export default function Navbar() {
             <div className="flex lg:hidden items-center space-x-2">
               {/* Cart Button - Mobile */}
               <button
-                onClick={() => navigate('/cart')}
+                onClick={() => navigate('/cart', { state: { scrollToCart: true } })}
                 className="relative p-3 rounded-xl text-white bg-gradient-to-r from-secondary-500 to-secondary-600 shadow-lg shadow-secondary-500/30 tap-target"
               >
                 <ShoppingBag className="h-5 w-5 sm:h-6 sm:w-6" />
@@ -195,20 +195,28 @@ export default function Navbar() {
             </div>
           </div>
 
-          {/* Mobile Navigation - Visible on Mobile/Tablet */}
+          {/* Mobile Navigation - iOS Glassmorphism Style */}
           {isOpen && (
             <>
-              {/* Backdrop overlay */}
+              {/* Backdrop overlay with enhanced blur */}
               <div
-                className="lg:hidden fixed inset-0 bg-black/20 backdrop-blur-sm z-30"
+                className="lg:hidden fixed inset-0 bg-black/20 backdrop-blur-md z-30 animate-[fadeIn_0.2s_ease-out]"
                 onClick={() => setIsOpen(false)}
               />
 
-              {/* Mobile menu */}
-              <div className="lg:hidden absolute left-0 right-0 top-full py-4 border-t border-neutral-200 bg-white shadow-xl z-40 animate-fadeIn">
-                <div className="container-custom">
-                  <div className="flex flex-col space-y-2">
-                    {navLinks.map((link) => {
+              {/* Compact dropdown menu - iOS Glass Effect */}
+              <div className="lg:hidden absolute right-4 top-full mt-2 w-56 z-40 animate-[scaleIn_0.2s_cubic-bezier(0.16,1,0.3,1)]">
+                {/* Glassy container with frosted glass effect */}
+                <div className="relative bg-white/70 backdrop-blur-2xl rounded-3xl shadow-[0_8px_32px_0_rgba(0,0,0,0.12)] border border-white/40 overflow-hidden">
+                  {/* Subtle gradient overlay for depth */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-white/60 via-white/30 to-white/10 pointer-events-none"></div>
+
+                  {/* Light reflection effect */}
+                  <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/80 to-transparent"></div>
+
+                  {/* Menu items - Liquid drop style */}
+                  <div className="relative py-3 px-2">
+                    {navLinks.map((link, index) => {
                       const Icon = link.icon;
                       return (
                         <Link
@@ -216,24 +224,81 @@ export default function Navbar() {
                           to={link.path}
                           onClick={() => {
                             setIsOpen(false);
-                            // Small delay to ensure menu closes before navigation
                             setTimeout(() => {
                               window.scrollTo({ top: 0, behavior: 'smooth' });
                             }, 100);
                           }}
-                          className={`flex items-center space-x-3 px-4 py-3.5 rounded-xl font-semibold transition-all tap-target ${
+                          className={`group relative flex items-center space-x-3 px-4 py-3 mb-1.5 last:mb-0 rounded-2xl transition-all duration-300 animate-[slideInRight_0.3s_ease-out] overflow-hidden ${
                             isActive(link.path)
-                              ? 'bg-gradient-to-r from-primary-600 to-primary-500 text-white shadow-lg'
-                              : 'text-neutral-700 hover:bg-neutral-50 hover:text-primary-600 active:bg-primary-50'
+                              ? 'bg-gradient-to-r from-primary-500/90 to-primary-600/90 text-white shadow-lg shadow-primary-500/30'
+                              : 'text-neutral-700 hover:bg-white/60 active:bg-white/80'
                           }`}
+                          style={{
+                            animationDelay: `${index * 0.05}s`,
+                            backdropFilter: 'blur(10px)',
+                            WebkitBackdropFilter: 'blur(10px)'
+                          }}
                         >
-                          <Icon className="h-5 w-5" />
-                          <span className="text-base">{link.label}</span>
+                          {/* Liquid glass background for inactive items */}
+                          {!isActive(link.path) && (
+                            <>
+                              {/* Base glass layer */}
+                              <div className="absolute inset-0 bg-gradient-to-br from-white/40 via-white/20 to-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"></div>
+
+                              {/* Liquid shimmer effect */}
+                              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out"></div>
+
+                              {/* Inner glow */}
+                              <div className="absolute inset-0 rounded-2xl shadow-[inset_0_1px_2px_0_rgba(255,255,255,0.5)] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            </>
+                          )}
+
+                          {/* Active item glass effect */}
+                          {isActive(link.path) && (
+                            <>
+                              {/* Glossy highlight */}
+                              <div className="absolute top-0 left-0 right-0 h-1/2 bg-gradient-to-b from-white/30 to-transparent rounded-t-2xl"></div>
+
+                              {/* Inner shadow for depth */}
+                              <div className="absolute inset-0 rounded-2xl shadow-[inset_0_2px_4px_0_rgba(0,0,0,0.1)]"></div>
+                            </>
+                          )}
+
+                          {/* Icon with glass bubble effect */}
+                          <div className={`relative z-10 p-1.5 rounded-xl transition-all duration-300 ${
+                            isActive(link.path)
+                              ? 'bg-white/20 shadow-lg backdrop-blur-sm'
+                              : 'bg-white/40 group-hover:bg-white/60 group-hover:scale-110 group-hover:shadow-md backdrop-blur-sm'
+                          }`}>
+                            <Icon className={`h-4 w-4 transition-all duration-300 ${
+                              isActive(link.path)
+                                ? 'text-white drop-shadow-sm'
+                                : 'text-primary-600 group-hover:text-primary-700'
+                            }`} />
+                          </div>
+
+                          {/* Label with subtle shadow */}
+                          <span className={`relative z-10 text-sm font-semibold tracking-wide ${
+                            isActive(link.path) ? 'drop-shadow-sm' : ''
+                          }`}>
+                            {link.label}
+                          </span>
+
+                          {/* Active indicator - glowing dot */}
+                          {isActive(link.path) && (
+                            <div className="absolute right-4 w-1.5 h-1.5 bg-white rounded-full shadow-[0_0_8px_2px_rgba(255,255,255,0.8)] animate-pulse"></div>
+                          )}
                         </Link>
                       );
                     })}
                   </div>
+
+                  {/* Bottom light reflection */}
+                  <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent"></div>
                 </div>
+
+                {/* Outer glow effect */}
+                <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary-200/20 to-secondary-200/20 blur-xl -z-10 opacity-50"></div>
               </div>
             </>
           )}

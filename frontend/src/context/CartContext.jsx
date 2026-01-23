@@ -87,11 +87,51 @@ export const CartProvider = ({ children }) => {
 
   const removeFromCart = (productId, customization = null) => {
     setCartItems((prevItems) => {
-      const filtered = prevItems.filter(
-        (item) => !(item.id === productId && JSON.stringify(item.customization) === JSON.stringify(customization))
-      );
-      // Mobile-friendly: Short and clear notification
-      toast.success('✓ Removed', { duration: 1500, icon: '🗑️' });
+      console.log('🔍 removeFromCart called with:', { productId, customization });
+      console.log('📦 Current cart items:', prevItems.length);
+      console.log('📦 All cart items:', prevItems);
+
+      // Normalize undefined to null for comparison
+      const normalizedCustomization = customization === undefined ? null : customization;
+      console.log('🔄 Normalized customization:', normalizedCustomization);
+
+      const filtered = prevItems.filter((item) => {
+        // Normalize item customization as well
+        const normalizedItemCustomization = item.customization === undefined ? null : item.customization;
+
+        // Detailed comparison logging
+        const idMatch = item.id === productId;
+        const customizationMatch = JSON.stringify(normalizedItemCustomization) === JSON.stringify(normalizedCustomization);
+
+        console.log(`🔎 Checking item ${item.id}:`, {
+          itemId: item.id,
+          targetId: productId,
+          idMatch,
+          itemCustomization: normalizedItemCustomization,
+          targetCustomization: normalizedCustomization,
+          itemCustomizationJSON: JSON.stringify(normalizedItemCustomization),
+          targetCustomizationJSON: JSON.stringify(normalizedCustomization),
+          customizationMatch,
+          shouldRemove: idMatch && customizationMatch,
+          willKeep: !(idMatch && customizationMatch)
+        });
+
+        // Compare: if both ID and customization match, exclude this item (return false)
+        return !(idMatch && customizationMatch);
+      });
+
+      console.log('📦 After filter:', filtered.length);
+      console.log('📦 Items removed:', prevItems.length - filtered.length);
+
+      // Only show toast if an item was actually removed
+      if (filtered.length < prevItems.length) {
+        toast.success('✓ Removed', { duration: 1500, icon: '🗑️' });
+        console.log('✅ Item successfully removed');
+      } else {
+        console.log('❌ No item was removed - no match found');
+        toast.error('Failed to remove item', { duration: 1500 });
+      }
+
       return filtered;
     });
   };

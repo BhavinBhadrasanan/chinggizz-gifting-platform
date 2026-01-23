@@ -1746,19 +1746,22 @@ export default function HamperBuilderPage() {
                         availableItems.map((item, index) => (
                           <div
                             key={item.id}
-                            className={`bg-white border-2 rounded-xl p-2 transition-all duration-300 tap-target relative overflow-hidden ${
-                              selectedItemToPlace?.id === item.id
-                                ? 'border-green-500 bg-gradient-to-r from-green-50 to-emerald-50 shadow-xl scale-105 animate-pulseGlow'
-                                : 'border-neutral-200 hover:border-orange-400 hover:shadow-lg'
-                            }`}
+                            className="flex items-center gap-2"
                             style={{ animationDelay: `${index * 0.05}s` }}
                           >
-                            {/* Glassy overlay on selected */}
-                            {selectedItemToPlace?.id === item.id && (
-                              <div className="absolute inset-0 bg-gradient-to-r from-green-400/10 to-emerald-400/10 backdrop-blur-[1px] pointer-events-none"></div>
-                            )}
+                            {/* Main Item Container - Clickable/Draggable */}
+                            <div
+                              className={`bg-white border-2 rounded-xl p-2 transition-all duration-300 tap-target relative overflow-hidden flex-1 ${
+                                selectedItemToPlace?.id === item.id
+                                  ? 'border-green-500 bg-gradient-to-r from-green-50 to-emerald-50 shadow-xl scale-105 animate-pulseGlow'
+                                  : 'border-neutral-200 hover:border-orange-400 hover:shadow-lg'
+                              }`}
+                            >
+                              {/* Glassy overlay on selected */}
+                              {selectedItemToPlace?.id === item.id && (
+                                <div className="absolute inset-0 bg-gradient-to-r from-green-400/10 to-emerald-400/10 backdrop-blur-[1px] pointer-events-none"></div>
+                              )}
 
-                            <div className="flex items-center gap-2 relative z-10">
                               <div
                                 draggable
                                 onDragStart={(e) => handleDragStart(e, item)}
@@ -1770,7 +1773,7 @@ export default function HamperBuilderPage() {
                                     icon: '👇',
                                   });
                                 }}
-                                className="flex items-center gap-2 flex-1 min-w-0 cursor-pointer"
+                                className="flex items-center gap-2 cursor-pointer relative z-10"
                               >
                                 <div className="w-12 h-12 bg-gradient-to-br from-neutral-100 to-neutral-200 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden shadow-sm">
                                   {item.imageUrl ? (
@@ -1783,31 +1786,37 @@ export default function HamperBuilderPage() {
                                   <p className="font-bold text-xs text-neutral-900 truncate leading-tight mb-0.5">{item.name}</p>
                                   <p className="text-xs font-semibold text-orange-600">₹{item.price}</p>
                                 </div>
-                              </div>
 
-                              {/* Action Buttons */}
-                              <div className="flex items-center gap-1 flex-shrink-0">
+                                {/* Selected Indicator */}
                                 {selectedItemToPlace?.id === item.id && (
-                                  <div className="animate-bounceIn">
+                                  <div className="animate-bounceIn flex-shrink-0">
                                     <div className="bg-gradient-to-br from-green-500 to-emerald-600 text-white rounded-full p-1 shadow-lg">
                                       <Check className="h-3 w-3" />
                                     </div>
                                   </div>
                                 )}
-
-                                {/* Remove Button */}
-                                <button
-                                  onClick={(e) => {
-                                    e.stopPropagation();
-                                    removeFromCart(item.id, item.customization);
-                                  }}
-                                  className="bg-red-100 hover:bg-red-200 text-red-600 rounded-full p-1.5 transition-all hover:scale-110 active:scale-95 shadow-sm tap-target"
-                                  title="Remove item"
-                                >
-                                  <Trash2 className="h-3 w-3" />
-                                </button>
                               </div>
                             </div>
+
+                            {/* Delete Button - Separate and Parallel */}
+                            <button
+                              onClick={() => {
+                                console.log('🗑️ DELETE BUTTON CLICKED');
+                                console.log('📋 Item ID:', item.id);
+                                console.log('📋 Item Name:', item.name);
+                                console.log('📋 Full Item Object:', item);
+                                console.log('📋 Customization:', item.customization);
+                                console.log('📋 Customization Type:', typeof item.customization);
+                                console.log('📋 Customization JSON:', JSON.stringify(item.customization));
+
+                                // Pass the exact customization as stored in the item
+                                removeFromCart(item.id, item.customization);
+                              }}
+                              className="bg-red-100 hover:bg-red-200 text-red-600 rounded-full p-2 transition-all hover:scale-110 active:scale-95 shadow-sm tap-target flex-shrink-0"
+                              title="Remove item"
+                            >
+                              <Trash2 className="h-4 w-4" />
+                            </button>
                           </div>
                         ))
                       )}
@@ -2343,66 +2352,67 @@ export default function HamperBuilderPage() {
                         const rotationInfo = getItemRotationInfo(item);
                         const isBeingDragged = draggedItem?.id === item.id;
                         return (
-                          <div
-                            key={item.id}
-                            className={`bg-white border rounded-lg p-2 transition-all ${
-                              !itemFits
-                                ? 'border-red-300 opacity-60'
-                                : isBeingDragged
-                                ? 'border-green-500 shadow-lg opacity-50'
-                                : selectedItemToPlace?.id === item.id
-                                ? 'border-blue-500 shadow-lg'
-                                : 'border-neutral-300 hover:border-primary-500 hover:shadow'
-                            }`}
-                          >
-                            <div className="flex items-center gap-2">
-                              {/* Drag Handle Icon */}
-                              {itemFits && (
-                                <div className="flex-shrink-0">
-                                  <Move className="h-4 w-4 text-neutral-400" />
-                                </div>
-                              )}
+                          <div key={item.id} className="flex items-center gap-2">
+                            {/* Main Item Container - Clickable/Draggable */}
+                            <div
+                              className={`bg-white border rounded-lg p-2 transition-all flex-1 ${
+                                !itemFits
+                                  ? 'border-red-300 opacity-60'
+                                  : isBeingDragged
+                                  ? 'border-green-500 shadow-lg opacity-50'
+                                  : selectedItemToPlace?.id === item.id
+                                  ? 'border-blue-500 shadow-lg'
+                                  : 'border-neutral-300 hover:border-primary-500 hover:shadow'
+                              }`}
+                            >
+                              <div className="flex items-center gap-2">
+                                {/* Drag Handle Icon */}
+                                {itemFits && (
+                                  <div className="flex-shrink-0">
+                                    <Move className="h-4 w-4 text-neutral-400" />
+                                  </div>
+                                )}
 
-                              <div
-                                draggable={itemFits}
-                                onDragStart={(e) => handleDragStart(e, item)}
-                                onDragEnd={handleDragEnd}
-                                onClick={() => handleItemClick(item)}
-                                className={`flex items-center gap-2 flex-1 min-w-0 ${
-                                  itemFits ? 'cursor-grab active:cursor-grabbing' : 'cursor-not-allowed'
-                                }`}
-                              >
-                                <div className="w-12 h-12 bg-neutral-100 rounded flex items-center justify-center flex-shrink-0">
-                                  {item.imageUrl ? (
-                                    <img src={item.imageUrl} alt={item.name} className="w-full h-full object-cover rounded" />
-                                  ) : (
-                                    <Package className="h-6 w-6 text-neutral-400" />
-                                  )}
-                                </div>
-                                <div className="flex-1 min-w-0">
-                                  <h4 className="font-bold text-xs text-neutral-900 truncate">
-                                    {item.name}
-                                  </h4>
-                                  <p className="text-xs text-neutral-600">₹{item.price}</p>
+                                <div
+                                  draggable={itemFits}
+                                  onDragStart={(e) => handleDragStart(e, item)}
+                                  onDragEnd={handleDragEnd}
+                                  onClick={() => handleItemClick(item)}
+                                  className={`flex items-center gap-2 flex-1 min-w-0 ${
+                                    itemFits ? 'cursor-grab active:cursor-grabbing' : 'cursor-not-allowed'
+                                  }`}
+                                >
+                                  <div className="w-12 h-12 bg-neutral-100 rounded flex items-center justify-center flex-shrink-0">
+                                    {item.imageUrl ? (
+                                      <img src={item.imageUrl} alt={item.name} className="w-full h-full object-cover rounded" />
+                                    ) : (
+                                      <Package className="h-6 w-6 text-neutral-400" />
+                                    )}
+                                  </div>
+                                  <div className="flex-1 min-w-0">
+                                    <h4 className="font-bold text-xs text-neutral-900 truncate">
+                                      {item.name}
+                                    </h4>
+                                    <p className="text-xs text-neutral-600">₹{item.price}</p>
 
-                                  {!itemFits && (
-                                    <p className="text-xs text-red-600 mt-1">⚠️ Too large</p>
-                                  )}
+                                    {!itemFits && (
+                                      <p className="text-xs text-red-600 mt-1">⚠️ Too large</p>
+                                    )}
+                                  </div>
                                 </div>
                               </div>
-
-                              {/* Remove Button */}
-                              <button
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  removeFromCart(item.id, item.customization);
-                                }}
-                                className="flex-shrink-0 bg-red-100 hover:bg-red-200 text-red-600 rounded-full p-1.5 transition-all hover:scale-110 active:scale-95"
-                                title="Remove item"
-                              >
-                                <Trash2 className="h-3.5 w-3.5" />
-                              </button>
                             </div>
+
+                            {/* Delete Button - Separate and Parallel */}
+                            <button
+                              onClick={() => {
+                                removeFromCart(item.id, item.customization);
+                              }}
+                              className="flex-shrink-0 bg-red-100 hover:bg-red-200 text-red-600 rounded-full p-1.5 transition-all hover:scale-110 active:scale-95"
+                              title="Remove item"
+                            >
+                              <Trash2 className="h-4 w-4" />
+                            </button>
                           </div>
                         );
                       })}

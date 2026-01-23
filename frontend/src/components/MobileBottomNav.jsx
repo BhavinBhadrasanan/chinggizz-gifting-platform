@@ -81,7 +81,7 @@ export default function MobileBottomNav() {
         <button
           onClick={() => {
             window.scrollTo({ top: 0, behavior: 'smooth' });
-            navigate('/cart');
+            navigate('/cart', { state: { scrollToCart: true } });
           }}
           className={`flex flex-col items-center justify-center space-y-1 transition-all duration-300 tap-target relative group ${
             isActive('/cart')

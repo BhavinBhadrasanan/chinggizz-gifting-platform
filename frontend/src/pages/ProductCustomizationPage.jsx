@@ -206,7 +206,8 @@ export default function ProductCustomizationPage() {
     };
 
     addToCart(product, quantity, customizationData);
-    navigate('/products');
+    // Navigate to cart page and scroll to first item
+    navigate('/cart', { state: { scrollToCart: true } });
   };
 
   const nextImage = () => {

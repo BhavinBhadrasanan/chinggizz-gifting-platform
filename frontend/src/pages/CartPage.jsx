@@ -1,13 +1,26 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Plus, Minus, ShoppingBag, Trash2, Sparkles, ArrowLeft, Package } from 'lucide-react';
 import { useCart } from '../context/CartContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import ConfirmationModal from '../components/ConfirmationModal';
 
 export default function CartPage() {
   const { cartItems, hampers, removeFromCart, removeHamperFromCart, updateQuantity, clearCart, getCartTotal, getCartCount } = useCart();
   const navigate = useNavigate();
+  const location = useLocation();
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
+  const cartItemsRef = useRef(null);
+
+  // Scroll to first cart item when navigating from other pages
+  useEffect(() => {
+    // Check if we should scroll to cart items (e.g., after adding to cart)
+    if (location.state?.scrollToCart && cartItemsRef.current) {
+      const scrollTimer = setTimeout(() => {
+        cartItemsRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
+      return () => clearTimeout(scrollTimer);
+    }
+  }, [location.state]);
 
   const handleEmptyCart = () => {
     setIsConfirmModalOpen(true);
@@ -93,7 +106,7 @@ export default function CartPage() {
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
             {/* Cart Items - Left Column */}
-            <div className="lg:col-span-2 space-y-4">
+            <div ref={cartItemsRef} className="lg:col-span-2 space-y-4">
               {/* Regular Cart Items */}
               {cartItems.map((item) => (
                 <div key={item.id} className="bg-white rounded-2xl shadow-lg p-4 sm:p-6 hover:shadow-xl transition-shadow">
