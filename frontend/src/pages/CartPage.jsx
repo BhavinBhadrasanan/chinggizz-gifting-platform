@@ -4,8 +4,14 @@ import { useNavigate } from 'react-router-dom';
 import CartBoxPreview3D from '../components/CartBoxPreview3D';
 
 export default function CartPage() {
-  const { cartItems, hampers, removeFromCart, removeHamperFromCart, updateQuantity, getCartTotal, getCartCount } = useCart();
+  const { cartItems, hampers, removeFromCart, removeHamperFromCart, updateQuantity, clearCart, getCartTotal, getCartCount } = useCart();
   const navigate = useNavigate();
+
+  const handleEmptyCart = () => {
+    if (window.confirm('Are you sure you want to empty your cart? This will remove all items and hampers.')) {
+      clearCart();
+    }
+  };
 
   // Helper function to check if item is a Hamper Box
   const isHamperBox = (item) => {
@@ -29,26 +35,39 @@ export default function CartPage() {
     <div className="min-h-screen bg-gradient-to-br from-neutral-50 via-primary-50/30 to-secondary-50/30 py-6 sm:py-8 lg:py-12">
       <div className="container-custom max-w-4xl">
         {/* Header */}
-        <div className="flex items-center justify-between mb-6 sm:mb-8">
-          <div className="flex items-center space-x-3 sm:space-x-4">
-            <button
-              onClick={() => navigate(-1)}
-              className="p-2 sm:p-3 rounded-xl bg-white hover:bg-neutral-100 transition-colors shadow-md"
-            >
-              <ArrowLeft className="h-5 w-5 sm:h-6 sm:w-6 text-neutral-700" />
-            </button>
-            <div className="flex items-center space-x-3">
-              <div className="bg-primary-600 p-2 sm:p-3 rounded-xl shadow-lg">
-                <ShoppingBag className="h-6 w-6 sm:h-7 sm:w-7 text-white" />
-              </div>
-              <div>
-                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-neutral-900">
-                  My Cart
-                </h1>
-                <p className="text-sm sm:text-base text-neutral-600">{getCartCount()} {getCartCount() === 1 ? 'item' : 'items'}</p>
+        <div className="mb-6 sm:mb-8">
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center space-x-3 sm:space-x-4">
+              <button
+                onClick={() => navigate(-1)}
+                className="p-2 sm:p-3 rounded-xl bg-white hover:bg-neutral-100 transition-colors shadow-md"
+              >
+                <ArrowLeft className="h-5 w-5 sm:h-6 sm:w-6 text-neutral-700" />
+              </button>
+              <div className="flex items-center space-x-3">
+                <div className="bg-primary-600 p-2 sm:p-3 rounded-xl shadow-lg">
+                  <ShoppingBag className="h-6 w-6 sm:h-7 sm:w-7 text-white" />
+                </div>
+                <div>
+                  <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-neutral-900">
+                    My Cart
+                  </h1>
+                  <p className="text-sm sm:text-base text-neutral-600">{getCartCount()} {getCartCount() === 1 ? 'item' : 'items'}</p>
+                </div>
               </div>
             </div>
           </div>
+
+          {/* Empty Cart Button - Only show when cart has items */}
+          {(cartItems.length > 0 || hampers.length > 0) && (
+            <button
+              onClick={handleEmptyCart}
+              className="w-full sm:w-auto bg-red-50 hover:bg-red-100 text-red-600 font-semibold text-sm sm:text-base py-2.5 sm:py-3 px-4 sm:px-6 rounded-xl flex items-center justify-center gap-2 transition-all hover:shadow-md active:scale-98 border border-red-200"
+            >
+              <Trash2 className="h-4 w-4 sm:h-5 sm:w-5" />
+              Empty Cart
+            </button>
+          )}
         </div>
 
         {/* Empty Cart State */}

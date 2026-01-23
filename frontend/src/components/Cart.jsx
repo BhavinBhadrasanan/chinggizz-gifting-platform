@@ -4,8 +4,14 @@ import { useNavigate } from 'react-router-dom';
 import CartBoxPreview3D from './CartBoxPreview3D';
 
 export default function Cart() {
-  const { cartItems, hampers, removeFromCart, removeHamperFromCart, updateQuantity, getCartTotal, getCartCount, isCartOpen, setIsCartOpen } = useCart();
+  const { cartItems, hampers, removeFromCart, removeHamperFromCart, updateQuantity, clearCart, getCartTotal, getCartCount, isCartOpen, setIsCartOpen } = useCart();
   const navigate = useNavigate();
+
+  const handleEmptyCart = () => {
+    if (window.confirm('Are you sure you want to empty your cart? This will remove all items and hampers.')) {
+      clearCart();
+    }
+  };
 
   if (!isCartOpen) return null;
 
@@ -38,24 +44,37 @@ export default function Cart() {
       {/* Cart Sidebar - Mobile Optimized - Leave space for footer nav on mobile */}
       <div className="fixed right-0 top-0 h-[calc(100vh-4rem)] lg:h-full w-full sm:max-w-md bg-white shadow-2xl z-[200] flex flex-col animate-slideInRight relative overflow-hidden">
         {/* Header - Mobile Friendly */}
-        <div className="flex items-center justify-between p-4 sm:p-6 border-b border-neutral-200 bg-gradient-to-r from-primary-50 to-secondary-50">
-          <div className="flex items-center space-x-2">
-            <div className="bg-primary-600 p-2 rounded-lg">
-              <ShoppingBag className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
+        <div className="p-4 sm:p-6 border-b border-neutral-200 bg-gradient-to-r from-primary-50 to-secondary-50">
+          <div className="flex items-center justify-between mb-3">
+            <div className="flex items-center space-x-2">
+              <div className="bg-primary-600 p-2 rounded-lg">
+                <ShoppingBag className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
+              </div>
+              <div>
+                <h2 className="text-lg sm:text-xl font-bold text-neutral-900">
+                  My Cart
+                </h2>
+                <p className="text-xs text-neutral-600">{getCartCount()} {getCartCount() === 1 ? 'item' : 'items'}</p>
+              </div>
             </div>
-            <div>
-              <h2 className="text-lg sm:text-xl font-bold text-neutral-900">
-                My Cart
-              </h2>
-              <p className="text-xs text-neutral-600">{getCartCount()} {getCartCount() === 1 ? 'item' : 'items'}</p>
-            </div>
+            <button
+              onClick={() => setIsCartOpen(false)}
+              className="p-2 hover:bg-white/50 active:bg-white rounded-lg transition-colors tap-target"
+            >
+              <X className="h-6 w-6 text-neutral-600" />
+            </button>
           </div>
-          <button
-            onClick={() => setIsCartOpen(false)}
-            className="p-2 hover:bg-white/50 active:bg-white rounded-lg transition-colors tap-target"
-          >
-            <X className="h-6 w-6 text-neutral-600" />
-          </button>
+
+          {/* Empty Cart Button - Only show when cart has items */}
+          {(cartItems.length > 0 || hampers.length > 0) && (
+            <button
+              onClick={handleEmptyCart}
+              className="w-full bg-red-50 hover:bg-red-100 text-red-600 font-semibold text-sm py-2.5 px-4 rounded-lg flex items-center justify-center gap-2 transition-all hover:shadow-md active:scale-98 tap-target border border-red-200"
+            >
+              <Trash2 className="h-4 w-4" />
+              Empty Cart
+            </button>
+          )}
         </div>
 
         {/* Cart Items - Mobile Optimized - Add bottom padding for fixed footer */}
