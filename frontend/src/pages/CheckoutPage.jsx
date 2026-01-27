@@ -105,20 +105,14 @@ export default function CheckoutPage() {
         // Show success popup first
         setShowSuccessPopup(true);
 
-        // After 3 seconds, hide popup and show full success screen
+        // After 5 seconds, hide popup and show full success screen
         setTimeout(() => {
           setShowSuccessPopup(false);
           setOrderPlaced(true);
-        }, 3000);
+        }, 5000);
 
         // Clear hamper builder state since order is successfully placed
         localStorage.removeItem('hamperBuilderState');
-
-        // Clear cart after 8 seconds total (3s popup + 5s success screen) and redirect
-        setTimeout(() => {
-          clearCart();
-          navigate('/');
-        }, 8000);
       }
     } catch (error) {
       console.error('Order submission error:', error);
@@ -156,52 +150,78 @@ export default function CheckoutPage() {
   // Success Popup Modal (shows for 3 seconds)
   if (showSuccessPopup) {
     return (
-      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm animate-fade-in p-4">
-        <div className="relative bg-gradient-to-br from-white via-green-50 to-emerald-50 rounded-full w-[90vw] h-[90vw] sm:w-[500px] sm:h-[500px] max-w-[500px] max-h-[500px] shadow-2xl flex flex-col items-center justify-center text-center animate-scale-in overflow-hidden">
-          {/* Decorative Circles */}
-          <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-green-200/30 to-emerald-300/30 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-0 left-0 w-40 h-40 bg-gradient-to-tr from-teal-200/30 to-green-300/30 rounded-full blur-3xl"></div>
+      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-md animate-fade-in p-4">
+        <div className="bg-white rounded-3xl shadow-2xl max-w-lg w-full mx-4 overflow-hidden animate-scale-in">
+          {/* Success Header with Gradient */}
+          <div className="bg-gradient-to-r from-green-500 via-emerald-500 to-teal-500 px-6 sm:px-8 py-8 sm:py-10 text-center relative overflow-hidden">
+            {/* Decorative Elements */}
+            <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16"></div>
+            <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/10 rounded-full -ml-12 -mb-12"></div>
 
-          {/* Content Container */}
-          <div className="relative z-10 px-6 sm:px-12">
-            {/* Animated Success Icon */}
-            <div className="relative inline-block mb-4 sm:mb-6">
-              {/* Outer Ring - Pulsing */}
-              <div className="absolute inset-0 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full animate-ping opacity-20"></div>
-
-              {/* Middle Ring */}
-              <div className="relative bg-gradient-to-br from-green-500 to-emerald-600 w-20 h-20 sm:w-28 sm:h-28 rounded-full flex items-center justify-center shadow-2xl ring-8 ring-green-100 animate-bounce-slow">
-                <CheckCircle className="h-10 w-10 sm:h-14 sm:w-14 text-white animate-scale-in" strokeWidth={2.5} />
+            {/* Success Icon */}
+            <div className="relative inline-block mb-4">
+              <div className="bg-white w-20 h-20 sm:w-24 sm:h-24 rounded-full flex items-center justify-center shadow-xl animate-bounce-slow">
+                <CheckCircle className="h-12 w-12 sm:h-14 sm:w-14 text-green-500" strokeWidth={2.5} />
               </div>
-
-              {/* Sparkle Effects */}
-              <div className="absolute -top-2 -right-2 w-5 h-5 sm:w-6 sm:h-6 bg-yellow-400 rounded-full animate-ping"></div>
-              <div className="absolute -bottom-2 -left-2 w-3 h-3 sm:w-4 sm:h-4 bg-green-300 rounded-full animate-pulse"></div>
+              {/* Sparkles */}
+              <div className="absolute -top-1 -right-1 w-6 h-6 bg-yellow-400 rounded-full animate-ping"></div>
+              <div className="absolute -bottom-1 -left-1 w-4 h-4 bg-green-300 rounded-full animate-pulse"></div>
             </div>
 
-            {/* Success Message */}
-            <h2 className="text-2xl sm:text-4xl font-bold bg-gradient-to-r from-green-700 via-emerald-600 to-teal-600 bg-clip-text text-transparent mb-3 sm:mb-4 animate-slide-up leading-tight">
+            {/* Success Title */}
+            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2 animate-slide-up">
               🎉 Order Placed Successfully!
             </h2>
-
-            <p className="text-sm sm:text-lg text-neutral-700 font-medium mb-4 sm:mb-6 animate-slide-up-delay leading-relaxed px-2">
-              Thank you for choosing Chinggizz! Your gift is on its way to making someone's day special ✨
+            <p className="text-sm sm:text-base text-white/90 animate-slide-up-delay">
+              Your order has been confirmed
             </p>
+          </div>
 
-            {/* Order Number Preview */}
+          {/* Content Section */}
+          <div className="px-6 sm:px-8 py-6 sm:py-8">
+            {/* Order Number */}
             {orderNumber && (
-              <div className="bg-gradient-to-r from-secondary-500 to-secondary-600 rounded-full px-4 sm:px-6 py-3 sm:py-4 mb-3 sm:mb-4 animate-slide-up-delay-2 shadow-lg">
-                <p className="text-xs sm:text-sm text-white/90 font-medium mb-1">Order Number</p>
-                <p className="text-xl sm:text-2xl font-bold text-white tracking-wider font-mono">
+              <div className="bg-gradient-to-r from-secondary-50 to-purple-50 border-2 border-secondary-200 rounded-2xl p-4 sm:p-5 mb-5 sm:mb-6 text-center animate-slide-up-delay-2">
+                <p className="text-xs sm:text-sm text-neutral-600 font-medium mb-2">Your Order Number</p>
+                <p className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-secondary-600 to-purple-600 bg-clip-text text-transparent tracking-wide font-mono">
                   {orderNumber}
                 </p>
+                <p className="text-xs text-neutral-500 mt-2">Save this for tracking</p>
               </div>
             )}
 
-            {/* Trust Message */}
-            <div className="flex items-center justify-center gap-2 text-xs sm:text-sm text-neutral-600 animate-slide-up-delay-3 bg-white/60 backdrop-blur-sm rounded-full px-4 sm:px-6 py-2 sm:py-3 shadow-md">
-              <span className="text-lg sm:text-xl">🔒</span>
-              <span className="font-medium">Your order will be delivered safely</span>
+            {/* Thank You Message */}
+            <div className="text-center mb-5 sm:mb-6 animate-slide-up-delay-3">
+              <p className="text-base sm:text-lg text-neutral-800 font-semibold mb-2">
+                Thank you for choosing Chinggizz! 💝
+              </p>
+              <p className="text-sm sm:text-base text-neutral-600 leading-relaxed">
+                Your gift is on its way to making someone's day special ✨
+              </p>
+            </div>
+
+            {/* Trust Badges */}
+            <div className="grid grid-cols-3 gap-3 mb-5 sm:mb-6 animate-slide-up-delay-4">
+              <div className="text-center p-3 bg-green-50 rounded-xl border border-green-200">
+                <div className="text-2xl mb-1">🔒</div>
+                <p className="text-xs font-semibold text-neutral-800">Secure</p>
+              </div>
+              <div className="text-center p-3 bg-blue-50 rounded-xl border border-blue-200">
+                <div className="text-2xl mb-1">📦</div>
+                <p className="text-xs font-semibold text-neutral-800">Safe Delivery</p>
+              </div>
+              <div className="text-center p-3 bg-purple-50 rounded-xl border border-purple-200">
+                <div className="text-2xl mb-1">✨</div>
+                <p className="text-xs font-semibold text-neutral-800">Quality</p>
+              </div>
+            </div>
+
+            {/* Info Message */}
+            <div className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-lg animate-slide-up-delay-5">
+              <p className="text-sm text-blue-800">
+                <span className="font-semibold">📱 We'll contact you soon!</span><br/>
+                <span className="text-xs">Our team will reach out via WhatsApp or phone within 2-4 hours to confirm your order.</span>
+              </p>
             </div>
           </div>
         </div>
@@ -373,10 +393,20 @@ export default function CheckoutPage() {
             </div>
           </div>
 
-          {/* Redirect Message */}
-          <div className="text-center animate-pulse">
-            <p className="text-xs sm:text-sm text-neutral-600 bg-white rounded-full px-4 sm:px-6 py-2 sm:py-3 inline-block shadow-md">
-              ⏱️ Redirecting to home page in a moment...
+          {/* Continue Shopping Button */}
+          <div className="text-center">
+            <button
+              onClick={() => {
+                clearCart();
+                navigate('/');
+              }}
+              className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-secondary-600 to-secondary-700 text-white px-8 sm:px-12 py-4 sm:py-5 rounded-xl sm:rounded-2xl font-bold text-base sm:text-lg hover:scale-105 active:scale-95 transition-all shadow-xl hover:shadow-2xl animate-slide-up-delay-5"
+            >
+              <span className="text-xl sm:text-2xl">🛍️</span>
+              Continue Shopping
+            </button>
+            <p className="text-xs sm:text-sm text-neutral-500 mt-3 sm:mt-4">
+              Click above to return to home page
             </p>
           </div>
         </div>
