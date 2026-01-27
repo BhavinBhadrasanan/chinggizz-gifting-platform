@@ -147,30 +147,173 @@ export default function CheckoutPage() {
 
   if (orderPlaced) {
     return (
-      <div className="min-h-screen bg-neutral-50 py-12">
-        <div className="container-custom">
-          <div className="max-w-2xl mx-auto text-center py-12">
-            <div className="bg-white rounded-2xl shadow-xl p-12">
-              <div className="bg-gradient-to-br from-accent-500 to-accent-600 w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-6">
-                <CheckCircle className="h-12 w-12 text-white" />
+      <div className="min-h-screen bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 py-6 sm:py-12 px-3 sm:px-4">
+        <div className="container-custom max-w-4xl mx-auto">
+          {/* Success Animation Container */}
+          <div className="text-center mb-6 sm:mb-8 animate-fade-in">
+            {/* Animated Success Icon */}
+            <div className="relative inline-block mb-4 sm:mb-6">
+              {/* Outer Ring - Pulsing */}
+              <div className="absolute inset-0 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full animate-ping opacity-20"></div>
+
+              {/* Middle Ring */}
+              <div className="relative bg-gradient-to-br from-green-500 to-emerald-600 w-20 h-20 sm:w-28 sm:h-28 rounded-full flex items-center justify-center shadow-2xl ring-8 ring-green-100 animate-bounce-slow">
+                <CheckCircle className="h-10 w-10 sm:h-14 sm:w-14 text-white animate-scale-in" strokeWidth={2.5} />
               </div>
-              <h2 className="text-3xl font-bold text-neutral-900 mb-4">Order Placed Successfully!</h2>
 
-              {orderNumber && (
-                <div className="bg-primary-50 border-2 border-primary-200 rounded-xl p-4 mb-6">
-                  <p className="text-sm text-neutral-600 mb-1">Your Order Number</p>
-                  <p className="text-2xl font-bold text-primary-600">{orderNumber}</p>
-                </div>
-              )}
-
-              <p className="text-lg text-neutral-600 mb-4">
-                Thank you for your order! We've received your order and will process it shortly.
-              </p>
-              <p className="text-neutral-600 mb-6">
-                A confirmation has been sent to our WhatsApp business number. We'll contact you soon!
-              </p>
-              <p className="text-sm text-neutral-500">Redirecting to home page...</p>
+              {/* Sparkle Effects */}
+              <div className="absolute -top-2 -right-2 w-4 h-4 bg-yellow-400 rounded-full animate-ping"></div>
+              <div className="absolute -bottom-1 -left-1 w-3 h-3 bg-green-300 rounded-full animate-pulse"></div>
             </div>
+
+            {/* Success Message */}
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-green-700 via-emerald-600 to-teal-600 bg-clip-text text-transparent mb-2 sm:mb-3 animate-slide-up">
+              🎉 Order Placed Successfully!
+            </h1>
+            <p className="text-base sm:text-lg text-neutral-600 font-medium animate-slide-up-delay">
+              Thank you for choosing Chinggizz! Your gift is on its way to making someone's day special ✨
+            </p>
+          </div>
+
+          {/* Order Details Card */}
+          <div className="bg-white rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden mb-4 sm:mb-6 animate-slide-up-delay-2">
+            {/* Order Number Section */}
+            {orderNumber && (
+              <div className="bg-gradient-to-r from-secondary-500 to-secondary-600 p-4 sm:p-6 text-center">
+                <p className="text-xs sm:text-sm text-white/90 font-medium mb-1 sm:mb-2">Your Order Number</p>
+                <div className="bg-white/20 backdrop-blur-sm rounded-xl sm:rounded-2xl p-3 sm:p-4 inline-block">
+                  <p className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-wider font-mono">
+                    {orderNumber}
+                  </p>
+                </div>
+                <p className="text-xs sm:text-sm text-white/80 mt-2 sm:mt-3">Save this number for tracking your order</p>
+              </div>
+            )}
+
+            {/* What Happens Next */}
+            <div className="p-4 sm:p-8">
+              <h3 className="text-lg sm:text-xl font-bold text-neutral-900 mb-4 sm:mb-6 flex items-center gap-2 justify-center">
+                <span className="text-xl sm:text-2xl">📋</span>
+                What Happens Next?
+              </h3>
+
+              <div className="space-y-3 sm:space-y-4">
+                {/* Step 1 */}
+                <div className="flex items-start gap-3 sm:gap-4 p-3 sm:p-4 bg-green-50 rounded-xl sm:rounded-2xl border-2 border-green-200 hover:shadow-md transition-shadow">
+                  <div className="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center text-white font-bold text-sm sm:text-base shadow-lg">
+                    1
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <h4 className="font-bold text-neutral-900 text-sm sm:text-base mb-1">Order Confirmation Sent</h4>
+                    <p className="text-xs sm:text-sm text-neutral-600">
+                      We've sent your order details to our WhatsApp business number. You'll receive a confirmation message shortly!
+                    </p>
+                  </div>
+                  <div className="flex-shrink-0 text-xl sm:text-2xl">✅</div>
+                </div>
+
+                {/* Step 2 */}
+                <div className="flex items-start gap-3 sm:gap-4 p-3 sm:p-4 bg-blue-50 rounded-xl sm:rounded-2xl border-2 border-blue-200 hover:shadow-md transition-shadow">
+                  <div className="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center text-white font-bold text-sm sm:text-base shadow-lg">
+                    2
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <h4 className="font-bold text-neutral-900 text-sm sm:text-base mb-1">We'll Contact You</h4>
+                    <p className="text-xs sm:text-sm text-neutral-600">
+                      Our team will reach out via WhatsApp or phone within 2-4 hours to confirm your order details and delivery preferences.
+                    </p>
+                  </div>
+                  <div className="flex-shrink-0 text-xl sm:text-2xl">📞</div>
+                </div>
+
+                {/* Step 3 */}
+                <div className="flex items-start gap-3 sm:gap-4 p-3 sm:p-4 bg-purple-50 rounded-xl sm:rounded-2xl border-2 border-purple-200 hover:shadow-md transition-shadow">
+                  <div className="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center text-white font-bold text-sm sm:text-base shadow-lg">
+                    3
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <h4 className="font-bold text-neutral-900 text-sm sm:text-base mb-1">Careful Preparation</h4>
+                    <p className="text-xs sm:text-sm text-neutral-600">
+                      Your personalized gift will be carefully prepared with love and attention to every detail.
+                    </p>
+                  </div>
+                  <div className="flex-shrink-0 text-xl sm:text-2xl">🎁</div>
+                </div>
+
+                {/* Step 4 */}
+                <div className="flex items-start gap-3 sm:gap-4 p-3 sm:p-4 bg-orange-50 rounded-xl sm:rounded-2xl border-2 border-orange-200 hover:shadow-md transition-shadow">
+                  <div className="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center text-white font-bold text-sm sm:text-base shadow-lg">
+                    4
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <h4 className="font-bold text-neutral-900 text-sm sm:text-base mb-1">Safe & Secure Delivery</h4>
+                    <p className="text-xs sm:text-sm text-neutral-600">
+                      Your gift will be securely packaged and delivered to your doorstep with care. Track your delivery in real-time!
+                    </p>
+                  </div>
+                  <div className="flex-shrink-0 text-xl sm:text-2xl">🚚</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Trust Badges */}
+          <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg p-4 sm:p-6 mb-4 sm:mb-6 animate-slide-up-delay-3">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
+              <div className="text-center p-2 sm:p-3 bg-green-50 rounded-lg sm:rounded-xl border border-green-200">
+                <div className="text-2xl sm:text-3xl mb-1 sm:mb-2">🔒</div>
+                <p className="text-xs sm:text-sm font-bold text-neutral-900">Secure</p>
+                <p className="text-[10px] sm:text-xs text-neutral-600">Payment</p>
+              </div>
+              <div className="text-center p-2 sm:p-3 bg-blue-50 rounded-lg sm:rounded-xl border border-blue-200">
+                <div className="text-2xl sm:text-3xl mb-1 sm:mb-2">✨</div>
+                <p className="text-xs sm:text-sm font-bold text-neutral-900">Quality</p>
+                <p className="text-[10px] sm:text-xs text-neutral-600">Guaranteed</p>
+              </div>
+              <div className="text-center p-2 sm:p-3 bg-purple-50 rounded-lg sm:rounded-xl border border-purple-200">
+                <div className="text-2xl sm:text-3xl mb-1 sm:mb-2">📦</div>
+                <p className="text-xs sm:text-sm font-bold text-neutral-900">Safe</p>
+                <p className="text-[10px] sm:text-xs text-neutral-600">Packaging</p>
+              </div>
+              <div className="text-center p-2 sm:p-3 bg-orange-50 rounded-lg sm:rounded-xl border border-orange-200">
+                <div className="text-2xl sm:text-3xl mb-1 sm:mb-2">💝</div>
+                <p className="text-xs sm:text-sm font-bold text-neutral-900">Made with</p>
+                <p className="text-[10px] sm:text-xs text-neutral-600">Love</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Contact Support */}
+          <div className="bg-gradient-to-r from-secondary-500 to-secondary-600 rounded-xl sm:rounded-2xl shadow-lg p-4 sm:p-6 text-center text-white mb-4 sm:mb-6 animate-slide-up-delay-4">
+            <h3 className="text-base sm:text-lg font-bold mb-2 sm:mb-3">Need Help? We're Here! 💬</h3>
+            <p className="text-xs sm:text-sm text-white/90 mb-3 sm:mb-4">
+              Have questions about your order? Our team is ready to assist you!
+            </p>
+            <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 justify-center">
+              <a
+                href="https://wa.me/917028870008"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 bg-white text-secondary-600 px-4 sm:px-6 py-2 sm:py-3 rounded-lg sm:rounded-xl font-bold text-xs sm:text-sm hover:bg-green-50 transition-all hover:scale-105 active:scale-95 shadow-lg"
+              >
+                <span className="text-base sm:text-lg">💬</span>
+                WhatsApp Us
+              </a>
+              <a
+                href="tel:+917028870008"
+                className="inline-flex items-center justify-center gap-2 bg-white/20 backdrop-blur-sm text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg sm:rounded-xl font-bold text-xs sm:text-sm hover:bg-white/30 transition-all hover:scale-105 active:scale-95 border-2 border-white/30"
+              >
+                <span className="text-base sm:text-lg">📞</span>
+                Call Us
+              </a>
+            </div>
+          </div>
+
+          {/* Redirect Message */}
+          <div className="text-center animate-pulse">
+            <p className="text-xs sm:text-sm text-neutral-600 bg-white rounded-full px-4 sm:px-6 py-2 sm:py-3 inline-block shadow-md">
+              ⏱️ Redirecting to home page in a moment...
+            </p>
           </div>
         </div>
       </div>
