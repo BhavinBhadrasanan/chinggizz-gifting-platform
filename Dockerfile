@@ -32,7 +32,6 @@ RUN mkdir -p /app/uploads/products
 EXPOSE 8080
 
 # Set environment variables
-ENV SPRING_PROFILES_ACTIVE=supabase
 ENV JAVA_OPTS="-Xmx512m -Xms256m"
 
 # Run the application

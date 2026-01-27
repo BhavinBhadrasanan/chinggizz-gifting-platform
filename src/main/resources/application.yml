@@ -10,13 +10,17 @@ spring:
     username: ${SPRING_DATASOURCE_USERNAME:postgres.pzgnowrxbiefhxsoukxc}
     password: ${SPRING_DATASOURCE_PASSWORD:Chinggizz098}
     hikari:
-      # Optimized for Supabase Connection Pooler
+      # Optimized for Supabase Connection Pooler (PgBouncer)
       maximum-pool-size: 5
       minimum-idle: 1
       connection-timeout: 30000
       idle-timeout: 600000
       max-lifetime: 1800000
       pool-name: ChinggizzHikariPool
+      # Additional connection pool settings for stability
+      connection-test-query: SELECT 1
+      validation-timeout: 5000
+      leak-detection-threshold: 60000
 
   jpa:
     open-in-view: false
