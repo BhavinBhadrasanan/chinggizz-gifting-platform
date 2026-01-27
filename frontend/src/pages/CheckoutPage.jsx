@@ -184,68 +184,114 @@ export default function CheckoutPage() {
               </div>
             )}
 
-            {/* What Happens Next */}
+            {/* What Happens Next - Roadmap Style */}
             <div className="p-4 sm:p-8">
-              <h3 className="text-lg sm:text-xl font-bold text-neutral-900 mb-4 sm:mb-6 flex items-center gap-2 justify-center">
-                <span className="text-xl sm:text-2xl">📋</span>
-                What Happens Next?
-              </h3>
+              <div className="bg-gradient-to-r from-neutral-50 to-white rounded-2xl p-4 sm:p-6 border-2 border-neutral-100">
+                <h3 className="text-xl sm:text-2xl font-bold text-center mb-6 sm:mb-8 flex items-center gap-2 justify-center">
+                  <span className="text-2xl">📋</span>
+                  <span className="bg-gradient-to-r from-secondary-600 to-purple-600 bg-clip-text text-transparent">
+                    What Happens Next?
+                  </span>
+                </h3>
 
-              <div className="space-y-3 sm:space-y-4">
-                {/* Step 1 */}
-                <div className="flex items-start gap-3 sm:gap-4 p-3 sm:p-4 bg-green-50 rounded-xl sm:rounded-2xl border-2 border-green-200 hover:shadow-md transition-shadow">
-                  <div className="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center text-white font-bold text-sm sm:text-base shadow-lg">
-                    1
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <h4 className="font-bold text-neutral-900 text-sm sm:text-base mb-1">Order Confirmation Sent</h4>
-                    <p className="text-xs sm:text-sm text-neutral-600">
-                      We've sent your order details to our WhatsApp business number. You'll receive a confirmation message shortly!
-                    </p>
-                  </div>
-                  <div className="flex-shrink-0 text-xl sm:text-2xl">✅</div>
-                </div>
+                {/* Roadmap Timeline */}
+                <div className="relative max-w-2xl mx-auto">
+                  {/* Vertical Line */}
+                  <div className="absolute left-[19px] sm:left-[23px] top-12 bottom-12 w-0.5 bg-gradient-to-b from-green-300 via-blue-300 via-purple-300 to-orange-300"></div>
 
-                {/* Step 2 */}
-                <div className="flex items-start gap-3 sm:gap-4 p-3 sm:p-4 bg-blue-50 rounded-xl sm:rounded-2xl border-2 border-blue-200 hover:shadow-md transition-shadow">
-                  <div className="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center text-white font-bold text-sm sm:text-base shadow-lg">
-                    2
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <h4 className="font-bold text-neutral-900 text-sm sm:text-base mb-1">We'll Contact You</h4>
-                    <p className="text-xs sm:text-sm text-neutral-600">
-                      Our team will reach out via WhatsApp or phone within 2-4 hours to confirm your order details and delivery preferences.
-                    </p>
-                  </div>
-                  <div className="flex-shrink-0 text-xl sm:text-2xl">📞</div>
-                </div>
+                  <div className="space-y-6 sm:space-y-8">
+                    {/* Step 1 - Order Confirmation */}
+                    <div className="relative flex items-start gap-4 sm:gap-5 animate-slide-up">
+                      {/* Number Badge */}
+                      <div className="relative z-10 flex-shrink-0">
+                        <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center shadow-lg ring-4 ring-white">
+                          <span className="text-white font-bold text-base sm:text-lg">1</span>
+                        </div>
+                      </div>
 
-                {/* Step 3 */}
-                <div className="flex items-start gap-3 sm:gap-4 p-3 sm:p-4 bg-purple-50 rounded-xl sm:rounded-2xl border-2 border-purple-200 hover:shadow-md transition-shadow">
-                  <div className="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center text-white font-bold text-sm sm:text-base shadow-lg">
-                    3
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <h4 className="font-bold text-neutral-900 text-sm sm:text-base mb-1">Careful Preparation</h4>
-                    <p className="text-xs sm:text-sm text-neutral-600">
-                      Your personalized gift will be carefully prepared with love and attention to every detail.
-                    </p>
-                  </div>
-                  <div className="flex-shrink-0 text-xl sm:text-2xl">🎁</div>
-                </div>
+                      {/* Content Card */}
+                      <div className="flex-1 bg-white rounded-xl sm:rounded-2xl border-2 border-green-200 p-4 sm:p-5 shadow-md hover:shadow-lg transition-all hover:scale-[1.02]">
+                        <div className="flex items-start justify-between gap-3 mb-2">
+                          <h4 className="font-bold text-neutral-900 text-base sm:text-lg">Order Confirmation Sent</h4>
+                          <div className="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 bg-green-100 rounded-full flex items-center justify-center">
+                            <span className="text-xl sm:text-2xl">✅</span>
+                          </div>
+                        </div>
+                        <p className="text-sm sm:text-base text-neutral-600 leading-relaxed">
+                          We've sent your order details to our WhatsApp business number. You'll receive a confirmation message shortly!
+                        </p>
+                      </div>
+                    </div>
 
-                {/* Step 4 */}
-                <div className="flex items-start gap-3 sm:gap-4 p-3 sm:p-4 bg-orange-50 rounded-xl sm:rounded-2xl border-2 border-orange-200 hover:shadow-md transition-shadow">
-                  <div className="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center text-white font-bold text-sm sm:text-base shadow-lg">
-                    4
+                    {/* Step 2 - Contact */}
+                    <div className="relative flex items-start gap-4 sm:gap-5 animate-slide-up-delay">
+                      {/* Number Badge */}
+                      <div className="relative z-10 flex-shrink-0">
+                        <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-lg ring-4 ring-white">
+                          <span className="text-white font-bold text-base sm:text-lg">2</span>
+                        </div>
+                      </div>
+
+                      {/* Content Card */}
+                      <div className="flex-1 bg-white rounded-xl sm:rounded-2xl border-2 border-blue-200 p-4 sm:p-5 shadow-md hover:shadow-lg transition-all hover:scale-[1.02]">
+                        <div className="flex items-start justify-between gap-3 mb-2">
+                          <h4 className="font-bold text-neutral-900 text-base sm:text-lg">We'll Contact You</h4>
+                          <div className="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                            <span className="text-xl sm:text-2xl">📞</span>
+                          </div>
+                        </div>
+                        <p className="text-sm sm:text-base text-neutral-600 leading-relaxed">
+                          Our team will reach out via WhatsApp or phone within 2-4 hours to confirm your order details and delivery preferences.
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Step 3 - Preparation */}
+                    <div className="relative flex items-start gap-4 sm:gap-5 animate-slide-up-delay-2">
+                      {/* Number Badge */}
+                      <div className="relative z-10 flex-shrink-0">
+                        <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center shadow-lg ring-4 ring-white">
+                          <span className="text-white font-bold text-base sm:text-lg">3</span>
+                        </div>
+                      </div>
+
+                      {/* Content Card */}
+                      <div className="flex-1 bg-white rounded-xl sm:rounded-2xl border-2 border-purple-200 p-4 sm:p-5 shadow-md hover:shadow-lg transition-all hover:scale-[1.02]">
+                        <div className="flex items-start justify-between gap-3 mb-2">
+                          <h4 className="font-bold text-neutral-900 text-base sm:text-lg">Careful Preparation</h4>
+                          <div className="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 bg-purple-100 rounded-full flex items-center justify-center">
+                            <span className="text-xl sm:text-2xl">🎁</span>
+                          </div>
+                        </div>
+                        <p className="text-sm sm:text-base text-neutral-600 leading-relaxed">
+                          Your personalized gift will be carefully prepared with love and attention to every detail.
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Step 4 - Delivery */}
+                    <div className="relative flex items-start gap-4 sm:gap-5 animate-slide-up-delay-3">
+                      {/* Number Badge */}
+                      <div className="relative z-10 flex-shrink-0">
+                        <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center shadow-lg ring-4 ring-white">
+                          <span className="text-white font-bold text-base sm:text-lg">4</span>
+                        </div>
+                      </div>
+
+                      {/* Content Card */}
+                      <div className="flex-1 bg-white rounded-xl sm:rounded-2xl border-2 border-orange-200 p-4 sm:p-5 shadow-md hover:shadow-lg transition-all hover:scale-[1.02]">
+                        <div className="flex items-start justify-between gap-3 mb-2">
+                          <h4 className="font-bold text-neutral-900 text-base sm:text-lg">Safe & Secure Delivery</h4>
+                          <div className="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 bg-orange-100 rounded-full flex items-center justify-center">
+                            <span className="text-xl sm:text-2xl">🚚</span>
+                          </div>
+                        </div>
+                        <p className="text-sm sm:text-base text-neutral-600 leading-relaxed">
+                          Your gift will be securely packaged and delivered to your doorstep with care. Track your delivery in real-time!
+                        </p>
+                      </div>
+                    </div>
                   </div>
-                  <div className="flex-1 min-w-0">
-                    <h4 className="font-bold text-neutral-900 text-sm sm:text-base mb-1">Safe & Secure Delivery</h4>
-                    <p className="text-xs sm:text-sm text-neutral-600">
-                      Your gift will be securely packaged and delivered to your doorstep with care. Track your delivery in real-time!
-                    </p>
-                  </div>
-                  <div className="flex-shrink-0 text-xl sm:text-2xl">🚚</div>
                 </div>
               </div>
             </div>
