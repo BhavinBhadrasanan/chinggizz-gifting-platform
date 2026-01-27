@@ -141,12 +141,12 @@ export default function CheckoutPage() {
 
   if (orderPlaced) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 py-6 sm:py-8 px-4 overflow-x-hidden">
+      <div className="min-h-screen bg-gradient-to-br from-secondary-50 via-purple-50 to-pink-50 py-6 sm:py-8 px-4 overflow-x-hidden">
         <div className="max-w-3xl mx-auto">
           {/* Success Header Card - Compact */}
           <div className="bg-white rounded-2xl shadow-xl overflow-hidden mb-4 animate-fade-in">
             {/* Compact Success Header */}
-            <div className="bg-gradient-to-r from-green-500 via-emerald-500 to-teal-500 py-6 px-4 text-center relative overflow-hidden">
+            <div className="bg-gradient-to-r from-secondary-500 via-secondary-600 to-purple-600 py-6 px-4 text-center relative overflow-hidden">
               {/* Decorative Elements - Smaller */}
               <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -mr-12 -mt-12"></div>
               <div className="absolute bottom-0 left-0 w-20 h-20 bg-white/10 rounded-full -ml-10 -mb-10"></div>
@@ -163,7 +163,7 @@ export default function CheckoutPage() {
 
                 {/* Sparkle Effects - Smaller */}
                 <div className="absolute -top-1 -right-1 w-4 h-4 bg-yellow-400 rounded-full animate-ping"></div>
-                <div className="absolute -bottom-1 -left-1 w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+                <div className="absolute -bottom-1 -left-1 w-3 h-3 bg-secondary-400 rounded-full animate-pulse"></div>
               </div>
 
               {/* Success Title - Compact */}
@@ -312,28 +312,28 @@ export default function CheckoutPage() {
               Why Choose Chinggizz? 🌟
             </h3>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6">
-              <div className="text-center p-4 sm:p-5 bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl border-2 border-green-200 hover:shadow-lg transition-all hover:scale-105">
+              <div className="text-center p-4 sm:p-5 bg-gradient-to-br from-secondary-50 to-purple-50 rounded-2xl border-2 border-secondary-200 hover:shadow-lg transition-all hover:scale-105">
                 <div className="w-14 h-14 sm:w-16 sm:h-16 mx-auto mb-3 bg-white rounded-full flex items-center justify-center shadow-md">
                   <span className="text-3xl sm:text-4xl">🔒</span>
                 </div>
                 <p className="text-sm sm:text-base font-bold text-neutral-900 mb-1">Secure</p>
                 <p className="text-xs text-neutral-600">Payment</p>
               </div>
-              <div className="text-center p-4 sm:p-5 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl border-2 border-blue-200 hover:shadow-lg transition-all hover:scale-105">
+              <div className="text-center p-4 sm:p-5 bg-gradient-to-br from-secondary-50 to-purple-50 rounded-2xl border-2 border-secondary-200 hover:shadow-lg transition-all hover:scale-105">
                 <div className="w-14 h-14 sm:w-16 sm:h-16 mx-auto mb-3 bg-white rounded-full flex items-center justify-center shadow-md">
                   <span className="text-3xl sm:text-4xl">✨</span>
                 </div>
                 <p className="text-sm sm:text-base font-bold text-neutral-900 mb-1">Quality</p>
                 <p className="text-xs text-neutral-600">Guaranteed</p>
               </div>
-              <div className="text-center p-4 sm:p-5 bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl border-2 border-purple-200 hover:shadow-lg transition-all hover:scale-105">
+              <div className="text-center p-4 sm:p-5 bg-gradient-to-br from-secondary-50 to-purple-50 rounded-2xl border-2 border-secondary-200 hover:shadow-lg transition-all hover:scale-105">
                 <div className="w-14 h-14 sm:w-16 sm:h-16 mx-auto mb-3 bg-white rounded-full flex items-center justify-center shadow-md">
                   <span className="text-3xl sm:text-4xl">📦</span>
                 </div>
                 <p className="text-sm sm:text-base font-bold text-neutral-900 mb-1">Safe</p>
                 <p className="text-xs text-neutral-600">Packaging</p>
               </div>
-              <div className="text-center p-4 sm:p-5 bg-gradient-to-br from-orange-50 to-amber-50 rounded-2xl border-2 border-orange-200 hover:shadow-lg transition-all hover:scale-105">
+              <div className="text-center p-4 sm:p-5 bg-gradient-to-br from-secondary-50 to-purple-50 rounded-2xl border-2 border-secondary-200 hover:shadow-lg transition-all hover:scale-105">
                 <div className="w-14 h-14 sm:w-16 sm:h-16 mx-auto mb-3 bg-white rounded-full flex items-center justify-center shadow-md">
                   <span className="text-3xl sm:text-4xl">💝</span>
                 </div>
