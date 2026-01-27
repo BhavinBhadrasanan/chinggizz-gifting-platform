@@ -27,47 +27,63 @@ export default {
     },
     extend: {
       colors: {
-        // Facebook-Inspired Blue - Trust, Professional, Recognizable
+        // Deep Forest Green - From logo's dark green heart/ribbon (Primary Brand Color)
         primary: {
-          50: '#e8f4ff',
-          100: '#d4e9ff',
-          200: '#b0d7ff',
-          300: '#7bbfff',
-          400: '#4a9eff',
-          500: '#1877f2',  // Facebook Blue
-          600: '#0c63d4',
-          700: '#0a52b3',
-          800: '#084491',
-          900: '#063870',
-          950: '#042a52',
+          50: '#f0f9f4',
+          100: '#dcf2e4',
+          200: '#bae5cd',
+          300: '#8bd3ad',
+          400: '#5ab886',
+          500: '#359a67',  // Medium forest green
+          600: '#1a5f3f',  // Logo green - Main brand color
+          700: '#164d33',
+          800: '#133d29',
+          900: '#103224',
+          950: '#081c15',
         },
-        // Warm Gold/Yellow - Premium, Luxury, Gift-giving
+        // Soft Lavender - From logo's light purple heart/ribbon (Secondary Brand Color)
         secondary: {
-          50: '#fffbeb',
-          100: '#fef3c7',
-          200: '#fde68a',
-          300: '#fcd34d',
-          400: '#fbbf24',
-          500: '#f59e0b',  // Warm Gold
-          600: '#d97706',
-          700: '#b45309',
-          800: '#92400e',
-          900: '#78350f',
+          50: '#faf8fc',
+          100: '#f4f0f8',
+          200: '#ebe3f1',
+          300: '#dccee6',
+          400: '#c8a8d4',  // Logo lavender - Main secondary color
+          500: '#b388c0',
+          600: '#9d6ba8',
+          700: '#85588d',
+          800: '#6f4a75',
+          900: '#5c3e61',
+          950: '#3d2742',
         },
-        // Success Green - Positive, Fresh, Natural
+        // Warm Peach/Coral - From logo's gift box (Accent Color)
         accent: {
-          50: '#f0fdf4',
-          100: '#dcfce7',
-          200: '#bbf7d0',
-          300: '#86efac',
-          400: '#4ade80',
-          500: '#22c55e',
-          600: '#16a34a',
-          700: '#15803d',
-          800: '#166534',
-          900: '#14532d',
+          50: '#fef8f3',
+          100: '#fdeee3',
+          200: '#fbd9c5',
+          300: '#f8c09d',
+          400: '#f4a172',
+          500: '#e8a87c',  // Logo peach - Main accent color
+          600: '#d4824f',
+          700: '#b86a3e',
+          800: '#945636',
+          900: '#78472f',
+          950: '#412318',
         },
-        // Neutral Grays - Professional, Clean
+        // Royal Gold - From logo's crowns (Premium/Luxury highlights)
+        gold: {
+          50: '#fefce8',
+          100: '#fef9c3',
+          200: '#fef08a',
+          300: '#fde047',
+          400: '#facc15',
+          500: '#f4c542',  // Logo gold - Crown color
+          600: '#d4a017',
+          700: '#b8860b',
+          800: '#9a7310',
+          900: '#7c5e10',
+          950: '#4a3609',
+        },
+        // Neutral Grays - Professional, Clean (Kept same for consistency)
         neutral: {
           50: '#fafafa',
           100: '#f5f5f5',
