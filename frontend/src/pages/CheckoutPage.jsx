@@ -253,12 +253,12 @@ export default function CheckoutPage() {
           <div className="lg:col-span-2">
             <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
               {/* Contact Information */}
-              <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg border-2 border-purple-100 p-4 sm:p-7 hover:shadow-xl transition-shadow">
+              <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg border-2 border-secondary-100 p-4 sm:p-7 hover:shadow-xl transition-shadow">
                 <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-5">
-                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-gradient-to-br from-purple-600 to-purple-700 flex items-center justify-center flex-shrink-0 shadow-lg">
+                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-gradient-to-br from-secondary-600 to-secondary-700 flex items-center justify-center flex-shrink-0 shadow-lg">
                     <User className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
                   </div>
-                  <h2 className="text-lg sm:text-2xl font-bold bg-gradient-to-r from-purple-700 to-purple-600 bg-clip-text text-transparent">
+                  <h2 className="text-lg sm:text-2xl font-bold bg-gradient-to-r from-secondary-700 to-secondary-600 bg-clip-text text-transparent">
                     Contact Information
                   </h2>
                 </div>
@@ -276,7 +276,7 @@ export default function CheckoutPage() {
                         className="w-full px-4 py-3.5 pl-11 text-base border-2 border-neutral-300 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all duration-200 hover:border-neutral-400"
                         required
                       />
-                      <User className="absolute left-3.5 top-1/2 -translate-y-1/2 h-5 w-5 text-purple-500" />
+                      <User className="absolute left-3.5 top-1/2 -translate-y-1/2 h-5 w-5 text-secondary-500" />
                     </div>
                   </div>
                   <div>
@@ -292,7 +292,7 @@ export default function CheckoutPage() {
                         className="w-full px-4 py-3.5 pl-11 text-base border-2 border-neutral-300 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all duration-200 hover:border-neutral-400"
                         required
                       />
-                      <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 h-5 w-5 text-purple-500" />
+                      <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 h-5 w-5 text-secondary-500" />
                     </div>
                   </div>
                   <div className="md:col-span-2">
@@ -308,7 +308,7 @@ export default function CheckoutPage() {
                         className="w-full px-4 py-3.5 pl-11 text-base border-2 border-neutral-300 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all duration-200 hover:border-neutral-400"
                         required
                       />
-                      <Phone className="absolute left-3.5 top-1/2 -translate-y-1/2 h-5 w-5 text-purple-500" />
+                      <Phone className="absolute left-3.5 top-1/2 -translate-y-1/2 h-5 w-5 text-secondary-500" />
                     </div>
                   </div>
                 </div>
@@ -317,12 +317,12 @@ export default function CheckoutPage() {
 
 
               {/* Shipping Address */}
-              <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg border-2 border-purple-100 p-4 sm:p-7 hover:shadow-xl transition-shadow">
+              <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg border-2 border-secondary-100 p-4 sm:p-7 hover:shadow-xl transition-shadow">
                 <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-5">
-                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-gradient-to-br from-purple-600 to-purple-700 flex items-center justify-center flex-shrink-0 shadow-lg">
+                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-gradient-to-br from-secondary-600 to-secondary-700 flex items-center justify-center flex-shrink-0 shadow-lg">
                     <MapPin className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
                   </div>
-                  <h2 className="text-lg sm:text-2xl font-bold bg-gradient-to-r from-purple-700 to-purple-600 bg-clip-text text-transparent">
+                  <h2 className="text-lg sm:text-2xl font-bold bg-gradient-to-r from-secondary-700 to-secondary-600 bg-clip-text text-transparent">
                     Shipping Address
                   </h2>
                 </div>
@@ -384,20 +384,20 @@ export default function CheckoutPage() {
               </div>
 
               {/* Delivery Method */}
-              <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg border-2 border-purple-100 p-4 sm:p-7 hover:shadow-xl transition-shadow">
+              <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg border-2 border-secondary-100 p-4 sm:p-7 hover:shadow-xl transition-shadow">
                 <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-5">
-                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-gradient-to-br from-purple-600 to-purple-700 flex items-center justify-center flex-shrink-0 shadow-lg">
+                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-gradient-to-br from-secondary-600 to-secondary-700 flex items-center justify-center flex-shrink-0 shadow-lg">
                     <Truck className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
                   </div>
-                  <h2 className="text-lg sm:text-2xl font-bold bg-gradient-to-r from-purple-700 to-purple-600 bg-clip-text text-transparent">
+                  <h2 className="text-lg sm:text-2xl font-bold bg-gradient-to-r from-secondary-700 to-secondary-600 bg-clip-text text-transparent">
                     Delivery Method
                   </h2>
                 </div>
                 <div className="space-y-3">
                   <label className={`flex items-start p-3 sm:p-5 border-2 rounded-lg sm:rounded-xl cursor-pointer transition-all ${
                     formData.deliveryMethod === 'DIRECT_DELIVERY'
-                      ? 'border-purple-500 bg-purple-50 shadow-md'
-                      : 'border-neutral-200 hover:border-purple-300 hover:shadow-md'
+                      ? 'border-secondary-500 bg-secondary-50 shadow-md'
+                      : 'border-neutral-200 hover:border-secondary-300 hover:shadow-md'
                   }`}>
                     <input
                       type="radio"
@@ -405,11 +405,11 @@ export default function CheckoutPage() {
                       value="DIRECT_DELIVERY"
                       checked={formData.deliveryMethod === 'DIRECT_DELIVERY'}
                       onChange={handleInputChange}
-                      className="mr-3 sm:mr-4 mt-1 w-4 h-4 sm:w-5 sm:h-5 text-purple-600 flex-shrink-0"
+                      className="mr-3 sm:mr-4 mt-1 w-4 h-4 sm:w-5 sm:h-5 text-secondary-600 flex-shrink-0"
                     />
                     <div className="flex-1 min-w-0">
                       <div className="font-bold text-sm sm:text-base text-neutral-900 flex items-center gap-2 mb-1 flex-wrap">
-                        <Package className="h-4 w-4 sm:h-5 sm:w-5 text-purple-600 flex-shrink-0" />
+                        <Package className="h-4 w-4 sm:h-5 sm:w-5 text-secondary-600 flex-shrink-0" />
                         <span>Direct Delivery</span>
                         <span className="text-[10px] sm:text-xs bg-green-100 text-green-700 px-2 py-0.5 sm:py-1 rounded-full font-semibold">Recommended</span>
                       </div>
@@ -420,8 +420,8 @@ export default function CheckoutPage() {
                   </label>
                   <label className={`flex items-start p-3 sm:p-5 border-2 rounded-lg sm:rounded-xl cursor-pointer transition-all ${
                     formData.deliveryMethod === 'COURIER_DELIVERY'
-                      ? 'border-orange-500 bg-orange-50 shadow-md'
-                      : 'border-neutral-200 hover:border-orange-300 hover:shadow-md'
+                      ? 'border-secondary-500 bg-secondary-50 shadow-md'
+                      : 'border-neutral-200 hover:border-secondary-300 hover:shadow-md'
                   }`}>
                     <input
                       type="radio"
@@ -429,11 +429,11 @@ export default function CheckoutPage() {
                       value="COURIER_DELIVERY"
                       checked={formData.deliveryMethod === 'COURIER_DELIVERY'}
                       onChange={handleInputChange}
-                      className="mr-3 sm:mr-4 mt-1 w-4 h-4 sm:w-5 sm:h-5 text-orange-600 flex-shrink-0"
+                      className="mr-3 sm:mr-4 mt-1 w-4 h-4 sm:w-5 sm:h-5 text-secondary-600 flex-shrink-0"
                     />
                     <div className="flex-1 min-w-0">
                       <div className="font-bold text-sm sm:text-base text-neutral-900 flex items-center gap-2 mb-1 flex-wrap">
-                        <Truck className="h-4 w-4 sm:h-5 sm:w-5 text-orange-600 flex-shrink-0" />
+                        <Truck className="h-4 w-4 sm:h-5 sm:w-5 text-secondary-600 flex-shrink-0" />
                         <span>Courier Delivery</span>
                         <span className="text-[10px] sm:text-xs bg-blue-100 text-blue-700 px-2 py-0.5 sm:py-1 rounded-full font-semibold">All India</span>
                       </div>
@@ -446,15 +446,15 @@ export default function CheckoutPage() {
               </div>
 
               {/* Special Instructions */}
-              <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg border-2 border-purple-100 p-4 sm:p-7 hover:shadow-xl transition-shadow">
+              <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg border-2 border-secondary-100 p-4 sm:p-7 hover:shadow-xl transition-shadow">
                 <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-5">
-                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-gradient-to-br from-purple-600 to-purple-700 flex items-center justify-center flex-shrink-0 shadow-lg">
+                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-gradient-to-br from-secondary-600 to-secondary-700 flex items-center justify-center flex-shrink-0 shadow-lg">
                     <svg className="h-4 w-4 sm:h-5 sm:w-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                     </svg>
                   </div>
                   <div>
-                    <h2 className="text-lg sm:text-2xl font-bold bg-gradient-to-r from-purple-700 to-purple-600 bg-clip-text text-transparent">
+                    <h2 className="text-lg sm:text-2xl font-bold bg-gradient-to-r from-secondary-700 to-secondary-600 bg-clip-text text-transparent">
                       Special Instructions
                     </h2>
                     <p className="text-xs sm:text-sm text-neutral-500">(Optional)</p>
@@ -471,12 +471,12 @@ export default function CheckoutPage() {
               </div>
 
               {/* Payment Method */}
-              <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg border-2 border-purple-100 p-4 sm:p-7 hover:shadow-xl transition-shadow">
+              <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg border-2 border-secondary-100 p-4 sm:p-7 hover:shadow-xl transition-shadow">
                 <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-5">
-                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-gradient-to-br from-purple-600 to-purple-700 flex items-center justify-center flex-shrink-0 shadow-lg">
+                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-gradient-to-br from-secondary-600 to-secondary-700 flex items-center justify-center flex-shrink-0 shadow-lg">
                     <CreditCard className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
                   </div>
-                  <h2 className="text-lg sm:text-2xl font-bold bg-gradient-to-r from-purple-700 to-purple-600 bg-clip-text text-transparent">
+                  <h2 className="text-lg sm:text-2xl font-bold bg-gradient-to-r from-secondary-700 to-secondary-600 bg-clip-text text-transparent">
                     Payment Method
                   </h2>
                 </div>
