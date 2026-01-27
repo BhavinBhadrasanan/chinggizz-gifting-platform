@@ -3,24 +3,19 @@ spring:
     name: chinggizz-app
 
   # Supabase PostgreSQL Database Configuration (Default)
-  # Optimized for high concurrency (1000+ users)
+  # Optimized for Supabase Connection Pooler (PgBouncer)
   datasource:
-    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://aws-1-ap-south-1.pooler.supabase.com:5432/postgres?sslmode=require&connectTimeout=60&socketTimeout=60&loginTimeout=60}
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://aws-1-ap-south-1.pooler.supabase.com:6543/postgres?sslmode=require&prepareThreshold=0}
     driver-class-name: org.postgresql.Driver
     username: ${SPRING_DATASOURCE_USERNAME:postgres.pzgnowrxbiefhxsoukxc}
     password: ${SPRING_DATASOURCE_PASSWORD:Chinggizz098}
     hikari:
-      # Increased pool size for high concurrency
-      maximum-pool-size: 10
-      minimum-idle: 2
-      connection-timeout: 60000
-      idle-timeout: 300000
+      # Optimized for Supabase Connection Pooler
+      maximum-pool-size: 5
+      minimum-idle: 1
+      connection-timeout: 30000
+      idle-timeout: 600000
       max-lifetime: 1800000
-      validation-timeout: 5000
-      initialization-fail-timeout: -1
-      connection-test-query: SELECT 1
-      # Additional performance tuning
-      leak-detection-threshold: 60000
       pool-name: ChinggizzHikariPool
 
   jpa:
