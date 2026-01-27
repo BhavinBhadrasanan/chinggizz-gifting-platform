@@ -564,10 +564,6 @@ export default function CheckoutPage() {
                   <span className="font-medium">Secure checkout</span>
                 </div>
                 <div className="flex items-center gap-3 text-sm text-neutral-700">
-                  <Truck className="h-5 w-5 text-blue-600 flex-shrink-0" />
-                  <span className="font-medium">Free delivery on all orders</span>
-                </div>
-                <div className="flex items-center gap-3 text-sm text-neutral-700">
                   <Package className="h-5 w-5 text-purple-600 flex-shrink-0" />
                   <span className="font-medium">Quality guaranteed</span>
                 </div>
