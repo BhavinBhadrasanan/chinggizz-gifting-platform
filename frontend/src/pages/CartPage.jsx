@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { Plus, Minus, ShoppingBag, Trash2, Sparkles, ArrowLeft, Package } from 'lucide-react';
+import { Plus, Minus, ShoppingBag, Trash2, Sparkles, ArrowLeft, Package, Gift, Heart, Star } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { useNavigate, useLocation } from 'react-router-dom';
 import ConfirmationModal from '../components/ConfirmationModal';
@@ -91,17 +91,69 @@ export default function CartPage() {
         {/* Empty Cart State */}
         {cartItems.length === 0 && hampers.length === 0 ? (
           <div className="bg-white rounded-2xl shadow-xl p-8 sm:p-12 text-center">
-            <div className="bg-gradient-to-br from-primary-100 to-secondary-100 w-24 h-24 sm:w-32 sm:h-32 rounded-full flex items-center justify-center mx-auto mb-6">
-              <ShoppingBag className="h-12 w-12 sm:h-16 sm:w-16 text-primary-600" />
+            {/* Animated Icon */}
+            <div className="relative mb-8">
+              <div className="bg-gradient-to-br from-primary-100 to-secondary-100 w-28 h-28 sm:w-36 sm:h-36 rounded-full flex items-center justify-center mx-auto animate-pulse">
+                <ShoppingBag className="h-14 w-14 sm:h-18 sm:w-18 text-primary-600" />
+              </div>
+              {/* Floating Icons */}
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-4 animate-bounce">
+                <Gift className="h-6 w-6 text-secondary-500" />
+              </div>
+              <div className="absolute bottom-0 left-1/4 animate-pulse">
+                <Heart className="h-5 w-5 text-pink-500" />
+              </div>
+              <div className="absolute bottom-0 right-1/4 animate-pulse delay-75">
+                <Star className="h-5 w-5 text-yellow-500" />
+              </div>
             </div>
-            <h3 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-primary-700 via-secondary-600 to-primary-700 bg-clip-text text-transparent mb-3">Your cart is empty</h3>
-            <p className="text-sm sm:text-base text-neutral-600 mb-8">Add some amazing products to get started!</p>
-            <button
-              onClick={() => navigate('/products')}
-              className="bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white font-semibold px-8 py-3 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl"
-            >
-              Browse Products
-            </button>
+
+            {/* Heading */}
+            <h3 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-primary-700 via-secondary-600 to-primary-700 bg-clip-text text-transparent mb-4">
+              Your Cart is Empty!
+            </h3>
+
+            {/* Description */}
+            <p className="text-base sm:text-lg text-neutral-600 mb-3 max-w-md mx-auto">
+              Looks like you haven't added anything yet.
+            </p>
+            <p className="text-sm sm:text-base text-neutral-500 mb-8 max-w-md mx-auto">
+              Explore our collection of personalized gifts, custom hampers, and unique products to make someone's day special! ✨
+            </p>
+
+            {/* Feature Highlights */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8 max-w-2xl mx-auto">
+              <div className="bg-gradient-to-br from-primary-50 to-primary-100 p-4 rounded-xl">
+                <Gift className="h-8 w-8 text-primary-600 mx-auto mb-2" />
+                <p className="text-sm font-semibold text-neutral-700">Personalized Gifts</p>
+              </div>
+              <div className="bg-gradient-to-br from-secondary-50 to-secondary-100 p-4 rounded-xl">
+                <Sparkles className="h-8 w-8 text-secondary-600 mx-auto mb-2" />
+                <p className="text-sm font-semibold text-neutral-700">Custom Hampers</p>
+              </div>
+              <div className="bg-gradient-to-br from-pink-50 to-pink-100 p-4 rounded-xl">
+                <Heart className="h-8 w-8 text-pink-600 mx-auto mb-2" />
+                <p className="text-sm font-semibold text-neutral-700">Made with Love</p>
+              </div>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <button
+                onClick={() => navigate('/products')}
+                className="w-full sm:w-auto bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white font-semibold px-8 py-3 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 flex items-center justify-center gap-2"
+              >
+                <ShoppingBag className="h-5 w-5" />
+                Browse Products
+              </button>
+              <button
+                onClick={() => navigate('/hamper-builder')}
+                className="w-full sm:w-auto bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold px-8 py-3 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 flex items-center justify-center gap-2"
+              >
+                <Sparkles className="h-5 w-5" />
+                Build Hamper
+              </button>
+            </div>
           </div>
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
