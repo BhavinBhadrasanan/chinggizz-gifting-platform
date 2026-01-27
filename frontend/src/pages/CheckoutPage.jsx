@@ -396,8 +396,8 @@ export default function CheckoutPage() {
                 <div className="space-y-3">
                   <label className={`flex items-start p-3 sm:p-5 border-2 rounded-lg sm:rounded-xl cursor-pointer transition-all ${
                     formData.deliveryMethod === 'DIRECT_DELIVERY'
-                      ? 'border-primary-500 bg-primary-50 shadow-md'
-                      : 'border-neutral-200 hover:border-primary-300 hover:shadow-md'
+                      ? 'border-purple-500 bg-purple-50 shadow-md'
+                      : 'border-neutral-200 hover:border-purple-300 hover:shadow-md'
                   }`}>
                     <input
                       type="radio"
@@ -405,13 +405,13 @@ export default function CheckoutPage() {
                       value="DIRECT_DELIVERY"
                       checked={formData.deliveryMethod === 'DIRECT_DELIVERY'}
                       onChange={handleInputChange}
-                      className="mr-3 sm:mr-4 mt-1 w-4 h-4 sm:w-5 sm:h-5 text-primary-600 flex-shrink-0"
+                      className="mr-3 sm:mr-4 mt-1 w-4 h-4 sm:w-5 sm:h-5 text-purple-600 flex-shrink-0"
                     />
                     <div className="flex-1 min-w-0">
                       <div className="font-bold text-sm sm:text-base text-neutral-900 flex items-center gap-2 mb-1 flex-wrap">
-                        <Package className="h-4 w-4 sm:h-5 sm:w-5 text-primary-600 flex-shrink-0" />
+                        <Package className="h-4 w-4 sm:h-5 sm:w-5 text-purple-600 flex-shrink-0" />
                         <span>Direct Delivery</span>
-                        <span className="text-[10px] sm:text-xs bg-primary-100 text-primary-700 px-2 py-0.5 sm:py-1 rounded-full font-semibold">Recommended</span>
+                        <span className="text-[10px] sm:text-xs bg-green-100 text-green-700 px-2 py-0.5 sm:py-1 rounded-full font-semibold">Recommended</span>
                       </div>
                       <p className="text-xs sm:text-sm text-neutral-600">
                         Our team will deliver directly (Kochi, Ernakulam, Alappuzha)
@@ -420,8 +420,8 @@ export default function CheckoutPage() {
                   </label>
                   <label className={`flex items-start p-3 sm:p-5 border-2 rounded-lg sm:rounded-xl cursor-pointer transition-all ${
                     formData.deliveryMethod === 'COURIER_DELIVERY'
-                      ? 'border-accent-500 bg-accent-50 shadow-md'
-                      : 'border-neutral-200 hover:border-accent-300 hover:shadow-md'
+                      ? 'border-orange-500 bg-orange-50 shadow-md'
+                      : 'border-neutral-200 hover:border-orange-300 hover:shadow-md'
                   }`}>
                     <input
                       type="radio"
@@ -429,13 +429,13 @@ export default function CheckoutPage() {
                       value="COURIER_DELIVERY"
                       checked={formData.deliveryMethod === 'COURIER_DELIVERY'}
                       onChange={handleInputChange}
-                      className="mr-3 sm:mr-4 mt-1 w-4 h-4 sm:w-5 sm:h-5 text-accent-600 flex-shrink-0"
+                      className="mr-3 sm:mr-4 mt-1 w-4 h-4 sm:w-5 sm:h-5 text-orange-600 flex-shrink-0"
                     />
                     <div className="flex-1 min-w-0">
                       <div className="font-bold text-sm sm:text-base text-neutral-900 flex items-center gap-2 mb-1 flex-wrap">
-                        <Truck className="h-4 w-4 sm:h-5 sm:w-5 text-accent-600 flex-shrink-0" />
+                        <Truck className="h-4 w-4 sm:h-5 sm:w-5 text-orange-600 flex-shrink-0" />
                         <span>Courier Delivery</span>
-                        <span className="text-[10px] sm:text-xs bg-accent-100 text-accent-700 px-2 py-0.5 sm:py-1 rounded-full font-semibold">All India</span>
+                        <span className="text-[10px] sm:text-xs bg-blue-100 text-blue-700 px-2 py-0.5 sm:py-1 rounded-full font-semibold">All India</span>
                       </div>
                       <p className="text-xs sm:text-sm text-neutral-600">
                         Delivery via courier (3-5 business days)
