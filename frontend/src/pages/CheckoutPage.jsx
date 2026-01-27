@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useCart } from '../context/CartContext';
 import { useNavigate } from 'react-router-dom';
-import { ShoppingBag, CreditCard, MapPin, User, Mail, Phone, CheckCircle, Truck, Package } from 'lucide-react';
+import { ShoppingBag, CreditCard, MapPin, User, Mail, Phone, CheckCircle, Truck, Package, ArrowLeft } from 'lucide-react';
 import toast from 'react-hot-toast';
 import api from '../config/api';
 
@@ -180,11 +180,27 @@ export default function CheckoutPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-neutral-50 via-primary-50/30 to-neutral-50 py-4 sm:py-12 pb-24 sm:pb-12">
       <div className="container-custom max-w-7xl px-3 sm:px-4">
-        {/* Header with Progress Indicator */}
+        {/* Header with Back Button and Progress Indicator */}
         <div className="mb-6 sm:mb-8">
-          <h1 className="text-2xl sm:text-4xl font-extrabold text-neutral-900 mb-4 sm:mb-3">
-            Checkout
-          </h1>
+          {/* Back Button and Title */}
+          <div className="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-6">
+            <button
+              onClick={() => navigate('/cart')}
+              className="p-2 sm:p-3 rounded-xl bg-white hover:bg-neutral-100 transition-colors shadow-md hover:shadow-lg group"
+              title="Back to Cart"
+            >
+              <ArrowLeft className="h-5 w-5 sm:h-6 sm:w-6 text-neutral-700 group-hover:text-primary-600 transition-colors" />
+            </button>
+            <div className="flex items-center gap-3">
+              <div className="bg-gradient-to-br from-primary-600 to-primary-700 p-2 sm:p-3 rounded-xl shadow-lg">
+                <ShoppingBag className="h-6 w-6 sm:h-7 sm:w-7 text-white" />
+              </div>
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-primary-700 via-secondary-600 to-primary-700 bg-clip-text text-transparent">
+                Checkout
+              </h1>
+            </div>
+          </div>
+
           {/* 2-Step Progress - Accurate Flow */}
           <div className="flex items-center justify-center sm:justify-start gap-3 sm:gap-4">
             <div className="flex items-center gap-2 sm:gap-3">
@@ -534,17 +550,6 @@ export default function CheckoutPage() {
                 <div className="flex justify-between text-neutral-700 text-sm sm:text-base">
                   <span className="font-medium">Subtotal</span>
                   <span className="font-semibold">₹{getCartTotal().toFixed(2)}</span>
-                </div>
-                <div className="flex justify-between text-neutral-700 text-sm sm:text-base">
-                  <span className="font-medium">Shipping</span>
-                  <span className="text-green-600 font-bold">FREE</span>
-                </div>
-                <div className="flex justify-between items-center text-sm sm:text-base text-neutral-600 bg-gradient-to-r from-green-50 to-emerald-50 border-2 border-green-200 rounded-xl p-3">
-                  <span className="flex items-center gap-2 font-medium">
-                    <CheckCircle className="h-5 w-5 text-green-600" />
-                    Discount
-                  </span>
-                  <span className="font-bold text-green-600">₹0</span>
                 </div>
                 <div className="flex justify-between items-center text-xl sm:text-2xl font-extrabold text-neutral-900 pt-4 border-t-2 border-purple-300 bg-gradient-to-r from-purple-50 to-indigo-50 rounded-xl p-4">
                   <span>Total</span>
