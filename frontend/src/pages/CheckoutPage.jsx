@@ -105,6 +105,9 @@ export default function CheckoutPage() {
 
         // Clear hamper builder state since order is successfully placed
         localStorage.removeItem('hamperBuilderState');
+
+        // Scroll to top to show success message
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       }
     } catch (error) {
       console.error('Order submission error:', error);
