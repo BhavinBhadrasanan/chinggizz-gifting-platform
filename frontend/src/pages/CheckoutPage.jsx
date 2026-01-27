@@ -9,6 +9,7 @@ export default function CheckoutPage() {
   const { cartItems, hampers, getCartTotal, clearCart } = useCart();
   const navigate = useNavigate();
   const [orderPlaced, setOrderPlaced] = useState(false);
+  const [showSuccessPopup, setShowSuccessPopup] = useState(false);
   const [orderNumber, setOrderNumber] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -100,17 +101,24 @@ export default function CheckoutPage() {
 
       if (response.data) {
         setOrderNumber(response.data.orderNumber);
-        toast.success('Order placed successfully!');
-        setOrderPlaced(true);
+
+        // Show success popup first
+        setShowSuccessPopup(true);
+
+        // After 3 seconds, hide popup and show full success screen
+        setTimeout(() => {
+          setShowSuccessPopup(false);
+          setOrderPlaced(true);
+        }, 3000);
 
         // Clear hamper builder state since order is successfully placed
         localStorage.removeItem('hamperBuilderState');
 
-        // Clear cart after 5 seconds and redirect
+        // Clear cart after 8 seconds total (3s popup + 5s success screen) and redirect
         setTimeout(() => {
           clearCart();
           navigate('/');
-        }, 5000);
+        }, 8000);
       }
     } catch (error) {
       console.error('Order submission error:', error);
@@ -139,6 +147,55 @@ export default function CheckoutPage() {
             <button onClick={() => navigate('/')} className="btn-primary">
               Continue Shopping
             </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Success Popup Modal (shows for 3 seconds)
+  if (showSuccessPopup) {
+    return (
+      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm animate-fade-in">
+        <div className="bg-white rounded-3xl shadow-2xl p-8 sm:p-12 max-w-md mx-4 text-center animate-scale-in">
+          {/* Animated Success Icon */}
+          <div className="relative inline-block mb-6">
+            {/* Outer Ring - Pulsing */}
+            <div className="absolute inset-0 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full animate-ping opacity-20"></div>
+
+            {/* Middle Ring */}
+            <div className="relative bg-gradient-to-br from-green-500 to-emerald-600 w-24 h-24 sm:w-32 sm:h-32 rounded-full flex items-center justify-center shadow-2xl ring-8 ring-green-100 animate-bounce-slow">
+              <CheckCircle className="h-12 w-12 sm:h-16 sm:w-16 text-white animate-scale-in" strokeWidth={2.5} />
+            </div>
+
+            {/* Sparkle Effects */}
+            <div className="absolute -top-2 -right-2 w-6 h-6 bg-yellow-400 rounded-full animate-ping"></div>
+            <div className="absolute -bottom-2 -left-2 w-4 h-4 bg-green-300 rounded-full animate-pulse"></div>
+          </div>
+
+          {/* Success Message */}
+          <h2 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-green-700 via-emerald-600 to-teal-600 bg-clip-text text-transparent mb-4 animate-slide-up">
+            🎉 Order Placed Successfully!
+          </h2>
+
+          <p className="text-base sm:text-lg text-neutral-700 font-medium mb-6 animate-slide-up-delay leading-relaxed">
+            Thank you for choosing Chinggizz! Your gift is on its way to making someone's day special ✨
+          </p>
+
+          {/* Order Number Preview */}
+          {orderNumber && (
+            <div className="bg-gradient-to-r from-secondary-500 to-secondary-600 rounded-2xl p-4 mb-4 animate-slide-up-delay-2">
+              <p className="text-sm text-white/90 font-medium mb-1">Order Number</p>
+              <p className="text-2xl font-bold text-white tracking-wider font-mono">
+                {orderNumber}
+              </p>
+            </div>
+          )}
+
+          {/* Trust Message */}
+          <div className="flex items-center justify-center gap-2 text-sm text-neutral-600 animate-slide-up-delay-3">
+            <span className="text-xl">🔒</span>
+            <span className="font-medium">Your order will be delivered safely</span>
           </div>
         </div>
       </div>
@@ -687,12 +744,12 @@ export default function CheckoutPage() {
 
           {/* Order Summary */}
           <div className="lg:col-span-1">
-            <div className="bg-white rounded-2xl shadow-2xl border-2 border-purple-100 p-5 sm:p-6 lg:sticky lg:top-24">
+            <div className="bg-white rounded-2xl shadow-2xl border-2 border-secondary-100 p-5 sm:p-6 lg:sticky lg:top-24">
               <div className="flex items-center gap-3 mb-5 sm:mb-6">
-                <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center flex-shrink-0 shadow-lg">
+                <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-secondary-600 to-secondary-700 flex items-center justify-center flex-shrink-0 shadow-lg">
                   <ShoppingBag className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
                 </div>
-                <h2 className="text-xl sm:text-2xl font-bold text-neutral-900">Order Summary</h2>
+                <h2 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-secondary-700 to-secondary-600 bg-clip-text text-transparent">Order Summary</h2>
               </div>
 
               <div className="space-y-3 mb-5 sm:mb-6 max-h-[350px] sm:max-h-[400px] overflow-y-auto pr-2 custom-scrollbar">
