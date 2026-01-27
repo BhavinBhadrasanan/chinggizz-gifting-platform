@@ -9,7 +9,6 @@ export default function CheckoutPage() {
   const { cartItems, hampers, getCartTotal, clearCart } = useCart();
   const navigate = useNavigate();
   const [orderPlaced, setOrderPlaced] = useState(false);
-  const [showSuccessPopup, setShowSuccessPopup] = useState(false);
   const [orderNumber, setOrderNumber] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -101,15 +100,8 @@ export default function CheckoutPage() {
 
       if (response.data) {
         setOrderNumber(response.data.orderNumber);
-
-        // Show success popup first
-        setShowSuccessPopup(true);
-
-        // After 5 seconds, hide popup and show full success screen
-        setTimeout(() => {
-          setShowSuccessPopup(false);
-          setOrderPlaced(true);
-        }, 5000);
+        toast.success('Order placed successfully!');
+        setOrderPlaced(true);
 
         // Clear hamper builder state since order is successfully placed
         localStorage.removeItem('hamperBuilderState');
@@ -141,88 +133,6 @@ export default function CheckoutPage() {
             <button onClick={() => navigate('/')} className="btn-primary">
               Continue Shopping
             </button>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  // Success Popup Modal (shows for 3 seconds)
-  if (showSuccessPopup) {
-    return (
-      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-md animate-fade-in p-4">
-        <div className="bg-white rounded-3xl shadow-2xl max-w-lg w-full mx-4 overflow-hidden animate-scale-in">
-          {/* Success Header with Gradient */}
-          <div className="bg-gradient-to-r from-green-500 via-emerald-500 to-teal-500 px-6 sm:px-8 py-8 sm:py-10 text-center relative overflow-hidden">
-            {/* Decorative Elements */}
-            <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16"></div>
-            <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/10 rounded-full -ml-12 -mb-12"></div>
-
-            {/* Success Icon */}
-            <div className="relative inline-block mb-4">
-              <div className="bg-white w-20 h-20 sm:w-24 sm:h-24 rounded-full flex items-center justify-center shadow-xl animate-bounce-slow">
-                <CheckCircle className="h-12 w-12 sm:h-14 sm:w-14 text-green-500" strokeWidth={2.5} />
-              </div>
-              {/* Sparkles */}
-              <div className="absolute -top-1 -right-1 w-6 h-6 bg-yellow-400 rounded-full animate-ping"></div>
-              <div className="absolute -bottom-1 -left-1 w-4 h-4 bg-green-300 rounded-full animate-pulse"></div>
-            </div>
-
-            {/* Success Title */}
-            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2 animate-slide-up">
-              🎉 Order Placed Successfully!
-            </h2>
-            <p className="text-sm sm:text-base text-white/90 animate-slide-up-delay">
-              Your order has been confirmed
-            </p>
-          </div>
-
-          {/* Content Section */}
-          <div className="px-6 sm:px-8 py-6 sm:py-8">
-            {/* Order Number */}
-            {orderNumber && (
-              <div className="bg-gradient-to-r from-secondary-50 to-purple-50 border-2 border-secondary-200 rounded-2xl p-4 sm:p-5 mb-5 sm:mb-6 text-center animate-slide-up-delay-2">
-                <p className="text-xs sm:text-sm text-neutral-600 font-medium mb-2">Your Order Number</p>
-                <p className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-secondary-600 to-purple-600 bg-clip-text text-transparent tracking-wide font-mono">
-                  {orderNumber}
-                </p>
-                <p className="text-xs text-neutral-500 mt-2">Save this for tracking</p>
-              </div>
-            )}
-
-            {/* Thank You Message */}
-            <div className="text-center mb-5 sm:mb-6 animate-slide-up-delay-3">
-              <p className="text-base sm:text-lg text-neutral-800 font-semibold mb-2">
-                Thank you for choosing Chinggizz! 💝
-              </p>
-              <p className="text-sm sm:text-base text-neutral-600 leading-relaxed">
-                Your gift is on its way to making someone's day special ✨
-              </p>
-            </div>
-
-            {/* Trust Badges */}
-            <div className="grid grid-cols-3 gap-3 mb-5 sm:mb-6 animate-slide-up-delay-4">
-              <div className="text-center p-3 bg-green-50 rounded-xl border border-green-200">
-                <div className="text-2xl mb-1">🔒</div>
-                <p className="text-xs font-semibold text-neutral-800">Secure</p>
-              </div>
-              <div className="text-center p-3 bg-blue-50 rounded-xl border border-blue-200">
-                <div className="text-2xl mb-1">📦</div>
-                <p className="text-xs font-semibold text-neutral-800">Safe Delivery</p>
-              </div>
-              <div className="text-center p-3 bg-purple-50 rounded-xl border border-purple-200">
-                <div className="text-2xl mb-1">✨</div>
-                <p className="text-xs font-semibold text-neutral-800">Quality</p>
-              </div>
-            </div>
-
-            {/* Info Message */}
-            <div className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-lg animate-slide-up-delay-5">
-              <p className="text-sm text-blue-800">
-                <span className="font-semibold">📱 We'll contact you soon!</span><br/>
-                <span className="text-xs">Our team will reach out via WhatsApp or phone within 2-4 hours to confirm your order.</span>
-              </p>
-            </div>
           </div>
         </div>
       </div>
