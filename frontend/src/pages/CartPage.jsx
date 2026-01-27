@@ -63,11 +63,11 @@ export default function CartPage() {
                 <ArrowLeft className="h-5 w-5 sm:h-6 sm:w-6 text-neutral-700" />
               </button>
               <div className="flex items-center space-x-3">
-                <div className="bg-primary-600 p-2 sm:p-3 rounded-xl shadow-lg">
+                <div className="bg-gradient-to-br from-primary-600 to-primary-700 p-2 sm:p-3 rounded-xl shadow-lg">
                   <ShoppingBag className="h-6 w-6 sm:h-7 sm:w-7 text-white" />
                 </div>
                 <div>
-                  <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-neutral-900">
+                  <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-primary-700 via-secondary-600 to-primary-700 bg-clip-text text-transparent">
                     My Cart
                   </h1>
                   <p className="text-sm sm:text-base text-neutral-600">{getCartCount()} {getCartCount() === 1 ? 'item' : 'items'}</p>
@@ -91,10 +91,10 @@ export default function CartPage() {
         {/* Empty Cart State */}
         {cartItems.length === 0 && hampers.length === 0 ? (
           <div className="bg-white rounded-2xl shadow-xl p-8 sm:p-12 text-center">
-            <div className="bg-neutral-100 w-24 h-24 sm:w-32 sm:h-32 rounded-full flex items-center justify-center mx-auto mb-6">
-              <ShoppingBag className="h-12 w-12 sm:h-16 sm:w-16 text-neutral-300" />
+            <div className="bg-gradient-to-br from-primary-100 to-secondary-100 w-24 h-24 sm:w-32 sm:h-32 rounded-full flex items-center justify-center mx-auto mb-6">
+              <ShoppingBag className="h-12 w-12 sm:h-16 sm:w-16 text-primary-600" />
             </div>
-            <h3 className="text-xl sm:text-2xl font-bold text-neutral-900 mb-3">Your cart is empty</h3>
+            <h3 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-primary-700 via-secondary-600 to-primary-700 bg-clip-text text-transparent mb-3">Your cart is empty</h3>
             <p className="text-sm sm:text-base text-neutral-600 mb-8">Add some amazing products to get started!</p>
             <button
               onClick={() => navigate('/products')}

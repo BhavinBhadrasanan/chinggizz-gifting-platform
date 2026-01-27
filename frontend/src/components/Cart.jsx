@@ -62,11 +62,11 @@ export default function Cart() {
         {/* Header - Mobile Friendly */}
         <div className="flex items-center justify-between p-4 sm:p-6 border-b border-neutral-200 bg-gradient-to-r from-primary-50 to-secondary-50">
           <div className="flex items-center space-x-2 sm:space-x-3">
-            <div className="bg-primary-600 p-2 rounded-lg">
+            <div className="bg-gradient-to-br from-primary-600 to-primary-700 p-2 rounded-lg">
               <ShoppingBag className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
             </div>
             <div>
-              <h2 className="text-lg sm:text-xl font-bold text-neutral-900">
+              <h2 className="text-lg sm:text-xl font-bold bg-gradient-to-r from-primary-700 via-secondary-600 to-primary-700 bg-clip-text text-transparent">
                 My Cart
               </h2>
               <p className="text-xs text-neutral-600">{getCartCount()} {getCartCount() === 1 ? 'item' : 'items'}</p>
@@ -99,10 +99,10 @@ export default function Cart() {
         <div ref={cartItemsRef} className="flex-1 overflow-y-auto p-4 sm:p-6 pb-48 overscroll-contain">
           {cartItems.length === 0 && hampers.length === 0 ? (
             <div className="text-center py-12 sm:py-16">
-              <div className="bg-neutral-100 w-24 h-24 sm:w-32 sm:h-32 rounded-full flex items-center justify-center mx-auto mb-4">
-                <ShoppingBag className="h-12 w-12 sm:h-16 sm:w-16 text-neutral-300" />
+              <div className="bg-gradient-to-br from-primary-100 to-secondary-100 w-24 h-24 sm:w-32 sm:h-32 rounded-full flex items-center justify-center mx-auto mb-4">
+                <ShoppingBag className="h-12 w-12 sm:h-16 sm:w-16 text-primary-600" />
               </div>
-              <h3 className="text-lg sm:text-xl font-bold text-neutral-900 mb-2">Your cart is empty</h3>
+              <h3 className="text-lg sm:text-xl font-bold bg-gradient-to-r from-primary-700 via-secondary-600 to-primary-700 bg-clip-text text-transparent mb-2">Your cart is empty</h3>
               <p className="text-sm sm:text-base text-neutral-600 mb-6">Add some amazing products to get started!</p>
               <button
                 onClick={() => {

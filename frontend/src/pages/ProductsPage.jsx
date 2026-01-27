@@ -268,20 +268,20 @@ export default function ProductsPage() {
           <div className="relative text-center py-4 sm:py-5">
             {/* Decorative top accent */}
             <div className="flex items-center justify-center mb-2">
-              <div className="h-1 w-12 bg-gradient-to-r from-transparent via-primary-500 to-transparent rounded-full"></div>
-              <Sparkles className="h-4 w-4 text-primary-500 mx-2" />
-              <div className="h-1 w-12 bg-gradient-to-r from-transparent via-primary-500 to-transparent rounded-full"></div>
+              <div className="h-1 w-12 bg-gradient-to-r from-transparent via-secondary-400 to-transparent rounded-full"></div>
+              <Sparkles className="h-4 w-4 text-secondary-500 mx-2" />
+              <div className="h-1 w-12 bg-gradient-to-r from-transparent via-secondary-400 to-transparent rounded-full"></div>
             </div>
 
             {/* Main heading */}
             <h1 className="text-2xl sm:text-4xl font-extrabold mb-1">
-              <span className="bg-gradient-to-r from-gray-900 via-primary-800 to-gray-900 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-primary-700 via-secondary-600 to-primary-700 bg-clip-text text-transparent">
                 Discover Our Collection
               </span>
             </h1>
 
             {/* Subtitle */}
-            <p className="text-xs sm:text-sm text-gray-600 font-medium">
+            <p className="text-xs sm:text-sm text-neutral-600 font-medium">
               Premium gifts & customizable products for every occasion
             </p>
           </div>

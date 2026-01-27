@@ -1672,7 +1672,7 @@ export default function HamperBuilderPage() {
               <div className="lg:hidden" ref={availableItemsRef}>
                 <div className="card p-3 glass-card animate-fadeInUp">
                   {/* Mobile Instructions - Collapsible Quick Guide */}
-                  <div className="mb-3 bg-gradient-to-r from-blue-50 via-indigo-50 to-purple-50 border-2 border-blue-300 rounded-xl shadow-lg relative overflow-hidden">
+                  <div className="mb-3 bg-gradient-to-r from-primary-50 via-secondary-50 to-primary-50 border-2 border-primary-300 rounded-xl shadow-lg relative overflow-hidden">
                     {/* Glassy overlay */}
                     <div className="absolute inset-0 bg-white/40 backdrop-blur-sm"></div>
 
@@ -1683,28 +1683,28 @@ export default function HamperBuilderPage() {
                     >
                       <div className="flex items-center gap-2">
                         <span className="text-xl animate-bounce">👇</span>
-                        <h4 className="font-bold text-blue-900 text-sm">Quick Guide</h4>
+                        <h4 className="font-bold text-primary-900 text-sm">Quick Guide</h4>
                       </div>
                       {showQuickGuide ? (
-                        <ChevronUp className="h-4 w-4 text-blue-900 flex-shrink-0" />
+                        <ChevronUp className="h-4 w-4 text-primary-900 flex-shrink-0" />
                       ) : (
-                        <ChevronDown className="h-4 w-4 text-blue-900 flex-shrink-0" />
+                        <ChevronDown className="h-4 w-4 text-primary-900 flex-shrink-0" />
                       )}
                     </button>
 
                     {/* Collapsible Content */}
                     {showQuickGuide && (
                       <div className="relative z-10 px-3 pb-3 space-y-1 animate-fadeIn">
-                        <p className="text-xs text-blue-800 flex items-center gap-2">
-                          <span className="bg-blue-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-[10px] font-bold flex-shrink-0">1</span>
+                        <p className="text-xs text-primary-800 flex items-center gap-2">
+                          <span className="bg-primary-600 text-white rounded-full w-5 h-5 flex items-center justify-center text-[10px] font-bold flex-shrink-0">1</span>
                           <span><strong>Tap</strong> an item below</span>
                         </p>
-                        <p className="text-xs text-blue-800 flex items-center gap-2">
-                          <span className="bg-blue-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-[10px] font-bold flex-shrink-0">2</span>
+                        <p className="text-xs text-primary-800 flex items-center gap-2">
+                          <span className="bg-primary-600 text-white rounded-full w-5 h-5 flex items-center justify-center text-[10px] font-bold flex-shrink-0">2</span>
                           <span><strong>Scroll</strong> to 3D box</span>
                         </p>
-                        <p className="text-xs text-blue-800 flex items-center gap-2">
-                          <span className="bg-green-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-[10px] font-bold flex-shrink-0">3</span>
+                        <p className="text-xs text-primary-800 flex items-center gap-2">
+                          <span className="bg-accent-600 text-white rounded-full w-5 h-5 flex items-center justify-center text-[10px] font-bold flex-shrink-0">3</span>
                           <span><strong>Tap</strong> green spot to place</span>
                         </p>
                       </div>
@@ -1712,32 +1712,32 @@ export default function HamperBuilderPage() {
                   </div>
 
                   {/* Available Items - Mobile - ENHANCED */}
-                  <div className="bg-white/90 backdrop-blur-sm rounded-xl border-2 border-orange-300 shadow-lg overflow-hidden">
-                    <div className="bg-gradient-to-r from-orange-500 via-orange-600 to-amber-500 px-3 py-2 flex items-center justify-between shadow-md">
+                  <div className="bg-white/90 backdrop-blur-sm rounded-xl border-2 border-secondary-300 shadow-lg overflow-hidden">
+                    <div className="bg-gradient-to-r from-secondary-500 via-secondary-600 to-secondary-500 px-3 py-2 flex items-center justify-between shadow-md">
                       <h3 className="text-white font-bold text-sm flex items-center gap-2">
                         <ShoppingBag className="h-4 w-4 animate-bounce" />
                         Available Items ({availableItems.length})
                       </h3>
                       <button
                         onClick={() => navigate('/products')}
-                        className="bg-white hover:bg-orange-50 text-orange-700 font-bold text-xs px-3 py-1.5 rounded-lg flex items-center gap-1 transition-all hover:scale-105 active:scale-95 shadow-md tap-target"
+                        className="bg-white hover:bg-secondary-50 text-secondary-700 font-bold text-xs px-3 py-1.5 rounded-lg flex items-center gap-1 transition-all hover:scale-105 active:scale-95 shadow-md tap-target"
                       >
                         <Plus className="h-3 w-3" />
                         Add More
                       </button>
                     </div>
 
-                    <div className="p-3 space-y-2 max-h-[220px] overflow-y-auto scrollbar-hide">
+                    <div className="p-2 space-y-1.5 max-h-[160px] overflow-y-auto scrollbar-hide">
                       {availableItems.length === 0 ? (
-                        <div className="text-center py-6 animate-fadeInUp">
-                          <div className="bg-gradient-to-br from-neutral-100 to-neutral-200 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-3">
-                            <ShoppingBag className="h-8 w-8 text-neutral-400" />
+                        <div className="text-center py-3 animate-fadeInUp">
+                          <div className="bg-gradient-to-br from-secondary-100 to-secondary-200 rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-2">
+                            <ShoppingBag className="h-6 w-6 text-secondary-400" />
                           </div>
-                          <p className="text-sm font-semibold text-neutral-700 mb-1">All items placed!</p>
-                          <p className="text-xs text-neutral-500 mb-3">Great job building your hamper</p>
+                          <p className="text-xs font-semibold text-neutral-700 mb-0.5">All items placed!</p>
+                          <p className="text-[10px] text-neutral-500 mb-2">Great job building your hamper</p>
                           <button
                             onClick={() => navigate('/products')}
-                            className="bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-bold text-xs py-2 px-4 rounded-lg transition-all hover:scale-105 active:scale-95 shadow-lg tap-target"
+                            className="bg-gradient-to-r from-secondary-500 to-secondary-600 hover:from-secondary-600 hover:to-secondary-700 text-white font-bold text-[10px] py-1.5 px-3 rounded-lg transition-all hover:scale-105 active:scale-95 shadow-md tap-target"
                           >
                             Add More Items
                           </button>
@@ -1751,15 +1751,15 @@ export default function HamperBuilderPage() {
                           >
                             {/* Main Item Container - Clickable/Draggable */}
                             <div
-                              className={`bg-white border-2 rounded-xl p-2 transition-all duration-300 tap-target relative overflow-hidden flex-1 ${
+                              className={`bg-white border-2 rounded-lg p-1.5 transition-all duration-300 tap-target relative overflow-hidden flex-1 ${
                                 selectedItemToPlace?.id === item.id
-                                  ? 'border-green-500 bg-gradient-to-r from-green-50 to-emerald-50 shadow-xl scale-105 animate-pulseGlow'
-                                  : 'border-neutral-200 hover:border-orange-400 hover:shadow-lg'
+                                  ? 'border-secondary-500 bg-gradient-to-r from-secondary-50 to-secondary-100 shadow-lg scale-105 animate-pulseGlow'
+                                  : 'border-neutral-200 hover:border-secondary-400 hover:shadow-md'
                               }`}
                             >
                               {/* Glassy overlay on selected */}
                               {selectedItemToPlace?.id === item.id && (
-                                <div className="absolute inset-0 bg-gradient-to-r from-green-400/10 to-emerald-400/10 backdrop-blur-[1px] pointer-events-none"></div>
+                                <div className="absolute inset-0 bg-gradient-to-r from-secondary-400/10 to-secondary-500/10 backdrop-blur-[1px] pointer-events-none"></div>
                               )}
 
                               <div
@@ -1768,30 +1768,30 @@ export default function HamperBuilderPage() {
                                 onDragEnd={handleDragEnd}
                                 onClick={() => {
                                   setSelectedItemToPlace(item);
-                                  toast.info(`${item.name} - Tap green spot below`, {
+                                  toast.info(`${item.name} - Tap spot below`, {
                                     duration: 2000,
                                     icon: '👇',
                                   });
                                 }}
-                                className="flex items-center gap-2 cursor-pointer relative z-10"
+                                className="flex items-center gap-1.5 cursor-pointer relative z-10"
                               >
-                                <div className="w-12 h-12 bg-gradient-to-br from-neutral-100 to-neutral-200 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden shadow-sm">
+                                <div className="w-10 h-10 bg-gradient-to-br from-neutral-100 to-neutral-200 rounded-lg flex items-center justify-center flex-shrink-0 overflow-hidden shadow-sm">
                                   {item.imageUrl ? (
                                     <img src={item.imageUrl} alt={item.name} className="w-full h-full object-cover" />
                                   ) : (
-                                    <Gift className="h-6 w-6 text-neutral-400" />
+                                    <Gift className="h-5 w-5 text-neutral-400" />
                                   )}
                                 </div>
                                 <div className="flex-1 min-w-0">
-                                  <p className="font-bold text-xs text-neutral-900 truncate leading-tight mb-0.5">{item.name}</p>
-                                  <p className="text-xs font-semibold text-orange-600">₹{item.price}</p>
+                                  <p className="font-bold text-[10px] text-neutral-900 truncate leading-tight mb-0.5">{item.name}</p>
+                                  <p className="text-[10px] font-semibold text-secondary-600">₹{item.price}</p>
                                 </div>
 
                                 {/* Selected Indicator */}
                                 {selectedItemToPlace?.id === item.id && (
                                   <div className="animate-bounceIn flex-shrink-0">
-                                    <div className="bg-gradient-to-br from-green-500 to-emerald-600 text-white rounded-full p-1 shadow-lg">
-                                      <Check className="h-3 w-3" />
+                                    <div className="bg-gradient-to-br from-secondary-500 to-secondary-600 text-white rounded-full p-0.5 shadow-md">
+                                      <Check className="h-2.5 w-2.5" />
                                     </div>
                                   </div>
                                 )}
@@ -1812,10 +1812,10 @@ export default function HamperBuilderPage() {
                                 // Pass the exact customization as stored in the item
                                 removeFromCart(item.id, item.customization);
                               }}
-                              className="bg-red-100 hover:bg-red-200 text-red-600 rounded-full p-2 transition-all hover:scale-110 active:scale-95 shadow-sm tap-target flex-shrink-0"
+                              className="bg-red-100 hover:bg-red-200 text-red-600 rounded-full p-1.5 transition-all hover:scale-110 active:scale-95 shadow-sm tap-target flex-shrink-0"
                               title="Remove item"
                             >
-                              <Trash2 className="h-4 w-4" />
+                              <Trash2 className="h-3 w-3" />
                             </button>
                           </div>
                         ))
@@ -1910,7 +1910,7 @@ export default function HamperBuilderPage() {
                   )}
 
                   {/* Mobile Instructions - Collapsible Quick Tips */}
-                  <div className="lg:hidden mb-3 mx-2 bg-gradient-to-r from-purple-50 to-pink-50 border-2 border-purple-300 rounded-xl overflow-hidden">
+                  <div className="lg:hidden mb-3 mx-2 bg-gradient-to-r from-secondary-50 to-accent-50 border-2 border-secondary-300 rounded-xl overflow-hidden">
                     {/* Header - Always Visible */}
                     <button
                       onClick={() => setShowQuickTips(!showQuickTips)}
@@ -1939,8 +1939,8 @@ export default function HamperBuilderPage() {
                   </div>
 
                   {/* Desktop Instructions - Hidden on Mobile */}
-                  <div className="hidden lg:block mb-4 p-4 bg-gradient-to-r from-blue-50 to-indigo-50 border-2 border-blue-200 rounded-xl">
-                    <h4 className="font-bold text-blue-900 mb-2 flex items-center">
+                  <div className="hidden lg:block mb-4 p-4 bg-gradient-to-r from-primary-50 to-secondary-50 border-2 border-primary-200 rounded-xl">
+                    <h4 className="font-bold text-primary-900 mb-2 flex items-center">
                       <span className="text-xl mr-2">💡</span>
                       Quick Tips
                     </h4>
@@ -2167,7 +2167,7 @@ export default function HamperBuilderPage() {
                           {/* Rotate Button */}
                           <button
                             onClick={handleControlRotate}
-                            className="w-full bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 text-white font-bold text-xs py-2.5 px-3 rounded-lg transition-all flex items-center justify-center gap-2 shadow-lg active:scale-95"
+                            className="w-full bg-gradient-to-r from-secondary-500 to-accent-600 hover:from-secondary-600 hover:to-accent-700 text-white font-bold text-xs py-2.5 px-3 rounded-lg transition-all flex items-center justify-center gap-2 shadow-lg active:scale-95"
                           >
                             <RotateCw className="h-4 w-4 flex-shrink-0" />
                             <span className="truncate">{selectedItemForControls.rotation?.needsRotation ? 'Stand Up' : 'Lay Down'}</span>
@@ -2216,9 +2216,9 @@ export default function HamperBuilderPage() {
                 <div className="card p-3 sticky top-6 space-y-3 max-h-screen overflow-y-auto">
 
                   {/* 1. SELECTED BOX - Compact (HIDDEN ON MOBILE - info moved to 3D box header) */}
-                  <div className="hidden lg:block bg-white rounded-lg border-2 border-blue-300 shadow-sm overflow-hidden">
+                  <div className="hidden lg:block bg-white rounded-lg border-2 border-secondary-300 shadow-sm overflow-hidden">
                     {/* Header */}
-                    <div className="bg-gradient-to-r from-blue-500 to-purple-500 px-3 py-2">
+                    <div className="bg-gradient-to-r from-secondary-500 to-secondary-600 px-3 py-2">
                       <h3 className="text-white font-bold text-sm flex items-center gap-2">
                         <Box className="h-4 w-4" />
                         Your Selected Box
@@ -2230,11 +2230,11 @@ export default function HamperBuilderPage() {
                       {/* Box Name & Price - Inline */}
                       <div className="flex items-center justify-between pb-2 border-b border-neutral-200">
                         <p className="text-lg font-bold text-neutral-900">{selectedBox.name}</p>
-                        <p className="text-sm font-semibold text-blue-600">₹{selectedBox.price}</p>
+                        <p className="text-sm font-semibold text-secondary-600">₹{selectedBox.price}</p>
                       </div>
 
                       {/* Dimensions - Compact */}
-                      <div className="bg-blue-50 rounded-lg p-2">
+                      <div className="bg-secondary-50 rounded-lg p-2">
                         <p className="text-xs text-neutral-600 text-center">
                           {selectedBox.dimensionsCm} • {selectedBox.dimensions}
                         </p>
@@ -2243,7 +2243,7 @@ export default function HamperBuilderPage() {
                       {/* Change Box Button - Smaller */}
                       <button
                         onClick={() => setShowBoxChangeModal(true)}
-                        className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white text-xs font-bold py-2 px-3 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 shadow-md hover:shadow-lg"
+                        className="w-full bg-gradient-to-r from-secondary-500 to-secondary-600 hover:from-secondary-600 hover:to-secondary-700 text-white text-xs font-bold py-2 px-3 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 shadow-md hover:shadow-lg"
                       >
                         <Package className="h-3 w-3" />
                         Change Box Size
@@ -2252,9 +2252,9 @@ export default function HamperBuilderPage() {
                   </div>
 
                   {/* 2. SPACE TRACKER - Compact (HIDDEN ON MOBILE - info moved to 3D box header) */}
-                  <div className="hidden lg:block bg-white rounded-lg border-2 border-green-300 shadow-sm overflow-hidden">
+                  <div className="hidden lg:block bg-white rounded-lg border-2 border-secondary-300 shadow-sm overflow-hidden">
                     {/* Header */}
-                    <div className="bg-gradient-to-r from-green-500 to-emerald-500 px-3 py-2">
+                    <div className="bg-gradient-to-r from-secondary-500 to-secondary-600 px-3 py-2">
                       <h3 className="text-white font-bold text-sm flex items-center gap-2">
                         <Package className="h-4 w-4" />
                         Space Tracker
@@ -2314,16 +2314,16 @@ export default function HamperBuilderPage() {
 
 
                   {/* 3. AVAILABLE ITEMS SECTION - Compact (HIDDEN ON MOBILE - shown at top instead) */}
-                  <div className="hidden lg:block bg-white rounded-lg border-2 border-orange-300 shadow-sm overflow-hidden">
+                  <div className="hidden lg:block bg-white rounded-lg border-2 border-secondary-300 shadow-sm overflow-hidden">
                     {/* Header */}
-                    <div className="bg-gradient-to-r from-orange-500 to-amber-500 px-3 py-2 flex items-center justify-between">
+                    <div className="bg-gradient-to-r from-secondary-500 to-secondary-600 px-3 py-2 flex items-center justify-between">
                       <h3 className="text-white font-bold text-sm flex items-center gap-2">
                         <ShoppingBag className="h-4 w-4" />
                         Available ({availableItems.length})
                       </h3>
                       <button
                         onClick={() => navigate('/products')}
-                        className="bg-white hover:bg-orange-50 text-orange-700 font-semibold text-xs px-2 py-1 rounded-lg flex items-center gap-1 transition-colors"
+                        className="bg-white hover:bg-secondary-50 text-secondary-700 font-semibold text-xs px-2 py-1 rounded-lg flex items-center gap-1 transition-colors"
                       >
                         <Plus className="h-3 w-3" />
                         Add
@@ -2422,9 +2422,9 @@ export default function HamperBuilderPage() {
                 </div>
 
                   {/* 4. PRICING SUMMARY - Compact */}
-                  <div className="bg-white rounded-lg border-2 border-indigo-300 shadow-sm overflow-hidden">
+                  <div className="bg-white rounded-lg border-2 border-secondary-300 shadow-sm overflow-hidden">
                     {/* Header */}
-                    <div className="bg-gradient-to-r from-indigo-500 to-blue-500 px-3 py-2">
+                    <div className="bg-gradient-to-r from-secondary-500 to-secondary-600 px-3 py-2">
                       <h3 className="text-white font-bold text-sm flex items-center gap-2">
                         <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -2456,10 +2456,10 @@ export default function HamperBuilderPage() {
                       </div>
 
                       {/* Grand Total */}
-                      <div className="bg-gradient-to-r from-indigo-50 to-blue-50 rounded-lg p-2 border border-indigo-200">
+                      <div className="bg-gradient-to-r from-secondary-50 to-secondary-100 rounded-lg p-2 border border-secondary-200">
                         <div className="flex items-center justify-between">
                           <p className="text-sm font-bold text-neutral-900">Total</p>
-                          <p className="text-xl font-bold text-indigo-600">₹{getTotalPrice()}</p>
+                          <p className="text-xl font-bold text-secondary-600">₹{getTotalPrice()}</p>
                         </div>
                       </div>
                     </div>
@@ -2510,14 +2510,14 @@ export default function HamperBuilderPage() {
               </div>
 
               {/* MOBILE: Complete Price Summary with Product Names */}
-              <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-4 lg:p-6 rounded-xl border-2 border-blue-200 mb-3 lg:mb-6">
-                <h4 className="font-bold text-base lg:text-lg text-blue-900 mb-3 lg:mb-4 flex items-center gap-2">
+              <div className="bg-gradient-to-br from-secondary-50 to-secondary-100 p-4 lg:p-6 rounded-xl border-2 border-secondary-200 mb-3 lg:mb-6">
+                <h4 className="font-bold text-base lg:text-lg text-secondary-900 mb-3 lg:mb-4 flex items-center gap-2">
                   <span>💰</span>
                   <span>Price Summary</span>
                 </h4>
                 <div className="space-y-2 text-sm lg:text-base">
                   {/* Box Info */}
-                  <div className="flex justify-between items-center pb-2 border-b border-blue-200">
+                  <div className="flex justify-between items-center pb-2 border-b border-secondary-200">
                     <div className="flex-1">
                       <span className="text-neutral-700 font-medium">Box:</span>
                       <span className="text-neutral-600 text-xs lg:text-sm ml-2">{selectedBox.name} ({selectedBox.dimensions})</span>
@@ -2527,7 +2527,7 @@ export default function HamperBuilderPage() {
 
                   {/* Individual Products with Names */}
                   {placedItems.map((item, index) => (
-                    <div key={index} className="flex justify-between items-center pb-2 border-b border-blue-200">
+                    <div key={index} className="flex justify-between items-center pb-2 border-b border-secondary-200">
                       <div className="flex items-center gap-2 flex-1 min-w-0">
                         {item.imageUrl && (
                           <div className="w-8 h-8 lg:w-10 lg:h-10 bg-neutral-100 rounded-lg flex-shrink-0 overflow-hidden">

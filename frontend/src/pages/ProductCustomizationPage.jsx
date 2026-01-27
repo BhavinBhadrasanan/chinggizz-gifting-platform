@@ -230,8 +230,8 @@ export default function ProductCustomizationPage() {
             <ArrowLeft className="h-5 w-5 sm:h-6 sm:w-6" />
             <span className="font-medium text-sm sm:text-base">Back</span>
           </button>
-          <h1 className="text-base sm:text-lg md:text-xl font-bold text-gray-900 flex items-center gap-1 sm:gap-2">
-            <Sparkles className="h-4 w-4 sm:h-5 sm:w-5 text-primary-600" />
+          <h1 className="text-base sm:text-lg md:text-xl font-bold bg-gradient-to-r from-primary-700 via-secondary-600 to-primary-700 bg-clip-text text-transparent flex items-center gap-1 sm:gap-2">
+            <Sparkles className="h-4 w-4 sm:h-5 sm:w-5 text-secondary-500" />
             <span className="hidden sm:inline">Customize Product</span>
             <span className="sm:hidden">Customize</span>
           </h1>
@@ -325,7 +325,7 @@ export default function ProductCustomizationPage() {
 
             {/* Product Info Card */}
             <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg p-4 sm:p-6">
-              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-2 leading-tight">{product.name}</h2>
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-primary-700 via-secondary-600 to-primary-700 bg-clip-text text-transparent mb-2 leading-tight">{product.name}</h2>
               <p className="text-sm sm:text-base text-gray-600 mb-4 leading-relaxed">{product.description}</p>
 
               <div className="mb-4 sm:mb-6">

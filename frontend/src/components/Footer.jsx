@@ -6,13 +6,13 @@ export default function Footer() {
 
   return (
     <footer className="bg-neutral-900 text-neutral-300">
-      <div className="container-custom py-8 sm:py-12">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
+      <div className="container-custom py-4 sm:py-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8">
           {/* Brand - BEAUTIFUL ROUND LOGO */}
           <div>
-            <div className="flex items-center space-x-3 mb-4">
+            <div className="flex items-center space-x-2 mb-2 sm:mb-4">
               {/* Round Logo with Fallback */}
-              <div className="h-14 w-14 sm:h-16 sm:w-16 rounded-full shadow-xl ring-2 ring-white/20 hover:ring-orange-400/50 transition-all duration-300 overflow-hidden bg-white">
+              <div className="h-10 w-10 sm:h-16 sm:w-16 rounded-full shadow-xl ring-2 ring-white/20 hover:ring-orange-400/50 transition-all duration-300 overflow-hidden bg-white">
                 <img
                   src="/chinggizz-logo.png"
                   alt="Chinggizz Logo"
@@ -24,42 +24,42 @@ export default function Footer() {
                   }}
                 />
               </div>
-              <span className="text-xl font-bold text-white">Chinggizz</span>
+              <span className="text-base sm:text-xl font-bold text-white">Chinggizz</span>
             </div>
-            <p className="text-sm text-neutral-400 mb-4">
+            <p className="text-xs sm:text-sm text-neutral-400 mb-2 sm:mb-4">
               Creating unforgettable gift experiences with personalized touches and premium quality.
             </p>
-            <div className="flex space-x-3">
+            <div className="flex space-x-2 sm:space-x-3">
               <a
                 href="https://www.facebook.com/share/1C8DV49upr/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 bg-neutral-800 rounded-lg flex items-center justify-center hover:bg-blue-600 hover:scale-110 transition-all duration-300"
+                className="w-8 h-8 sm:w-10 sm:h-10 bg-neutral-800 rounded-lg flex items-center justify-center hover:bg-blue-600 hover:scale-110 transition-all duration-300"
                 aria-label="Visit our Facebook page"
               >
-                <Facebook className="h-5 w-5" />
+                <Facebook className="h-4 w-4 sm:h-5 sm:w-5" />
               </a>
               <a
                 href="https://www.instagram.com/chinggizz_?igsh=MXFoMnpwYWt4bDh5cw%3D%3D&utm_source=qr"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 bg-neutral-800 rounded-lg flex items-center justify-center hover:bg-pink-600 hover:scale-110 transition-all duration-300"
+                className="w-8 h-8 sm:w-10 sm:h-10 bg-neutral-800 rounded-lg flex items-center justify-center hover:bg-pink-600 hover:scale-110 transition-all duration-300"
                 aria-label="Visit our Instagram page"
               >
-                <Instagram className="h-5 w-5" />
+                <Instagram className="h-4 w-4 sm:h-5 sm:w-5" />
               </a>
             </div>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-white font-bold mb-4">Quick Links</h3>
-            <ul className="space-y-2">
+            <h3 className="text-white font-bold mb-2 sm:mb-4 text-sm sm:text-base">Quick Links</h3>
+            <ul className="space-y-1 sm:space-y-2">
               <li>
                 <Link
                   to="/"
                   onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                  className="text-sm hover:text-primary-400 transition-colors"
+                  className="text-xs sm:text-sm hover:text-primary-400 transition-colors"
                 >
                   Home
                 </Link>
@@ -68,7 +68,7 @@ export default function Footer() {
                 <Link
                   to="/products"
                   onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                  className="text-sm hover:text-primary-400 transition-colors"
+                  className="text-xs sm:text-sm hover:text-primary-400 transition-colors"
                 >
                   Products
                 </Link>
@@ -77,7 +77,7 @@ export default function Footer() {
                 <Link
                   to="/hamper-builder"
                   onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                  className="text-sm hover:text-primary-400 transition-colors"
+                  className="text-xs sm:text-sm hover:text-primary-400 transition-colors"
                 >
                   Build Hamper
                 </Link>
@@ -86,7 +86,7 @@ export default function Footer() {
                 <Link
                   to="/admin/login"
                   onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                  className="text-sm hover:text-primary-400 transition-colors"
+                  className="text-xs sm:text-sm hover:text-primary-400 transition-colors"
                 >
                   Admin
                 </Link>
@@ -96,42 +96,42 @@ export default function Footer() {
 
           {/* Categories */}
           <div>
-            <h3 className="text-white font-bold mb-4">Categories</h3>
-            <ul className="space-y-2">
+            <h3 className="text-white font-bold mb-2 sm:mb-4 text-sm sm:text-base">Categories</h3>
+            <ul className="space-y-1 sm:space-y-2">
               <li>
-                <a href="#" className="text-sm hover:text-primary-400 transition-colors">Customized Gifts</a>
+                <a href="#" className="text-xs sm:text-sm hover:text-primary-400 transition-colors">Customized Gifts</a>
               </li>
               <li>
-                <a href="#" className="text-sm hover:text-primary-400 transition-colors">Edible Items</a>
+                <a href="#" className="text-xs sm:text-sm hover:text-primary-400 transition-colors">Edible Items</a>
               </li>
               <li>
-                <a href="#" className="text-sm hover:text-primary-400 transition-colors">Hamper Boxes</a>
+                <a href="#" className="text-xs sm:text-sm hover:text-primary-400 transition-colors">Hamper Boxes</a>
               </li>
               <li>
-                <a href="#" className="text-sm hover:text-primary-400 transition-colors">Predefined Hampers</a>
+                <a href="#" className="text-xs sm:text-sm hover:text-primary-400 transition-colors">Predefined Hampers</a>
               </li>
             </ul>
           </div>
 
           {/* Contact */}
           <div>
-            <h3 className="text-white font-bold mb-4">Contact Us</h3>
-            <ul className="space-y-3">
-              <li className="flex items-start space-x-3">
-                <Mail className="h-5 w-5 text-primary-400 mt-0.5 flex-shrink-0" />
-                <a href="mailto:chinggezz@gmail.com" className="text-sm hover:text-primary-400 transition-colors">
+            <h3 className="text-white font-bold mb-2 sm:mb-4 text-sm sm:text-base">Contact Us</h3>
+            <ul className="space-y-2 sm:space-y-3">
+              <li className="flex items-start space-x-2 sm:space-x-3">
+                <Mail className="h-4 w-4 sm:h-5 sm:w-5 text-primary-400 mt-0.5 flex-shrink-0" />
+                <a href="mailto:chinggezz@gmail.com" className="text-xs sm:text-sm hover:text-primary-400 transition-colors">
                   chinggezz@gmail.com
                 </a>
               </li>
-              <li className="flex items-start space-x-3">
-                <Phone className="h-5 w-5 text-primary-400 mt-0.5 flex-shrink-0" />
-                <a href="tel:+917012897008" className="text-sm hover:text-primary-400 transition-colors">
+              <li className="flex items-start space-x-2 sm:space-x-3">
+                <Phone className="h-4 w-4 sm:h-5 sm:w-5 text-primary-400 mt-0.5 flex-shrink-0" />
+                <a href="tel:+917012897008" className="text-xs sm:text-sm hover:text-primary-400 transition-colors">
                   +91 70128 97008
                 </a>
               </li>
-              <li className="flex items-start space-x-3">
-                <MapPin className="h-5 w-5 text-primary-400 mt-0.5 flex-shrink-0" />
-                <span className="text-sm">
+              <li className="flex items-start space-x-2 sm:space-x-3">
+                <MapPin className="h-4 w-4 sm:h-5 sm:w-5 text-primary-400 mt-0.5 flex-shrink-0" />
+                <span className="text-xs sm:text-sm">
                   64A, Kuzuvalil, Chalikkavattom,<br />
                   Vennala P.O, 682028
                 </span>
@@ -141,8 +141,8 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-neutral-800 mt-6 sm:mt-8 pt-6 sm:pt-8 text-center">
-          <p className="text-xs sm:text-sm text-neutral-400 px-4">
+        <div className="border-t border-neutral-800 mt-4 sm:mt-8 pt-3 sm:pt-8 text-center">
+          <p className="text-[10px] sm:text-sm text-neutral-400 px-4">
             © {currentYear} Chinggizz. All rights reserved. | Made with <span className="text-secondary-500">❤</span> for special moments
           </p>
         </div>
