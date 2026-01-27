@@ -59,25 +59,44 @@ export default function ProductCustomizationPage() {
   useEffect(() => {
     if (!product) return;
 
-    let price = product.price * quantity;
-
-    if (product.isCustomizable && product.customizationCharge) {
-      price += product.customizationCharge * quantity;
-    }
-
     const customizationOptions = product.customizationOptions
       ? (typeof product.customizationOptions === 'string'
           ? JSON.parse(product.customizationOptions)
           : product.customizationOptions)
       : null;
 
-    Object.entries(selectedOptions).forEach(([category, choice]) => {
-      const categoryOptions = customizationOptions?.options?.find(opt => opt.category === category);
-      const selectedChoice = categoryOptions?.choices?.find(c => c.name === choice);
-      if (selectedChoice?.price) {
-        price += selectedChoice.price * quantity;
+    // Check if this is a quantity-based pricing product (like Polaroid)
+    const quantityOption = customizationOptions?.options?.find(opt => opt.category === 'Quantity');
+
+    let price = 0;
+
+    if (quantityOption && selectedOptions['Quantity']) {
+      // For quantity-based pricing: base price + selected quantity price
+      const selectedQuantityChoice = quantityOption.choices.find(c => c.name === selectedOptions['Quantity']);
+      if (selectedQuantityChoice) {
+        price = product.price + (selectedQuantityChoice.price || 0);
+      } else {
+        price = product.price;
       }
-    });
+    } else {
+      // Regular pricing: base price * quantity
+      price = product.price * quantity;
+
+      if (product.isCustomizable && product.customizationCharge) {
+        price += product.customizationCharge * quantity;
+      }
+
+      // Add prices from other customization options
+      Object.entries(selectedOptions).forEach(([category, choice]) => {
+        if (category !== 'Quantity') { // Skip quantity option as it's handled above
+          const categoryOptions = customizationOptions?.options?.find(opt => opt.category === category);
+          const selectedChoice = categoryOptions?.choices?.find(c => c.name === choice);
+          if (selectedChoice?.price) {
+            price += selectedChoice.price * quantity;
+          }
+        }
+      });
+    }
 
     setTotalPrice(price);
   }, [selectedOptions, quantity, product]);
@@ -232,8 +251,8 @@ export default function ProductCustomizationPage() {
           </button>
           <h1 className="text-base sm:text-lg md:text-xl font-bold bg-gradient-to-r from-primary-700 via-secondary-600 to-primary-700 bg-clip-text text-transparent flex items-center gap-1 sm:gap-2">
             <Sparkles className="h-4 w-4 sm:h-5 sm:w-5 text-secondary-500" />
-            <span className="hidden sm:inline">Customize Product</span>
-            <span className="sm:hidden">Customize</span>
+            <span className="hidden sm:inline">✨ Make It Yours!</span>
+            <span className="sm:hidden">✨ Make It Yours!</span>
           </h1>
           <div className="w-12 sm:w-20"></div> {/* Spacer for centering */}
         </div>
@@ -331,20 +350,33 @@ export default function ProductCustomizationPage() {
               <div className="mb-4 sm:mb-6">
                 {(() => {
                   const pricing = getPricingData(product);
+
+                  // Check if quantity-based pricing is active
+                  const customizationOpts = product.customizationOptions
+                    ? (typeof product.customizationOptions === 'string'
+                        ? JSON.parse(product.customizationOptions)
+                        : product.customizationOptions)
+                    : null;
+                  const quantityOption = customizationOpts?.options?.find(opt => opt.category === 'Quantity');
+                  const isQuantityBased = quantityOption && selectedOptions['Quantity'];
+
+                  // Calculate display price based on selection
+                  let displayPrice = totalPrice;
+
                   return (
                     <>
                       {/* Original Price - Strikethrough */}
                       <div className="flex items-center gap-2 mb-2">
                         <span className="text-base sm:text-lg text-neutral-400 line-through font-medium">
-                          ₹{pricing.originalPrice}
+                          ₹{isQuantityBased ? (totalPrice * (1 + pricing.discount / 100)).toFixed(2) : pricing.originalPrice}
                         </span>
                         <span className="text-xs sm:text-sm font-bold bg-green-100 text-green-700 px-2 sm:px-3 py-1 rounded-full">
                           {pricing.discount}% OFF
                         </span>
                       </div>
-                      {/* Offer Price - Current Price */}
+                      {/* Current Price - Updates based on quantity selection */}
                       <span className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent">
-                        ₹{pricing.currentPrice}
+                        ₹{displayPrice.toFixed(2)}
                       </span>
                     </>
                   );
@@ -572,19 +604,41 @@ export default function ProductCustomizationPage() {
                 {/* Price Breakdown */}
                 <div className="bg-gradient-to-r from-primary-50 to-secondary-50 rounded-xl p-4 border-2 border-primary-200">
                   <div className="space-y-2">
-                    <div className="flex items-center justify-between text-sm text-gray-600">
-                      <span>Base Price:</span>
-                      <span className="font-semibold">₹{product.price}</span>
-                    </div>
-                    <div className="flex items-center justify-between text-sm text-gray-600">
-                      <span>Quantity:</span>
-                      <span className="font-semibold">×{quantity}</span>
-                    </div>
+                    {(() => {
+                      const customizationOpts = product.customizationOptions
+                        ? (typeof product.customizationOptions === 'string'
+                            ? JSON.parse(product.customizationOptions)
+                            : product.customizationOptions)
+                        : null;
+                      const quantityOption = customizationOpts?.options?.find(opt => opt.category === 'Quantity');
+                      const isQuantityBased = quantityOption && selectedOptions['Quantity'];
+
+                      return (
+                        <>
+                          <div className="flex items-center justify-between text-sm text-gray-600">
+                            <span>Base Price:</span>
+                            <span className="font-semibold">₹{product.price}</span>
+                          </div>
+                          {isQuantityBased && selectedOptions['Quantity'] && (
+                            <div className="flex items-center justify-between text-sm text-gray-600">
+                              <span>Selected:</span>
+                              <span className="font-semibold">{selectedOptions['Quantity']}</span>
+                            </div>
+                          )}
+                          {!isQuantityBased && (
+                            <div className="flex items-center justify-between text-sm text-gray-600">
+                              <span>Quantity:</span>
+                              <span className="font-semibold">×{quantity}</span>
+                            </div>
+                          )}
+                        </>
+                      );
+                    })()}
                     <div className="border-t-2 border-primary-300 pt-2 mt-2">
                       <div className="flex items-center justify-between">
                         <span className="font-bold text-gray-700 text-lg">Total:</span>
                         <span className="text-3xl font-bold bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent">
-                          ₹{totalPrice}
+                          ₹{totalPrice.toFixed(2)}
                         </span>
                       </div>
                     </div>
@@ -614,13 +668,26 @@ export default function ProductCustomizationPage() {
               <div className="flex items-center gap-2">
                 {(() => {
                   const pricing = getPricingData(product);
+
+                  // Check if quantity-based pricing is active
+                  const customizationOpts = product.customizationOptions
+                    ? (typeof product.customizationOptions === 'string'
+                        ? JSON.parse(product.customizationOptions)
+                        : product.customizationOptions)
+                    : null;
+                  const quantityOption = customizationOpts?.options?.find(opt => opt.category === 'Quantity');
+                  const isQuantityBased = quantityOption && selectedOptions['Quantity'];
+
                   return (
                     <>
                       {/* Original Price - Strikethrough */}
                       <div className="flex flex-col">
                         <span className="text-[10px] text-gray-500 leading-none">MRP</span>
                         <span className="text-xs text-gray-400 line-through leading-tight">
-                          ₹{pricing.originalPrice * quantity}
+                          ₹{isQuantityBased
+                            ? (totalPrice * (1 + pricing.discount / 100)).toFixed(2)
+                            : (pricing.originalPrice * quantity).toFixed(2)
+                          }
                         </span>
                       </div>
 
@@ -628,7 +695,7 @@ export default function ProductCustomizationPage() {
                       <div className="flex flex-col">
                         <span className="text-[10px] text-gray-600 font-medium leading-none">Total</span>
                         <span className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent leading-tight">
-                          ₹{totalPrice}
+                          ₹{totalPrice.toFixed(2)}
                         </span>
                       </div>
 
@@ -643,11 +710,32 @@ export default function ProductCustomizationPage() {
                 })()}
               </div>
 
-              {/* Quantity Display */}
-              <div className="text-right">
-                <p className="text-[9px] text-gray-500 leading-none">Quantity</p>
-                <p className="text-sm font-bold text-gray-700 leading-tight">×{quantity}</p>
-              </div>
+              {/* Quantity Display - Only show for non-quantity-based products */}
+              {(() => {
+                const customizationOpts = product.customizationOptions
+                  ? (typeof product.customizationOptions === 'string'
+                      ? JSON.parse(product.customizationOptions)
+                      : product.customizationOptions)
+                  : null;
+                const quantityOption = customizationOpts?.options?.find(opt => opt.category === 'Quantity');
+                const isQuantityBased = quantityOption && selectedOptions['Quantity'];
+
+                if (isQuantityBased) {
+                  return (
+                    <div className="text-right">
+                      <p className="text-[9px] text-gray-500 leading-none">Selected</p>
+                      <p className="text-xs font-bold text-gray-700 leading-tight">{selectedOptions['Quantity']}</p>
+                    </div>
+                  );
+                } else {
+                  return (
+                    <div className="text-right">
+                      <p className="text-[9px] text-gray-500 leading-none">Quantity</p>
+                      <p className="text-sm font-bold text-gray-700 leading-tight">×{quantity}</p>
+                    </div>
+                  );
+                }
+              })()}
             </div>
 
             {/* Add to Cart Button - Compact */}
