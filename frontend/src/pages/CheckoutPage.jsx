@@ -141,46 +141,55 @@ export default function CheckoutPage() {
 
   if (orderPlaced) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 py-6 sm:py-12 px-3 sm:px-4">
-        <div className="container-custom max-w-4xl mx-auto">
-          {/* Success Animation Container */}
-          <div className="text-center mb-6 sm:mb-8 animate-fade-in">
-            {/* Animated Success Icon */}
-            <div className="relative inline-block mb-4 sm:mb-6">
-              {/* Outer Ring - Pulsing */}
-              <div className="absolute inset-0 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full animate-ping opacity-20"></div>
+      <div className="min-h-screen bg-gradient-to-br from-secondary-50 via-purple-50 to-pink-50 py-8 sm:py-12 px-4 sm:px-6 overflow-x-hidden">
+        <div className="max-w-4xl mx-auto">
+          {/* Success Header Card */}
+          <div className="bg-white rounded-3xl shadow-2xl overflow-hidden mb-6 animate-fade-in">
+            {/* Animated Success Icon Section */}
+            <div className="bg-gradient-to-r from-secondary-500 via-secondary-600 to-purple-600 py-8 sm:py-12 px-4 text-center relative overflow-hidden">
+              {/* Decorative Background Elements */}
+              <div className="absolute top-0 right-0 w-40 h-40 bg-white/10 rounded-full -mr-20 -mt-20"></div>
+              <div className="absolute bottom-0 left-0 w-32 h-32 bg-white/10 rounded-full -ml-16 -mb-16"></div>
 
-              {/* Middle Ring */}
-              <div className="relative bg-gradient-to-br from-green-500 to-emerald-600 w-20 h-20 sm:w-28 sm:h-28 rounded-full flex items-center justify-center shadow-2xl ring-8 ring-green-100 animate-bounce-slow">
-                <CheckCircle className="h-10 w-10 sm:h-14 sm:w-14 text-white animate-scale-in" strokeWidth={2.5} />
+              {/* Success Icon */}
+              <div className="relative inline-block mb-6">
+                {/* Outer Pulsing Ring */}
+                <div className="absolute inset-0 bg-white/30 rounded-full animate-ping"></div>
+
+                {/* Main Icon Circle */}
+                <div className="relative bg-white w-24 h-24 sm:w-32 sm:h-32 rounded-full flex items-center justify-center shadow-2xl animate-bounce-slow ring-8 ring-white/30">
+                  <CheckCircle className="h-12 w-12 sm:h-16 sm:w-16 text-green-500" strokeWidth={3} />
+                </div>
+
+                {/* Sparkle Effects */}
+                <div className="absolute -top-2 -right-2 w-6 h-6 bg-yellow-400 rounded-full animate-ping"></div>
+                <div className="absolute -bottom-2 -left-2 w-5 h-5 bg-green-400 rounded-full animate-pulse"></div>
               </div>
 
-              {/* Sparkle Effects */}
-              <div className="absolute -top-2 -right-2 w-4 h-4 bg-yellow-400 rounded-full animate-ping"></div>
-              <div className="absolute -bottom-1 -left-1 w-3 h-3 bg-green-300 rounded-full animate-pulse"></div>
+              {/* Success Title */}
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-3 animate-slide-up">
+                🎉 Order Placed Successfully!
+              </h1>
+              <p className="text-base sm:text-lg text-white/90 font-medium max-w-2xl mx-auto animate-slide-up-delay px-4">
+                Thank you for choosing Chinggizz! Your gift is on its way to making someone's day special ✨
+              </p>
             </div>
 
-            {/* Success Message */}
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-green-700 via-emerald-600 to-teal-600 bg-clip-text text-transparent mb-2 sm:mb-3 animate-slide-up">
-              🎉 Order Placed Successfully!
-            </h1>
-            <p className="text-base sm:text-lg text-neutral-600 font-medium animate-slide-up-delay">
-              Thank you for choosing Chinggizz! Your gift is on its way to making someone's day special ✨
-            </p>
-          </div>
-
-          {/* Order Details Card */}
-          <div className="bg-white rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden mb-4 sm:mb-6 animate-slide-up-delay-2">
             {/* Order Number Section */}
             {orderNumber && (
-              <div className="bg-gradient-to-r from-secondary-500 to-secondary-600 p-4 sm:p-6 text-center">
-                <p className="text-xs sm:text-sm text-white/90 font-medium mb-1 sm:mb-2">Your Order Number</p>
-                <div className="bg-white/20 backdrop-blur-sm rounded-xl sm:rounded-2xl p-3 sm:p-4 inline-block">
-                  <p className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-wider font-mono">
-                    {orderNumber}
+              <div className="bg-gradient-to-br from-neutral-50 to-white p-6 sm:p-8 border-b-2 border-neutral-100">
+                <div className="text-center">
+                  <p className="text-sm sm:text-base text-neutral-600 font-semibold mb-3">Your Order Number</p>
+                  <div className="bg-gradient-to-r from-secondary-500 to-purple-600 rounded-2xl p-5 sm:p-6 inline-block shadow-lg">
+                    <p className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-wider font-mono">
+                      {orderNumber}
+                    </p>
+                  </div>
+                  <p className="text-xs sm:text-sm text-neutral-500 mt-3 flex items-center justify-center gap-2">
+                    <span className="text-base">💾</span>
+                    Save this number for tracking your order
                   </p>
                 </div>
-                <p className="text-xs sm:text-sm text-white/80 mt-2 sm:mt-3">Save this number for tracking your order</p>
               </div>
             )}
 
@@ -298,71 +307,89 @@ export default function CheckoutPage() {
           </div>
 
           {/* Trust Badges */}
-          <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg p-4 sm:p-6 mb-4 sm:mb-6 animate-slide-up-delay-3">
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
-              <div className="text-center p-2 sm:p-3 bg-green-50 rounded-lg sm:rounded-xl border border-green-200">
-                <div className="text-2xl sm:text-3xl mb-1 sm:mb-2">🔒</div>
-                <p className="text-xs sm:text-sm font-bold text-neutral-900">Secure</p>
-                <p className="text-[10px] sm:text-xs text-neutral-600">Payment</p>
+          <div className="bg-white rounded-3xl shadow-xl p-6 sm:p-8 mb-6 animate-slide-up-delay-4 border-2 border-secondary-100">
+            <h3 className="text-lg sm:text-xl font-bold text-center mb-6 bg-gradient-to-r from-secondary-600 to-purple-600 bg-clip-text text-transparent">
+              Why Choose Chinggizz? 🌟
+            </h3>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6">
+              <div className="text-center p-4 sm:p-5 bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl border-2 border-green-200 hover:shadow-lg transition-all hover:scale-105">
+                <div className="w-14 h-14 sm:w-16 sm:h-16 mx-auto mb-3 bg-white rounded-full flex items-center justify-center shadow-md">
+                  <span className="text-3xl sm:text-4xl">🔒</span>
+                </div>
+                <p className="text-sm sm:text-base font-bold text-neutral-900 mb-1">Secure</p>
+                <p className="text-xs text-neutral-600">Payment</p>
               </div>
-              <div className="text-center p-2 sm:p-3 bg-blue-50 rounded-lg sm:rounded-xl border border-blue-200">
-                <div className="text-2xl sm:text-3xl mb-1 sm:mb-2">✨</div>
-                <p className="text-xs sm:text-sm font-bold text-neutral-900">Quality</p>
-                <p className="text-[10px] sm:text-xs text-neutral-600">Guaranteed</p>
+              <div className="text-center p-4 sm:p-5 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl border-2 border-blue-200 hover:shadow-lg transition-all hover:scale-105">
+                <div className="w-14 h-14 sm:w-16 sm:h-16 mx-auto mb-3 bg-white rounded-full flex items-center justify-center shadow-md">
+                  <span className="text-3xl sm:text-4xl">✨</span>
+                </div>
+                <p className="text-sm sm:text-base font-bold text-neutral-900 mb-1">Quality</p>
+                <p className="text-xs text-neutral-600">Guaranteed</p>
               </div>
-              <div className="text-center p-2 sm:p-3 bg-purple-50 rounded-lg sm:rounded-xl border border-purple-200">
-                <div className="text-2xl sm:text-3xl mb-1 sm:mb-2">📦</div>
-                <p className="text-xs sm:text-sm font-bold text-neutral-900">Safe</p>
-                <p className="text-[10px] sm:text-xs text-neutral-600">Packaging</p>
+              <div className="text-center p-4 sm:p-5 bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl border-2 border-purple-200 hover:shadow-lg transition-all hover:scale-105">
+                <div className="w-14 h-14 sm:w-16 sm:h-16 mx-auto mb-3 bg-white rounded-full flex items-center justify-center shadow-md">
+                  <span className="text-3xl sm:text-4xl">📦</span>
+                </div>
+                <p className="text-sm sm:text-base font-bold text-neutral-900 mb-1">Safe</p>
+                <p className="text-xs text-neutral-600">Packaging</p>
               </div>
-              <div className="text-center p-2 sm:p-3 bg-orange-50 rounded-lg sm:rounded-xl border border-orange-200">
-                <div className="text-2xl sm:text-3xl mb-1 sm:mb-2">💝</div>
-                <p className="text-xs sm:text-sm font-bold text-neutral-900">Made with</p>
-                <p className="text-[10px] sm:text-xs text-neutral-600">Love</p>
+              <div className="text-center p-4 sm:p-5 bg-gradient-to-br from-orange-50 to-amber-50 rounded-2xl border-2 border-orange-200 hover:shadow-lg transition-all hover:scale-105">
+                <div className="w-14 h-14 sm:w-16 sm:h-16 mx-auto mb-3 bg-white rounded-full flex items-center justify-center shadow-md">
+                  <span className="text-3xl sm:text-4xl">💝</span>
+                </div>
+                <p className="text-sm sm:text-base font-bold text-neutral-900 mb-1">Made with</p>
+                <p className="text-xs text-neutral-600">Love</p>
               </div>
             </div>
           </div>
 
           {/* Contact Support */}
-          <div className="bg-gradient-to-r from-secondary-500 to-secondary-600 rounded-xl sm:rounded-2xl shadow-lg p-4 sm:p-6 text-center text-white mb-4 sm:mb-6 animate-slide-up-delay-4">
-            <h3 className="text-base sm:text-lg font-bold mb-2 sm:mb-3">Need Help? We're Here! 💬</h3>
-            <p className="text-xs sm:text-sm text-white/90 mb-3 sm:mb-4">
-              Have questions about your order? Our team is ready to assist you!
-            </p>
-            <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 justify-center">
-              <a
-                href="https://wa.me/917028870008"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 bg-white text-secondary-600 px-4 sm:px-6 py-2 sm:py-3 rounded-lg sm:rounded-xl font-bold text-xs sm:text-sm hover:bg-green-50 transition-all hover:scale-105 active:scale-95 shadow-lg"
-              >
-                <span className="text-base sm:text-lg">💬</span>
-                WhatsApp Us
-              </a>
-              <a
-                href="tel:+917028870008"
-                className="inline-flex items-center justify-center gap-2 bg-white/20 backdrop-blur-sm text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg sm:rounded-xl font-bold text-xs sm:text-sm hover:bg-white/30 transition-all hover:scale-105 active:scale-95 border-2 border-white/30"
-              >
-                <span className="text-base sm:text-lg">📞</span>
-                Call Us
-              </a>
+          <div className="bg-gradient-to-r from-secondary-500 via-secondary-600 to-purple-600 rounded-3xl shadow-2xl p-6 sm:p-8 text-center text-white mb-6 animate-slide-up-delay-5 relative overflow-hidden">
+            {/* Decorative Elements */}
+            <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16"></div>
+            <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/10 rounded-full -ml-12 -mb-12"></div>
+
+            <div className="relative z-10">
+              <h3 className="text-xl sm:text-2xl font-bold mb-3">Need Help? We're Here! 💬</h3>
+              <p className="text-sm sm:text-base text-white/90 mb-6 max-w-2xl mx-auto">
+                Have questions about your order? Our team is ready to assist you!
+              </p>
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center max-w-md mx-auto">
+                <a
+                  href="https://wa.me/917028870008"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 inline-flex items-center justify-center gap-2 bg-white text-green-600 px-6 py-4 rounded-xl font-bold text-sm sm:text-base hover:bg-green-50 transition-all hover:scale-105 active:scale-95 shadow-lg"
+                >
+                  <span className="text-xl">💬</span>
+                  WhatsApp Us
+                </a>
+                <a
+                  href="tel:+917028870008"
+                  className="flex-1 inline-flex items-center justify-center gap-2 bg-white/20 backdrop-blur-sm text-white px-6 py-4 rounded-xl font-bold text-sm sm:text-base hover:bg-white/30 transition-all hover:scale-105 active:scale-95 border-2 border-white/40 shadow-lg"
+                >
+                  <span className="text-xl">📞</span>
+                  Call Us
+                </a>
+              </div>
             </div>
           </div>
 
           {/* Continue Shopping Button */}
-          <div className="text-center">
+          <div className="text-center pb-4">
             <button
               onClick={() => {
                 clearCart();
                 navigate('/');
               }}
-              className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-secondary-600 to-secondary-700 text-white px-8 sm:px-12 py-4 sm:py-5 rounded-xl sm:rounded-2xl font-bold text-base sm:text-lg hover:scale-105 active:scale-95 transition-all shadow-xl hover:shadow-2xl animate-slide-up-delay-5"
+              className="inline-flex items-center justify-center gap-3 bg-gradient-to-r from-secondary-600 via-secondary-700 to-purple-600 text-white px-10 sm:px-16 py-5 sm:py-6 rounded-2xl font-bold text-lg sm:text-xl hover:scale-105 active:scale-95 transition-all shadow-2xl hover:shadow-secondary-500/50 animate-slide-up-delay-5 group"
             >
-              <span className="text-xl sm:text-2xl">🛍️</span>
+              <span className="text-2xl group-hover:scale-110 transition-transform">🛍️</span>
               Continue Shopping
+              <span className="text-2xl group-hover:translate-x-1 transition-transform">→</span>
             </button>
-            <p className="text-xs sm:text-sm text-neutral-500 mt-3 sm:mt-4">
-              Click above to return to home page
+            <p className="text-sm text-neutral-600 mt-4 font-medium">
+              Ready to explore more amazing gifts?
             </p>
           </div>
         </div>
