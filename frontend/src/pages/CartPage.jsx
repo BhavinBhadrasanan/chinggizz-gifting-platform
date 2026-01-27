@@ -75,14 +75,16 @@ export default function CartPage() {
               </div>
             </div>
 
-            {/* Empty Cart Button - Compact Icon Version */}
+            {/* Empty Cart Button - Clear and Visible */}
             {(cartItems.length > 0 || hampers.length > 0) && (
               <button
                 onClick={handleEmptyCart}
-                className="p-2 sm:p-3 hover:bg-red-50 text-red-600 rounded-xl transition-all hover:scale-110 active:scale-95 shadow-md hover:shadow-lg group"
+                className="flex items-center gap-2 px-3 py-2 sm:px-4 sm:py-2.5 bg-red-50 hover:bg-red-100 text-red-600 hover:text-red-700 rounded-xl transition-all hover:scale-105 active:scale-95 shadow-md hover:shadow-lg border-2 border-red-200 hover:border-red-300 group"
                 title="Empty Cart"
               >
-                <Trash2 className="h-5 w-5 sm:h-6 sm:w-6 group-hover:animate-pulse" />
+                <Trash2 className="h-4 w-4 sm:h-5 sm:w-5 group-hover:animate-pulse" />
+                <span className="hidden sm:inline font-semibold text-sm">Empty Cart</span>
+                <span className="sm:hidden font-semibold text-xs">Clear</span>
               </button>
             )}
           </div>
