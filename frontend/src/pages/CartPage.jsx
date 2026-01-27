@@ -308,10 +308,6 @@ export default function CartPage() {
                     <span>Subtotal</span>
                     <span className="font-semibold">₹{getCartTotal().toFixed(2)}</span>
                   </div>
-                  <div className="flex items-center justify-between text-neutral-700">
-                    <span>Shipping</span>
-                    <span className="font-semibold text-green-600">FREE</span>
-                  </div>
                   <div className="border-t border-neutral-200 pt-4">
                     <div className="flex items-center justify-between">
                       <span className="text-lg font-bold text-neutral-900">Total</span>
