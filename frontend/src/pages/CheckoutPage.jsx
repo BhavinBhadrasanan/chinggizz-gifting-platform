@@ -183,38 +183,67 @@ export default function CheckoutPage() {
         {/* Header with Back Button and Progress Indicator */}
         <div className="mb-6 sm:mb-8">
           {/* Back Button and Title */}
-          <div className="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-6">
-            <button
-              onClick={() => navigate('/cart')}
-              className="p-2 sm:p-3 rounded-xl bg-white hover:bg-neutral-100 transition-colors shadow-md hover:shadow-lg group"
-              title="Back to Cart"
-            >
-              <ArrowLeft className="h-5 w-5 sm:h-6 sm:w-6 text-neutral-700 group-hover:text-primary-600 transition-colors" />
-            </button>
-            <div className="flex items-center gap-3">
-              <div className="bg-gradient-to-br from-primary-600 to-primary-700 p-2 sm:p-3 rounded-xl shadow-lg">
-                <ShoppingBag className="h-6 w-6 sm:h-7 sm:w-7 text-white" />
+          <div className="flex items-center justify-between mb-4 sm:mb-6">
+            <div className="flex items-center gap-3 sm:gap-4">
+              <button
+                onClick={() => navigate('/cart')}
+                className="p-2 sm:p-3 rounded-xl bg-white hover:bg-neutral-100 transition-all shadow-md hover:shadow-lg hover:scale-105 active:scale-95 group"
+                title="Back to Cart"
+              >
+                <ArrowLeft className="h-5 w-5 sm:h-6 sm:w-6 text-neutral-700 group-hover:text-primary-600 transition-colors" />
+              </button>
+              <div className="flex items-center gap-3">
+                <div className="bg-gradient-to-br from-primary-600 to-primary-700 p-2 sm:p-3 rounded-xl shadow-lg">
+                  <ShoppingBag className="h-6 w-6 sm:h-7 sm:w-7 text-white" />
+                </div>
+                <div>
+                  <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-primary-700 via-secondary-600 to-primary-700 bg-clip-text text-transparent">
+                    Checkout
+                  </h1>
+                  <p className="text-xs sm:text-sm text-neutral-600 mt-0.5">Complete your order details</p>
+                </div>
               </div>
-              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-primary-700 via-secondary-600 to-primary-700 bg-clip-text text-transparent">
-                Checkout
-              </h1>
             </div>
           </div>
 
-          {/* 2-Step Progress - Accurate Flow */}
-          <div className="flex items-center justify-center sm:justify-start gap-3 sm:gap-4">
-            <div className="flex items-center gap-2 sm:gap-3">
-              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-primary-600 to-primary-700 text-white flex items-center justify-center text-sm sm:text-base font-bold shadow-lg">
-                1
+          {/* 2-Step Progress - Enhanced Design */}
+          <div className="bg-white rounded-2xl shadow-lg p-4 sm:p-6 border-2 border-primary-100">
+            <div className="flex items-center justify-between max-w-md mx-auto">
+              {/* Step 1 - Active */}
+              <div className="flex items-center gap-2 sm:gap-3 flex-1">
+                <div className="relative">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-primary-600 to-primary-700 text-white flex items-center justify-center text-base sm:text-lg font-bold shadow-lg ring-4 ring-primary-100">
+                    1
+                  </div>
+                  <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></div>
+                </div>
+                <div className="hidden sm:block">
+                  <p className="text-xs text-neutral-500 font-medium">Step 1</p>
+                  <p className="text-sm font-bold text-neutral-900">Complete Order</p>
+                </div>
+                <div className="sm:hidden">
+                  <p className="text-xs font-bold text-neutral-900">Complete Order</p>
+                </div>
               </div>
-              <span className="text-sm sm:text-base font-bold text-neutral-900">Complete Your Order</span>
-            </div>
-            <div className="h-0.5 w-12 sm:w-16 bg-neutral-300"></div>
-            <div className="flex items-center gap-2 sm:gap-3">
-              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-neutral-200 text-neutral-500 flex items-center justify-center text-sm sm:text-base font-bold">
-                2
+
+              {/* Connector Line */}
+              <div className="flex-1 max-w-[80px] sm:max-w-[120px] px-2 sm:px-4">
+                <div className="h-1 bg-gradient-to-r from-primary-300 to-neutral-200 rounded-full"></div>
               </div>
-              <span className="text-sm sm:text-base font-medium text-neutral-500">Order Confirmed</span>
+
+              {/* Step 2 - Inactive */}
+              <div className="flex items-center gap-2 sm:gap-3 flex-1 justify-end">
+                <div className="hidden sm:block text-right">
+                  <p className="text-xs text-neutral-400 font-medium">Step 2</p>
+                  <p className="text-sm font-medium text-neutral-500">Confirmed</p>
+                </div>
+                <div className="sm:hidden text-right">
+                  <p className="text-xs font-medium text-neutral-500">Confirmed</p>
+                </div>
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-neutral-100 text-neutral-400 flex items-center justify-center text-base sm:text-lg font-bold border-2 border-neutral-200">
+                  2
+                </div>
+              </div>
             </div>
           </div>
         </div>
