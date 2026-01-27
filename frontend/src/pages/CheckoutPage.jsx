@@ -141,52 +141,52 @@ export default function CheckoutPage() {
 
   if (orderPlaced) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-secondary-50 via-purple-50 to-pink-50 py-8 sm:py-12 px-4 sm:px-6 overflow-x-hidden">
-        <div className="max-w-4xl mx-auto">
-          {/* Success Header Card */}
-          <div className="bg-white rounded-3xl shadow-2xl overflow-hidden mb-6 animate-fade-in">
-            {/* Animated Success Icon Section */}
-            <div className="bg-gradient-to-r from-secondary-500 via-secondary-600 to-purple-600 py-8 sm:py-12 px-4 text-center relative overflow-hidden">
-              {/* Decorative Background Elements */}
-              <div className="absolute top-0 right-0 w-40 h-40 bg-white/10 rounded-full -mr-20 -mt-20"></div>
-              <div className="absolute bottom-0 left-0 w-32 h-32 bg-white/10 rounded-full -ml-16 -mb-16"></div>
+      <div className="min-h-screen bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 py-6 sm:py-8 px-4 overflow-x-hidden">
+        <div className="max-w-3xl mx-auto">
+          {/* Success Header Card - Compact */}
+          <div className="bg-white rounded-2xl shadow-xl overflow-hidden mb-4 animate-fade-in">
+            {/* Compact Success Header */}
+            <div className="bg-gradient-to-r from-green-500 via-emerald-500 to-teal-500 py-6 px-4 text-center relative overflow-hidden">
+              {/* Decorative Elements - Smaller */}
+              <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -mr-12 -mt-12"></div>
+              <div className="absolute bottom-0 left-0 w-20 h-20 bg-white/10 rounded-full -ml-10 -mb-10"></div>
 
-              {/* Success Icon */}
-              <div className="relative inline-block mb-6">
+              {/* Compact Success Icon */}
+              <div className="relative inline-block mb-3">
                 {/* Outer Pulsing Ring */}
                 <div className="absolute inset-0 bg-white/30 rounded-full animate-ping"></div>
 
-                {/* Main Icon Circle */}
-                <div className="relative bg-white w-24 h-24 sm:w-32 sm:h-32 rounded-full flex items-center justify-center shadow-2xl animate-bounce-slow ring-8 ring-white/30">
-                  <CheckCircle className="h-12 w-12 sm:h-16 sm:w-16 text-green-500" strokeWidth={3} />
+                {/* Main Icon Circle - Smaller */}
+                <div className="relative bg-white w-16 h-16 sm:w-20 sm:h-20 rounded-full flex items-center justify-center shadow-xl animate-bounce-slow ring-4 ring-white/30">
+                  <CheckCircle className="h-8 w-8 sm:h-10 sm:w-10 text-green-500" strokeWidth={3} />
                 </div>
 
-                {/* Sparkle Effects */}
-                <div className="absolute -top-2 -right-2 w-6 h-6 bg-yellow-400 rounded-full animate-ping"></div>
-                <div className="absolute -bottom-2 -left-2 w-5 h-5 bg-green-400 rounded-full animate-pulse"></div>
+                {/* Sparkle Effects - Smaller */}
+                <div className="absolute -top-1 -right-1 w-4 h-4 bg-yellow-400 rounded-full animate-ping"></div>
+                <div className="absolute -bottom-1 -left-1 w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
               </div>
 
-              {/* Success Title */}
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-3 animate-slide-up">
+              {/* Success Title - Compact */}
+              <h1 className="text-xl sm:text-2xl font-bold text-white mb-2 animate-slide-up">
                 🎉 Order Placed Successfully!
               </h1>
-              <p className="text-base sm:text-lg text-white/90 font-medium max-w-2xl mx-auto animate-slide-up-delay px-4">
+              <p className="text-sm sm:text-base text-white/90 font-medium max-w-xl mx-auto animate-slide-up-delay px-4">
                 Thank you for choosing Chinggizz! Your gift is on its way to making someone's day special ✨
               </p>
             </div>
 
-            {/* Order Number Section */}
+            {/* Order Number Section - Compact */}
             {orderNumber && (
-              <div className="bg-gradient-to-br from-neutral-50 to-white p-6 sm:p-8 border-b-2 border-neutral-100">
+              <div className="bg-white p-4 sm:p-5 border-b border-neutral-100">
                 <div className="text-center">
-                  <p className="text-sm sm:text-base text-neutral-600 font-semibold mb-3">Your Order Number</p>
-                  <div className="bg-gradient-to-r from-secondary-500 to-purple-600 rounded-2xl p-5 sm:p-6 inline-block shadow-lg">
-                    <p className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-wider font-mono">
+                  <p className="text-xs sm:text-sm text-neutral-600 font-semibold mb-2">Your Order Number</p>
+                  <div className="bg-gradient-to-r from-secondary-500 to-purple-600 rounded-xl p-3 sm:p-4 inline-block shadow-md">
+                    <p className="text-xl sm:text-2xl font-bold text-white tracking-wider font-mono">
                       {orderNumber}
                     </p>
                   </div>
-                  <p className="text-xs sm:text-sm text-neutral-500 mt-3 flex items-center justify-center gap-2">
-                    <span className="text-base">💾</span>
+                  <p className="text-xs text-secondary-600 mt-2 flex items-center justify-center gap-1 font-medium">
+                    <span>💾</span>
                     Save this number for tracking your order
                   </p>
                 </div>
