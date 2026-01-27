@@ -201,31 +201,31 @@ export default function CheckoutPage() {
               <div className="bg-gradient-to-r from-neutral-50 to-white rounded-2xl p-4 sm:p-6 border-2 border-neutral-100">
                 <h3 className="text-xl sm:text-2xl font-bold text-center mb-6 sm:mb-8 flex items-center gap-2 justify-center">
                   <span className="text-2xl">📋</span>
-                  <span className="bg-gradient-to-r from-secondary-600 to-purple-600 bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-primary-600 to-primary-700 bg-clip-text text-transparent">
                     What Happens Next?
                   </span>
                 </h3>
 
                 {/* Roadmap Timeline */}
                 <div className="relative max-w-2xl mx-auto">
-                  {/* Vertical Line */}
-                  <div className="absolute left-[19px] sm:left-[23px] top-12 bottom-12 w-0.5 bg-gradient-to-b from-green-300 via-blue-300 via-purple-300 to-orange-300"></div>
+                  {/* Vertical Line - Green Gradient */}
+                  <div className="absolute left-[19px] sm:left-[23px] top-12 bottom-12 w-0.5 bg-gradient-to-b from-primary-200 via-primary-400 to-primary-600"></div>
 
                   <div className="space-y-6 sm:space-y-8">
                     {/* Step 1 - Order Confirmation */}
                     <div className="relative flex items-start gap-4 sm:gap-5 animate-slide-up">
                       {/* Number Badge */}
                       <div className="relative z-10 flex-shrink-0">
-                        <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center shadow-lg ring-4 ring-white">
+                        <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-primary-300 to-primary-400 flex items-center justify-center shadow-lg ring-4 ring-white">
                           <span className="text-white font-bold text-base sm:text-lg">1</span>
                         </div>
                       </div>
 
                       {/* Content Card */}
-                      <div className="flex-1 bg-white rounded-xl sm:rounded-2xl border-2 border-green-200 p-4 sm:p-5 shadow-md hover:shadow-lg transition-all hover:scale-[1.02]">
+                      <div className="flex-1 bg-white rounded-xl sm:rounded-2xl border-2 border-primary-200 p-4 sm:p-5 shadow-md hover:shadow-lg transition-all hover:scale-[1.02]">
                         <div className="flex items-start justify-between gap-3 mb-2">
                           <h4 className="font-bold text-neutral-900 text-base sm:text-lg">Order Confirmation Sent</h4>
-                          <div className="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 bg-green-100 rounded-full flex items-center justify-center">
+                          <div className="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 bg-primary-100 rounded-full flex items-center justify-center">
                             <span className="text-xl sm:text-2xl">✅</span>
                           </div>
                         </div>
@@ -239,16 +239,16 @@ export default function CheckoutPage() {
                     <div className="relative flex items-start gap-4 sm:gap-5 animate-slide-up-delay">
                       {/* Number Badge */}
                       <div className="relative z-10 flex-shrink-0">
-                        <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-lg ring-4 ring-white">
+                        <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-primary-400 to-primary-500 flex items-center justify-center shadow-lg ring-4 ring-white">
                           <span className="text-white font-bold text-base sm:text-lg">2</span>
                         </div>
                       </div>
 
                       {/* Content Card */}
-                      <div className="flex-1 bg-white rounded-xl sm:rounded-2xl border-2 border-blue-200 p-4 sm:p-5 shadow-md hover:shadow-lg transition-all hover:scale-[1.02]">
+                      <div className="flex-1 bg-white rounded-xl sm:rounded-2xl border-2 border-primary-200 p-4 sm:p-5 shadow-md hover:shadow-lg transition-all hover:scale-[1.02]">
                         <div className="flex items-start justify-between gap-3 mb-2">
                           <h4 className="font-bold text-neutral-900 text-base sm:text-lg">We'll Contact You</h4>
-                          <div className="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                          <div className="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 bg-primary-100 rounded-full flex items-center justify-center">
                             <span className="text-xl sm:text-2xl">📞</span>
                           </div>
                         </div>
@@ -262,16 +262,16 @@ export default function CheckoutPage() {
                     <div className="relative flex items-start gap-4 sm:gap-5 animate-slide-up-delay-2">
                       {/* Number Badge */}
                       <div className="relative z-10 flex-shrink-0">
-                        <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center shadow-lg ring-4 ring-white">
+                        <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center shadow-lg ring-4 ring-white">
                           <span className="text-white font-bold text-base sm:text-lg">3</span>
                         </div>
                       </div>
 
                       {/* Content Card */}
-                      <div className="flex-1 bg-white rounded-xl sm:rounded-2xl border-2 border-purple-200 p-4 sm:p-5 shadow-md hover:shadow-lg transition-all hover:scale-[1.02]">
+                      <div className="flex-1 bg-white rounded-xl sm:rounded-2xl border-2 border-primary-200 p-4 sm:p-5 shadow-md hover:shadow-lg transition-all hover:scale-[1.02]">
                         <div className="flex items-start justify-between gap-3 mb-2">
                           <h4 className="font-bold text-neutral-900 text-base sm:text-lg">Careful Preparation</h4>
-                          <div className="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 bg-purple-100 rounded-full flex items-center justify-center">
+                          <div className="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 bg-primary-100 rounded-full flex items-center justify-center">
                             <span className="text-xl sm:text-2xl">🎁</span>
                           </div>
                         </div>
@@ -285,16 +285,16 @@ export default function CheckoutPage() {
                     <div className="relative flex items-start gap-4 sm:gap-5 animate-slide-up-delay-3">
                       {/* Number Badge */}
                       <div className="relative z-10 flex-shrink-0">
-                        <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center shadow-lg ring-4 ring-white">
+                        <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-primary-600 to-primary-700 flex items-center justify-center shadow-lg ring-4 ring-white">
                           <span className="text-white font-bold text-base sm:text-lg">4</span>
                         </div>
                       </div>
 
                       {/* Content Card */}
-                      <div className="flex-1 bg-white rounded-xl sm:rounded-2xl border-2 border-orange-200 p-4 sm:p-5 shadow-md hover:shadow-lg transition-all hover:scale-[1.02]">
+                      <div className="flex-1 bg-white rounded-xl sm:rounded-2xl border-2 border-primary-200 p-4 sm:p-5 shadow-md hover:shadow-lg transition-all hover:scale-[1.02]">
                         <div className="flex items-start justify-between gap-3 mb-2">
                           <h4 className="font-bold text-neutral-900 text-base sm:text-lg">Safe & Secure Delivery</h4>
-                          <div className="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 bg-orange-100 rounded-full flex items-center justify-center">
+                          <div className="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 bg-primary-100 rounded-full flex items-center justify-center">
                             <span className="text-xl sm:text-2xl">🚚</span>
                           </div>
                         </div>
