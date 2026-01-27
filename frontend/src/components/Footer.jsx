@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Gift, Mail, Phone, MapPin, Facebook, Instagram } from 'lucide-react';
+import { Gift, Mail, Phone, MapPin, Facebook, Instagram, Youtube } from 'lucide-react';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -47,6 +47,15 @@ export default function Footer() {
                 aria-label="Visit our Instagram page"
               >
                 <Instagram className="h-4 w-4 sm:h-5 sm:w-5" />
+              </a>
+              <a
+                href="https://www.youtube.com/@Chinggizz/shorts"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-8 h-8 sm:w-10 sm:h-10 bg-neutral-800 rounded-lg flex items-center justify-center hover:bg-red-600 hover:scale-110 transition-all duration-300"
+                aria-label="Visit our YouTube Shorts"
+              >
+                <Youtube className="h-4 w-4 sm:h-5 sm:w-5" />
               </a>
             </div>
           </div>
