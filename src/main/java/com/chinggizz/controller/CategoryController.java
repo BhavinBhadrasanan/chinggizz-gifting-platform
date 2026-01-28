@@ -9,19 +9,13 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-/**
- * Category Controller
- * Public endpoints for browsing categories
- * Admin endpoints for managing categories
- */
 @RestController
 @RequestMapping("/api/categories")
 @RequiredArgsConstructor
 public class CategoryController {
     
     private final CategoryService categoryService;
-    
-    // Public endpoints
+
     @GetMapping
     public ResponseEntity<List<CategoryDTO>> getAllActiveCategories() {
         List<CategoryDTO> categories = categoryService.getAllActiveCategories();

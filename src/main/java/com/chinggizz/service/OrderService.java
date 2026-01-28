@@ -24,10 +24,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * Service for Order operations
- * Implements stock management and price validation for concurrent order processing
- */
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)

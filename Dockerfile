@@ -32,8 +32,8 @@ RUN mkdir -p /app/uploads/products
 EXPOSE 8080
 
 # Set environment variables
-ENV JAVA_OPTS="-Xmx512m -Xms256m"
+ENV JAVA_OPTS="-Xmx512m -Xms256m -Djava.security.egd=file:/dev/./urandom"
 
 # Run the application
-ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -Dserver.port=${PORT:-8080} -jar app.jar"]
+ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -Dserver.port=${PORT:-8080} -Dspring.jpa.hibernate.ddl-auto=validate -jar app.jar"]
 

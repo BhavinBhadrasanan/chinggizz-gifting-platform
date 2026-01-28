@@ -14,9 +14,6 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.UUID;
 
-/**
- * Service for handling file uploads and storage
- */
 @Service
 @Slf4j
 public class FileStorageService {

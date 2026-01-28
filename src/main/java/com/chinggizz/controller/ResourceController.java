@@ -14,9 +14,6 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.file.Path;
 
-/**
- * Controller for serving uploaded files (images, etc.)
- */
 @RestController
 @RequestMapping("/api/products/images")
 @RequiredArgsConstructor
@@ -25,9 +22,6 @@ public class ResourceController {
 
     private final FileStorageService fileStorageService;
 
-    /**
-     * Serve uploaded product images
-     */
     @GetMapping("/{fileName:.+}")
     public ResponseEntity<Resource> serveFile(@PathVariable String fileName) {
         try {

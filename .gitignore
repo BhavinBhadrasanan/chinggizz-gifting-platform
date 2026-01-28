@@ -1,16 +1,9 @@
-# ========================================
 # Backend (Java/Spring Boot)
-# ========================================
-
-# Compiled class files
 *.class
-
-# Log files
+*.class
 *.log
 logs/
 spring.log
-
-# Package Files
 *.jar
 *.war
 *.nar
@@ -34,11 +27,7 @@ dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
 
-# ========================================
 # Frontend (React/Vite/Node.js)
-# ========================================
-
-# Dependencies
 node_modules/
 frontend/node_modules/
 jspm_packages/
@@ -63,11 +52,7 @@ yarn-error.log*
 lerna-debug.log*
 .pnpm-debug.log*
 
-# ========================================
 # Environment & Configuration Files
-# ========================================
-
-# CRITICAL: Never commit sensitive data!
 .env
 .env.local
 .env.development.local
@@ -85,27 +70,15 @@ application-supabase.properties
 application-production.properties
 src/main/resources/application-local.properties
 src/main/resources/application-supabase.properties
-
-# Keep template files (safe to commit)
 !*.template
 !*.example
 
-# ========================================
 # File Uploads & User Data
-# ========================================
-
-# Product images and uploads
 uploads/
 uploads/**/*
-
-# Keep directory structure
 !uploads/.gitkeep
 
-# ========================================
 # IDE Files
-# ========================================
-
-# IntelliJ IDEA
 .idea/
 *.iws
 *.iml
@@ -132,11 +105,7 @@ dist/
 nbdist/
 .nb-gradle/
 
-# ========================================
 # Operating System Files
-# ========================================
-
-# macOS
 .DS_Store
 .AppleDouble
 .LSOverride
@@ -163,10 +132,7 @@ $RECYCLE.BIN/
 .directory
 .Trash-*
 
-# ========================================
 # Temporary & Backup Files
-# ========================================
-
 *.tmp
 *.temp
 *.bak
@@ -176,11 +142,7 @@ $RECYCLE.BIN/
 *.old
 *.orig
 
-# ========================================
 # Database Files
-# ========================================
-
-# H2 Database files
 *.db
 *.mv.db
 *.trace.db
@@ -193,11 +155,7 @@ $RECYCLE.BIN/
 *.sql.backup
 *.dump
 
-# ========================================
 # Security & Secrets
-# ========================================
-
-# SSH keys
 *.pem
 *.key
 
@@ -207,26 +165,11 @@ $RECYCLE.BIN/
 *.p12
 *.pfx
 
-# ========================================
-# Documentation Files (Optional)
-# ========================================
-
-# Uncomment if you don't want to commit these
-# *.pdf
-# *.docx
-
-# ========================================
 # Cloudflare Pages
-# ========================================
-
-# Wrangler local state
 .wrangler/
 wrangler.toml.local
 
-# Functions build output
 functions/
-
-# Keep configuration files (safe to commit)
 !wrangler.toml
 !frontend/public/_redirects
 !frontend/public/_headers

@@ -9,10 +9,6 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.concurrent.TimeUnit;
 
-/**
- * Cache Configuration using Caffeine
- * Optimized for high-performance in-memory caching
- */
 @Configuration
 @EnableCaching
 public class CacheConfig {

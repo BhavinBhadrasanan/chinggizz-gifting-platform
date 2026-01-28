@@ -2,36 +2,27 @@ spring:
   application:
     name: chinggizz-app
 
-  # Supabase PostgreSQL Database Configuration (Default)
-  # Optimized for Supabase Connection Pooler (PgBouncer) + Render Free Tier
   datasource:
-    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://aws-1-ap-south-1.pooler.supabase.com:6543/postgres?sslmode=require&prepareThreshold=0&connectTimeout=30&socketTimeout=60&tcpKeepAlive=true&ApplicationName=chinggizz-app}
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://aws-1-ap-south-1.pooler.supabase.com:6543/postgres?sslmode=require&prepareThreshold=0&connectTimeout=60&socketTimeout=60&tcpKeepAlive=true&ApplicationName=chinggizz-app}
     driver-class-name: org.postgresql.Driver
     username: ${SPRING_DATASOURCE_USERNAME:postgres.pzgnowrxbiefhxsoukxc}
     password: ${SPRING_DATASOURCE_PASSWORD:Chinggizz098}
     hikari:
-      # Optimized for Supabase Connection Pooler (PgBouncer) + Render
-      # Increased for Render cold start reliability
-      maximum-pool-size: 5
-      minimum-idle: 2
-      connection-timeout: 60000
-      idle-timeout: 600000
-      max-lifetime: 1800000
+      maximum-pool-size: 3
+      minimum-idle: 1
+      connection-timeout: 90000
+      idle-timeout: 300000
+      max-lifetime: 600000
       pool-name: ChinggizzHikariPool
-      # Removed connection-test-query for PgBouncer compatibility
-      # PgBouncer handles connection validation internally
-      leak-detection-threshold: 120000
-      # Keep connections alive for PgBouncer
-      keepalive-time: 60000
-      # Validation settings for better connection health
-      validation-timeout: 10000
+      leak-detection-threshold: 0
+      initialization-fail-timeout: -1
 
   jpa:
     open-in-view: false
     show-sql: ${SHOW_SQL:false}
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
-      ddl-auto: update
+      ddl-auto: ${HIBERNATE_DDL_AUTO:validate}
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
@@ -39,17 +30,19 @@ spring:
         use_sql_comments: false
         jdbc:
           batch_size: 20
+          time_zone: UTC
         order_inserts: true
         order_updates: true
         temp:
           use_jdbc_metadata_defaults: false
+        connection:
+          provider_disables_autocommit: true
 
   jackson:
     serialization:
       write-dates-as-timestamps: false
     time-zone: UTC
 
-  # File upload configuration
   servlet:
     multipart:
       enabled: true
@@ -70,11 +63,10 @@ logging:
     org.hibernate.SQL: ${HIBERNATE_LOG_LEVEL:WARN}
     org.hibernate.type.descriptor.sql.BasicBinder: WARN
 
-# Application specific properties
 app:
   jwt:
     secret: ${JWT_SECRET}
-    expiration: ${JWT_EXPIRATION:86400000} # 24 hours in milliseconds
+    expiration: ${JWT_EXPIRATION:86400000}
   whatsapp:
     business-number: ${WHATSAPP_NUMBER:7012897008}
   admin:

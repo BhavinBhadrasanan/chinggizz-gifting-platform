@@ -8,10 +8,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-/**
- * Authentication Controller
- * Handles admin login
- */
 @RestController
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor

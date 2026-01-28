@@ -13,26 +13,19 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Order Controller
- * Public endpoint for creating orders
- * Admin endpoints for managing orders
- */
 @RestController
 @RequestMapping("/api/orders")
 @RequiredArgsConstructor
 public class OrderController {
     
     private final OrderService orderService;
-    
-    // Public endpoint - Guest checkout
+
     @PostMapping("/create")
     public ResponseEntity<OrderDTO> createOrder(@Valid @RequestBody CreateOrderRequest request) {
         OrderDTO order = orderService.createOrder(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(order);
     }
-    
-    // Admin endpoints
+
     @GetMapping
     public ResponseEntity<List<OrderDTO>> getAllOrders() {
         List<OrderDTO> orders = orderService.getAllOrders();

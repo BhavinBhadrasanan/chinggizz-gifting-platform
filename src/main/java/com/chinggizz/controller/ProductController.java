@@ -16,11 +16,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Product Controller
- * Public endpoints for browsing products
- * Admin endpoints for managing products
- */
 @RestController
 @RequestMapping("/api/products")
 @RequiredArgsConstructor
@@ -31,8 +26,7 @@ public class ProductController {
 
     @Value("${server.port:8080}")
     private String serverPort;
-    
-    // Public endpoints
+
     @GetMapping
     public ResponseEntity<List<ProductDTO>> getAllActiveProducts() {
         List<ProductDTO> products = productService.getAllActiveProducts();

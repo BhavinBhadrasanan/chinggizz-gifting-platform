@@ -9,19 +9,13 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-/**
- * HamperBox Controller
- * Public endpoints for browsing hamper boxes
- * Admin endpoints for managing hamper boxes
- */
 @RestController
 @RequestMapping("/api/hamper-boxes")
 @RequiredArgsConstructor
 public class HamperBoxController {
     
     private final HamperBoxService hamperBoxService;
-    
-    // Public endpoints
+
     @GetMapping
     public ResponseEntity<List<HamperBoxDTO>> getAllActiveHamperBoxes() {
         List<HamperBoxDTO> hamperBoxes = hamperBoxService.getAllActiveHamperBoxes();

@@ -16,9 +16,6 @@ import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 
-/**
- * Data Initializer - Creates default admin user and sample data
- */
 @Component
 @RequiredArgsConstructor
 @Slf4j

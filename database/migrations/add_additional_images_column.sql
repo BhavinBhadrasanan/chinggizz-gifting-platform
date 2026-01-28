@@ -1,8 +1,3 @@
--- Migration: Add additional_images column to products table
--- Date: 2026-01-28
--- Description: Adds a TEXT column to store additional product images as JSON array
-
--- Add additional_images column if it doesn't exist
 DO $$
 BEGIN
     IF NOT EXISTS (
@@ -18,15 +13,13 @@ BEGIN
     END IF;
 END $$;
 
--- Verify the migration
-SELECT 
+SELECT
     COUNT(*) as total_products,
     COUNT(additional_images) as products_with_additional_images,
     COUNT(*) - COUNT(additional_images) as products_without_additional_images
 FROM products;
 
--- Show sample of products
-SELECT id, name, image_url, additional_images 
-FROM products 
+SELECT id, name, image_url, additional_images
+FROM products
 LIMIT 5;
 
