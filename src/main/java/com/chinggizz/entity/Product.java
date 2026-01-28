@@ -62,6 +62,10 @@ public class Product extends BaseEntity {
     @Column(name = "specifications", columnDefinition = "TEXT")
     private String specifications;
 
+    // JSON array of additional product images (stored as TEXT)
+    @Column(name = "additional_images", columnDefinition = "TEXT")
+    private String additionalImages;
+
     // Product dimensions in centimeters
     @Column(name = "width_cm", precision = 10, scale = 2)
     private BigDecimal widthCm;

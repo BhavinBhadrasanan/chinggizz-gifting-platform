@@ -34,6 +34,7 @@ CREATE TABLE IF NOT EXISTS products (
     category_id BIGINT,
     customization_options TEXT,
     specifications TEXT,
+    additional_images TEXT,
     width_cm DECIMAL(10, 2),
     height_cm DECIMAL(10, 2),
     depth_cm DECIMAL(10, 2),

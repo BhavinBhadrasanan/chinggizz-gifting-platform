@@ -31,6 +31,7 @@ public class ProductDTO {
     private String categoryName;
     private String customizationOptions;
     private String specifications;
+    private String additionalImages;
     private BigDecimal widthCm;
     private BigDecimal heightCm;
     private BigDecimal depthCm;

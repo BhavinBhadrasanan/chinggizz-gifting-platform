@@ -134,9 +134,16 @@ export default function ProductCustomizationPage() {
                          product.name?.toLowerCase().includes('caricature') ||
                          product.name?.toLowerCase().includes('personalized');
 
-  // Product images array (main image + any additional images from customization options)
+  // Product images array (main image + additional images + customization option images)
   const productImages = [
     product.imageUrl,
+    ...((() => {
+      try {
+        return product.additionalImages ? JSON.parse(product.additionalImages) : [];
+      } catch (e) {
+        return [];
+      }
+    })()),
     ...(customizationOptions?.images || [])
   ].filter(Boolean);
 

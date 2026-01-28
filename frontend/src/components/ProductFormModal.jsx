@@ -19,6 +19,7 @@ export default function ProductFormModal({ product, categories, onClose }) {
     depthCm: '',
     customizationOptions: '',
     specifications: '',
+    additionalImages: '[]',
     active: true
   });
   const [loading, setLoading] = useState(false);
@@ -26,7 +27,10 @@ export default function ProductFormModal({ product, categories, onClose }) {
   const [selectedFile, setSelectedFile] = useState(null);
   const [uploadingImage, setUploadingImage] = useState(false);
   const [dragActive, setDragActive] = useState(false);
+  const [additionalImagePreviews, setAdditionalImagePreviews] = useState([]);
+  const [uploadingAdditionalImage, setUploadingAdditionalImage] = useState(false);
   const fileInputRef = useRef(null);
+  const additionalImagesInputRef = useRef(null);
 
   useEffect(() => {
     if (product) {
@@ -45,9 +49,18 @@ export default function ProductFormModal({ product, categories, onClose }) {
         depthCm: product.depthCm || '',
         customizationOptions: product.customizationOptions || '',
         specifications: product.specifications || '',
+        additionalImages: product.additionalImages || '[]',
         active: product.active !== undefined ? product.active : true
       });
       setImagePreview(product.imageUrl || '');
+
+      // Load additional images
+      try {
+        const additionalImgs = product.additionalImages ? JSON.parse(product.additionalImages) : [];
+        setAdditionalImagePreviews(additionalImgs);
+      } catch (e) {
+        setAdditionalImagePreviews([]);
+      }
     }
   }, [product]);
 
@@ -157,6 +170,65 @@ export default function ProductFormModal({ product, categories, onClose }) {
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
     }
+  };
+
+  // Handle additional images upload
+  const handleAdditionalImagesSelect = async (e) => {
+    const files = Array.from(e.target.files || []);
+    if (files.length === 0) return;
+
+    setUploadingAdditionalImage(true);
+    const uploadedUrls = [];
+
+    for (const file of files) {
+      // Validate file type
+      if (!file.type.startsWith('image/')) {
+        toast.error(`${file.name} is not an image file`);
+        continue;
+      }
+
+      // Validate file size (max 5MB)
+      if (file.size > 5 * 1024 * 1024) {
+        toast.error(`${file.name} is too large (max 5MB)`);
+        continue;
+      }
+
+      try {
+        const formData = new FormData();
+        formData.append('image', file);
+
+        const response = await api.post('/products/upload-image', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+
+        uploadedUrls.push(response.data.imageUrl);
+      } catch (error) {
+        toast.error(`Failed to upload ${file.name}`);
+        console.error(error);
+      }
+    }
+
+    if (uploadedUrls.length > 0) {
+      const newImages = [...additionalImagePreviews, ...uploadedUrls];
+      setAdditionalImagePreviews(newImages);
+      setFormData(prev => ({ ...prev, additionalImages: JSON.stringify(newImages) }));
+      toast.success(`${uploadedUrls.length} image(s) uploaded successfully`);
+    }
+
+    setUploadingAdditionalImage(false);
+    if (additionalImagesInputRef.current) {
+      additionalImagesInputRef.current.value = '';
+    }
+  };
+
+  // Remove additional image
+  const handleRemoveAdditionalImage = (index) => {
+    const newImages = additionalImagePreviews.filter((_, i) => i !== index);
+    setAdditionalImagePreviews(newImages);
+    setFormData(prev => ({ ...prev, additionalImages: JSON.stringify(newImages) }));
+    toast.success('Image removed');
   };
 
   const handleSubmit = async (e) => {
@@ -578,6 +650,83 @@ export default function ProductFormModal({ product, categories, onClose }) {
                   ? 'Remove uploaded file to use URL instead'
                   : 'Enter a direct URL to the product image (e.g., from Imgur, Cloudinary, or your CDN)'}
               </p>
+            </div>
+
+            {/* Additional Images Section */}
+            <div className="md:col-span-2 mt-6">
+              <h3 className="text-lg font-semibold mb-4 flex items-center">
+                <ImagePlus className="h-5 w-5 mr-2 text-primary-500" />
+                Additional Images (Different Angles)
+              </h3>
+            </div>
+
+            {/* Additional Images Upload */}
+            <div className="md:col-span-2">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Upload Multiple Images
+              </label>
+
+              <div className="space-y-4">
+                {/* Upload Button */}
+                <div>
+                  <input
+                    ref={additionalImagesInputRef}
+                    type="file"
+                    accept="image/*"
+                    multiple
+                    onChange={handleAdditionalImagesSelect}
+                    className="hidden"
+                    id="additional-images-upload"
+                  />
+                  <label
+                    htmlFor="additional-images-upload"
+                    className={`inline-flex items-center gap-2 px-4 py-2 border-2 border-dashed border-primary-300 rounded-lg cursor-pointer hover:border-primary-500 hover:bg-primary-50 transition-colors ${
+                      uploadingAdditionalImage ? 'opacity-50 cursor-not-allowed' : ''
+                    }`}
+                  >
+                    <Upload className="h-5 w-5 text-primary-600" />
+                    <span className="text-sm font-medium text-primary-700">
+                      {uploadingAdditionalImage ? 'Uploading...' : 'Add More Images'}
+                    </span>
+                  </label>
+                  <p className="text-xs text-gray-500 mt-1">
+                    Upload images from different angles (PNG, JPG up to 5MB each)
+                  </p>
+                </div>
+
+                {/* Image Previews Grid */}
+                {additionalImagePreviews.length > 0 && (
+                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+                    {additionalImagePreviews.map((imgUrl, index) => (
+                      <div key={index} className="relative group">
+                        <img
+                          src={imgUrl}
+                          alt={`Additional ${index + 1}`}
+                          className="w-full h-32 object-cover rounded-lg border-2 border-gray-200"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => handleRemoveAdditionalImage(index)}
+                          className="absolute top-1 right-1 bg-red-500 text-white p-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-600"
+                        >
+                          <Trash2 className="h-3.5 w-3.5" />
+                        </button>
+                        <div className="absolute bottom-1 left-1 bg-black/60 text-white text-xs px-2 py-0.5 rounded">
+                          {index + 1}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {additionalImagePreviews.length === 0 && (
+                  <div className="text-center py-8 border-2 border-dashed border-gray-200 rounded-lg bg-gray-50">
+                    <ImagePlus className="h-12 w-12 text-gray-300 mx-auto mb-2" />
+                    <p className="text-sm text-gray-500">No additional images yet</p>
+                    <p className="text-xs text-gray-400 mt-1">Upload images to show product from different angles</p>
+                  </div>
+                )}
+              </div>
             </div>
 
             {/* Customization Options (JSON) */}
