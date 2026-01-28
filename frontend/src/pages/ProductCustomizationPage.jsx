@@ -513,8 +513,8 @@ export default function ProductCustomizationPage() {
                                    customizationOptions?.requiresPhoto === true;
 
               return (
-                <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg overflow-hidden border-2 border-pink-200">
-                  <div className="bg-gradient-to-r from-pink-500 to-pink-600 px-3 sm:px-4 py-2.5 sm:py-3">
+                <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg overflow-hidden border-2 border-primary-200">
+                  <div className="bg-gradient-to-r from-primary-500 to-primary-600 px-3 sm:px-4 py-2.5 sm:py-3">
                     <h3 className="text-base sm:text-lg font-bold text-white flex items-center gap-1.5 sm:gap-2 flex-wrap">
                       <ImageIcon className="h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" />
                       <span>Upload Photos</span>
@@ -539,7 +539,7 @@ export default function ProductCustomizationPage() {
                           <div
                             onMouseEnter={(e) => {
                               if (!uploadedImage) {
-                                e.currentTarget.style.border = '3px dashed #a855f7';
+                                e.currentTarget.style.border = '3px dashed #1a5f3f';
                               }
                             }}
                             onMouseLeave={(e) => {
@@ -549,12 +549,12 @@ export default function ProductCustomizationPage() {
                             }}
                             className={`rounded-xl p-4 sm:p-6 text-center transition-all duration-200 ${
                               uploadedImage
-                                ? 'bg-gradient-to-br from-green-50 to-emerald-50 shadow-lg'
-                                : 'bg-gradient-to-br from-gray-50 to-gray-100 hover:from-primary-50 hover:to-secondary-50 hover:shadow-md active:scale-98'
+                                ? 'bg-gradient-to-br from-primary-50 to-primary-100 shadow-lg'
+                                : 'bg-gradient-to-br from-gray-50 to-gray-100 hover:from-primary-50 hover:to-primary-100 hover:shadow-md active:scale-98'
                             }`}
                             style={{
                               border: uploadedImage
-                                ? '3px dashed #22c55e'
+                                ? '3px dashed #1a5f3f'
                                 : '3px dashed #9ca3af',
                               borderStyle: 'dashed'
                             }}
@@ -568,13 +568,13 @@ export default function ProductCustomizationPage() {
 
                             {uploadedImage ? (
                               <div className="space-y-2">
-                                <div className="w-24 h-24 sm:w-28 sm:h-28 mx-auto rounded-xl overflow-hidden ring-4 ring-green-500 shadow-xl">
+                                <div className="w-24 h-24 sm:w-28 sm:h-28 mx-auto rounded-xl overflow-hidden ring-4 ring-primary-500 shadow-xl">
                                   <img src={uploadedImage.preview} alt="Preview" className="w-full h-full object-cover" />
                                 </div>
-                                <p className="text-xs sm:text-sm font-bold text-green-700 truncate px-2">{uploadedImage.name}</p>
+                                <p className="text-xs sm:text-sm font-bold text-primary-700 truncate px-2">{uploadedImage.name}</p>
                                 <div className="flex items-center justify-center gap-1">
-                                  <Check className="h-4 w-4 text-green-600" />
-                                  <p className="text-xs sm:text-sm text-green-600 font-semibold">Uploaded successfully</p>
+                                  <Check className="h-4 w-4 text-primary-600" />
+                                  <p className="text-xs sm:text-sm text-primary-600 font-semibold">Uploaded successfully</p>
                                 </div>
                               </div>
                             ) : (
