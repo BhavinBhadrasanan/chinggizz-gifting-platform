@@ -349,10 +349,10 @@ export default function ProductCustomizationPage() {
 
               {/* Tabs */}
               <div className="mb-6">
-                <div className="flex border-b border-gray-200">
+                <div className="flex border-b border-gray-200 overflow-x-auto scrollbar-hide">
                   <button
                     onClick={() => setActiveTab('description')}
-                    className={`flex items-center gap-2 px-4 py-3 font-semibold text-sm transition-all ${
+                    className={`flex items-center gap-2 px-4 py-3 font-semibold text-sm transition-all whitespace-nowrap ${
                       activeTab === 'description'
                         ? 'text-primary-600 border-b-2 border-primary-600'
                         : 'text-gray-500 hover:text-gray-700'
@@ -363,7 +363,7 @@ export default function ProductCustomizationPage() {
                   </button>
                   <button
                     onClick={() => setActiveTab('dimensions')}
-                    className={`flex items-center gap-2 px-4 py-3 font-semibold text-sm transition-all ${
+                    className={`flex items-center gap-2 px-4 py-3 font-semibold text-sm transition-all whitespace-nowrap ${
                       activeTab === 'dimensions'
                         ? 'text-primary-600 border-b-2 border-primary-600'
                         : 'text-gray-500 hover:text-gray-700'
@@ -374,7 +374,7 @@ export default function ProductCustomizationPage() {
                   </button>
                   <button
                     onClick={() => setActiveTab('specifications')}
-                    className={`flex items-center gap-2 px-4 py-3 font-semibold text-sm transition-all ${
+                    className={`flex items-center gap-2 px-4 py-3 font-semibold text-sm transition-all whitespace-nowrap ${
                       activeTab === 'specifications'
                         ? 'text-primary-600 border-b-2 border-primary-600'
                         : 'text-gray-500 hover:text-gray-700'
