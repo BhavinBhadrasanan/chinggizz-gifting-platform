@@ -5,23 +5,26 @@ spring:
   # Supabase PostgreSQL Database Configuration (Default)
   # Optimized for Supabase Connection Pooler (PgBouncer) + Render Free Tier
   datasource:
-    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://aws-1-ap-south-1.pooler.supabase.com:6543/postgres?sslmode=require&prepareThreshold=0&connectTimeout=10&socketTimeout=30&tcpKeepAlive=true&ApplicationName=chinggizz-app}
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://aws-1-ap-south-1.pooler.supabase.com:6543/postgres?sslmode=require&prepareThreshold=0&connectTimeout=30&socketTimeout=60&tcpKeepAlive=true&ApplicationName=chinggizz-app}
     driver-class-name: org.postgresql.Driver
     username: ${SPRING_DATASOURCE_USERNAME:postgres.pzgnowrxbiefhxsoukxc}
     password: ${SPRING_DATASOURCE_PASSWORD:Chinggizz098}
     hikari:
       # Optimized for Supabase Connection Pooler (PgBouncer) + Render
-      maximum-pool-size: 3
-      minimum-idle: 1
-      connection-timeout: 20000
-      idle-timeout: 300000
-      max-lifetime: 600000
+      # Increased for Render cold start reliability
+      maximum-pool-size: 5
+      minimum-idle: 2
+      connection-timeout: 60000
+      idle-timeout: 600000
+      max-lifetime: 1800000
       pool-name: ChinggizzHikariPool
       # Removed connection-test-query for PgBouncer compatibility
       # PgBouncer handles connection validation internally
-      leak-detection-threshold: 60000
+      leak-detection-threshold: 120000
       # Keep connections alive for PgBouncer
-      keepalive-time: 30000
+      keepalive-time: 60000
+      # Validation settings for better connection health
+      validation-timeout: 10000
 
   jpa:
     open-in-view: false
