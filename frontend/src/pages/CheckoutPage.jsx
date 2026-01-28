@@ -144,12 +144,12 @@ export default function CheckoutPage() {
 
   if (orderPlaced) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-neutral-50 via-secondary-50/30 to-neutral-50 py-6 sm:py-8 px-4 overflow-x-hidden">
+      <div className="min-h-screen bg-gradient-to-br from-primary-50 via-primary-100/30 to-secondary-50/20 py-6 sm:py-8 px-4 overflow-x-hidden">
         <div className="max-w-3xl mx-auto">
           {/* Success Header Card - Compact */}
           <div className="bg-white rounded-2xl shadow-xl overflow-hidden mb-4 animate-fade-in">
             {/* Compact Success Header */}
-            <div className="bg-gradient-to-r from-secondary-600 via-secondary-700 to-secondary-600 py-6 px-4 text-center relative overflow-hidden">
+            <div className="bg-gradient-to-r from-primary-500 via-primary-600 to-primary-700 py-6 px-4 text-center relative overflow-hidden">
               {/* Decorative Elements - Smaller */}
               <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -mr-12 -mt-12"></div>
               <div className="absolute bottom-0 left-0 w-20 h-20 bg-white/10 rounded-full -ml-10 -mb-10"></div>
@@ -161,12 +161,12 @@ export default function CheckoutPage() {
 
                 {/* Main Icon Circle - Smaller */}
                 <div className="relative bg-white w-16 h-16 sm:w-20 sm:h-20 rounded-full flex items-center justify-center shadow-xl animate-bounce-slow ring-4 ring-white/30">
-                  <CheckCircle className="h-8 w-8 sm:h-10 sm:w-10 text-secondary-600" strokeWidth={3} />
+                  <CheckCircle className="h-8 w-8 sm:h-10 sm:w-10 text-primary-600" strokeWidth={3} />
                 </div>
 
                 {/* Sparkle Effects - Smaller */}
                 <div className="absolute -top-1 -right-1 w-4 h-4 bg-gold-400 rounded-full animate-ping"></div>
-                <div className="absolute -bottom-1 -left-1 w-3 h-3 bg-secondary-400 rounded-full animate-pulse"></div>
+                <div className="absolute -bottom-1 -left-1 w-3 h-3 bg-primary-400 rounded-full animate-pulse"></div>
               </div>
 
               {/* Success Title - Compact */}
@@ -183,12 +183,12 @@ export default function CheckoutPage() {
               <div className="bg-white p-4 sm:p-5 border-b border-neutral-100">
                 <div className="text-center">
                   <p className="text-xs sm:text-sm text-neutral-600 font-semibold mb-2">Your Order Number</p>
-                  <div className="bg-gradient-to-r from-secondary-600 to-secondary-700 rounded-xl p-3 sm:p-4 inline-block shadow-md">
+                  <div className="bg-gradient-to-r from-primary-500 to-primary-600 rounded-xl p-3 sm:p-4 inline-block shadow-md">
                     <p className="text-xl sm:text-2xl font-bold text-white tracking-wider font-mono">
                       {orderNumber}
                     </p>
                   </div>
-                  <p className="text-xs text-secondary-600 mt-2 flex items-center justify-center gap-1 font-medium">
+                  <p className="text-xs text-primary-600 mt-2 flex items-center justify-center gap-1 font-medium">
                     <span>💾</span>
                     Save this number for tracking your order
                   </p>
@@ -198,34 +198,34 @@ export default function CheckoutPage() {
 
             {/* What Happens Next - Roadmap Style */}
             <div className="p-4 sm:p-8">
-              <div className="bg-gradient-to-r from-neutral-50 to-white rounded-2xl p-4 sm:p-6 border-2 border-secondary-100">
+              <div className="bg-gradient-to-r from-neutral-50 to-white rounded-2xl p-4 sm:p-6 border-2 border-primary-100">
                 <h3 className="text-xl sm:text-2xl font-bold text-center mb-6 sm:mb-8 flex items-center gap-2 justify-center">
                   <span className="text-2xl">📋</span>
-                  <span className="bg-gradient-to-r from-secondary-700 to-secondary-600 bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-primary-600 to-primary-700 bg-clip-text text-transparent">
                     What Happens Next?
                   </span>
                 </h3>
 
                 {/* Roadmap Timeline */}
                 <div className="relative max-w-2xl mx-auto">
-                  {/* Vertical Line - Lavender Gradient */}
-                  <div className="absolute left-[19px] sm:left-[23px] top-12 bottom-12 w-0.5 bg-gradient-to-b from-secondary-200 via-secondary-400 to-secondary-600"></div>
+                  {/* Vertical Line - Green Gradient */}
+                  <div className="absolute left-[19px] sm:left-[23px] top-12 bottom-12 w-0.5 bg-gradient-to-b from-primary-200 via-primary-400 to-primary-600"></div>
 
                   <div className="space-y-6 sm:space-y-8">
                     {/* Step 1 - Order Confirmation */}
                     <div className="relative flex items-start gap-4 sm:gap-5 animate-slide-up">
                       {/* Number Badge */}
                       <div className="relative z-10 flex-shrink-0">
-                        <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-secondary-300 to-secondary-400 flex items-center justify-center shadow-lg ring-4 ring-white">
+                        <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-primary-300 to-primary-400 flex items-center justify-center shadow-lg ring-4 ring-white">
                           <span className="text-white font-bold text-base sm:text-lg">1</span>
                         </div>
                       </div>
 
                       {/* Content Card */}
-                      <div className="flex-1 bg-white rounded-xl sm:rounded-2xl border-2 border-secondary-200 p-4 sm:p-5 shadow-md hover:shadow-lg transition-all hover:scale-[1.02]">
+                      <div className="flex-1 bg-white rounded-xl sm:rounded-2xl border-2 border-primary-200 p-4 sm:p-5 shadow-md hover:shadow-lg transition-all hover:scale-[1.02]">
                         <div className="flex items-start justify-between gap-3 mb-2">
                           <h4 className="font-bold text-neutral-900 text-base sm:text-lg">Order Confirmation Sent</h4>
-                          <div className="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 bg-secondary-100 rounded-full flex items-center justify-center">
+                          <div className="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 bg-primary-100 rounded-full flex items-center justify-center">
                             <span className="text-xl sm:text-2xl">✅</span>
                           </div>
                         </div>
@@ -239,16 +239,16 @@ export default function CheckoutPage() {
                     <div className="relative flex items-start gap-4 sm:gap-5 animate-slide-up-delay">
                       {/* Number Badge */}
                       <div className="relative z-10 flex-shrink-0">
-                        <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-secondary-400 to-secondary-500 flex items-center justify-center shadow-lg ring-4 ring-white">
+                        <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-primary-400 to-primary-500 flex items-center justify-center shadow-lg ring-4 ring-white">
                           <span className="text-white font-bold text-base sm:text-lg">2</span>
                         </div>
                       </div>
 
                       {/* Content Card */}
-                      <div className="flex-1 bg-white rounded-xl sm:rounded-2xl border-2 border-secondary-200 p-4 sm:p-5 shadow-md hover:shadow-lg transition-all hover:scale-[1.02]">
+                      <div className="flex-1 bg-white rounded-xl sm:rounded-2xl border-2 border-primary-200 p-4 sm:p-5 shadow-md hover:shadow-lg transition-all hover:scale-[1.02]">
                         <div className="flex items-start justify-between gap-3 mb-2">
                           <h4 className="font-bold text-neutral-900 text-base sm:text-lg">We'll Contact You</h4>
-                          <div className="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 bg-secondary-100 rounded-full flex items-center justify-center">
+                          <div className="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 bg-primary-100 rounded-full flex items-center justify-center">
                             <span className="text-xl sm:text-2xl">📞</span>
                           </div>
                         </div>
@@ -262,16 +262,16 @@ export default function CheckoutPage() {
                     <div className="relative flex items-start gap-4 sm:gap-5 animate-slide-up-delay-2">
                       {/* Number Badge */}
                       <div className="relative z-10 flex-shrink-0">
-                        <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-secondary-500 to-secondary-600 flex items-center justify-center shadow-lg ring-4 ring-white">
+                        <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center shadow-lg ring-4 ring-white">
                           <span className="text-white font-bold text-base sm:text-lg">3</span>
                         </div>
                       </div>
 
                       {/* Content Card */}
-                      <div className="flex-1 bg-white rounded-xl sm:rounded-2xl border-2 border-secondary-200 p-4 sm:p-5 shadow-md hover:shadow-lg transition-all hover:scale-[1.02]">
+                      <div className="flex-1 bg-white rounded-xl sm:rounded-2xl border-2 border-primary-200 p-4 sm:p-5 shadow-md hover:shadow-lg transition-all hover:scale-[1.02]">
                         <div className="flex items-start justify-between gap-3 mb-2">
                           <h4 className="font-bold text-neutral-900 text-base sm:text-lg">Careful Preparation</h4>
-                          <div className="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 bg-secondary-100 rounded-full flex items-center justify-center">
+                          <div className="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 bg-primary-100 rounded-full flex items-center justify-center">
                             <span className="text-xl sm:text-2xl">🎁</span>
                           </div>
                         </div>
@@ -285,16 +285,16 @@ export default function CheckoutPage() {
                     <div className="relative flex items-start gap-4 sm:gap-5 animate-slide-up-delay-3">
                       {/* Number Badge */}
                       <div className="relative z-10 flex-shrink-0">
-                        <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-secondary-600 to-secondary-700 flex items-center justify-center shadow-lg ring-4 ring-white">
+                        <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-primary-600 to-primary-700 flex items-center justify-center shadow-lg ring-4 ring-white">
                           <span className="text-white font-bold text-base sm:text-lg">4</span>
                         </div>
                       </div>
 
                       {/* Content Card */}
-                      <div className="flex-1 bg-white rounded-xl sm:rounded-2xl border-2 border-secondary-200 p-4 sm:p-5 shadow-md hover:shadow-lg transition-all hover:scale-[1.02]">
+                      <div className="flex-1 bg-white rounded-xl sm:rounded-2xl border-2 border-primary-200 p-4 sm:p-5 shadow-md hover:shadow-lg transition-all hover:scale-[1.02]">
                         <div className="flex items-start justify-between gap-3 mb-2">
                           <h4 className="font-bold text-neutral-900 text-base sm:text-lg">Safe & Secure Delivery</h4>
-                          <div className="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 bg-secondary-100 rounded-full flex items-center justify-center">
+                          <div className="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 bg-primary-100 rounded-full flex items-center justify-center">
                             <span className="text-xl sm:text-2xl">🚚</span>
                           </div>
                         </div>
@@ -310,33 +310,33 @@ export default function CheckoutPage() {
           </div>
 
           {/* Trust Badges */}
-          <div className="bg-white rounded-3xl shadow-xl p-6 sm:p-8 mb-6 animate-slide-up-delay-4 border-2 border-secondary-100">
-            <h3 className="text-lg sm:text-xl font-bold text-center mb-6 bg-gradient-to-r from-secondary-700 to-secondary-600 bg-clip-text text-transparent">
+          <div className="bg-white rounded-3xl shadow-xl p-6 sm:p-8 mb-6 animate-slide-up-delay-4 border-2 border-primary-100">
+            <h3 className="text-lg sm:text-xl font-bold text-center mb-6 bg-gradient-to-r from-primary-600 to-primary-700 bg-clip-text text-transparent">
               Why Choose Chinggizz? 🌟
             </h3>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6">
-              <div className="text-center p-4 sm:p-5 bg-gradient-to-br from-secondary-50 to-secondary-100 rounded-2xl border-2 border-secondary-200 hover:shadow-lg transition-all hover:scale-105">
+              <div className="text-center p-4 sm:p-5 bg-gradient-to-br from-primary-50 to-primary-100 rounded-2xl border-2 border-primary-200 hover:shadow-lg transition-all hover:scale-105">
                 <div className="w-14 h-14 sm:w-16 sm:h-16 mx-auto mb-3 bg-white rounded-full flex items-center justify-center shadow-md">
                   <span className="text-3xl sm:text-4xl">🔒</span>
                 </div>
                 <p className="text-sm sm:text-base font-bold text-neutral-900 mb-1">Secure</p>
                 <p className="text-xs text-neutral-600">Payment</p>
               </div>
-              <div className="text-center p-4 sm:p-5 bg-gradient-to-br from-secondary-50 to-secondary-100 rounded-2xl border-2 border-secondary-200 hover:shadow-lg transition-all hover:scale-105">
+              <div className="text-center p-4 sm:p-5 bg-gradient-to-br from-primary-50 to-primary-100 rounded-2xl border-2 border-primary-200 hover:shadow-lg transition-all hover:scale-105">
                 <div className="w-14 h-14 sm:w-16 sm:h-16 mx-auto mb-3 bg-white rounded-full flex items-center justify-center shadow-md">
                   <span className="text-3xl sm:text-4xl">✨</span>
                 </div>
                 <p className="text-sm sm:text-base font-bold text-neutral-900 mb-1">Quality</p>
                 <p className="text-xs text-neutral-600">Guaranteed</p>
               </div>
-              <div className="text-center p-4 sm:p-5 bg-gradient-to-br from-secondary-50 to-secondary-100 rounded-2xl border-2 border-secondary-200 hover:shadow-lg transition-all hover:scale-105">
+              <div className="text-center p-4 sm:p-5 bg-gradient-to-br from-primary-50 to-primary-100 rounded-2xl border-2 border-primary-200 hover:shadow-lg transition-all hover:scale-105">
                 <div className="w-14 h-14 sm:w-16 sm:h-16 mx-auto mb-3 bg-white rounded-full flex items-center justify-center shadow-md">
                   <span className="text-3xl sm:text-4xl">📦</span>
                 </div>
                 <p className="text-sm sm:text-base font-bold text-neutral-900 mb-1">Safe</p>
                 <p className="text-xs text-neutral-600">Packaging</p>
               </div>
-              <div className="text-center p-4 sm:p-5 bg-gradient-to-br from-secondary-50 to-secondary-100 rounded-2xl border-2 border-secondary-200 hover:shadow-lg transition-all hover:scale-105">
+              <div className="text-center p-4 sm:p-5 bg-gradient-to-br from-primary-50 to-primary-100 rounded-2xl border-2 border-primary-200 hover:shadow-lg transition-all hover:scale-105">
                 <div className="w-14 h-14 sm:w-16 sm:h-16 mx-auto mb-3 bg-white rounded-full flex items-center justify-center shadow-md">
                   <span className="text-3xl sm:text-4xl">💝</span>
                 </div>
@@ -347,7 +347,7 @@ export default function CheckoutPage() {
           </div>
 
           {/* Contact Support */}
-          <div className="bg-gradient-to-r from-secondary-600 via-secondary-700 to-secondary-600 rounded-3xl shadow-2xl p-6 sm:p-8 text-center text-white mb-6 animate-slide-up-delay-5 relative overflow-hidden">
+          <div className="bg-gradient-to-r from-primary-500 via-primary-600 to-primary-700 rounded-3xl shadow-2xl p-6 sm:p-8 text-center text-white mb-6 animate-slide-up-delay-5 relative overflow-hidden">
             {/* Decorative Elements */}
             <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16"></div>
             <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/10 rounded-full -ml-12 -mb-12"></div>
@@ -385,7 +385,7 @@ export default function CheckoutPage() {
                 clearCart();
                 navigate('/');
               }}
-              className="inline-flex items-center justify-center gap-3 bg-gradient-to-r from-secondary-600 via-secondary-700 to-secondary-600 text-white px-10 sm:px-16 py-5 sm:py-6 rounded-2xl font-bold text-lg sm:text-xl hover:scale-105 active:scale-95 transition-all shadow-2xl hover:shadow-secondary-500/50 animate-slide-up-delay-5 group"
+              className="inline-flex items-center justify-center gap-3 bg-gradient-to-r from-primary-600 via-primary-700 to-primary-800 text-white px-10 sm:px-16 py-5 sm:py-6 rounded-2xl font-bold text-lg sm:text-xl hover:scale-105 active:scale-95 transition-all shadow-2xl hover:shadow-primary-500/50 animate-slide-up-delay-5 group"
             >
               <span className="text-2xl group-hover:scale-110 transition-transform">🛍️</span>
               Continue Shopping
