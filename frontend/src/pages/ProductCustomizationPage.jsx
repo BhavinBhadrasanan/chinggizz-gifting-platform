@@ -349,39 +349,39 @@ export default function ProductCustomizationPage() {
 
               {/* Tabs */}
               <div className="mb-6">
-                <div className="flex border-b border-gray-200 overflow-x-auto scrollbar-hide">
+                <div className="flex border-b border-gray-200 overflow-x-auto scrollbar-hide -mx-4 sm:mx-0 px-4 sm:px-0">
                   <button
                     onClick={() => setActiveTab('description')}
-                    className={`flex items-center gap-2 px-4 py-3 font-semibold text-sm transition-all whitespace-nowrap ${
+                    className={`flex items-center gap-1.5 px-3 sm:px-4 py-2.5 sm:py-3 font-semibold text-xs sm:text-sm transition-all whitespace-nowrap flex-shrink-0 ${
                       activeTab === 'description'
                         ? 'text-primary-600 border-b-2 border-primary-600'
                         : 'text-gray-500 hover:text-gray-700'
                     }`}
                   >
-                    <FileText className="h-4 w-4" />
-                    Description
+                    <FileText className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+                    <span>Description</span>
                   </button>
                   <button
                     onClick={() => setActiveTab('dimensions')}
-                    className={`flex items-center gap-2 px-4 py-3 font-semibold text-sm transition-all whitespace-nowrap ${
+                    className={`flex items-center gap-1.5 px-3 sm:px-4 py-2.5 sm:py-3 font-semibold text-xs sm:text-sm transition-all whitespace-nowrap flex-shrink-0 ${
                       activeTab === 'dimensions'
                         ? 'text-primary-600 border-b-2 border-primary-600'
                         : 'text-gray-500 hover:text-gray-700'
                     }`}
                   >
-                    <Ruler className="h-4 w-4" />
-                    Dimensions
+                    <Ruler className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+                    <span>Dimensions</span>
                   </button>
                   <button
                     onClick={() => setActiveTab('specifications')}
-                    className={`flex items-center gap-2 px-4 py-3 font-semibold text-sm transition-all whitespace-nowrap ${
+                    className={`flex items-center gap-1.5 px-3 sm:px-4 py-2.5 sm:py-3 font-semibold text-xs sm:text-sm transition-all whitespace-nowrap flex-shrink-0 ${
                       activeTab === 'specifications'
                         ? 'text-primary-600 border-b-2 border-primary-600'
                         : 'text-gray-500 hover:text-gray-700'
                     }`}
                   >
-                    <ListChecks className="h-4 w-4" />
-                    Specifications
+                    <ListChecks className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+                    <span>Specs</span>
                   </button>
                 </div>
 
