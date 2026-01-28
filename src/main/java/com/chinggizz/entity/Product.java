@@ -58,6 +58,10 @@ public class Product extends BaseEntity {
     @Column(name = "customization_options", columnDefinition = "TEXT")
     private String customizationOptions;
 
+    // JSON field for product specifications (stored as TEXT)
+    @Column(name = "specifications", columnDefinition = "TEXT")
+    private String specifications;
+
     // Product dimensions in centimeters
     @Column(name = "width_cm", precision = 10, scale = 2)
     private BigDecimal widthCm;

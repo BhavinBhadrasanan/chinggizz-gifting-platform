@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { ArrowLeft, ShoppingCart, Plus, Minus, Upload, ImageIcon, Package, Sparkles, Check, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowLeft, ShoppingCart, Plus, Minus, Upload, ImageIcon, Package, Sparkles, Check, ChevronLeft, ChevronRight, FileText, Ruler, ListChecks } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import api from '../config/api';
 import toast from 'react-hot-toast';
@@ -19,6 +19,7 @@ export default function ProductCustomizationPage() {
   const [quantity, setQuantity] = useState(1);
   const [totalPrice, setTotalPrice] = useState(0);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [activeTab, setActiveTab] = useState('description');
   const previewTimeoutRef = useRef(null);
   const imageGalleryRef = useRef(null);
 
@@ -344,8 +345,114 @@ export default function ProductCustomizationPage() {
 
             {/* Product Info Card */}
             <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg p-4 sm:p-6">
-              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-primary-700 via-secondary-600 to-primary-700 bg-clip-text text-transparent mb-2 leading-tight">{product.name}</h2>
-              <p className="text-sm sm:text-base text-gray-600 mb-4 leading-relaxed">{product.description}</p>
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-primary-700 via-secondary-600 to-primary-700 bg-clip-text text-transparent mb-4 leading-tight">{product.name}</h2>
+
+              {/* Tabs */}
+              <div className="mb-6">
+                <div className="flex border-b border-gray-200">
+                  <button
+                    onClick={() => setActiveTab('description')}
+                    className={`flex items-center gap-2 px-4 py-3 font-semibold text-sm transition-all ${
+                      activeTab === 'description'
+                        ? 'text-primary-600 border-b-2 border-primary-600'
+                        : 'text-gray-500 hover:text-gray-700'
+                    }`}
+                  >
+                    <FileText className="h-4 w-4" />
+                    Description
+                  </button>
+                  <button
+                    onClick={() => setActiveTab('dimensions')}
+                    className={`flex items-center gap-2 px-4 py-3 font-semibold text-sm transition-all ${
+                      activeTab === 'dimensions'
+                        ? 'text-primary-600 border-b-2 border-primary-600'
+                        : 'text-gray-500 hover:text-gray-700'
+                    }`}
+                  >
+                    <Ruler className="h-4 w-4" />
+                    Dimensions
+                  </button>
+                  <button
+                    onClick={() => setActiveTab('specifications')}
+                    className={`flex items-center gap-2 px-4 py-3 font-semibold text-sm transition-all ${
+                      activeTab === 'specifications'
+                        ? 'text-primary-600 border-b-2 border-primary-600'
+                        : 'text-gray-500 hover:text-gray-700'
+                    }`}
+                  >
+                    <ListChecks className="h-4 w-4" />
+                    Specifications
+                  </button>
+                </div>
+
+                {/* Tab Content */}
+                <div className="mt-4">
+                  {activeTab === 'description' && (
+                    <div className="text-sm sm:text-base text-gray-600 leading-relaxed">
+                      {product.description || 'No description available.'}
+                    </div>
+                  )}
+
+                  {activeTab === 'dimensions' && (
+                    <div className="space-y-3">
+                      {product.widthCm || product.heightCm || product.depthCm ? (
+                        <>
+                          <div className="grid grid-cols-3 gap-4">
+                            <div className="bg-primary-50 rounded-lg p-3 text-center border border-primary-200">
+                              <p className="text-xs text-gray-600 mb-1">Width</p>
+                              <p className="text-lg font-bold text-primary-700">{product.widthCm || 'N/A'} cm</p>
+                            </div>
+                            <div className="bg-primary-50 rounded-lg p-3 text-center border border-primary-200">
+                              <p className="text-xs text-gray-600 mb-1">Height</p>
+                              <p className="text-lg font-bold text-primary-700">{product.heightCm || 'N/A'} cm</p>
+                            </div>
+                            <div className="bg-primary-50 rounded-lg p-3 text-center border border-primary-200">
+                              <p className="text-xs text-gray-600 mb-1">Depth</p>
+                              <p className="text-lg font-bold text-primary-700">{product.depthCm || 'N/A'} cm</p>
+                            </div>
+                          </div>
+                          <p className="text-xs text-gray-500 text-center">
+                            Dimensions: {product.widthCm || 0} × {product.heightCm || 0} × {product.depthCm || 0} cm
+                          </p>
+                        </>
+                      ) : (
+                        <p className="text-sm text-gray-500">No dimensions available.</p>
+                      )}
+                    </div>
+                  )}
+
+                  {activeTab === 'specifications' && (
+                    <div className="space-y-2">
+                      {product.specifications ? (
+                        (() => {
+                          try {
+                            const specs = JSON.parse(product.specifications);
+                            return (
+                              <div className="space-y-2">
+                                {Object.entries(specs).map(([key, value]) => (
+                                  <div key={key} className="flex justify-between py-2 border-b border-gray-100">
+                                    <span className="text-sm font-semibold text-gray-700">{key}:</span>
+                                    <span className="text-sm text-gray-600">{value}</span>
+                                  </div>
+                                ))}
+                              </div>
+                            );
+                          } catch (e) {
+                            // If not JSON, display as plain text
+                            return (
+                              <div className="text-sm text-gray-600 whitespace-pre-wrap">
+                                {product.specifications}
+                              </div>
+                            );
+                          }
+                        })()
+                      ) : (
+                        <p className="text-sm text-gray-500">No specifications available.</p>
+                      )}
+                    </div>
+                  )}
+                </div>
+              </div>
 
               <div className="mb-4 sm:mb-6">
                 {(() => {

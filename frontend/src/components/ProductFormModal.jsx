@@ -18,6 +18,7 @@ export default function ProductFormModal({ product, categories, onClose }) {
     heightCm: '',
     depthCm: '',
     customizationOptions: '',
+    specifications: '',
     active: true
   });
   const [loading, setLoading] = useState(false);
@@ -43,6 +44,7 @@ export default function ProductFormModal({ product, categories, onClose }) {
         heightCm: product.heightCm || '',
         depthCm: product.depthCm || '',
         customizationOptions: product.customizationOptions || '',
+        specifications: product.specifications || '',
         active: product.active !== undefined ? product.active : true
       });
       setImagePreview(product.imageUrl || '');
@@ -266,6 +268,24 @@ export default function ProductFormModal({ product, categories, onClose }) {
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
                 placeholder="Enter product description"
               />
+            </div>
+
+            {/* Specifications */}
+            <div className="md:col-span-2">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Specifications (JSON format or plain text)
+              </label>
+              <textarea
+                name="specifications"
+                value={formData.specifications}
+                onChange={handleChange}
+                rows="4"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent font-mono text-sm"
+                placeholder='Example: {"Material": "Ceramic", "Capacity": "350ml", "Care": "Dishwasher safe"}'
+              />
+              <p className="text-xs text-gray-500 mt-1">
+                Enter specifications as JSON object or plain text. This will be displayed in the product details tab.
+              </p>
             </div>
 
             {/* Price */}

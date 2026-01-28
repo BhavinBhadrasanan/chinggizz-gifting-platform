@@ -83,6 +83,7 @@ public class ProductService {
                 .customizationCharge(productDTO.getCustomizationCharge())
                 .stockQuantity(productDTO.getStockQuantity())
                 .customizationOptions(productDTO.getCustomizationOptions())
+                .specifications(productDTO.getSpecifications())
                 .category(category)
                 .active(true)
                 .widthCm(productDTO.getWidthCm())
@@ -115,6 +116,7 @@ public class ProductService {
         product.setCustomizationCharge(productDTO.getCustomizationCharge());
         product.setStockQuantity(productDTO.getStockQuantity());
         product.setCustomizationOptions(productDTO.getCustomizationOptions());
+        product.setSpecifications(productDTO.getSpecifications());
         product.setActive(productDTO.getActive());
 
         // Update dimensions for 3D hamper simulation
@@ -150,6 +152,7 @@ public class ProductService {
                 .categoryId(product.getCategory() != null ? product.getCategory().getId() : null)
                 .categoryName(product.getCategory() != null ? product.getCategory().getName() : null)
                 .customizationOptions(product.getCustomizationOptions())
+                .specifications(product.getSpecifications())
                 .widthCm(product.getWidthCm())
                 .heightCm(product.getHeightCm())
                 .depthCm(product.getDepthCm())

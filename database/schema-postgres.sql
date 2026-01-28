@@ -33,6 +33,7 @@ CREATE TABLE IF NOT EXISTS products (
     active BOOLEAN NOT NULL DEFAULT TRUE,
     category_id BIGINT,
     customization_options TEXT,
+    specifications TEXT,
     width_cm DECIMAL(10, 2),
     height_cm DECIMAL(10, 2),
     depth_cm DECIMAL(10, 2),
