@@ -35,8 +35,6 @@ spring:
         order_updates: true
         temp:
           use_jdbc_metadata_defaults: false
-        connection:
-          provider_disables_autocommit: true
 
   jackson:
     serialization:

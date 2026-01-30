@@ -11,6 +11,7 @@ export default function CheckoutPage() {
   const [orderPlaced, setOrderPlaced] = useState(false);
   const [orderNumber, setOrderNumber] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showCallModal, setShowCallModal] = useState(false);
 
   const [formData, setFormData] = useState({
     fullName: '',
@@ -359,7 +360,7 @@ export default function CheckoutPage() {
               </p>
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center max-w-md mx-auto">
                 <a
-                  href="https://wa.me/917028870008"
+                  href="https://wa.me/917012897008"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex-1 inline-flex items-center justify-center gap-2 bg-white text-green-600 px-6 py-4 rounded-xl font-bold text-sm sm:text-base hover:bg-green-50 transition-all hover:scale-105 active:scale-95 shadow-lg"
@@ -367,13 +368,16 @@ export default function CheckoutPage() {
                   <span className="text-xl">💬</span>
                   WhatsApp Us
                 </a>
-                <a
-                  href="tel:+917028870008"
+                <button
+                  onClick={() => {
+                    console.log('Call Us button clicked!');
+                    setShowCallModal(true);
+                  }}
                   className="flex-1 inline-flex items-center justify-center gap-2 bg-white/20 backdrop-blur-sm text-white px-6 py-4 rounded-xl font-bold text-sm sm:text-base hover:bg-white/30 transition-all hover:scale-105 active:scale-95 border-2 border-white/40 shadow-lg"
                 >
                   <span className="text-xl">📞</span>
                   Call Us
-                </a>
+                </button>
               </div>
             </div>
           </div>
@@ -401,6 +405,7 @@ export default function CheckoutPage() {
   }
 
   return (
+    <>
     <div className="min-h-screen bg-gradient-to-br from-neutral-50 via-primary-50/30 to-neutral-50 py-4 sm:py-12 pb-24 sm:pb-12">
       <div className="container-custom max-w-7xl px-3 sm:px-4">
         {/* Header with Back Button and Progress Indicator */}
@@ -852,5 +857,115 @@ export default function CheckoutPage() {
         </div>
       </div>
     </div>
+
+      {/* Call Us Modal - Rendered outside main container */}
+      {showCallModal && (
+        <div style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundColor: 'rgba(0, 0, 0, 0.8)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          zIndex: 999999,
+          padding: '16px'
+        }}
+        onClick={() => setShowCallModal(false)}
+        >
+          <div style={{
+            backgroundColor: 'white',
+            borderRadius: '20px',
+            padding: '20px',
+            maxWidth: '90%',
+            width: '100%',
+            maxWidth: '380px',
+            boxShadow: '0 25px 50px rgba(0,0,0,0.5)',
+            position: 'relative',
+            zIndex: 1000000,
+            animation: 'slideUp 0.3s ease-out'
+          }}
+          onClick={(e) => e.stopPropagation()}
+          >
+            {/* Header */}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+              <h3 style={{ fontSize: '20px', fontWeight: 'bold', color: '#111', margin: 0 }}>
+                📞 Call Us
+              </h3>
+              <button
+                onClick={() => setShowCallModal(false)}
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  fontSize: '32px',
+                  cursor: 'pointer',
+                  color: '#999',
+                  lineHeight: '1'
+                }}
+              >
+                ×
+              </button>
+            </div>
+
+            {/* Phone Numbers */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+              {/* Primary Number */}
+              <a
+                href="tel:+917012897008"
+                onClick={() => setShowCallModal(false)}
+                style={{
+                  display: 'block',
+                  padding: '18px 16px',
+                  backgroundColor: '#10b981',
+                  borderRadius: '14px',
+                  border: 'none',
+                  textDecoration: 'none',
+                  transition: 'all 0.2s',
+                  boxShadow: '0 4px 12px rgba(16, 185, 129, 0.3)',
+                  cursor: 'pointer'
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+                  <span style={{ fontSize: '28px' }}>📞</span>
+                  <div style={{ flex: 1 }}>
+                    <p style={{ fontSize: '11px', color: '#d1fae5', fontWeight: '600', margin: '0 0 4px 0', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Primary Number</p>
+                    <p style={{ fontSize: '18px', fontWeight: 'bold', color: 'white', margin: 0, letterSpacing: '0.5px' }}>+91 7012897008</p>
+                  </div>
+                  <span style={{ fontSize: '20px', color: 'white' }}>→</span>
+                </div>
+              </a>
+
+              {/* Secondary Number */}
+              <a
+                href="tel:+919746797207"
+                onClick={() => setShowCallModal(false)}
+                style={{
+                  display: 'block',
+                  padding: '18px 16px',
+                  backgroundColor: '#059669',
+                  borderRadius: '14px',
+                  border: 'none',
+                  textDecoration: 'none',
+                  transition: 'all 0.2s',
+                  boxShadow: '0 4px 12px rgba(5, 150, 105, 0.3)',
+                  cursor: 'pointer'
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+                  <span style={{ fontSize: '28px' }}>☎️</span>
+                  <div style={{ flex: 1 }}>
+                    <p style={{ fontSize: '11px', color: '#d1fae5', fontWeight: '600', margin: '0 0 4px 0', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Secondary Number</p>
+                    <p style={{ fontSize: '18px', fontWeight: 'bold', color: 'white', margin: 0, letterSpacing: '0.5px' }}>+91 9746797207</p>
+                  </div>
+                  <span style={{ fontSize: '20px', color: 'white' }}>→</span>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 }
