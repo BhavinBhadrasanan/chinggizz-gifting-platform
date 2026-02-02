@@ -219,19 +219,17 @@ public class DataInitializer implements CommandLineRunner {
         // 8. Caricatures - Customer selects type and size, uploads photo
         createProductWithOptions("Customised Caricature",
             "Hand-drawn personalized caricature. Upload your photo and get a unique artwork!",
-            new BigDecimal("799.00"), ProductType.CUSTOMISED_ITEM, personalizedGifts,
+            new BigDecimal("900.00"), ProductType.CUSTOMISED_ITEM, personalizedGifts,
             "https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=500",
-            true, new BigDecimal("200.00"), 50,
-            new BigDecimal("21"), new BigDecimal("30"), new BigDecimal("0.5"),
+            true, new BigDecimal("0.00"), 50,
+            new BigDecimal("22.5"), new BigDecimal("9"), new BigDecimal("0.5"),
             "{\"type\":\"caricature\",\"hasPhotoUpload\":true,\"options\":[" +
                 "{\"category\":\"Type\",\"choices\":[" +
                     "{\"name\":\"Individual\",\"price\":0,\"description\":\"Single person caricature\"}," +
-                    "{\"name\":\"Couple\",\"price\":500,\"description\":\"Two people caricature\"}" +
+                    "{\"name\":\"Couple\",\"price\":200,\"description\":\"Two people caricature\"}" +
                 "]}," +
                 "{\"category\":\"Size\",\"choices\":[" +
-                    "{\"name\":\"A4 (21×30 cm)\",\"price\":0,\"width\":21,\"height\":30}," +
-                    "{\"name\":\"A3 (30×42 cm)\",\"price\":300,\"width\":30,\"height\":42}," +
-                    "{\"name\":\"A2 (42×59 cm)\",\"price\":600,\"width\":42,\"height\":59}" +
+                    "{\"name\":\"22.5 cm × 9 cm\",\"price\":0,\"width\":22.5,\"height\":9}" +
                 "]}" +
             "]}");
 
