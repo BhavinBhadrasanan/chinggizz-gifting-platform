@@ -363,6 +363,24 @@ export default function HomePage() {
                     {/* Price Section - Ultra Compact */}
                     <div className="mt-auto">
                       {(() => {
+                        // Check if this is a "price on request" product
+                        const customizationOpts = product.customizationOptions
+                          ? (typeof product.customizationOptions === 'string'
+                              ? JSON.parse(product.customizationOptions)
+                              : product.customizationOptions)
+                          : null;
+
+                        if (customizationOpts?.priceOnRequest) {
+                          return (
+                            <div className="mb-1.5">
+                              <span className="text-xs sm:text-sm font-semibold text-primary-700 flex items-center gap-1">
+                                <Sparkles className="w-3 h-3" />
+                                Price on Request
+                              </span>
+                            </div>
+                          );
+                        }
+
                         const pricing = getPricingData(product);
                         return (
                           <>

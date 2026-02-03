@@ -531,6 +531,24 @@ export default function ProductsPage() {
                   {/* Price Section - Ultra Compact Premium Style */}
                   <div className="mt-auto">
                     {(() => {
+                      // Check if this is a "price on request" product
+                      const customizationOpts = product.customizationOptions
+                        ? (typeof product.customizationOptions === 'string'
+                            ? JSON.parse(product.customizationOptions)
+                            : product.customizationOptions)
+                        : null;
+
+                      if (customizationOpts?.priceOnRequest) {
+                        return (
+                          <div className="mb-1.5">
+                            <span className="text-xs sm:text-sm font-semibold text-primary-700 flex items-center gap-1">
+                              <Sparkles className="w-3 h-3" />
+                              Price on Request
+                            </span>
+                          </div>
+                        );
+                      }
+
                       const pricing = getPricingData(product);
                       return (
                         <>
@@ -716,6 +734,22 @@ export default function ProductsPage() {
                     <div className="flex items-end justify-between mt-4">
                       <div>
                         {(() => {
+                          // Check if this is a "price on request" product
+                          const customizationOpts = product.customizationOptions
+                            ? (typeof product.customizationOptions === 'string'
+                                ? JSON.parse(product.customizationOptions)
+                                : product.customizationOptions)
+                            : null;
+
+                          if (customizationOpts?.priceOnRequest) {
+                            return (
+                              <span className="text-lg font-semibold text-primary-700 flex items-center gap-2">
+                                <Sparkles className="w-5 h-5" />
+                                Price on Request
+                              </span>
+                            );
+                          }
+
                           const pricing = getPricingData(product);
                           return (
                             <>

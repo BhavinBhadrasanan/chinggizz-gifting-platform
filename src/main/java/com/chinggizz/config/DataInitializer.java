@@ -282,66 +282,148 @@ public class DataInitializer implements CommandLineRunner {
         // 💍 FASHION & ACCESSORIES CATEGORY
         // ========================================
 
-        // 12. Jewellery Items - NEW
+        // 12. Jewellery Items - NEW (Price on Request - Non-Customizable)
         createProductWithOptions("Jewellery Items",
-            "Beautiful jewellery pieces for every occasion. Choose from necklaces, bracelets, earrings, and more.",
-            new BigDecimal("999.00"), ProductType.CUSTOMISED_ITEM, fashionAccessories,
+            "Beautiful jewellery pieces for every occasion. We will purchase it for you and share the details.",
+            new BigDecimal("0.00"), ProductType.CUSTOMISED_ITEM, fashionAccessories,
             "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=500",
-            true, new BigDecimal("200.00"), 80,
+            false, new BigDecimal("0"), 80,
             new BigDecimal("5"), new BigDecimal("5"), new BigDecimal("2"),
-            "{\"type\":\"jewellery\",\"options\":[" +
+            "{\"type\":\"jewellery\",\"priceOnRequest\":true,\"priceMessage\":\"We will purchase it for you and share the details\",\"options\":[" +
                 "{\"category\":\"Type\",\"choices\":[" +
                     "{\"name\":\"Necklace\",\"price\":0,\"description\":\"Elegant necklace\"}," +
-                    "{\"name\":\"Bracelet\",\"price\":-200,\"description\":\"Stylish bracelet\"}," +
-                    "{\"name\":\"Earrings\",\"price\":-300,\"description\":\"Beautiful earrings\"}," +
-                    "{\"name\":\"Ring\",\"price\":200,\"description\":\"Stunning ring\"}," +
-                    "{\"name\":\"Jewellery Set\",\"price\":500,\"description\":\"Complete matching set\"}" +
+                    "{\"name\":\"Bracelet\",\"price\":0,\"description\":\"Stylish bracelet\"}," +
+                    "{\"name\":\"Earrings\",\"price\":0,\"description\":\"Beautiful earrings\"}," +
+                    "{\"name\":\"Ring\",\"price\":0,\"description\":\"Stunning ring\"}," +
+                    "{\"name\":\"Jewellery Set\",\"price\":0,\"description\":\"Complete matching set\"}" +
                 "]}," +
                 "{\"category\":\"Material\",\"choices\":[" +
                     "{\"name\":\"Silver Plated\",\"price\":0,\"description\":\"Elegant silver finish\"}," +
-                    "{\"name\":\"Gold Plated\",\"price\":300,\"description\":\"Luxurious gold finish\"}," +
-                    "{\"name\":\"Rose Gold\",\"price\":400,\"description\":\"Trendy rose gold\"}," +
-                    "{\"name\":\"Artificial Diamonds\",\"price\":600,\"description\":\"Sparkling diamond-like stones\"}" +
+                    "{\"name\":\"Gold Plated\",\"price\":0,\"description\":\"Luxurious gold finish\"}," +
+                    "{\"name\":\"Rose Gold\",\"price\":0,\"description\":\"Trendy rose gold\"}" +
                 "]}" +
             "]}");
 
-        // 13. Watch or Accessories - NEW
-        createProductWithOptions("Watch & Accessories",
-            "Stylish watches and fashion accessories. Perfect gift for him or her.",
-            new BigDecimal("1499.00"), ProductType.CUSTOMISED_ITEM, fashionAccessories,
+        // 13. Watches - UPDATED (Price on Request - Non-Customizable)
+        createProductWithOptions("Watches",
+            "Premium watches for men and women. We will purchase it for you and share the details.",
+            new BigDecimal("0.00"), ProductType.CUSTOMISED_ITEM, fashionAccessories,
             "https://images.unsplash.com/photo-1523170335258-f5ed11844a49?w=500",
-            true, new BigDecimal("300.00"), 60,
+            false, new BigDecimal("0"), 60,
             new BigDecimal("5"), new BigDecimal("5"), new BigDecimal("3"),
-            "{\"type\":\"accessories\",\"options\":[" +
+            "{\"type\":\"watch\",\"priceOnRequest\":true,\"priceMessage\":\"We will purchase it for you and share the details\",\"options\":[" +
                 "{\"category\":\"Type\",\"choices\":[" +
                     "{\"name\":\"Men's Watch\",\"price\":0,\"description\":\"Classic men's wristwatch\"}," +
-                    "{\"name\":\"Women's Watch\",\"price\":200,\"description\":\"Elegant women's watch\"}," +
-                    "{\"name\":\"Couple Watches\",\"price\":1000,\"description\":\"Matching pair of watches\"}," +
-                    "{\"name\":\"Sunglasses\",\"price\":-500,\"description\":\"Stylish sunglasses\"}," +
-                    "{\"name\":\"Wallet\",\"price\":-700,\"description\":\"Premium leather wallet\"}," +
-                    "{\"name\":\"Belt\",\"price\":-800,\"description\":\"Genuine leather belt\"}" +
+                    "{\"name\":\"Women's Watch\",\"price\":0,\"description\":\"Elegant women's watch\"}," +
+                    "{\"name\":\"Couple Watches\",\"price\":0,\"description\":\"Matching pair of watches\"}" +
                 "]}," +
                 "{\"category\":\"Style\",\"choices\":[" +
-                    "{\"name\":\"Classic\",\"price\":0,\"description\":\"Timeless design\"}," +
-                    "{\"name\":\"Modern\",\"price\":200,\"description\":\"Contemporary style\"}," +
-                    "{\"name\":\"Sport\",\"price\":100,\"description\":\"Athletic design\"}," +
-                    "{\"name\":\"Luxury\",\"price\":500,\"description\":\"Premium luxury finish\"}" +
+                    "{\"name\":\"Digital\",\"price\":0,\"description\":\"Modern digital display\"}," +
+                    "{\"name\":\"Analogue\",\"price\":0,\"description\":\"Classic analogue with hands\"}," +
+                    "{\"name\":\"Smartwatch\",\"price\":0,\"description\":\"Smart features with fitness tracking\"}" +
                 "]}" +
             "]}");
 
-        // 14. Dress of Choice - NEW
-        createProductWithOptions("Dress of Choice",
-            "Beautiful dresses for special occasions. Choose style, size, and color.",
-            new BigDecimal("1999.00"), ProductType.CUSTOMISED_ITEM, fashionAccessories,
-            "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=500",
+        // 13a. Belt - NEW (Price on Request - Non-Customizable)
+        createProductWithOptions("Belt",
+            "Premium leather belts for men and women. We will purchase it for you and share the details.",
+            new BigDecimal("0.00"), ProductType.CUSTOMISED_ITEM, fashionAccessories,
+            "https://images.unsplash.com/photo-1624222247344-550fb60583c2?w=500",
+            false, new BigDecimal("0"), 50,
+            new BigDecimal("10"), new BigDecimal("5"), new BigDecimal("2"),
+            "{\"type\":\"belt\",\"priceOnRequest\":true,\"priceMessage\":\"We will purchase it for you and share the details\",\"options\":[" +
+                "{\"category\":\"Type\",\"choices\":[" +
+                    "{\"name\":\"Men's Belt\",\"price\":0,\"description\":\"Classic men's leather belt\"}," +
+                    "{\"name\":\"Women's Belt\",\"price\":100,\"description\":\"Elegant women's belt\"}" +
+                "]}," +
+                "{\"category\":\"Material\",\"choices\":[" +
+                    "{\"name\":\"Genuine Leather\",\"price\":0,\"description\":\"Premium leather\"}," +
+                    "{\"name\":\"Synthetic Leather\",\"price\":-200,\"description\":\"Durable synthetic material\"}," +
+                    "{\"name\":\"Canvas\",\"price\":-300,\"description\":\"Casual canvas belt\"}" +
+                "]}," +
+                "{\"category\":\"Color\",\"choices\":[" +
+                    "{\"name\":\"Black\",\"price\":0}," +
+                    "{\"name\":\"Brown\",\"price\":0}," +
+                    "{\"name\":\"Tan\",\"price\":0}," +
+                    "{\"name\":\"Navy Blue\",\"price\":50}" +
+                "]}" +
+            "]}");
+
+        // 13b. Wallet - NEW (Separated from Watch & Accessories)
+        createProductWithOptions("Wallet",
+            "Premium leather wallets with multiple card slots. Perfect for daily use.",
+            new BigDecimal("799.00"), ProductType.CUSTOMISED_ITEM, fashionAccessories,
+            "https://images.unsplash.com/photo-1627123424574-724758594e93?w=500",
             true, new BigDecimal("0"), 50,
+            new BigDecimal("12"), new BigDecimal("9"), new BigDecimal("2"),
+            "{\"type\":\"wallet\",\"options\":[" +
+                "{\"category\":\"Type\",\"choices\":[" +
+                    "{\"name\":\"Men's Wallet\",\"price\":0,\"description\":\"Classic bifold wallet\"}," +
+                    "{\"name\":\"Women's Wallet\",\"price\":100,\"description\":\"Elegant clutch wallet\"}," +
+                    "{\"name\":\"Card Holder\",\"price\":-200,\"description\":\"Slim card holder\"}" +
+                "]}," +
+                "{\"category\":\"Material\",\"choices\":[" +
+                    "{\"name\":\"Genuine Leather\",\"price\":0,\"description\":\"Premium leather\"}," +
+                    "{\"name\":\"Synthetic Leather\",\"price\":-200,\"description\":\"Durable synthetic material\"}," +
+                    "{\"name\":\"Canvas\",\"price\":-300,\"description\":\"Casual canvas wallet\"}" +
+                "]}," +
+                "{\"category\":\"Color\",\"choices\":[" +
+                    "{\"name\":\"Black\",\"price\":0}," +
+                    "{\"name\":\"Brown\",\"price\":0}," +
+                    "{\"name\":\"Tan\",\"price\":0}," +
+                    "{\"name\":\"Navy Blue\",\"price\":50}," +
+                    "{\"name\":\"Red\",\"price\":50}" +
+                "]}" +
+            "]}");
+
+        // 13c. Sunglasses - NEW (Price on Request - Non-Customizable)
+        createProductWithOptions("Sunglasses",
+            "Stylish sunglasses with UV protection. We will purchase it for you and share the details.",
+            new BigDecimal("0.00"), ProductType.CUSTOMISED_ITEM, fashionAccessories,
+            "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=500",
+            false, new BigDecimal("0"), 50,
+            new BigDecimal("15"), new BigDecimal("6"), new BigDecimal("5"),
+            "{\"type\":\"sunglasses\",\"priceOnRequest\":true,\"priceMessage\":\"We will purchase it for you and share the details\",\"options\":[" +
+                "{\"category\":\"Type\",\"choices\":[" +
+                    "{\"name\":\"Men's Sunglasses\",\"price\":0,\"description\":\"Classic men's sunglasses\"}," +
+                    "{\"name\":\"Women's Sunglasses\",\"price\":100,\"description\":\"Elegant women's sunglasses\"}," +
+                    "{\"name\":\"Unisex Sunglasses\",\"price\":50,\"description\":\"Versatile unisex design\"}" +
+                "]}," +
+                "{\"category\":\"Frame Style\",\"choices\":[" +
+                    "{\"name\":\"Aviator\",\"price\":0,\"description\":\"Classic aviator style\"}," +
+                    "{\"name\":\"Wayfarer\",\"price\":100,\"description\":\"Trendy wayfarer design\"}," +
+                    "{\"name\":\"Round\",\"price\":50,\"description\":\"Vintage round frames\"}," +
+                    "{\"name\":\"Cat Eye\",\"price\":150,\"description\":\"Stylish cat eye frames\"}" +
+                "]}," +
+                "{\"category\":\"Lens Color\",\"choices\":[" +
+                    "{\"name\":\"Black\",\"price\":0}," +
+                    "{\"name\":\"Brown\",\"price\":0}," +
+                    "{\"name\":\"Blue\",\"price\":50}," +
+                    "{\"name\":\"Green\",\"price\":50}," +
+                    "{\"name\":\"Gradient\",\"price\":100}" +
+                "]}" +
+            "]}");
+
+        // 14. Dress of Choice - NEW (Price on Request - Non-Customizable)
+        createProductWithOptions("Dress of Choice",
+            "Beautiful dresses for special occasions. Choose style, size, and color. We will purchase it for you and share the details.",
+            new BigDecimal("0.00"), ProductType.CUSTOMISED_ITEM, fashionAccessories,
+            "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=500",
+            false, new BigDecimal("0"), 50,
             new BigDecimal("30"), new BigDecimal("40"), new BigDecimal("5"),
-            "{\"type\":\"dress\",\"options\":[" +
+            "{\"type\":\"dress\",\"priceOnRequest\":true,\"priceMessage\":\"We will purchase it for you and share the details\",\"options\":[" +
+                "{\"category\":\"Category\",\"choices\":[" +
+                    "{\"name\":\"Men\",\"price\":0,\"description\":\"Men's clothing\"}," +
+                    "{\"name\":\"Women\",\"price\":0,\"description\":\"Women's clothing\"}," +
+                    "{\"name\":\"Boy\",\"price\":0,\"description\":\"Boys' clothing\"}," +
+                    "{\"name\":\"Girl\",\"price\":0,\"description\":\"Girls' clothing\"}," +
+                    "{\"name\":\"Infant\",\"price\":0,\"description\":\"Infant clothing\"}" +
+                "]}," +
                 "{\"category\":\"Type\",\"choices\":[" +
                     "{\"name\":\"Casual Dress\",\"price\":0,\"description\":\"Comfortable everyday wear\"}," +
-                    "{\"name\":\"Party Dress\",\"price\":500,\"description\":\"Glamorous party outfit\"}," +
-                    "{\"name\":\"Formal Dress\",\"price\":800,\"description\":\"Elegant formal attire\"}," +
-                    "{\"name\":\"Traditional Dress\",\"price\":600,\"description\":\"Cultural traditional wear\"}" +
+                    "{\"name\":\"Party Dress\",\"price\":0,\"description\":\"Glamorous party outfit\"}," +
+                    "{\"name\":\"Formal Dress\",\"price\":0,\"description\":\"Elegant formal attire\"}," +
+                    "{\"name\":\"Traditional Dress\",\"price\":0,\"description\":\"Cultural traditional wear\"}" +
                 "]}," +
                 "{\"category\":\"Size\",\"choices\":[" +
                     "{\"name\":\"XS\",\"price\":0}," +
@@ -349,7 +431,7 @@ public class DataInitializer implements CommandLineRunner {
                     "{\"name\":\"M\",\"price\":0}," +
                     "{\"name\":\"L\",\"price\":0}," +
                     "{\"name\":\"XL\",\"price\":0}," +
-                    "{\"name\":\"XXL\",\"price\":100}" +
+                    "{\"name\":\"XXL\",\"price\":0}" +
                 "]}," +
                 "{\"category\":\"Color\",\"choices\":[" +
                     "{\"name\":\"Red\",\"price\":0}," +
@@ -359,7 +441,7 @@ public class DataInitializer implements CommandLineRunner {
                     "{\"name\":\"Pink\",\"price\":0}," +
                     "{\"name\":\"Green\",\"price\":0}," +
                     "{\"name\":\"Yellow\",\"price\":0}," +
-                    "{\"name\":\"Multi-Color\",\"price\":200}" +
+                    "{\"name\":\"Multi-Color\",\"price\":0}" +
                 "]}" +
             "]}");
 
@@ -367,14 +449,14 @@ public class DataInitializer implements CommandLineRunner {
         // 🍫 EDIBLES & TREATS CATEGORY
         // ========================================
 
-        // 15. Chocolates - NEW
+        // 15. Chocolates - NEW (Price on Request - Non-Customizable)
         createProductWithOptions("Premium Chocolates",
-            "Delicious handcrafted chocolates. Choose from various flavors and gift boxes.",
-            new BigDecimal("499.00"), ProductType.EDIBLE_ITEM, edibleTreats,
+            "Delicious handcrafted chocolates. We will purchase it for you and share the details.",
+            new BigDecimal("0.00"), ProductType.EDIBLE_ITEM, edibleTreats,
             "https://images.unsplash.com/photo-1511381939415-e44015466834?w=500",
-            true, BigDecimal.ZERO, 150,
+            false, BigDecimal.ZERO, 150,
             new BigDecimal("15"), new BigDecimal("15"), new BigDecimal("5"),
-            "{\"type\":\"chocolates\",\"options\":[" +
+            "{\"type\":\"chocolates\",\"priceOnRequest\":true,\"priceMessage\":\"We will purchase it for you and share the details\",\"options\":[" +
                 "{\"category\":\"Type\",\"choices\":[" +
                     "{\"name\":\"Milk Chocolate Box\",\"price\":0,\"description\":\"Classic milk chocolates\"}," +
                     "{\"name\":\"Dark Chocolate Box\",\"price\":100,\"description\":\"Rich dark chocolates\"}," +
@@ -424,38 +506,40 @@ public class DataInitializer implements CommandLineRunner {
             "https://images.unsplash.com/photo-1602874801006-e7d8dc1c4ce6?w=500",
             true, BigDecimal.ZERO, 100,
             new BigDecimal("8"), new BigDecimal("10"), new BigDecimal("8"),
-            "{\"type\":\"fragrance\",\"options\":[" +
-                "{\"name\":\"Lavender\",\"price\":0,\"description\":\"Calming lavender scent\",\"color\":\"#9B7EBD\"}," +
-                "{\"name\":\"Vanilla Rose\",\"price\":50,\"description\":\"Sweet vanilla with rose notes\",\"color\":\"#FFB6C1\"}," +
-                "{\"name\":\"Sandalwood\",\"price\":100,\"description\":\"Traditional sandalwood fragrance\",\"color\":\"#D2B48C\"}," +
-                "{\"name\":\"Jasmine\",\"price\":50,\"description\":\"Fresh jasmine aroma\",\"color\":\"#FFFACD\"}," +
-                "{\"name\":\"Citrus Fresh\",\"price\":0,\"description\":\"Energizing citrus blend\",\"color\":\"#FFA500\"}," +
-                "{\"name\":\"Apple\",\"price\":0,\"description\":\"Fresh apple fragrance\",\"color\":\"#DC143C\"}" +
+            "{\"type\":\"candle\",\"options\":[" +
+                "{\"category\":\"Fragrance\",\"choices\":[" +
+                    "{\"name\":\"Lavender\",\"price\":0,\"description\":\"Calming lavender scent\"}," +
+                    "{\"name\":\"Vanilla Rose\",\"price\":50,\"description\":\"Sweet vanilla with rose notes\"}," +
+                    "{\"name\":\"Sandalwood\",\"price\":100,\"description\":\"Traditional sandalwood fragrance\"}," +
+                    "{\"name\":\"Jasmine\",\"price\":50,\"description\":\"Fresh jasmine aroma\"}," +
+                    "{\"name\":\"Citrus Fresh\",\"price\":0,\"description\":\"Energizing citrus blend\"}," +
+                    "{\"name\":\"Apple\",\"price\":0,\"description\":\"Fresh apple fragrance\"}" +
+                "]}" +
             "]}");
 
-        // 18. Perfumes - Customer selects fragrance
+        // 18. Perfumes - Customer selects type (Price on Request - Non-Customizable)
         createProductWithOptions("Premium Perfumes",
-            "Long-lasting premium fragrances. 50ml bottle. Choose your signature scent.",
-            new BigDecimal("799.00"), ProductType.EDIBLE_ITEM, homeDecor,
+            "Long-lasting premium fragrances. We will purchase it for you and share the details.",
+            new BigDecimal("0.00"), ProductType.EDIBLE_ITEM, homeDecor,
             "https://images.unsplash.com/photo-1541643600914-78b084683601?w=500",
-            true, BigDecimal.ZERO, 80,
+            false, BigDecimal.ZERO, 80,
             new BigDecimal("5"), new BigDecimal("12"), new BigDecimal("5"),
-            "{\"type\":\"fragrance\",\"options\":[" +
-                "{\"name\":\"Floral Essence\",\"price\":0,\"description\":\"Delicate floral notes\"}," +
-                "{\"name\":\"Woody Musk\",\"price\":200,\"description\":\"Sophisticated woody fragrance\"}," +
-                "{\"name\":\"Citrus Fresh\",\"price\":0,\"description\":\"Refreshing citrus blend\"}," +
-                "{\"name\":\"Oriental Spice\",\"price\":150,\"description\":\"Exotic spicy notes\"}," +
-                "{\"name\":\"Ocean Breeze\",\"price\":100,\"description\":\"Fresh aquatic scent\"}" +
+            "{\"type\":\"perfume\",\"priceOnRequest\":true,\"priceMessage\":\"We will purchase it for you and share the details\",\"options\":[" +
+                "{\"category\":\"Type\",\"choices\":[" +
+                    "{\"name\":\"Men's Perfume\",\"price\":0,\"description\":\"Premium fragrance for men\"}," +
+                    "{\"name\":\"Women's Perfume\",\"price\":0,\"description\":\"Elegant fragrance for women\"}," +
+                    "{\"name\":\"Couple Perfume\",\"price\":0,\"description\":\"Matching pair of perfumes\"}" +
+                "]}" +
             "]}");
 
-        // 19. Mini Indoor Plants - Customer selects plant type
+        // 19. Mini Indoor Plants - Customer selects plant type (Price on Request - Non-Customizable)
         createProductWithOptions("Mini Indoor Plants",
-            "Low-maintenance mini plants in decorative pots. Perfect for desk or home.",
-            new BigDecimal("249.00"), ProductType.EDIBLE_ITEM, homeDecor,
+            "Low-maintenance mini plants in decorative pots. We will purchase it for you and share the details.",
+            new BigDecimal("0.00"), ProductType.EDIBLE_ITEM, homeDecor,
             "https://images.unsplash.com/photo-1459156212016-c812468e2115?w=500",
-            true, BigDecimal.ZERO, 120,
+            false, BigDecimal.ZERO, 120,
             new BigDecimal("8"), new BigDecimal("12"), new BigDecimal("8"),
-            "{\"type\":\"plant\",\"options\":[" +
+            "{\"type\":\"plant\",\"priceOnRequest\":true,\"priceMessage\":\"We will purchase it for you and share the details\",\"options\":[" +
                 "{\"category\":\"Plant Type\",\"choices\":[" +
                     "{\"name\":\"Succulent\",\"price\":0,\"description\":\"Cute succulent, very low maintenance\"}," +
                     "{\"name\":\"Cactus\",\"price\":0,\"description\":\"Small cactus, minimal watering needed\"}," +
@@ -465,14 +549,14 @@ public class DataInitializer implements CommandLineRunner {
                 "]}" +
             "]}");
 
-        // 20. Live Outdoor Plants
+        // 20. Live Outdoor Plants (Price on Request - Non-Customizable)
         createProductWithOptions("Live Outdoor Plants",
-            "Beautiful flowering plants for balcony or garden. Comes with care instructions.",
-            new BigDecimal("349.00"), ProductType.EDIBLE_ITEM, homeDecor,
+            "Beautiful flowering plants for balcony or garden. We will purchase it for you and share the details.",
+            new BigDecimal("0.00"), ProductType.EDIBLE_ITEM, homeDecor,
             "https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=500",
-            true, BigDecimal.ZERO, 70,
+            false, BigDecimal.ZERO, 70,
             new BigDecimal("12"), new BigDecimal("20"), new BigDecimal("12"),
-            "{\"type\":\"plant\",\"options\":[" +
+            "{\"type\":\"plant\",\"priceOnRequest\":true,\"priceMessage\":\"We will purchase it for you and share the details\",\"options\":[" +
                 "{\"category\":\"Plant Type\",\"choices\":[" +
                     "{\"name\":\"Rose Plant\",\"price\":0,\"description\":\"Beautiful blooming roses\"}," +
                     "{\"name\":\"Jasmine Plant\",\"price\":50,\"description\":\"Fragrant jasmine flowers\"}," +
