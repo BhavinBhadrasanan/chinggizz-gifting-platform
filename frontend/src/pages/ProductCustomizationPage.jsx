@@ -248,7 +248,7 @@ export default function ProductCustomizationPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50 pb-40 sm:pb-44 lg:pb-8">
       {/* Header */}
-      <div className="sticky top-0 z-40 bg-white shadow-md">
+      <div className="sticky top-0 z-40 bg-white shadow-md customization-page-header">
         <div className="max-w-7xl mx-auto px-3 sm:px-4 py-3 sm:py-4 flex items-center justify-between">
           <button
             onClick={() => navigate(-1)}
@@ -463,14 +463,38 @@ export default function ProductCustomizationPage() {
 
               <div className="mb-4 sm:mb-6">
                 {(() => {
-                  const pricing = getPricingData(product);
-
                   // Check if quantity-based pricing is active
                   const customizationOpts = product.customizationOptions
                     ? (typeof product.customizationOptions === 'string'
                         ? JSON.parse(product.customizationOptions)
                         : product.customizationOptions)
                     : null;
+
+                  // Check if this is a "price on request" product
+                  if (customizationOpts?.priceOnRequest) {
+                    return (
+                      <div className="bg-gradient-to-r from-primary-50 to-secondary-50 border-2 border-primary-200 rounded-xl p-4 sm:p-6">
+                        <div className="flex items-start gap-3">
+                          <div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 bg-primary-100 rounded-full flex items-center justify-center">
+                            <Sparkles className="w-5 h-5 sm:w-6 sm:h-6 text-primary-600" />
+                          </div>
+                          <div className="flex-1">
+                            <h3 className="text-base sm:text-lg font-bold text-primary-900 mb-1">
+                              Special Service
+                            </h3>
+                            <p className="text-sm sm:text-base text-primary-700 font-medium">
+                              {customizationOpts.priceMessage || "We will purchase it for you and share the details"}
+                            </p>
+                            <p className="text-xs sm:text-sm text-primary-600 mt-2">
+                              Select your preferences and add to cart. We'll contact you with pricing and details.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  }
+
+                  const pricing = getPricingData(product);
                   const quantityOption = customizationOpts?.options?.find(opt => opt.category === 'Quantity');
                   const isQuantityBased = quantityOption && selectedOptions['Quantity'];
 
@@ -781,14 +805,26 @@ export default function ProductCustomizationPage() {
               {/* Price Display */}
               <div className="flex items-center gap-2">
                 {(() => {
-                  const pricing = getPricingData(product);
-
                   // Check if quantity-based pricing is active
                   const customizationOpts = product.customizationOptions
                     ? (typeof product.customizationOptions === 'string'
                         ? JSON.parse(product.customizationOptions)
                         : product.customizationOptions)
                     : null;
+
+                  // Check if this is a "price on request" product
+                  if (customizationOpts?.priceOnRequest) {
+                    return (
+                      <div className="flex items-center gap-2">
+                        <Sparkles className="w-4 h-4 text-primary-600" />
+                        <span className="text-xs sm:text-sm font-semibold text-primary-700">
+                          Price on Request
+                        </span>
+                      </div>
+                    );
+                  }
+
+                  const pricing = getPricingData(product);
                   const quantityOption = customizationOpts?.options?.find(opt => opt.category === 'Quantity');
                   const isQuantityBased = quantityOption && selectedOptions['Quantity'];
 

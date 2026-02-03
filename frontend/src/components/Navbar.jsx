@@ -41,15 +41,18 @@ export default function Navbar() {
       // Lock scroll when menu is open (mobile only)
       if (window.innerWidth < 1024) {
         document.body.style.overflow = 'hidden';
+        document.body.classList.add('mobile-menu-open');
       }
     } else {
       // Unlock scroll when menu is closed
       document.body.style.overflow = 'unset';
+      document.body.classList.remove('mobile-menu-open');
     }
 
     // Cleanup on unmount
     return () => {
       document.body.style.overflow = 'unset';
+      document.body.classList.remove('mobile-menu-open');
     };
   }, [isOpen]);
 

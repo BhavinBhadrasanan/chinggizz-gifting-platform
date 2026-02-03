@@ -1590,3 +1590,8 @@ button, .btn-primary, .btn-secondary {
 .transform-style-3d {
   transform-style: preserve-3d;
 }
+
+/* Hide customization page header when mobile menu is open */
+body.mobile-menu-open .customization-page-header {
+  display: none !important;
+}
