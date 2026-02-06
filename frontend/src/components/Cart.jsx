@@ -318,11 +318,9 @@ export default function Cart() {
             <button
               onClick={() => {
                 setIsCartOpen(false);
-                // Scroll to top for smooth transition
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-                // Navigate to checkout
+                // Navigate to checkout and scroll to top (especially for mobile view)
                 setTimeout(() => {
-                  navigate('/checkout');
+                  navigate('/checkout', { state: { scrollToTop: true } });
                 }, 100);
               }}
               className="w-full bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white font-semibold text-xs py-2 px-3 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg flex items-center justify-center gap-1.5"

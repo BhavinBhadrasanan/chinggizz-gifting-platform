@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useCart } from '../context/CartContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { ShoppingBag, CreditCard, MapPin, User, Mail, Phone, CheckCircle, Truck, Package, ArrowLeft } from 'lucide-react';
 import toast from 'react-hot-toast';
 import api from '../config/api';
@@ -8,6 +8,7 @@ import api from '../config/api';
 export default function CheckoutPage() {
   const { cartItems, hampers, getCartTotal, clearCart } = useCart();
   const navigate = useNavigate();
+  const location = useLocation();
   const [orderPlaced, setOrderPlaced] = useState(false);
   const [orderNumber, setOrderNumber] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -26,9 +27,27 @@ export default function CheckoutPage() {
     paymentMethod: 'cod',
   });
 
-  // Scroll to top when component mounts (mobile UX improvement)
+  // Scroll to top when navigating to checkout page (especially for mobile view)
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'instant' });
+    // Check if mobile view (screen width < 768px)
+    const isMobile = window.innerWidth < 768;
+
+    if (isMobile) {
+      // For mobile: Force scroll to top immediately
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+
+      // Also scroll to top after a short delay to ensure content is rendered
+      const scrollTimer = setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, 100);
+
+      return () => clearTimeout(scrollTimer);
+    } else {
+      // For desktop: Smooth scroll to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   }, []);
 
   const handleInputChange = (e) => {

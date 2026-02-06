@@ -127,7 +127,7 @@ const HAMPER_BOXES = [
 ];
 
 export default function HamperBuilderPage() {
-  const { cartItems, addHamperToCart } = useCart();
+  const { cartItems, addHamperToCart, removeFromCart } = useCart();
   const navigate = useNavigate();
 
   // Debug: Log when component mounts and scroll to top
@@ -193,6 +193,7 @@ export default function HamperBuilderPage() {
   // Collapsible sections state
   const [showQuickGuide, setShowQuickGuide] = useState(false);
   const [showQuickTips, setShowQuickTips] = useState(false);
+  const [showAvailableItems, setShowAvailableItems] = useState(true);
 
   // Error notification modal state
   const [showErrorModal, setShowErrorModal] = useState(false);
@@ -1215,6 +1216,15 @@ export default function HamperBuilderPage() {
     cartItem => !placedItems.some(placed => placed.id === cartItem.id)
   );
 
+  // Auto-collapse available items section when empty to save space
+  useEffect(() => {
+    if (availableItems.length === 0) {
+      setShowAvailableItems(false);
+    } else {
+      setShowAvailableItems(true);
+    }
+  }, [availableItems.length]);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-neutral-50 via-primary-50/20 to-secondary-50/20 py-4 sm:py-6 md:py-12">
       <div className="container-custom">
@@ -1433,6 +1443,9 @@ export default function HamperBuilderPage() {
                         <div className="flex-1 min-w-0">
                           <h3 className="text-base font-bold text-neutral-900 mb-0.5">{box.name}</h3>
                           <p className="text-xs text-neutral-600 mb-1 line-clamp-1">{box.description}</p>
+                          <p className="text-xs text-neutral-500 mb-1">
+                            📏 {box.dimensions} ({box.dimensionsCm})
+                          </p>
                           <div className="flex items-center justify-between">
                             <div>
                               <span className="text-lg font-bold text-primary-600">
@@ -1471,9 +1484,15 @@ export default function HamperBuilderPage() {
                             <span className="text-neutral-600">Capacity:</span>
                             <span className="font-semibold text-neutral-900">{box.capacity} items</span>
                           </div>
-                          <div className="flex items-center justify-between text-sm">
-                            <span className="text-neutral-600">Size:</span>
-                            <span className="font-semibold text-neutral-900">{box.dimensions}</span>
+                          <div className="flex flex-col gap-1 text-sm">
+                            <div className="flex items-center justify-between">
+                              <span className="text-neutral-600">Size (Inches):</span>
+                              <span className="font-semibold text-neutral-900">{box.dimensions}</span>
+                            </div>
+                            <div className="flex items-center justify-between">
+                              <span className="text-neutral-600">Size (CM):</span>
+                              <span className="font-semibold text-neutral-900">{box.dimensionsCm}</span>
+                            </div>
                           </div>
                           <div className="flex items-center justify-between text-sm">
                             <span className="text-neutral-600">Best for:</span>
@@ -1711,23 +1730,39 @@ export default function HamperBuilderPage() {
                     )}
                   </div>
 
-                  {/* Available Items - Mobile - ENHANCED */}
+                  {/* Available Items - Mobile - ENHANCED - Collapsible */}
                   <div className="bg-white/90 backdrop-blur-sm rounded-xl border-2 border-secondary-300 shadow-lg overflow-hidden">
-                    <div className="bg-gradient-to-r from-secondary-500 via-secondary-600 to-secondary-500 px-3 py-2 flex items-center justify-between shadow-md">
+                    {/* Header - Always Visible - Clickable to Toggle */}
+                    <button
+                      onClick={() => setShowAvailableItems(!showAvailableItems)}
+                      className="w-full bg-gradient-to-r from-secondary-500 via-secondary-600 to-secondary-500 px-3 py-2 flex items-center justify-between shadow-md transition-all hover:from-secondary-600 hover:via-secondary-700 hover:to-secondary-600"
+                    >
                       <h3 className="text-white font-bold text-sm flex items-center gap-2">
-                        <ShoppingBag className="h-4 w-4 animate-bounce" />
+                        <ShoppingBag className={`h-4 w-4 ${availableItems.length > 0 ? 'animate-bounce' : ''}`} />
                         Available Items ({availableItems.length})
                       </h3>
-                      <button
-                        onClick={() => navigate('/products')}
-                        className="bg-white hover:bg-secondary-50 text-secondary-700 font-bold text-xs px-3 py-1.5 rounded-lg flex items-center gap-1 transition-all hover:scale-105 active:scale-95 shadow-md tap-target"
-                      >
-                        <Plus className="h-3 w-3" />
-                        Add More
-                      </button>
-                    </div>
+                      <div className="flex items-center gap-2">
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            navigate('/products');
+                          }}
+                          className="bg-white hover:bg-secondary-50 text-secondary-700 font-bold text-xs px-3 py-1.5 rounded-lg flex items-center gap-1 transition-all hover:scale-105 active:scale-95 shadow-md tap-target"
+                        >
+                          <Plus className="h-3 w-3" />
+                          Add More
+                        </button>
+                        {showAvailableItems ? (
+                          <ChevronUp className="h-5 w-5 text-white" />
+                        ) : (
+                          <ChevronDown className="h-5 w-5 text-white" />
+                        )}
+                      </div>
+                    </button>
 
-                    <div className="p-2 space-y-1.5 max-h-[160px] overflow-y-auto scrollbar-hide">
+                    {/* Collapsible Content */}
+                    {showAvailableItems && (
+                      <div className="p-2 space-y-1.5 max-h-[160px] overflow-y-auto scrollbar-hide">
                       {availableItems.length === 0 ? (
                         <div className="text-center py-3 animate-fadeInUp">
                           <div className="bg-gradient-to-br from-secondary-100 to-secondary-200 rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-2">
@@ -1820,7 +1855,8 @@ export default function HamperBuilderPage() {
                           </div>
                         ))
                       )}
-                    </div>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
@@ -2313,25 +2349,39 @@ export default function HamperBuilderPage() {
 
 
 
-                  {/* 3. AVAILABLE ITEMS SECTION - Compact (HIDDEN ON MOBILE - shown at top instead) */}
+                  {/* 3. AVAILABLE ITEMS SECTION - Compact - Collapsible (HIDDEN ON MOBILE - shown at top instead) */}
                   <div className="hidden lg:block bg-white rounded-lg border-2 border-secondary-300 shadow-sm overflow-hidden">
-                    {/* Header */}
-                    <div className="bg-gradient-to-r from-secondary-500 to-secondary-600 px-3 py-2 flex items-center justify-between">
+                    {/* Header - Clickable to Toggle */}
+                    <button
+                      onClick={() => setShowAvailableItems(!showAvailableItems)}
+                      className="w-full bg-gradient-to-r from-secondary-500 to-secondary-600 px-3 py-2 flex items-center justify-between transition-all hover:from-secondary-600 hover:to-secondary-700"
+                    >
                       <h3 className="text-white font-bold text-sm flex items-center gap-2">
-                        <ShoppingBag className="h-4 w-4" />
+                        <ShoppingBag className={`h-4 w-4 ${availableItems.length > 0 ? 'animate-bounce' : ''}`} />
                         Available ({availableItems.length})
                       </h3>
-                      <button
-                        onClick={() => navigate('/products')}
-                        className="bg-white hover:bg-secondary-50 text-secondary-700 font-semibold text-xs px-2 py-1 rounded-lg flex items-center gap-1 transition-colors"
-                      >
-                        <Plus className="h-3 w-3" />
-                        Add
-                      </button>
-                    </div>
+                      <div className="flex items-center gap-2">
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            navigate('/products');
+                          }}
+                          className="bg-white hover:bg-secondary-50 text-secondary-700 font-semibold text-xs px-2 py-1 rounded-lg flex items-center gap-1 transition-colors"
+                        >
+                          <Plus className="h-3 w-3" />
+                          Add
+                        </button>
+                        {showAvailableItems ? (
+                          <ChevronUp className="h-4 w-4 text-white" />
+                        ) : (
+                          <ChevronDown className="h-4 w-4 text-white" />
+                        )}
+                      </div>
+                    </button>
 
-                    {/* Items List */}
-                    <div className="p-2">
+                    {/* Collapsible Items List */}
+                    {showAvailableItems && (
+                      <div className="p-2">
                       {availableItems.length === 0 ? (
                     <div className="text-center py-4">
                       <Package className="h-12 w-12 text-neutral-300 mx-auto mb-2" />
@@ -2418,8 +2468,9 @@ export default function HamperBuilderPage() {
                       })}
                     </div>
                   )}
+                      </div>
+                    )}
                   </div>
-                </div>
 
                   {/* 4. PRICING SUMMARY - Compact */}
                   <div className="bg-white rounded-lg border-2 border-secondary-300 shadow-sm overflow-hidden">

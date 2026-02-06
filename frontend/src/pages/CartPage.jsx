@@ -360,8 +360,8 @@ export default function CartPage() {
                   {/* Proceed to Checkout Button */}
                   <button
                     onClick={() => {
-                      window.scrollTo({ top: 0, behavior: 'smooth' });
-                      navigate('/checkout');
+                      // Navigate to checkout page and scroll to top (especially for mobile view)
+                      navigate('/checkout', { state: { scrollToTop: true } });
                     }}
                     className="w-full bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white font-semibold py-3 px-4 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl flex items-center justify-center gap-2"
                   >
