@@ -5,6 +5,68 @@ import * as THREE from 'three';
 import { DragControls } from 'three-stdlib';
 
 /**
+ * Dimension Line Component - Simple and reliable version
+ */
+function DimensionLine({ start, end, label, color = "#374151", axis = "x" }) {
+  const midpoint = [
+    (start[0] + end[0]) / 2,
+    (start[1] + end[1]) / 2,
+    (start[2] + end[2]) / 2
+  ];
+
+  // Calculate distance
+  const dx = end[0] - start[0];
+  const dy = end[1] - start[1];
+  const dz = end[2] - start[2];
+  const distance = Math.sqrt(dx * dx + dy * dy + dz * dz);
+
+  // Determine rotation based on axis
+  let rotation = [0, 0, 0];
+  if (axis === "x") {
+    rotation = [0, 0, Math.PI / 2]; // Horizontal along X
+  } else if (axis === "y") {
+    rotation = [0, 0, 0]; // Vertical along Y
+  } else if (axis === "z") {
+    rotation = [Math.PI / 2, 0, 0]; // Depth along Z
+  }
+
+  return (
+    <group>
+      {/* Main dimension line - thin cylinder */}
+      <mesh position={midpoint} rotation={rotation}>
+        <cylinderGeometry args={[0.015, 0.015, distance, 8]} />
+        <meshBasicMaterial color={color} />
+      </mesh>
+
+      {/* Start arrow - small sphere */}
+      <mesh position={start}>
+        <sphereGeometry args={[0.04, 8, 8]} />
+        <meshBasicMaterial color={color} />
+      </mesh>
+
+      {/* End arrow - small sphere */}
+      <mesh position={end}>
+        <sphereGeometry args={[0.04, 8, 8]} />
+        <meshBasicMaterial color={color} />
+      </mesh>
+
+      {/* Label with background */}
+      <Text
+        position={[midpoint[0], midpoint[1] + 0.2, midpoint[2]]}
+        fontSize={0.15}
+        color={color}
+        anchorX="center"
+        anchorY="middle"
+        outlineWidth={0.02}
+        outlineColor="#FFFFFF"
+      >
+        {label}
+      </Text>
+    </group>
+  );
+}
+
+/**
  * Create a realistic cup/mug shape using LatheGeometry
  * This creates a smooth, rounded cup body like a real ceramic tumbler
  * @param {number} radius - Radius of the mug
@@ -741,6 +803,36 @@ function HamperBoxMesh({
           />
         </mesh>
       )}
+
+      {/* Dimension Lines - Show Length, Width, and Height measurements - NOW ON MOBILE TOO! */}
+      <>
+        {/* Length dimension (along X-axis) - Bottom front */}
+        <DimensionLine
+          start={[-length / 2, -0.25, width / 2 + 0.4]}
+          end={[length / 2, -0.25, width / 2 + 0.4]}
+          label={`${(length * 10).toFixed(0)}cm`}
+          color="#EF4444"
+          axis="x"
+        />
+
+        {/* Width dimension (along Z-axis) - Bottom right */}
+        <DimensionLine
+          start={[length / 2 + 0.4, -0.25, -width / 2]}
+          end={[length / 2 + 0.4, -0.25, width / 2]}
+          label={`${(width * 10).toFixed(0)}cm`}
+          color="#3B82F6"
+          axis="z"
+        />
+
+        {/* Height dimension (along Y-axis) - Back right */}
+        <DimensionLine
+          start={[length / 2 + 0.4, 0, -width / 2 - 0.4]}
+          end={[length / 2 + 0.4, height, -width / 2 - 0.4]}
+          label={`${(height * 10).toFixed(0)}cm`}
+          color="#10B981"
+          axis="y"
+        />
+      </>
 
       {/* Interactive Grid Spots (only show if onSpotClick is provided) */}
       {onSpotClick && Array.from({ length: box.capacity }).map((_, position) => {
