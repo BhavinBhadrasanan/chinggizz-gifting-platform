@@ -11,14 +11,29 @@ export default function CartPage() {
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
   const cartItemsRef = useRef(null);
 
-  // Scroll to first cart item when navigating from other pages
+  // Scroll to top when navigating from customization page (especially for mobile view)
   useEffect(() => {
-    // Check if we should scroll to cart items (e.g., after adding to cart)
-    if (location.state?.scrollToCart && cartItemsRef.current) {
-      const scrollTimer = setTimeout(() => {
-        cartItemsRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 100);
-      return () => clearTimeout(scrollTimer);
+    // Check if we should scroll to top (e.g., after adding to cart from customization page)
+    if (location.state?.scrollToCart) {
+      // Check if mobile view (screen width < 768px)
+      const isMobile = window.innerWidth < 768;
+
+      if (isMobile) {
+        // For mobile: Force scroll to top immediately
+        window.scrollTo(0, 0);
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
+
+        // Also scroll to top after a short delay to ensure content is rendered
+        const scrollTimer = setTimeout(() => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }, 100);
+
+        return () => clearTimeout(scrollTimer);
+      } else {
+        // For desktop: Smooth scroll to top
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
     }
   }, [location.state]);
 

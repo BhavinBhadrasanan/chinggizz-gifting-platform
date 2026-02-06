@@ -23,16 +23,25 @@ export default function ProductCustomizationPage() {
   const previewTimeoutRef = useRef(null);
   const imageGalleryRef = useRef(null);
 
-  // Scroll to product image when page loads (when navigating from other pages)
+  // Scroll to top when customization page is invoked (especially for mobile view)
   useEffect(() => {
-    // Add a small delay to ensure the page is fully rendered
-    const scrollTimer = setTimeout(() => {
-      if (imageGalleryRef.current) {
-        imageGalleryRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }
-    }, 100);
+    // Check if mobile view (screen width < 768px)
+    const isMobile = window.innerWidth < 768;
 
-    return () => clearTimeout(scrollTimer);
+    if (isMobile) {
+      // For mobile: Immediate scroll to top (instant)
+      window.scrollTo(0, 0);
+
+      // Also scroll to top after a short delay to ensure content is rendered
+      const scrollTimer = setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, 100);
+
+      return () => clearTimeout(scrollTimer);
+    } else {
+      // For desktop: Also scroll to top for consistency
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   }, [productId]);
 
   // Fetch product data
@@ -233,7 +242,7 @@ export default function ProductCustomizationPage() {
     };
 
     addToCart(product, quantity, customizationData);
-    // Navigate to cart page and scroll to first item
+    // Navigate to cart page and scroll to top (especially for mobile view)
     navigate('/cart', { state: { scrollToCart: true } });
   };
 
