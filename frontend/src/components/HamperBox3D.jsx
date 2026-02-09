@@ -51,12 +51,12 @@ function DimensionLine({ start, end, label, color = "#374151", axis = "x", showL
         <meshBasicMaterial color={color} />
       </mesh>
 
-      {/* Label - HTML overlay for instant loading! */}
+      {/* Label - Compact HTML overlay for instant loading! */}
       {showLabels && (
         <Html
-          position={[midpoint[0], midpoint[1] + 0.2, midpoint[2]]}
+          position={[midpoint[0], midpoint[1] + 0.15, midpoint[2]]}
           center
-          distanceFactor={8}
+          distanceFactor={15}
           style={{
             pointerEvents: 'none',
             userSelect: 'none'
@@ -65,15 +65,16 @@ function DimensionLine({ start, end, label, color = "#374151", axis = "x", showL
           <div
             style={{
               color: color,
-              fontSize: '14px',
-              fontWeight: 'bold',
-              padding: '4px 8px',
-              backgroundColor: 'rgba(255, 255, 255, 0.95)',
-              borderRadius: '4px',
-              border: `2px solid ${color}`,
-              boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
+              fontSize: '11px',
+              fontWeight: '600',
+              padding: '2px 6px',
+              backgroundColor: 'rgba(255, 255, 255, 0.92)',
+              borderRadius: '3px',
+              border: `1.5px solid ${color}`,
+              boxShadow: '0 1px 4px rgba(0,0,0,0.1)',
               whiteSpace: 'nowrap',
-              fontFamily: 'system-ui, -apple-system, sans-serif'
+              fontFamily: 'system-ui, -apple-system, sans-serif',
+              lineHeight: '1.2'
             }}
           >
             {label}
