@@ -1,12 +1,12 @@
 import React, { useRef, useMemo, useState, Suspense } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { OrbitControls, PerspectiveCamera, Environment, ContactShadows, Text } from '@react-three/drei';
+import { OrbitControls, PerspectiveCamera, Environment, ContactShadows, Html } from '@react-three/drei';
 import * as THREE from 'three';
 import { DragControls } from 'three-stdlib';
 
 /**
- * Dimension Line Component - PROGRESSIVE LOADING
- * Shows lines immediately, loads text labels after scene is ready
+ * Dimension Line Component - INSTANT HTML LABELS
+ * Shows lines and HTML text labels immediately - no font loading delay!
  */
 function DimensionLine({ start, end, label, color = "#374151", axis = "x", showLabels = true }) {
   const midpoint = [
@@ -51,22 +51,34 @@ function DimensionLine({ start, end, label, color = "#374151", axis = "x", showL
         <meshBasicMaterial color={color} />
       </mesh>
 
-      {/* Label - Progressive loading: only show after scene is ready */}
+      {/* Label - HTML overlay for instant loading! */}
       {showLabels && (
-        <Suspense fallback={null}>
-          <Text
-            position={[midpoint[0], midpoint[1] + 0.2, midpoint[2]]}
-            fontSize={0.15}
-            color={color}
-            anchorX="center"
-            anchorY="middle"
-            outlineWidth={0.02}
-            outlineColor="#FFFFFF"
-            characters="0123456789cm"
+        <Html
+          position={[midpoint[0], midpoint[1] + 0.2, midpoint[2]]}
+          center
+          distanceFactor={8}
+          style={{
+            pointerEvents: 'none',
+            userSelect: 'none'
+          }}
+        >
+          <div
+            style={{
+              color: color,
+              fontSize: '14px',
+              fontWeight: 'bold',
+              padding: '4px 8px',
+              backgroundColor: 'rgba(255, 255, 255, 0.95)',
+              borderRadius: '4px',
+              border: `2px solid ${color}`,
+              boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
+              whiteSpace: 'nowrap',
+              fontFamily: 'system-ui, -apple-system, sans-serif'
+            }}
           >
             {label}
-          </Text>
-        </Suspense>
+          </div>
+        </Html>
       )}
     </group>
   );
@@ -643,11 +655,11 @@ function HamperBoxMesh({
   const [hoveredSpot, setHoveredSpot] = useState(null);
   const [showLabels, setShowLabels] = useState(false);
 
-  // Progressive loading: Show labels after scene is ready (1 second delay)
+  // Instant loading: Show HTML labels immediately (no font loading needed!)
   React.useEffect(() => {
     const timer = setTimeout(() => {
       setShowLabels(true);
-    }, 1000); // Load labels 1 second after scene loads
+    }, 100); // Show labels almost instantly (100ms for scene to render)
     return () => clearTimeout(timer);
   }, []);
 
