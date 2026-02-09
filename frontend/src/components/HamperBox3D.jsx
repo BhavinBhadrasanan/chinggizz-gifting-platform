@@ -51,33 +51,36 @@ function DimensionLine({ start, end, label, color = "#374151", axis = "x", showL
         <meshBasicMaterial color={color} />
       </mesh>
 
-      {/* Label - Compact HTML overlay for instant loading! */}
+      {/* Label - Very tiny, minimal badge */}
       {showLabels && (
         <Html
-          position={[midpoint[0], midpoint[1] + 0.15, midpoint[2]]}
+          position={[midpoint[0], midpoint[1] + 0.08, midpoint[2]]}
           center
-          distanceFactor={15}
+          distanceFactor={8}
           style={{
             pointerEvents: 'none',
-            userSelect: 'none'
+            userSelect: 'none',
+            transform: 'scale(0.5)'
           }}
         >
           <div
             style={{
               color: color,
-              fontSize: '11px',
-              fontWeight: '600',
-              padding: '2px 6px',
-              backgroundColor: 'rgba(255, 255, 255, 0.92)',
+              fontSize: '10px',
+              fontWeight: '500',
+              padding: '1px 4px',
+              backgroundColor: 'rgba(255, 255, 255, 0.9)',
               borderRadius: '3px',
-              border: `1.5px solid ${color}`,
-              boxShadow: '0 1px 4px rgba(0,0,0,0.1)',
+              border: `1px solid ${color}`,
+              boxShadow: '0 1px 2px rgba(0,0,0,0.1)',
               whiteSpace: 'nowrap',
               fontFamily: 'system-ui, -apple-system, sans-serif',
-              lineHeight: '1.2'
+              lineHeight: '1.3'
             }}
           >
-            {label}
+            {label} {axis === 'x' && 'L'}
+            {axis === 'z' && 'B'}
+            {axis === 'y' && 'H'}
           </div>
         </Html>
       )}
