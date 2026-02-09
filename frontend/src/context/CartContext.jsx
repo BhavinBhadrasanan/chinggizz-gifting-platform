@@ -12,39 +12,48 @@ export const useCart = () => {
 };
 
 export const CartProvider = ({ children }) => {
-  const [cartItems, setCartItems] = useState([]);
-  const [hampers, setHampers] = useState([]);
-  const [isCartOpen, setIsCartOpen] = useState(false);
+  // Initialize state from localStorage to prevent overwriting on mount
+  const [cartItems, setCartItems] = useState(() => {
+    try {
+      const savedCart = localStorage.getItem('chinggizz_cart');
+      return savedCart ? JSON.parse(savedCart) : [];
+    } catch (error) {
+      console.error('Failed to load cart:', error);
+      return [];
+    }
+  });
 
-  // Load cart from localStorage on mount
+  const [hampers, setHampers] = useState(() => {
+    try {
+      const savedHampers = localStorage.getItem('chinggizz_hampers');
+      return savedHampers ? JSON.parse(savedHampers) : [];
+    } catch (error) {
+      console.error('Failed to load hampers:', error);
+      return [];
+    }
+  });
+
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isInitialized, setIsInitialized] = useState(false);
+
+  // Mark as initialized after first render
   useEffect(() => {
-    const savedCart = localStorage.getItem('chinggizz_cart');
-    const savedHampers = localStorage.getItem('chinggizz_hampers');
-    if (savedCart) {
-      try {
-        setCartItems(JSON.parse(savedCart));
-      } catch (error) {
-        console.error('Failed to load cart:', error);
-      }
-    }
-    if (savedHampers) {
-      try {
-        setHampers(JSON.parse(savedHampers));
-      } catch (error) {
-        console.error('Failed to load hampers:', error);
-      }
-    }
+    setIsInitialized(true);
   }, []);
 
-  // Save cart to localStorage whenever it changes
+  // Save cart to localStorage whenever it changes (but not on initial mount)
   useEffect(() => {
-    localStorage.setItem('chinggizz_cart', JSON.stringify(cartItems));
-  }, [cartItems]);
+    if (isInitialized) {
+      localStorage.setItem('chinggizz_cart', JSON.stringify(cartItems));
+    }
+  }, [cartItems, isInitialized]);
 
-  // Save hampers to localStorage whenever they change
+  // Save hampers to localStorage whenever they change (but not on initial mount)
   useEffect(() => {
-    localStorage.setItem('chinggizz_hampers', JSON.stringify(hampers));
-  }, [hampers]);
+    if (isInitialized) {
+      localStorage.setItem('chinggizz_hampers', JSON.stringify(hampers));
+    }
+  }, [hampers, isInitialized]);
 
   const addToCart = (product, quantity = 1, customization = null) => {
     setCartItems((prevItems) => {
