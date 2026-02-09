@@ -5,9 +5,10 @@ import * as THREE from 'three';
 import { DragControls } from 'three-stdlib';
 
 /**
- * Dimension Line Component - Simple and reliable version
+ * Dimension Line Component - PROGRESSIVE LOADING
+ * Shows lines immediately, loads text labels after scene is ready
  */
-function DimensionLine({ start, end, label, color = "#374151", axis = "x" }) {
+function DimensionLine({ start, end, label, color = "#374151", axis = "x", showLabels = true }) {
   const midpoint = [
     (start[0] + end[0]) / 2,
     (start[1] + end[1]) / 2,
@@ -34,34 +35,39 @@ function DimensionLine({ start, end, label, color = "#374151", axis = "x" }) {
     <group>
       {/* Main dimension line - thin cylinder */}
       <mesh position={midpoint} rotation={rotation}>
-        <cylinderGeometry args={[0.015, 0.015, distance, 8]} />
+        <cylinderGeometry args={[0.015, 0.015, distance, 6]} />
         <meshBasicMaterial color={color} />
       </mesh>
 
       {/* Start arrow - small sphere */}
       <mesh position={start}>
-        <sphereGeometry args={[0.04, 8, 8]} />
+        <sphereGeometry args={[0.03, 6, 6]} />
         <meshBasicMaterial color={color} />
       </mesh>
 
       {/* End arrow - small sphere */}
       <mesh position={end}>
-        <sphereGeometry args={[0.04, 8, 8]} />
+        <sphereGeometry args={[0.03, 6, 6]} />
         <meshBasicMaterial color={color} />
       </mesh>
 
-      {/* Label with background */}
-      <Text
-        position={[midpoint[0], midpoint[1] + 0.2, midpoint[2]]}
-        fontSize={0.15}
-        color={color}
-        anchorX="center"
-        anchorY="middle"
-        outlineWidth={0.02}
-        outlineColor="#FFFFFF"
-      >
-        {label}
-      </Text>
+      {/* Label - Progressive loading: only show after scene is ready */}
+      {showLabels && (
+        <Suspense fallback={null}>
+          <Text
+            position={[midpoint[0], midpoint[1] + 0.2, midpoint[2]]}
+            fontSize={0.15}
+            color={color}
+            anchorX="center"
+            anchorY="middle"
+            outlineWidth={0.02}
+            outlineColor="#FFFFFF"
+            characters="0123456789cm"
+          >
+            {label}
+          </Text>
+        </Suspense>
+      )}
     </group>
   );
 }
@@ -614,6 +620,7 @@ const getBoxColor = (colorClass) => {
 
 /**
  * 3D Hamper Box Component with Drag & Drop Support
+ * PROGRESSIVE LOADING: Shows box first, then labels after 1 second
  */
 function HamperBoxMesh({
   box,
@@ -634,6 +641,15 @@ function HamperBoxMesh({
   const [internalDraggedItem, setInternalDraggedItem] = useState(null);
   const [draggedFromPosition, setDraggedFromPosition] = useState(null);
   const [hoveredSpot, setHoveredSpot] = useState(null);
+  const [showLabels, setShowLabels] = useState(false);
+
+  // Progressive loading: Show labels after scene is ready (1 second delay)
+  React.useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowLabels(true);
+    }, 1000); // Load labels 1 second after scene loads
+    return () => clearTimeout(timer);
+  }, []);
 
   // Parse box dimensions
   const [length, width, height] = box.dimensionsCm.split(' × ').map(d => parseFloat(d) / 10);
@@ -804,7 +820,7 @@ function HamperBoxMesh({
         </mesh>
       )}
 
-      {/* Dimension Lines - Show Length, Width, and Height measurements - NOW ON MOBILE TOO! */}
+      {/* Dimension Lines - Progressive loading for fast initial render */}
       <>
         {/* Length dimension (along X-axis) - Bottom front */}
         <DimensionLine
@@ -813,6 +829,7 @@ function HamperBoxMesh({
           label={`${(length * 10).toFixed(0)}cm`}
           color="#EF4444"
           axis="x"
+          showLabels={showLabels}
         />
 
         {/* Width dimension (along Z-axis) - Bottom right */}
@@ -822,6 +839,7 @@ function HamperBoxMesh({
           label={`${(width * 10).toFixed(0)}cm`}
           color="#3B82F6"
           axis="z"
+          showLabels={showLabels}
         />
 
         {/* Height dimension (along Y-axis) - Back right */}
@@ -831,6 +849,7 @@ function HamperBoxMesh({
           label={`${(height * 10).toFixed(0)}cm`}
           color="#10B981"
           axis="y"
+          showLabels={showLabels}
         />
       </>
 
